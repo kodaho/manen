@@ -1,12 +1,3 @@
-[global]
-name = "manen"
-version = "0.1.0"
-description = ""
-license = ""
-author = "kodaho <>"
-readme = "README.md"
-keywords = "selenium dom automation"
-
 [tool.black]
 line-length = 88
 

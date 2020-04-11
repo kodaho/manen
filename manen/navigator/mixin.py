@@ -53,6 +53,8 @@ class NavigatorMixin:
 
     def highlight(self, selector, **kwargs):
         elements = self.find(selector, **kwargs)
+        if not isinstance(elements, list):
+            elements = [elements]
         highlight_script = "arguments[%d].style.border = '3px solid black';"
         script = "".join([highlight_script % i for i in range(len(elements))])
         return self.execute_script(script, *elements)

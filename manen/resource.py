@@ -23,6 +23,8 @@ class Version:
     Helper class to compare version matching the pattern:
     MAJOR.MINOR(.BRANCH)?.PATH where BRANCH is optional.
 
+    https://sites.google.com/a/chromium.org/chromedriver/downloads/version-selection
+
     Note: This is not compliant with semantic versioning rules.
     """
 
@@ -108,7 +110,7 @@ class LocalAsset:
     @classmethod
     def list_drivers(
         cls,
-        browser,
+        browser: str,
         os: Optional[str] = PLATFORM.system,
         version: Optional[str] = None,
     ):
@@ -133,7 +135,11 @@ class LocalAsset:
         )
 
 
-class ChromeResources:
+class ChromeResource:
+    """
+    https://cloud.google.com/storage/docs/xml-api/get-bucket-list
+    """
+
     CHROMIUM_RELEASE_API = "http://omahaproxy.appspot.com/"
     COMMAND = {
         "mac": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -199,13 +205,13 @@ class ChromeResources:
         return Version(match.group("version"))
 
 
-class ChromeDriverResources:
+class ChromeDriverResource:
     API = "https://chromedriver.storage.googleapis.com/"
 
     @classmethod
-    def latest_release(cls, version="installed"):
+    def latest_release(cls, version: str = "installed") -> "Version":
         if version == "installed":
-            version = ChromeResources.version()[:3]
+            version = ChromeResource.version()[:3]
         version = f"_{version}" if version else ""
         remote_version = requests.get(
             f"{cls.API}LATEST_RELEASE{version}"
@@ -213,7 +219,7 @@ class ChromeDriverResources:
         return Version(remote_version)
 
     @classmethod
-    def find(cls, query: str = "installed", download: bool = True):
+    def find(cls, query: str = "installed", download: bool = True) -> str:
         query = str(cls.latest_release(version=query))
         try:
             return LocalAsset.list_drivers(browser="chrome", version=query)[-1]["path"]
@@ -223,7 +229,7 @@ class ChromeDriverResources:
             raise exception
 
     @classmethod
-    def remote_versions(cls, query=None, os=PLATFORM.system):
+    def remote_versions(cls, query: Optional[str] = None, os: str = PLATFORM.system):
         response = requests.get(cls.API, params={"marker": 3, "prefix": query})
         response.raise_for_status()
         root = ET.fromstring(response.content)
@@ -266,11 +272,22 @@ class ChromeDriverResources:
         extract: bool = True,
         remove_archive: bool = True,
     ) -> str:
+        """Given a specific Chrome version, download the matching driver from
+        the official Chrome driver storage.
+
+        Args:
+            version (str):
+            os (str):
+            extract (bool):
+            remove_archive (bool):
+        Returns:
+            str: path of the downloaded driver
+        """
         platform_code = {"mac": "mac64", "win": "win32", "linux": "linux64"}[os.lower()]
         if version == "latest":
             version = cls.latest_release()
         if version == "installed":
-            installed_version = ChromeResources.version()[:3]
+            installed_version = ChromeResource.version()[:3]
             version = cls.remote_versions(query=installed_version)[-1]["version"]
             version = str(version)
         if isinstance(version, Version):
@@ -305,3 +322,10 @@ class ChromeDriverResources:
                 if unix_attributes:
                     chmod(extracted_path, unix_attributes)
         return extracted_path
+
+
+class FirefoxDriverResource:
+    """
+    Remote versions URL: https://api.github.com/repos/mozilla/geckodriver/releases
+    https://developer.github.com/v3/repos/releases/
+    """

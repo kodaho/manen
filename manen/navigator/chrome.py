@@ -1,6 +1,6 @@
 from selenium.webdriver import Chrome, ChromeOptions
 
-from ..asset_manager import ChromeDriverResources
+from ..resource import ChromeDriverResource
 from .mixin import NavigatorMixin
 
 
@@ -9,7 +9,7 @@ class ChromeNavigator(NavigatorMixin, Chrome):
     def initialize(
         cls, proxy=None, headless=False, driver_path=None,
     ):
-        driver_path = driver_path or ChromeDriverResources.find()
+        driver_path = driver_path or ChromeDriverResource.find()
 
         chrome_options = ChromeOptions()
         chrome_options.add_argument("--window-size=1920,1080")

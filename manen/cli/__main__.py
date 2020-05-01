@@ -1,6 +1,6 @@
 import argparse
 from questionary import prompt, Choice
-from ..asset_manager import ChromeDriverResources, ChromeResources
+from ..resource import ChromeDriverResource, ChromeResource
 
 
 def get_args():
@@ -13,7 +13,7 @@ def get_args():
 
 
 def download_workflow():
-    chrome_version = ChromeResources.version()
+    chrome_version = ChromeResource.version()
     return [
         {
             "type": "select",
@@ -43,7 +43,7 @@ def download_workflow():
                     ),
                     str(item["version"]),
                 )
-                for item in ChromeDriverResources.remote_versions()[-10:]
+                for item in ChromeDriverResource.remote_versions()[-10:]
             ],
         },
     ]
@@ -52,7 +52,7 @@ def download_workflow():
 def download(os, browser, version):
     if browser == "chrome":
         print(f"📥 Dowloading version {version} for the {browser} browser on {os}...")
-        driver_file = ChromeDriverResources.download(version=version, os=os)
+        driver_file = ChromeDriverResource.download(version=version, os=os)
         print(f"✅ Driver file available at {driver_file}")
     else:
         raise NotImplementedError

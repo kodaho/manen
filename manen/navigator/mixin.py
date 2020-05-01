@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 
 from ..finder import find
 from ..helpers import PLATFORM
-from ..asset_manager import Version
+from ..resource import Version
 
 
 class NavigatorMixin:

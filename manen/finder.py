@@ -1,3 +1,5 @@
+"""Find inside a Selenium element some DOM elements based on selectors."""
+
 from functools import partial
 from typing import Any, Tuple, Union
 
@@ -29,6 +31,15 @@ METHODS_MAPPER = {
 
 
 def _parse_selector(selector: str) -> Tuple[str, str]:
+    """Parse a selector string ({selection_method}:{selector}). If no selection
+    method is specified, infer it from the selector (XPath or CSS).
+
+    Args:
+        selector (str): [description]
+
+    Returns:
+        Tuple[str, str]: [description]
+    """
     if any(selector.startswith(f"{method}:") for method in METHODS_MAPPER):
         selection_method, sel = selector.split(":", 1)
         return METHODS_MAPPER[selection_method], sel
@@ -37,7 +48,7 @@ def _parse_selector(selector: str) -> Tuple[str, str]:
     return By.CSS_SELECTOR, selector
 
 
-def find(
+def find(  # pylint: disable=bad-continuation
     selector: str = None,
     *,
     wait: int = 0,
@@ -45,6 +56,44 @@ def find(
     inside: Union[WebDriver, WebElement] = None,
     many: bool = False,
 ):
+    """Retrieve DOM elements from Selenium WebElements. Highly customizable.
+
+    Available selection methods:
+
+    +--------------------------+-------------------------------------------------------------+
+    | Selection Method         | Selection Engine                                            |
+    +==========================+=============================================================+
+    | xpath, xp                | XPath (can be inferred if no selection method is specified) |
+    +--------------------------+-------------------------------------------------------------+
+    | css                      | CSS                                                         |
+    +--------------------------+-------------------------------------------------------------+
+    | class_name, class, cls   | Class Name (but Selenium is the CSS method behind)          |
+    +--------------------------+-------------------------------------------------------------+
+    | id                       | ID (but Selenium is the CSS method behind)                  |
+    +--------------------------+-------------------------------------------------------------+
+    | link_text, link          | Link Text                                                   |
+    +--------------------------+-------------------------------------------------------------+
+    | name                     | Name attribute                                              |
+    +--------------------------+-------------------------------------------------------------+
+    | tag_name, tag            | Tag Name                                                    |
+    +--------------------------+-------------------------------------------------------------+
+    | partial_link_text, plink | Partial Link Text                                           |
+    +--------------------------+-------------------------------------------------------------+
+
+    Args:
+        selector (str, optional): [description]. Defaults to None.
+        wait (int, optional): [description]. Defaults to 0.
+        default (Any, optional): [description]. Defaults to NotImplemented.
+        inside (Union[WebDriver, WebElement], optional): [description]. Defaults to None.
+        many (bool, optional): [description]. Defaults to False.
+
+    Raises:
+        ValueError: [description]
+        ElementNotFound: [description]
+
+    Returns:
+        [type]: [description]
+    """
     if selector is None:
         return partial(find, wait=wait, default=default, inside=inside, many=many)
 
@@ -60,8 +109,8 @@ def find(
     selectors = [selector] if not isinstance(selector, list) else selector
     driver = inside if isinstance(inside, WebDriver) else inside.parent
 
-    for selector in selectors:
-        selenium_selector = _parse_selector(selector)
+    for sel in selectors:
+        selenium_selector = _parse_selector(sel)
         if many:
             expected_condition = EC.presence_of_all_elements_located
             finder = inside.find_elements

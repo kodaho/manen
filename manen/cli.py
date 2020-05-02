@@ -1,6 +1,8 @@
 import argparse
-from questionary import prompt, Choice
-from ..resource import ChromeDriverResource, ChromeResource
+
+from questionary import Choice, prompt
+
+from .resource import ChromeDriverResource, ChromeResource
 
 
 def get_args():

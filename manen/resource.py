@@ -117,8 +117,7 @@ class LocalAsset:
         if os is None:
             os = "*"
         version = "*" if version is None else f"{version}*"
-        drivers = (cls.PATH / os.lower() / browser).glob(f"{version}/*")
-        drivers = list(drivers)
+        drivers = list((cls.PATH / os.lower() / browser).glob(f"{version}/*"))
         if drivers:
             return [
                 {
@@ -135,7 +134,7 @@ class LocalAsset:
         )
 
 
-class ChromeResource:
+class ChromeAppResource:
     """
     https://cloud.google.com/storage/docs/xml-api/get-bucket-list
     """
@@ -147,7 +146,7 @@ class ChromeResource:
     }
 
     @classmethod
-    def remote_versions(cls, os=PLATFORM.system) -> List[Dict]:
+    def list_remote(cls, os=PLATFORM.system) -> List[Dict]:
         def extract_current_and_previous_versions(data):
             current = {
                 "version": Version(data["current_version"]),
@@ -211,7 +210,7 @@ class ChromeDriverResource:
     @classmethod
     def latest_release(cls, version: str = "installed") -> "Version":
         if version == "installed":
-            version = ChromeResource.version()[:3]
+            version = ChromeAppResource.version()[:3]
         version = f"_{version}" if version else ""
         remote_version = requests.get(
             f"{cls.API}LATEST_RELEASE{version}"
@@ -229,7 +228,7 @@ class ChromeDriverResource:
             raise exception
 
     @classmethod
-    def remote_versions(cls, query: Optional[str] = None, os: str = PLATFORM.system):
+    def list_remote(cls, query: Optional[str] = None, os: str = PLATFORM.system):
         response = requests.get(cls.API, params={"marker": 3, "prefix": query})
         response.raise_for_status()
         root = ET.fromstring(response.content)
@@ -287,8 +286,8 @@ class ChromeDriverResource:
         if version == "latest":
             version = cls.latest_release()
         if version == "installed":
-            installed_version = ChromeResource.version()[:3]
-            version = cls.remote_versions(query=installed_version)[-1]["version"]
+            installed_version = ChromeAppResource.version()[:3]
+            version = cls.list_remote(query=installed_version)[-1]["version"]
             version = str(version)
         if isinstance(version, Version):
             version = str(version)

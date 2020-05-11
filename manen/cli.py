@@ -2,7 +2,7 @@ import argparse
 
 from questionary import Choice, prompt
 
-from .resource import ChromeDriverResource, ChromeResource
+from .resource import ChromeDriverResource, ChromeAppResource
 
 
 def get_args():
@@ -15,7 +15,7 @@ def get_args():
 
 
 def download_workflow():
-    chrome_version = ChromeResource.version()
+    chrome_version = ChromeAppResource.version()
     return [
         {
             "type": "select",
@@ -45,7 +45,7 @@ def download_workflow():
                     ),
                     str(item["version"]),
                 )
-                for item in ChromeDriverResource.remote_versions()[-10:]
+                for item in ChromeDriverResource.list_remote()[-10:]
             ],
         },
     ]

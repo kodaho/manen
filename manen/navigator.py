@@ -88,13 +88,14 @@ class NavigatorMixin:
 
 class ChromeNavigator(NavigatorMixin, Chrome):
     @classmethod
-    def initialize(
-        cls, proxy=None, headless=False, driver_path=None,
+    def initialize(  # pylint: disable=bad-continuation
+        cls, proxy=None, headless=False, driver_path=None, window_size=None,
     ):
         driver_path = driver_path or ChromeDriverResource.find()
 
         chrome_options = ChromeOptions()
-        chrome_options.add_argument("--window-size=1920,1080")
+        if window_size:
+            chrome_options.add_argument("--window-size=%s,%s" % window_size)
 
         if headless:
             chrome_options.add_argument("--headless")

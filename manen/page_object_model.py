@@ -2,12 +2,12 @@
 """This module provides an implementation of the `Page Object design pattern
 <https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/>`_
 described in Selenium documentation. By combining the classes
-:py:class:`manen.page_object_model.Page` and :py:class:`manen.page_object_model.Region`
-with the :py:class:`manen.page_object_model.Element` object (and all its subclasses),
+:py:class:`~manen.page_object_model.Page` and :py:class:`~manen.page_object_model.Region`
+with the :py:class:`~manen.page_object_model.Element` object (and all its subclasses),
 you can easily describe any web pages and access all the DOM elements in a simple
 way through a Python class.
 
-Let's say you want, given a query, to get all the packages information from
+Let's say that you want, given a query, to get all the packages information from
 the website `PyPi <https://pypi.org/>`_ (e.g.: "selenium"). The first step to
 work with :py:mod:`manen.page_object_model` is to define the Python classes which
 will describe the web pages you are working on. Here we will define all the
@@ -322,7 +322,7 @@ class Region(DomAccessor):
 
 
 class Regions(Region, many=True):
-    """Pluralized version of :py:class:`manen.page_object_model.Region`."""
+    """Pluralized version of :py:class:`~manen.page_object_model.Region`."""
 
 
 class Frame(DomAccessor):
@@ -367,9 +367,9 @@ class Element(DomAccessor):
     :py:class:`selenium.webdriver.remote.webelement.WebElement` from a region or page.
 
     An element should be used to initialize a class attribute of a subclass of
-    :py:class:`manen.page_object_model.Page`, :py:class:`manen.page_object_model.Region`
-    or :py:class:`manen.page_object_model.Frame` (or any subtypes of
-    :py:class:`manen.page_object_model.WebArea`)
+    :py:class:`~manen.page_object_model.Page`, :py:class:`~manen.page_object_model.Region`
+    or :py:class:`~manen.page_object_model.Frame` (or any subtypes of
+    :py:class:`~manen.page_object_model.WebArea`)
     """
 
     def __get__(self, area: WebArea, area_cls: type) -> "WebElement":
@@ -380,7 +380,7 @@ class Element(DomAccessor):
 
 
 class Elements(Element, many=True):
-    """Pluralized version of :py:class:`manen.page_object_model.Element`."""
+    """Pluralized version of :py:class:`~manen.page_object_model.Element`."""
 
 
 class LinkElement(Element, post_processing=[lambda x: x.get_attribute("href")]):
@@ -390,7 +390,7 @@ class LinkElement(Element, post_processing=[lambda x: x.get_attribute("href")]):
 class LinkElements(  # pylint: disable=bad-continuation
     LinkElement, many=True, post_processing=[lambda x: x.get_attribute("href")],
 ):
-    """Pluralized version of :py:class:`manen.page_object_model.LinkElement`."""
+    """Pluralized version of :py:class:`~manen.page_object_model.LinkElement`."""
 
 
 class TextElement(Element, post_processing=[lambda x: x.text]):
@@ -398,7 +398,7 @@ class TextElement(Element, post_processing=[lambda x: x.text]):
 
 
 class TextElements(TextElement, many=True, post_processing=[lambda x: x.text]):
-    """Pluralized version of :py:class:`manen.page_object_model.TextElement`."""
+    """Pluralized version of :py:class:`~manen.page_object_model.TextElement`."""
 
 
 class IntegerElement(Element, post_processing=[lambda x: x.text, extract_integer]):
@@ -411,7 +411,7 @@ class IntegerElements(  # pylint: disable=bad-continuation
 ):
     """Get elements from a HTML page matching a set of selectors and extract a
     integer from each text element.
-    Pluralized version of :py:class:`manen.page_object_model.IntegerElement`
+    Pluralized version of :py:class:`~manen.page_object_model.IntegerElement`
     """
 
 

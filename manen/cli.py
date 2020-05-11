@@ -1,3 +1,5 @@
+"""CLI for :py:mod:`manen`."""
+
 import argparse
 
 from questionary import Choice, prompt

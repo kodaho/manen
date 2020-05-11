@@ -1,26 +1,20 @@
+"""Exceptions raised by :py:mod:`manen`."""
+
 from selenium.webdriver.remote.webdriver import WebDriver
 
 
 class ManenException(Exception):
-    pass
-
-
-class BrowserNotSupported(ManenException):
-    def __init__(self, browser):
-        super().__init__()
-        self.browser = browser
-
-    def __str__(self):
-        return "The browser {} is not supported by the current of Navigator.".format(
-            self.browser.upper()
-        )
+    """Basic exception."""
 
 
 class DriverNotFound(ManenException):
-    pass
+    """Can not find a driver executable used by the web drivers."""
 
 
 class ElementNotFound(ManenException):
+    """Can not find inside a specific container an element matching the selectors.
+    """
+
     def __init__(self, selectors, inside):
         super().__init__()
         self.selectors = selectors
@@ -45,12 +39,9 @@ class ElementNotFound(ManenException):
         ) + context_string
 
 
-class NavigatorNotDefined(ManenException):
-    def __str__(self):
-        return "No navigator has been defined to be used by the page object."
-
-
 class PlatformNotRecognized(ManenException):
+    """Can not clearly identify the platform running the code."""
+
     def __init__(self, platform):
         super().__init__()
         self.platform = platform
@@ -60,25 +51,13 @@ class PlatformNotRecognized(ManenException):
 
 
 class UnsettableElement(ManenException):
+    """Cannot set a value to an instance of
+    :py:class:`manen.page_object_model.Element`.
+    """
+
     def __init__(self, class_name):
         super().__init__()
         self.class_name = class_name
 
     def __str__(self):
         return "{} is a web element which cannot be set.".format(self.class_name)
-
-
-class BadConfiguration(ManenException):
-    pass
-
-
-class UnknownSelectionMethod(ManenException):
-    pass
-
-
-class ElementNotVisible(ManenException):
-    pass
-
-
-class PageNotRecognized(ManenException):
-    pass

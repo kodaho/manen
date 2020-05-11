@@ -1,7 +1,7 @@
 """Find inside a Selenium element some DOM elements based on selectors."""
 
 from functools import partial
-from typing import Any, Tuple, Union
+from typing import Any, List, Tuple, Union
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
@@ -49,7 +49,7 @@ def _parse_selector(selector: str) -> Tuple[str, str]:
 
 
 def find(  # pylint: disable=bad-continuation
-    selector: str = None,
+    selector: Union[str, List[str]] = None,
     *,
     wait: int = 0,
     default: Any = NotImplemented,
@@ -81,7 +81,7 @@ def find(  # pylint: disable=bad-continuation
     +--------------------------+-------------------------------------------------------------+
 
     Args:
-        selector (str, optional): [description]. Defaults to None.
+        selector (str or List[str], optional): [description]. Defaults to None.
         wait (int, optional): [description]. Defaults to 0.
         default (Any, optional): [description]. Defaults to NotImplemented.
         inside (Union[WebDriver, WebElement], optional): [description]. Defaults to None.

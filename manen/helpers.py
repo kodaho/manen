@@ -22,9 +22,9 @@ def get_current_platform() -> "Platform":
     sys_platform = platform()
     if "darwin" in sys_platform.lower() or "macos" in sys_platform.lower():
         return Platform("MAC", sys_platform)
-    elif "windows" in sys_platform.lower():
+    if "windows" in sys_platform.lower():
         return Platform("WIN", sys_platform)
-    elif "linux" in sys_platform.lower():
+    if "linux" in sys_platform.lower():
         return Platform("LINUX", sys_platform)
     raise PlatformNotRecognized(sys_platform)
 

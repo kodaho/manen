@@ -108,7 +108,7 @@ class LocalAsset:
     PATH = Path(__file__).parent / "assets/drivers"
 
     @classmethod
-    def list_drivers(
+    def list_drivers(  # pylint: disable=bad-continuation
         cls,
         browser: str,
         os: Optional[str] = PLATFORM.system,
@@ -264,7 +264,7 @@ class ChromeDriverResource:
         return sorted(chromedrivers, key=lambda x: x["updated_at"])
 
     @classmethod
-    def download(
+    def download(  # pylint: disable=bad-continuation
         cls,
         version: Union[str, "Version"] = "installed",
         os: str = PLATFORM.system,

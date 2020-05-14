@@ -4,10 +4,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-manen = {editable= true, path= ".", extras=["doc", "test", "dev"]}
+manen = {editable = true,path = ".",extras = ["doc", "test", "dev"]}
 
 [packages]
 manen = {editable = true,path = "."}
+dateparser = "*"
 
 [requires]
 python_version = "3.6"

@@ -71,6 +71,7 @@ from importlib import import_module
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Union
 
+import dateparser  # pylint: disable=unused-import # (see PyCQA/pylint#1603)
 import yaml
 
 from .exceptions import UnsettableElement
@@ -445,6 +446,14 @@ class IntegerElements(IntegerElement, many=True):  # pylint: disable=bad-continu
     integer from each text element.
     Pluralized version of :py:class:`~manen.page_object_model.IntegerElement`
     """
+
+
+class DatetimeElement(TextElement, post_processing=[dateparser.parse]):
+    """Extract a datetime from a text element matching a set of selectors."""
+
+
+class DatetimeElements(DatetimeElement, many=True):
+    """Pluralized version of :py:class:`~manen.page_object_model.DatetimeElement`."""
 
 
 class InputElement(Element, post_processing=[lambda x: x.get_attribute("value")]):

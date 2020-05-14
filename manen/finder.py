@@ -1,16 +1,19 @@
 """Find inside a Selenium element some DOM elements based on selectors."""
 
 from functools import partial
-from typing import Any, List, Tuple, Union
+from typing import Any, List, Tuple, Union, TYPE_CHECKING
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
-from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from .exceptions import ElementNotFound
+
+if TYPE_CHECKING:
+    from .typing import SeleniumElement
+
 
 METHODS_MAPPER = {
     "class_name": By.CLASS_NAME,
@@ -53,7 +56,7 @@ def find(  # pylint: disable=bad-continuation
     *,
     wait: int = 0,
     default: Any = NotImplemented,
-    inside: Union[WebDriver, WebElement] = None,
+    inside: "SeleniumElement" = None,
     many: bool = False,
 ):
     """Retrieve DOM elements from Selenium WebElements. Highly customizable.
@@ -84,7 +87,7 @@ def find(  # pylint: disable=bad-continuation
         selector (str or List[str], optional): [description]. Defaults to None.
         wait (int, optional): [description]. Defaults to 0.
         default (Any, optional): [description]. Defaults to NotImplemented.
-        inside (Union[WebDriver, WebElement], optional): [description]. Defaults to None.
+        inside (SeleniumElement, optional): [description]. Defaults to None.
         many (bool, optional): [description]. Defaults to False.
 
     Raises:
@@ -130,4 +133,4 @@ def find(  # pylint: disable=bad-continuation
     if default != NotImplemented:
         return default
 
-    raise ElementNotFound(selectors=selectors, inside=inside)
+    raise ElementNotFound(selectors=selectors, driver=driver)

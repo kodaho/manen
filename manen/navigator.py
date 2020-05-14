@@ -11,11 +11,9 @@ from .helpers import PLATFORM
 from .resource import ChromeDriverResource, Version
 
 if TYPE_CHECKING:
-    from selenium.webdriver.remote.webdriver import WebDriver
-    from selenium.webdriver.remote.webelement import WebElement
     from .helpers import Platform
+    from .typing import SeleniumElement, WebDriver, WebElement
 
-    SeleniumElement = Union["WebDriver", "WebElement"]
 
 __all__ = ("ChromeNavigator",)
 

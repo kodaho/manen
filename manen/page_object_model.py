@@ -81,11 +81,9 @@ from .helpers import (  # pylint: disable=unused-import # (see PyCQA/pylint#1603
 )
 
 if TYPE_CHECKING:
-    from selenium.webdriver.remote.webdriver import WebDriver
-    from selenium.webdriver.remote.webelement import WebElement
+    from .typing import SeleniumElement, WebDriver, WebElement
 
-    PostProcessingFunction = Callable[["SeleniumElement"], Any]
-    SeleniumElement = Union["WebDriver", "WebElement"]
+    PostProcessingFunction = Callable[[Any], Any]
 
 __all__ = (
     "Action",

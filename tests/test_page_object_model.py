@@ -1,15 +1,20 @@
 from collections import namedtuple
+from pathlib import Path
 from unittest.mock import MagicMock, PropertyMock
 
+import yaml
 from selenium.webdriver.common.by import By
 
 from manen.page_object_model import (
     Element,
     Elements,
     InputElement,
+    IntegerElement,
+    LinkElements,
     Page,
     TextElement,
     TextElements,
+    PageObjectLoader,
 )
 
 ExpectedResult = namedtuple("ExpectedResult", ("attr", "strategy", "selector"))
@@ -105,3 +110,17 @@ class TestElementInPage:
 
         browser.find_element.assert_called_with(By.CSS_SELECTOR, "input[name='email']")
         browser.find_element.return_value.get_attribute.assert_called_with("value")
+
+
+class TestLoadPage:
+    def test_load_page_objects_from_yaml(self):
+        page_path = Path(__file__).parent / "assets/page.yaml"
+        with page_path.open(mode="r") as page_file:
+            page_objects = yaml.load(page_file, Loader=PageObjectLoader)
+        assert isinstance(page_objects["name"], TextElement)
+        assert page_objects["name"].selectors == ["p.name", "span.name"]
+        assert isinstance(page_objects["links"], LinkElements)
+        assert isinstance(page_objects["description"], TextElement)
+        assert isinstance(page_objects["age"], IntegerElement)
+        assert isinstance(page_objects["button_validate"], Element)
+        assert isinstance(page_objects["login"], InputElement)

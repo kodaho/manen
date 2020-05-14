@@ -67,7 +67,11 @@ documentation of each objects to check all the features provided by the module.
 """
 from contextlib import contextmanager
 from functools import reduce
-from typing import TYPE_CHECKING, Any, Callable, List, Union, Optional
+from importlib import import_module
+from pathlib import Path
+from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Union, Type
+
+import yaml
 
 from .exceptions import UnsettableElement
 from .finder import find
@@ -272,6 +276,19 @@ class Page(WebArea):
         >>> button_validate.click()
     """
 
+    @classmethod
+    def from_object(cls, page_objects: Dict[str, "Element"], name: str = "Page"):
+        """Build a Page class from a dictionary."""
+        return type(name, (cls,), page_objects)
+
+    @classmethod
+    def from_yaml(cls, filepath: Union[str, Path]):
+        """Build a Page class from a YAML file."""
+        path = Path(filepath) if isinstance(filepath, str) else filepath
+        with path.open(mode="r") as page_file:
+            page_objects = yaml.load(page_file, Loader=PageObjectLoader)
+        return cls.from_object(page_objects, name=f"{path.stem.capitalize()}Page")
+
     @property
     def title(self) -> str:
         """Title of the page."""
@@ -440,3 +457,29 @@ class InputElement(Element, post_processing=[lambda x: x.get_attribute("value")]
             else:
                 input_.clear()
                 input_.send_keys(value)
+
+
+class PageObjectLoader(yaml.Loader):  # pylint: disable=too-many-ancestors
+    """Loader used to build page from a YAML file. This loader automatically
+    registers all classes defined in __all__.
+
+    .. warning:: :py:class:`manen.page_object_model.Region` is not compatible
+    """
+
+    def __init__(self, *args, **kwargs):
+        def constructor(class_: Type[DomAccessor]):
+            def constructor_from_mapping(loader: yaml.Loader, node):
+                if isinstance(node, yaml.nodes.SequenceNode):
+                    return class_(selectors=loader.construct_sequence(node))
+                if isinstance(node, yaml.nodes.MappingNode):
+                    return class_(**loader.construct_mapping(node))
+                raise Exception("Unexpected beahviour")
+
+            return constructor_from_mapping
+
+        super().__init__(*args, **kwargs)
+
+        this_module = import_module(".".join([__package__, Path(__file__).stem]))
+        for elt in (getattr(this_module, elt) for elt in __all__):
+            if issubclass(elt, (DomAccessor)):
+                self.add_constructor("!%s" % elt.__name__, constructor(elt))

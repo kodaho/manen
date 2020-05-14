@@ -1,0 +1,21 @@
+name: !TextElement
+  - p.name
+  - span.name
+
+links: !LinkElements
+  - a
+
+description: !TextElement
+  - p.desc
+  - ul li p.desc-list
+
+age: !IntegerElement
+  selectors:
+    - span.age
+
+button_validate: !Element
+  - button
+
+login: !InputElement
+  selectors:
+    - input

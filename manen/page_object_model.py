@@ -187,7 +187,11 @@ class DomAccessor:
         post_processing: Optional[List["PostProcessingFunction"]] = None,
     ):
         super().__init_subclass__()
-        cls._post_processing += post_processing or []
+        cls._post_processing = (
+            cls._post_processing
+            if post_processing is None
+            else cls._post_processing + post_processing
+        )
         cls._many = cls._many if many is None else many
 
     def __init__(  # pylint: disable=bad-continuation

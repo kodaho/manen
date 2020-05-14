@@ -69,7 +69,7 @@ from contextlib import contextmanager
 from functools import reduce
 from importlib import import_module
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Union, Type
+from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Union
 
 import yaml
 
@@ -394,6 +394,14 @@ class Element(DomAccessor):
     def __set__(self, area: WebArea, value: Any):
         raise UnsettableElement(self.__class__.__name__)
 
+    @classmethod
+    def _yaml_loader(cls, loader: yaml.Loader, node: yaml.Node):
+        if isinstance(node, yaml.nodes.SequenceNode):
+            return cls(selectors=loader.construct_sequence(node))
+        if isinstance(node, yaml.nodes.MappingNode):
+            return cls(**loader.construct_mapping(node))
+        raise Exception("Unexpected beahviour")
+
 
 class Elements(Element, many=True):
     """Pluralized version of :py:class:`~manen.page_object_model.Element`."""
@@ -460,25 +468,14 @@ class InputElement(Element, post_processing=[lambda x: x.get_attribute("value")]
 
 class PageObjectLoader(yaml.Loader):  # pylint: disable=too-many-ancestors
     """Loader used to build page from a YAML file. This loader automatically
-    registers all classes defined in __all__.
-
-    .. warning:: :py:class:`manen.page_object_model.Region` is not compatible
+    registers all classes having a method ``_yaml_loader``.
     """
 
     def __init__(self, *args, **kwargs):
-        def constructor(class_: Type[DomAccessor]):
-            def constructor_from_mapping(loader: yaml.Loader, node):
-                if isinstance(node, yaml.nodes.SequenceNode):
-                    return class_(selectors=loader.construct_sequence(node))
-                if isinstance(node, yaml.nodes.MappingNode):
-                    return class_(**loader.construct_mapping(node))
-                raise Exception("Unexpected beahviour")
-
-            return constructor_from_mapping
-
         super().__init__(*args, **kwargs)
 
         this_module = import_module(".".join([__package__, Path(__file__).stem]))
-        for elt in (getattr(this_module, elt) for elt in __all__):
-            if issubclass(elt, (DomAccessor)):
-                self.add_constructor("!%s" % elt.__name__, constructor(elt))
+        for name in __all__:
+            class_ = getattr(this_module, name)
+            if hasattr(class_, "_yaml_loader"):
+                self.add_constructor("!%s" % class_.__name__, class_._yaml_loader)

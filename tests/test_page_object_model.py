@@ -116,7 +116,8 @@ class TestLoadPage:
     def test_load_page_objects_from_yaml(self):
         page_path = Path(__file__).parent / "assets/page.yaml"
         with page_path.open(mode="r") as page_file:
-            page_objects = yaml.load(page_file, Loader=PageObjectLoader)
+            page = yaml.load(page_file, Loader=PageObjectLoader)
+        page_objects = page["elements"]
         assert isinstance(page_objects["name"], TextElement)
         assert page_objects["name"].selectors == ["p.name", "span.name"]
         assert isinstance(page_objects["links"], LinkElements)

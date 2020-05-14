@@ -289,8 +289,10 @@ class Page(WebArea):
         """Build a Page class from a YAML file."""
         path = Path(filepath) if isinstance(filepath, str) else filepath
         with path.open(mode="r") as page_file:
-            page_objects = yaml.load(page_file, Loader=PageObjectLoader)
-        return cls.from_object(page_objects, name=f"{path.stem.capitalize()}Page")
+            page_definition = yaml.load(page_file, Loader=PageObjectLoader)
+        name = page_definition.get("name", f"{path.stem.capitalize()}Page")
+        page_objects = page_definition.get("elements")
+        return cls.from_object(page_objects, name=name)
 
     @property
     def title(self) -> str:

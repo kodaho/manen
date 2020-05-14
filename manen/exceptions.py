@@ -1,7 +1,5 @@
 """Exceptions raised by :py:mod:`manen`."""
 
-from selenium.webdriver.remote.webdriver import WebDriver
-
 
 class ManenException(Exception):
     """Basic exception."""
@@ -12,13 +10,11 @@ class DriverNotFound(ManenException):
 
 
 class ElementNotFound(ManenException):
-    """Can not find inside a specific container an element matching the selectors.
-    """
+    """Can not find inside a specific container an element matching the selectors."""
 
-    def __init__(self, selectors, inside):
+    def __init__(self, selectors, driver):
         super().__init__()
         self.selectors = selectors
-        driver = inside if isinstance(inside, WebDriver) else inside.parent
         self.context = {
             "title": driver.title,
             "current_url": driver.current_url,

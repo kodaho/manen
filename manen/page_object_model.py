@@ -336,6 +336,14 @@ class Region(DomAccessor):
     def __set__(self, area: WebArea, value: Any):
         raise UnsettableElement(self.__class__.__name__)
 
+    @classmethod
+    def _yaml_loader(cls, loader: yaml.Loader, node: yaml.Node):
+        if not isinstance(node, yaml.nodes.MappingNode):
+            raise Exception
+        region = loader.construct_mapping(node, deep=True)
+        elements = region.pop("elements")
+        return type(cls.__name__, (cls,), elements)(**region)
+
 
 class Regions(Region, many=True):
     """Pluralized version of :py:class:`~manen.page_object_model.Region`."""

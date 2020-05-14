@@ -19,3 +19,10 @@ button_validate: !Element
 login: !InputElement
   selectors:
     - input
+
+results: !Regions
+  selectors:
+    - div.rc
+  elements:
+    name: !TextElement
+      - h3

@@ -22,14 +22,8 @@ __all__ = ("ChromeNavigator",)
 
 class NavigatorMixin:
     """Mixin to enrich :py:class:`selenium.webdriver.remote.webdriver.WebDriver`
-    with a set of features created to ease the way to work with such an instance.
+    with a set of features intended to ease the way to work with such an instance.
     """
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.quit()
 
     @property
     def cookies(self: "WebDriver"):

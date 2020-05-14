@@ -64,6 +64,6 @@ html_context = {"css_files": ["_static/theme_override.css",]}
 html_theme_options = {"description": "Ease the way to work with Selenium"}
 
 intersphinx_mapping = {
-    "python": ("https://docs.python.org/3", (None)),
+    "python": ("https://docs.python.org/3", None),
     "selenium": ("https://selenium-python.readthedocs.io/", None),
 }

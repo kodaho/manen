@@ -423,9 +423,7 @@ class LinkElement(Element, post_processing=[lambda x: x.get_attribute("href")]):
     """Extract the link from an element matching one or several selectors."""
 
 
-class LinkElements(  # pylint: disable=bad-continuation
-    LinkElement, many=True, post_processing=[lambda x: x.get_attribute("href")],
-):
+class LinkElements(LinkElement, many=True):  # pylint: disable=bad-continuation
     """Pluralized version of :py:class:`~manen.page_object_model.LinkElement`."""
 
 
@@ -433,18 +431,16 @@ class TextElement(Element, post_processing=[lambda x: x.text]):
     """Extract text from an element matching one or several selectors."""
 
 
-class TextElements(TextElement, many=True, post_processing=[lambda x: x.text]):
+class TextElements(TextElement, many=True):
     """Pluralized version of :py:class:`~manen.page_object_model.TextElement`."""
 
 
-class IntegerElement(Element, post_processing=[lambda x: x.text, extract_integer]):
+class IntegerElement(TextElement, post_processing=[extract_integer]):
     """Extract the integer from a text element matching a selector or set of selectors.
     """
 
 
-class IntegerElements(  # pylint: disable=bad-continuation
-    Element, many=True, post_processing=[lambda x: x.text, extract_integer]
-):
+class IntegerElements(IntegerElement, many=True):  # pylint: disable=bad-continuation
     """Get elements from a HTML page matching a set of selectors and extract a
     integer from each text element.
     Pluralized version of :py:class:`~manen.page_object_model.IntegerElement`

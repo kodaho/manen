@@ -183,12 +183,12 @@ class DomAccessor:
 
     def __init_subclass__(  # pylint: disable=bad-continuation
         cls,
-        many: bool = False,
+        many: Optional[bool] = None,
         post_processing: Optional[List["PostProcessingFunction"]] = None,
     ):
         super().__init_subclass__()
-        cls._post_processing = post_processing or []
-        cls._many = many
+        cls._post_processing += post_processing or []
+        cls._many = cls._many if many is None else many
 
     def __init__(  # pylint: disable=bad-continuation
         self,
@@ -331,7 +331,6 @@ class Region(DomAccessor):
     def __get__(self, area: WebArea, area_cls) -> WebArea:
         element = super()._get_from(area, area_cls)
         element = self._build_elements(element, context="REGION")
-        assert isinstance(element, WebArea)  # For mypy
         return element
 
     def __set__(self, area: WebArea, value: Any):

@@ -1,13 +1,12 @@
-"""Manage assets used by `manen`"""
+"""Manage assets used by :py:mod:`manen`"""
 
 import re
-import subprocess
 import xml.etree.ElementTree as ET
 import zipfile
 from datetime import datetime
-from itertools import chain
 from os import chmod
 from pathlib import Path
+from subprocess import PIPE, STDOUT, Popen
 from typing import Dict, List, Optional, Union
 
 import requests
@@ -20,7 +19,7 @@ ZIP_UNIX_SYSTEM = 3
 
 class Version:
     """
-    Helper class to compare version matching the pattern:
+    Helper class to work with version string matching the pattern:
     MAJOR.MINOR(.BRANCH)?.PATH where BRANCH is optional.
 
     https://sites.google.com/a/chromium.org/chromedriver/downloads/version-selection
@@ -147,50 +146,34 @@ class ChromeAppResource:
 
     @classmethod
     def list_remote(cls, os=PLATFORM.system) -> List[Dict]:
-        def extract_current_and_previous_versions(data):
-            current = {
-                "version": Version(data["current_version"]),
+        def extractor(prefix):
+            return lambda data: {
+                "version": Version(data[f"{prefix}_version"]),
                 "release_date": datetime.strptime(
-                    data["current_reldate"], "%m/%d/%y"
+                    data[f"{prefix}_reldate"], "%m/%d/%y"
                 ).date(),
                 "os": data["os"],
                 "channel": data["channel"],
             }
-            previous = {
-                "version": Version(data["previous_version"]),
-                "release_date": datetime.strptime(
-                    data["previous_reldate"], "%m/%d/%y"
-                ).date(),
-                "os": data["os"],
-                "channel": data["channel"],
-            }
-            return [current, previous]
 
         params = {"os": os.lower() if os else os}
         res = requests.get(cls.CHROMIUM_RELEASE_API + "all.json", params=params)
-        versions = []
+        versions: List[Dict] = []
         for data in res.json():
-            versions.extend(
-                list(
-                    chain.from_iterable(
-                        map(extract_current_and_previous_versions, data["versions"])
-                    )
-                )
-            )
-        return list(chain(versions))
+            versions.extend(map(extractor("current"), data["versions"]))
+            versions.extend(map(extractor("previous"), data["versions"]))
+        return versions
 
     @classmethod
     def version(cls) -> "Version":
-        command = cls.COMMAND[PLATFORM.system.lower()]
+        command = [cls.COMMAND[PLATFORM.system.lower()], "--version"]
         if command is None:
             raise ManenException(
                 "Unable to find the Google Chrome command for the platform %s"
                 % PLATFORM.information
             )
 
-        version_command = subprocess.Popen(
-            [command, "--version"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-        )
+        version_command = Popen(command, stdout=PIPE, stderr=STDOUT)
         ans, stderr = version_command.communicate()
         if stderr:
             raise ManenException(stderr)
@@ -205,16 +188,23 @@ class ChromeAppResource:
 
 
 class ChromeDriverResource:
-    API = "https://chromedriver.storage.googleapis.com/"
+    API = "https://chromedriver.storage.googleapis.com"
 
     @classmethod
     def latest_release(cls, version: str = "installed") -> "Version":
+        """Get the version of the latest release for the chromedriver matching this query.
+
+        Args:
+            version:
+
+        Returns:
+            Version: version object of the latest release
+        """
         if version == "installed":
             version = ChromeAppResource.version()[:3]
-        version = f"_{version}" if version else ""
-        remote_version = requests.get(
-            f"{cls.API}LATEST_RELEASE{version}"
-        ).content.decode()
+        url = f"{cls.API}/LATEST_RELEASE"
+        url += f"_{version}" if version else ""
+        remote_version = requests.get(url).content.decode()
         return Version(remote_version)
 
     @classmethod
@@ -228,40 +218,29 @@ class ChromeDriverResource:
             raise exception
 
     @classmethod
-    def list_remote(cls, query: Optional[str] = None, os: str = PLATFORM.system):
-        response = requests.get(cls.API, params={"marker": 3, "prefix": query})
+    def list_remote(cls, query: str = "", os: str = PLATFORM.system):
+        params: Dict[str, Union[str, int]] = {"marker": 3, "prefix": query}
+        response = requests.get(cls.API, params=params)
         response.raise_for_status()
         root = ET.fromstring(response.content)
-        namespaces = {"root": root.tag.split("}")[0].strip("{")}
-        chromedrivers = filter(
-            lambda x: "chromedriver" in x[0],
-            zip(
-                map(
-                    lambda x: x.text,
-                    root.findall("./root:Contents/root:Key", namespaces),
-                ),
-                map(
-                    lambda x: datetime.strptime(x.text, "%Y-%m-%dT%H:%M:%S.%fZ"),
-                    root.findall("./root:Contents/root:LastModified", namespaces),
-                ),
-                map(
-                    lambda x: x.text,
-                    root.findall("./root:Contents/root:Size", namespaces),
-                ),
-            ),
-        )
-        chromedrivers = map(
-            lambda x: {
-                "version": Version(x[0].split("/")[0]),
-                "name": x[0].split("/")[1],
-                "updated_at": x[1],
-                "size": int(x[2]),
-            },
-            chromedrivers,
+        ns = "".join(root.tag.partition("}")[:2])  # pylint: disable=invalid-name
+        chromedrivers = (
+            {
+                "version": (content.findtext(f"{ns}Key") or "").split("/")[0],
+                "name": (content.findtext(f"{ns}Key") or "").split("/")[1],
+                "updated_at": content.findtext(f"{ns}LastModified"),
+                "size": int(content.findtext(f"{ns}Size") or 0),
+            }
+            for content in root.iterfind(f"{ns}Contents")
+            if "chromedriver" in (content.findtext(f"{ns}Key") or "")
         )
         if os:
-            chromedrivers = filter(lambda x: os.lower() in x["name"], chromedrivers)
-        return sorted(chromedrivers, key=lambda x: x["updated_at"])
+            chromedrivers = (
+                chromedriver
+                for chromedriver in chromedrivers
+                if os.lower() in str(chromedriver["name"])
+            )
+        return sorted(chromedrivers, key=lambda x: x["version"])
 
     @classmethod
     def download(  # pylint: disable=bad-continuation
@@ -321,10 +300,3 @@ class ChromeDriverResource:
                 if unix_attributes:
                     chmod(extracted_path, unix_attributes)
         return extracted_path
-
-
-class FirefoxDriverResource:
-    """
-    Remote versions URL: https://api.github.com/repos/mozilla/geckodriver/releases
-    https://developer.github.com/v3/repos/releases/
-    """

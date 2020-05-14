@@ -4,21 +4,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-rope = "*"
-black = "*"
-mypy = "*"
-sphinx = "*"
-pytest = "*"
-pylama = "*"
-pylint = "*"
-Jinja2 = "*"
+manen = {editable= true, path= ".", extras=["doc", "test"]}
 
 [packages]
-selenium = "~=3.141.0"
-questionary = "*"
-requests = "*"
-tabulate = "*"
-manen = {editable = true, path = "."}
+manen = {editable = true,path = "."}
 
 [requires]
 python_version = "3.6"

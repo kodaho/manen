@@ -89,6 +89,8 @@ __all__ = (
     "Elements",
     "Frame",
     "InputElement",
+    "ImageSourceElement",
+    "ImageSourceElements",
     "IntegerElement",
     "IntegerElements",
     "LinkElement",
@@ -432,6 +434,14 @@ class TextElement(Element, post_processing=[lambda x: x.text]):
 
 class TextElements(TextElement, many=True):
     """Pluralized version of :py:class:`~manen.page_object_model.TextElement`."""
+
+
+class ImageSourceElement(Element, post_processing=[lambda x: x.get_attribute("src")]):
+    """Extract the source URL of an image."""
+
+
+class ImageSourceElements(ImageSourceElement, many=True):
+    """Pluralized version of :py:class:`~manen.page_object_model.ImageSourceElement`."""
 
 
 class IntegerElement(TextElement, post_processing=[extract_integer]):

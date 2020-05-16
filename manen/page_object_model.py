@@ -76,9 +76,7 @@ import yaml
 
 from .exceptions import UnsettableElement
 from .finder import find
-from .helpers import (  # pylint: disable=unused-import # (see PyCQA/pylint#1603)
-    extract_integer,
-)
+from .helpers import extract_integer  # pylint: disable=unused-import
 
 if TYPE_CHECKING:
     from .typing import SeleniumElement, WebDriver, WebElement

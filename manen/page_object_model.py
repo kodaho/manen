@@ -69,7 +69,7 @@ from contextlib import contextmanager
 from functools import reduce
 from importlib import import_module
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple, Union
 
 import dateparser  # pylint: disable=unused-import # (see PyCQA/pylint#1603)
 import yaml
@@ -280,9 +280,11 @@ class Page(WebArea):
     """
 
     @classmethod
-    def from_object(cls, page_objects: Dict[str, "Element"], name: str = "Page"):
+    def from_object(  # pylint: disable=bad-continuation
+        cls, page_objects: Dict[str, "Element"], bases: Tuple = (), name: str = "Page",
+    ):
         """Build a Page class from a dictionary."""
-        return type(name, (cls,), page_objects)
+        return type(name, (*bases, cls,), page_objects)
 
     @classmethod
     def from_yaml(cls, filepath: Union[str, Path]):
@@ -290,9 +292,11 @@ class Page(WebArea):
         path = Path(filepath) if isinstance(filepath, str) else filepath
         with path.open(mode="r") as page_file:
             page_definition = yaml.load(page_file, Loader=PageObjectLoader)
+        base_pages = page_definition.get("extends", [])
+        bases = (Page.from_yaml(path.parent / base_page) for base_page in base_pages)
         name = page_definition.get("name", f"{path.stem.capitalize()}Page")
         page_objects = page_definition.get("elements")
-        return cls.from_object(page_objects, name=name)
+        return cls.from_object(page_objects, bases=tuple(bases), name=name)
 
     @property
     def title(self) -> str:
@@ -347,7 +351,8 @@ class Region(DomAccessor):
             raise Exception
         region = loader.construct_mapping(node, deep=True)
         elements = region.pop("elements")
-        return type(cls.__name__, (cls,), elements)(**region)
+        name = region.pop("name", cls.__name__)
+        return type(name, (cls,), elements)(**region)
 
 
 class Regions(Region, many=True):

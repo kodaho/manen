@@ -5,6 +5,8 @@ from unittest.mock import MagicMock, PropertyMock
 import yaml
 from selenium.webdriver.common.by import By
 
+import pytest
+from manen.exceptions import ManenException
 from manen.page_object_model import (
     Element,
     Elements,
@@ -12,9 +14,10 @@ from manen.page_object_model import (
     IntegerElement,
     LinkElements,
     Page,
+    PageObjectLoader,
+    Region,
     TextElement,
     TextElements,
-    PageObjectLoader,
 )
 
 ExpectedResult = namedtuple("ExpectedResult", ("attr", "strategy", "selector"))
@@ -119,9 +122,51 @@ class TestLoadPage:
             page = yaml.load(page_file, Loader=PageObjectLoader)
         page_objects = page["elements"]
         assert isinstance(page_objects["name"], TextElement)
-        assert page_objects["name"].selectors == ["p.name", "span.name"]
+        assert page_objects["name"]._selectors == ["p.name", "span.name"]
         assert isinstance(page_objects["links"], LinkElements)
         assert isinstance(page_objects["description"], TextElement)
         assert isinstance(page_objects["age"], IntegerElement)
         assert isinstance(page_objects["button_validate"], Element)
         assert isinstance(page_objects["login"], InputElement)
+
+
+class TestPageWithoutExplicitSelectors:
+    def test_page_with_external_selectors(self):
+        class MyPage(Page):
+            class Meta:
+                selectors = {
+                    "elements": {
+                        "h1_title": "h1.title",
+                        "button": ".//button",
+                        "my_region": {
+                            "selectors": "div.region",
+                            "elements": {"name": "span.name"},
+                        },
+                    }
+                }
+
+            class MyRegion(Region):
+                name = Element()
+                subtitle = TextElement()
+
+            h1_title = TextElement()
+            button = Element()
+            my_region = MyRegion()
+
+        browser = MagicMock()
+        page = MyPage(browser)
+
+        _ = page.h1_title
+        browser.find_element.assert_called_once_with(By.CSS_SELECTOR, "h1.title")
+        browser.reset_mock()
+
+        _ = page.button
+        browser.find_element.assert_called_with(By.XPATH, ".//button")
+        browser.reset_mock()
+
+        _ = page.my_region
+        browser.find_element.assert_called_with(By.CSS_SELECTOR, "div.region")
+        _ = page.my_region.name
+
+        with pytest.raises(ManenException):
+            assert page.my_region.subtitle

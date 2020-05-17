@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 manen = {editable = true,path = ".",extras = ["doc", "test", "dev"]}
+isort = "*"
 
 [packages]
 manen = {editable = true,path = "."}

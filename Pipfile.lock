@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7145086b5bf2ff0040e6241402a243e043a3364ff2dde4b9d3404189cf32fe27"
+            "sha256": "ee2168b7b9964ef3c5e82aa8083412b5c3fc6436e01bc92efe1e5e0a763ff1ff"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -239,6 +239,7 @@
                 "sha256:54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1",
                 "sha256:6e811fcb295968434526407adb8796944f1988c5b65e8139058f2014cbe100fd"
             ],
+            "index": "pypi",
             "version": "==4.3.21"
         },
         "jinja2": {
@@ -314,10 +315,10 @@
         },
         "more-itertools": {
             "hashes": [
-                "sha256:5dd8bcf33e5f9513ffa06d5ad33d78f31e1931ac9a18f33d37e77a180d393a7c",
-                "sha256:b1ddb932186d8a6ac451e1d95844b382f55e12686d51ca0c68b6f61f2ab7a507"
+                "sha256:558bb897a2232f5e4f8e2399089e35aecb746e1f9191b6584a151647e89267be",
+                "sha256:7818f596b1e87be009031c7653d01acc46ed422e6656b394b0f765ce66ed4982"
             ],
-            "version": "==8.2.0"
+            "version": "==8.3.0"
         },
         "mypy": {
             "hashes": [

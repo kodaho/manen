@@ -74,7 +74,7 @@ from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple, Un
 import dateparser  # pylint: disable=unused-import # (see PyCQA/pylint#1603)
 import yaml
 
-from .exceptions import UnsettableElement
+from .exceptions import ManenException, UnsettableElement
 from .finder import find
 from .helpers import extract_integer  # pylint: disable=unused-import
 
@@ -132,7 +132,14 @@ class WebArea:
       see how to efficiently used page object modelling).
     """
 
-    def __init__(self, container: "SeleniumElement", _context: str = "PAGE"):
+    class Meta:
+        """Metadata for a webarea."""
+
+        selectors: Dict[str, Any] = {}
+
+    def __init__(  # pylint: disable=bad-continuation
+        self, container: "SeleniumElement", _context: str = "PAGE",
+    ):
         """
         Args:
             container ("SeleniumElement"): Parent element in which all the
@@ -173,6 +180,13 @@ class WebArea:
             if self._context == "FRAME":
                 self._driver.switch_to.default_content()
 
+    @classmethod
+    def _selectors_from_src(cls, name):
+        if name not in cls.Meta.selectors["elements"]:
+            raise ManenException("No selectors defined for element `%s`." % name)
+        selectors = cls.Meta.selectors["elements"][name]
+        return selectors["selectors"] if isinstance(selectors, dict) else selectors
+
 
 class DomAccessor:
     """Main interface of a DOM element."""
@@ -195,7 +209,8 @@ class DomAccessor:
 
     def __init__(  # pylint: disable=bad-continuation
         self,
-        selectors: Union[str, List[str]],
+        selectors: Optional[Union[str, List[str]]] = None,
+        *,
         default: Any = NotImplemented,
         wait: int = 0,
         post_processing: Optional["PostProcessingFunction"] = None,
@@ -216,31 +231,56 @@ class DomAccessor:
             post_processing (Callable[[Any], Any]): Callable called after
                 getting the element from the DOM. Defaults to None.
         """
-        self.selectors = selectors if isinstance(selectors, list) else [selectors]
-        self.default = default
-        self.wait = wait
-        self.post_processing = self._post_processing + (
-            [post_processing] if post_processing else []
+        self._selectors = (
+            selectors
+            if selectors is None or isinstance(selectors, list)
+            else [selectors]
         )
+        self._default = default
+        self._wait = wait
+        self._post_processing = [post_processing] if post_processing else []
+        self._name: str
+        self._path: Tuple[str, ...]
+
+    def __set_name__(self, owner, name: str):
+        if name.startswith("_"):
+            raise ManenException(
+                "To prevent any side effect, the element name cannot start with '_'."
+            )
+        self._name = name
+        self._path = tuple(addr for addr in owner.__qualname__.split(".")[1:] if addr)
 
     def _apply_post_processing(self, element: "WebElement") -> Any:
-        return reduce(lambda x, f: f(x) if x else x, self.post_processing, element)
+        return reduce(
+            lambda x, f: f(x) if x else x,
+            self.__class__._post_processing  # pylint: disable=protected-access
+            + self._post_processing,
+            element,
+        )
 
-    def _get_from(self, area: WebArea, _) -> Any:
+    def _get_from(self, area: WebArea, area_class) -> Any:
         if area is None:
             return self
+
+        selectors = (
+            self._selectors
+            if self._selectors is not None
+            else area_class._selectors_from_src(  # pylint: disable=protected-access
+                self._name
+            )
+        )
 
         with area.switch_container() as container:
             lookup = find(
                 inside=container,
                 many=getattr(self, "_many", False),
-                wait=self.wait,
-                default=self.default,
+                wait=self._wait,
+                default=self._default,
             )
 
-            elements = lookup(self.selectors)
+            elements = lookup(selectors)
 
-            if elements == self.default:
+            if elements == self._default:
                 return elements
 
             if isinstance(elements, list):
@@ -248,10 +288,15 @@ class DomAccessor:
 
             return self._apply_post_processing(elements)
 
-    def _build_elements(self, elements, context) -> Union[WebArea, List[WebArea]]:
-        name = self.__class__.__name__
+    def _build_elements(self, elements, context, area) -> Union[WebArea, List[WebArea]]:
+        name = f"{area.__class__.__qualname__}.{self.__class__.__name__}"
         base = (WebArea,)
-        base_dict = dict(self.__class__.__dict__)
+        metadata = dict(area.Meta.__dict__) if area else {}
+        metadata.update(selectors=area.Meta.selectors["elements"][self._name])
+        base_dict = {
+            **dict(self.__class__.__dict__),
+            "Meta": type("Meta", (), metadata),
+        }
 
         if self._many:
             return [
@@ -339,7 +384,7 @@ class Region(DomAccessor):
 
     def __get__(self, area: WebArea, area_cls) -> WebArea:
         element = super()._get_from(area, area_cls)
-        element = self._build_elements(element, context="REGION")
+        element = self._build_elements(element, context="REGION", area=area)
         return element
 
     def __set__(self, area: WebArea, value: Any):
@@ -364,7 +409,7 @@ class Frame(DomAccessor):
 
     def __get__(self, area, area_cls) -> WebArea:
         element = super()._get_from(area, area_cls)
-        element = self._build_elements(element, context="FRAME")
+        element = self._build_elements(element, context="FRAME", area=area)
         assert isinstance(element, WebArea)  # For mypy
         return element
 
@@ -488,7 +533,7 @@ class InputElement(Element, post_processing=[lambda x: x.get_attribute("value")]
 
     def __set__(self, area: WebArea, value: Any):
         with area.switch_container() as container:
-            input_ = find(self.selectors, inside=container)
+            input_ = find(self._selectors, inside=container)
             if isinstance(value, Action):
                 getattr(input_, value.method)(*value.args, **value.kwargs)
             else:

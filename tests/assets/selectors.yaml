@@ -1,0 +1,5 @@
+a: div.a
+region:
+  selectors: a
+  elements:
+    b: div.b

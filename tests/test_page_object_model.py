@@ -170,58 +170,68 @@ class TestElementInPage:
         browser.find_element.return_value.send_keys.assert_called_with("this is a test")
 
 
-class TestLoadPage:
-    def test_load_page_objects_from_yaml(self):
-        page_path = Path(__file__).parent / "assets/page.yaml"
-        with page_path.open(mode="r") as page_file:
-            page = yaml.load(page_file, Loader=PageObjectLoader)
-        page_objects = page["elements"]
-        assert isinstance(page_objects["name"], TextElement)
-        assert page_objects["name"]._selectors == ["p.name", "span.name"]
-        assert isinstance(page_objects["links"], LinkElements)
-        assert isinstance(page_objects["description"], TextElement)
-        assert isinstance(page_objects["age"], IntegerElement)
-        assert isinstance(page_objects["button_validate"], Element)
-        assert isinstance(page_objects["login"], InputElement)
+def test_load_page_objects_from_yaml():
+    page_path = Path(__file__).parent / "assets/page.yaml"
+    with page_path.open(mode="r") as page_file:
+        page = yaml.load(page_file, Loader=PageObjectLoader)
+    page_objects = page["elements"]
+    assert isinstance(page_objects["name"], TextElement)
+    assert page_objects["name"]._selectors == ["p.name", "span.name"]
+    assert isinstance(page_objects["links"], LinkElements)
+    assert isinstance(page_objects["description"], TextElement)
+    assert isinstance(page_objects["age"], IntegerElement)
+    assert isinstance(page_objects["button_validate"], Element)
+    assert isinstance(page_objects["login"], InputElement)
 
 
-class TestPageWithoutExplicitSelectors:
-    def test_page_with_external_selectors(self):
-        class MyPage(Page):
-            class Meta:
-                selectors = {
-                    "elements": {
-                        "h1_title": "h1.title",
-                        "button": ".//button",
-                        "my_region": {
-                            "selectors": "div.region",
-                            "elements": {"name": "span.name"},
+def test_page_with_external_selectors():
+    class MyPage(Page):
+        class Meta:
+            selectors = {
+                "elements": {
+                    "h1_title": "h1.title",
+                    "button": ".//button",
+                    "my_region": {
+                        "selectors": "div.region",
+                        "elements": {
+                            "name": "span.name",
+                            "my_subregion": {
+                                "selectors": ["div.subregion", "div.other-choice"],
+                                "elements": {"description": "p"},
+                            },
                         },
-                    }
+                    },
                 }
+            }
 
-            class MyRegion(Region):
-                name = Element()
-                subtitle = TextElement()
+        class MyRegion(Region):
+            class MySubRegion(Region):
+                description = TextElement()
 
-            h1_title = TextElement()
-            button = Element()
-            my_region = MyRegion()
+            name = Element()
+            subtitle = TextElement()
+            my_subregion = MySubRegion()
 
-        browser = MagicMock()
-        page = MyPage(browser)
+        h1_title = TextElement()
+        button = Element()
+        my_region = MyRegion()
 
-        _ = page.h1_title
-        browser.find_element.assert_called_once_with(By.CSS_SELECTOR, "h1.title")
-        browser.reset_mock()
+    browser = MagicMock()
+    page = MyPage(browser)
 
-        _ = page.button
-        browser.find_element.assert_called_with(By.XPATH, ".//button")
-        browser.reset_mock()
+    _ = page.h1_title
+    browser.find_element.assert_called_once_with(By.CSS_SELECTOR, "h1.title")
+    browser.reset_mock()
 
-        _ = page.my_region
-        browser.find_element.assert_called_with(By.CSS_SELECTOR, "div.region")
-        _ = page.my_region.name
+    _ = page.button
+    browser.find_element.assert_called_with(By.XPATH, ".//button")
+    browser.reset_mock()
 
-        with pytest.raises(ManenException):
-            assert page.my_region.subtitle
+    _ = page.my_region
+    browser.find_element.assert_called_with(By.CSS_SELECTOR, "div.region")
+
+    _ = page.my_region.name
+    _ = page.my_region.my_subregion.description
+
+    with pytest.raises(ManenException):
+        assert page.my_region.subtitle

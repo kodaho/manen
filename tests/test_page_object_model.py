@@ -14,6 +14,7 @@ from manen.page_object_model import (
     Element,
     ImageSourceElement,
     ImageSourceElements,
+    InnerHtmlElement,
     InputElement,
     IntegerElement,
     IntegerElements,
@@ -30,7 +31,8 @@ ExpectedResult = namedtuple("ExpectedResult", ("attr", "strategy", "selector"))
 
 
 @pytest.mark.parametrize(
-    "element_class", [Element, TextElement, LinkElement, ImageSourceElement],
+    "element_class",
+    [Element, TextElement, LinkElement, ImageSourceElement, InnerHtmlElement],
 )
 @pytest.mark.parametrize(
     "manen_selector,strategy,selector",

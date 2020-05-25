@@ -93,10 +93,14 @@ __all__ = (
     "InputElement",
     "ImageSourceElement",
     "ImageSourceElements",
+    "InnerHtmlElement",
+    "InnerHtmlElements",
     "IntegerElement",
     "IntegerElements",
     "LinkElement",
     "LinkElements",
+    "OuterHtmlElement",
+    "OuterHtmlElements",
     "Page",
     "Region",
     "Regions",
@@ -512,6 +516,16 @@ class ImageSourceElements(ImageSourceElement, many=True):
     """Pluralized version of :py:class:`~manen.page_object_model.ImageSourceElement`."""
 
 
+class InnerHtmlElement(
+    Element, post_processing=[lambda x: x.get_property("innerHTML")]
+):
+    """Extract the inner HTML from an element."""
+
+
+class InnerHtmlElements(InnerHtmlElement, many=True):
+    """Pluralized version of :py:class:`manen.page_object_model.InnerHtmlElement`."""
+
+
 class IntegerElement(TextElement, post_processing=[extract_integer]):
     """Extract the integer from a text element matching a selector or set of selectors.
     """
@@ -530,6 +544,16 @@ class DatetimeElement(TextElement, post_processing=[dateparser.parse]):
 
 class DatetimeElements(DatetimeElement, many=True):
     """Pluralized version of :py:class:`~manen.page_object_model.DatetimeElement`."""
+
+
+class OuterHtmlElement(
+    Element, post_processing=[lambda x: x.get_property("outerHTML")]
+):
+    """Extract the outer HTMl of an element."""
+
+
+class OuterHtmlElements(OuterHtmlElement, many=True):
+    """Pluralized version of :py:class:`~manen.page_object_model.OuterHtmlElement`."""
 
 
 class InputElement(Element, post_processing=[lambda x: x.get_attribute("value")]):

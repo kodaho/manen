@@ -85,6 +85,8 @@ if TYPE_CHECKING:
 
 __all__ = (
     "Action",
+    "DatetimeElement",
+    "DatetimeElements",
     "Element",
     "Elements",
     "Frame",
@@ -136,6 +138,7 @@ class WebArea:
         """Metadata for a webarea."""
 
         selectors: Dict[str, Any] = {}
+        url: Optional[str] = None
 
     def __init__(  # pylint: disable=bad-continuation
         self, container: "SeleniumElement", _context: str = "PAGE",
@@ -337,10 +340,16 @@ class Page(WebArea):
         path = Path(filepath) if isinstance(filepath, str) else filepath
         with path.open(mode="r") as page_file:
             page_definition = yaml.load(page_file, Loader=PageObjectLoader)
+
         base_pages = page_definition.get("extends", [])
         bases = (Page.from_yaml(path.parent / base_page) for base_page in base_pages)
+
         name = page_definition.get("name", f"{path.stem.capitalize()}Page")
+
         page_objects = page_definition.get("elements")
+        metadata = page_definition.get("meta", {})
+        page_objects.update(Meta=type("Meta", (), metadata))
+
         return cls.from_object(page_objects, bases=tuple(bases), name=name)
 
     @property
@@ -356,6 +365,15 @@ class Page(WebArea):
     def click_with_js(self, element: "WebElement"):
         """Click on an element using a JavaScript script."""
         return self._container.click_with_js(element)
+
+    def open(self, **kwargs):
+        """Go to the URL specified in the Meta class associated to a Page. Any
+        keywords arguments will be passed to the URL to format it.
+        """
+        url = self.__class__.Meta.url
+        if url is not None:
+            return self._driver.get(url.format(**kwargs))
+        raise ManenException("No URL specified.")
 
 
 class Region(DomAccessor):

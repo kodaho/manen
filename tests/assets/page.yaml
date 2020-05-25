@@ -1,4 +1,6 @@
 name: DemoPage
+meta:
+  url: https://www.linkedin.com/in/{profile_id}
 elements:
   name: !TextElement
     - p.name

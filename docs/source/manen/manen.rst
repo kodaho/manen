@@ -1,20 +1,20 @@
 manen package
 =============
 
+.. automodule:: manen
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-Subpackages
------------
+
+API Documentation
+-----------------
+
+Examine directly the code to discover all features proposed by :py:mod:`manen`
 
 .. toctree::
    :maxdepth: 4
-
-   manen.resource
-
-Submodules
-----------
-
-.. toctree::
-   :maxdepth: 4
+   :titlesonly:
 
    manen.cli
    manen.exceptions
@@ -22,4 +22,4 @@ Submodules
    manen.helpers
    manen.navigator
    manen.page_object_model
-   manen.typing
+   manen.resource

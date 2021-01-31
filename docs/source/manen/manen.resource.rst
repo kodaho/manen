@@ -6,19 +6,29 @@ manen.resource package
    :undoc-members:
    :show-inheritance:
 
-Subpackages
------------
+
+This is for Google Chrome
 
 .. toctree::
    :maxdepth: 4
+   :titlesonly:
 
    manen.resource.chrome
-   manen.resource.firefox
 
-Submodules
-----------
+
+This is for firefox
 
 .. toctree::
    :maxdepth: 4
+   :titlesonly:
+
+   manen.resource.firefox
+
+
+This is for local resources
+
+.. toctree::
+   :maxdepth: 4
+   :titlesonly:
 
    manen.resource.local

@@ -140,26 +140,27 @@ def find(  # pylint: disable=bad-continuation
     Args:
         selector (str or List[str], optional): Selectors to be used to find the
             element(s). If it is a list, it will try each selector until at
-            least one element is found. If it is `None`, it returns a partial
+            least one element is found. If it is ``None``, it returns a partial
             function which can be used later to find the elements. Defaults to
-            `None`.
-        wait (int, optional): If `wait` > 0 and no element is currently found,
+            ``None``.
+        wait (int, optional): If ``wait`` > 0 and no element is currently found,
             the function will retry every 500ms, for ``wait`` seconds maximum.
             Defaults to 0.
         default (Any, optional): default value to return if no element is found.
             Specifying this value will prevent the function to raise
-            `ElementNotFound` if no element matching the selectors are found.
-            Defaults to NotImplemented.
+            :py:exc:`manen.exceptions.ElementNotFound` if no element matching the selectors are found.
+            Defaults to ``NotImplemented``.
         inside (SeleniumElement, optional): where to find the element(s).
-            Specifying this argument will restrict the search area. If `None`,
-            it will search the whole page. If it's a list, the function will
-            map over each element of that list. Defaults to None.
+            Specifying this argument will restrict the search area. If
+            ``None``, it will search the whole page. If it's a list, the
+            function will map over each element of that list. Defaults to
+            ``None``.
         many (bool, optional): Whether to return a single element or all the
-            elements matching the selectors. Defaults to False.
+            elements matching the selectors. Defaults to ``False``.
 
     Raises:
-        ValueError: raised if the function is called with `selector` but
-            without `inside`.
+        ValueError: raised if the function is called with ``selector`` but
+            without ``inside``.
         ElementNotFound: raised if no default value is specified and no element
             matching the selector(s) has been found
 

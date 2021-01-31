@@ -39,12 +39,13 @@ def extract_integer(string: str) -> int:
 def version(version_str: str) -> "Version":
     """
     Helper function to convert a version string into a tuple. The versioning
-    scheme is described `here <https://www.chromium.org/developers/version-numbers>`.
+    scheme is described `here <https://www.chromium.org/developers/version-numbers>`_.
     The input will be validated with the regular expression
-    `^[\\d]+.[\\d]+.[\\d]+.[\\d]+$` and raised a `ValueError` if it doesn't match.
+    ``^[\\d]+.[\\d]+.[\\d]+.[\\d]+$`` and raised a :py:class:`ValueError` if it doesn't match.
 
-    ..note:: This versioning system is not compliant with semantic versioning
-        rules.
+    ..  caution::
+    
+        This versioning system is not compliant with semantic versioning rules.
 
     Args:
         version_str: string to be converted to a tuple

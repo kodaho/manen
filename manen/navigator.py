@@ -72,7 +72,7 @@ class NavigatorMixin:
 
         return
 
-    def highlight(self, selector: Union[str, List[str]], **kwargs):
+    def highlight(self: "WebDriver", selector: Union[str, List[str]], **kwargs):
         elements = self.find(selector, **kwargs)
         if not isinstance(elements, list):
             elements = [elements]
@@ -93,8 +93,8 @@ class NavigatorMixin:
         return version(self.capabilities["chrome"]["chromedriverVersion"].split(" ")[0])
 
     @property
-    def are_versions_compatible(self):
-        return self.browser_version[:3] == self.driver_version[:3]  # type: ignore
+    def are_versions_compatible(self: "WebDriver"):
+        return self.browser_version[:3] == self.driver_version[:3]
 
     def find(self: "WebDriver", selector: Union[str, List[str]], **kwargs):
         kwargs.setdefault("inside", self)

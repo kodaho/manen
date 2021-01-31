@@ -5,12 +5,8 @@ manen.resource.chrome package
    :members:
    :undoc-members:
    :show-inheritance:
+   :noindex:
 
-Submodules
-----------
 
-.. toctree::
-   :maxdepth: 4
-
-   manen.resource.chrome.application
-   manen.resource.chrome.driver
+.. include:: manen.resource.chrome.application.rst
+.. include:: manen.resource.chrome.driver.rst

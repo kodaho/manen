@@ -11,6 +11,7 @@ isort = "*"
 manen = {editable = true,path = "."}
 dateparser = "*"
 polling2 = "*"
+furo = "*"
 
 [requires]
 python_version = "3.6"

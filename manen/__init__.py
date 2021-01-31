@@ -1,4 +1,13 @@
-""":py:mod:`manen` is a module to ease the interaction with Selenium. Its features
+"""
+Welcome to ``manen``'s documentation!
+-------------------------------------
+
+.. image:: https://img.shields.io/badge/python-%3E=3.6-informational?style=for-the-badge&logo=python
+.. image:: https://img.shields.io/badge/version-0.1.0-informational?style=for-the-badge
+.. image:: https://img.shields.io/badge/status-in%20development-yellow?style=for-the-badge
+
+
+:py:mod:`manen` is a module to ease the interaction with Selenium. Its features
 are splitted into four modules, where each module is independant:
 
 - :py:mod:`manen.resource` : set of helpers to get the drivers needed by Selenium to work

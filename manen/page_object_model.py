@@ -1,5 +1,9 @@
 # pylint: disable=too-few-public-methods
-"""This module provides an implementation of the `Page Object design pattern
+"""
+manen.page_object_mode
+======================
+
+This module provides an implementation of the `Page Object design pattern
 <https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/>`_
 described in Selenium documentation. By combining the classes
 :py:class:`~manen.page_object_model.Page` and :py:class:`~manen.page_object_model.Region`
@@ -299,7 +303,9 @@ class DomAccessor:
         name = f"{area.__class__.__qualname__}.{self.__class__.__name__}"
         base = (WebArea,)
         metadata = dict(area.Meta.__dict__) if area else {}
-        metadata.update(selectors=area.Meta.selectors["elements"][self._name])
+        metadata.update(
+            selectors=area.Meta.selectors.get("elements", {}).get(self._name, {})
+        )
         base_dict = {
             **dict(self.__class__.__dict__),
             "Meta": type("Meta", (), metadata),
@@ -485,7 +491,7 @@ class Element(DomAccessor):
             return cls(selectors=loader.construct_sequence(node))
         if isinstance(node, yaml.nodes.MappingNode):
             return cls(**loader.construct_mapping(node))
-        raise Exception("Unexpected beahviour")
+        raise Exception("Unexpected node type encoutered while loading node %s" % node)
 
 
 class Elements(Element, many=True):
@@ -549,7 +555,7 @@ class DatetimeElements(DatetimeElement, many=True):
 class OuterHtmlElement(
     Element, post_processing=[lambda x: x.get_property("outerHTML")]
 ):
-    """Extract the outer HTMl of an element."""
+    """Extract the outer HTML of an element."""
 
 
 class OuterHtmlElements(OuterHtmlElement, many=True):
@@ -585,7 +591,7 @@ class InputElement(Element, post_processing=[lambda x: x.get_attribute("value")]
 
 class PageObjectLoader(yaml.Loader):  # pylint: disable=too-many-ancestors
     """Loader used to build page from a YAML file. This loader automatically
-    registers all classes having a method ``_yaml_loader``.
+    registers all classes in the current module having a method ``_yaml_loader``.
     """
 
     def __init__(self, *args, **kwargs):

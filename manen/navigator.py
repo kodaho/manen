@@ -1,4 +1,9 @@
-"""Classes which enrich :py:class:`selenium.webdriver.remote.webdriver.WebDriver`."""
+"""
+manen.navigator
+===============
+
+Classes which enrich :py:class:`selenium.webdriver.remote.webdriver.WebDriver`.
+"""
 
 import time
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union
@@ -7,12 +12,11 @@ from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.common.keys import Keys
 
 from .finder import find
-from .helpers import PLATFORM
-from .resource import ChromeDriverResource, Version
+from .helpers import PLATFORM_SYS, version
+from .resource.chrome import driver as chrome_driver
 
 if TYPE_CHECKING:
-    from .helpers import Platform
-    from .typing import SeleniumElement, WebDriver, WebElement
+    from .typing import SeleniumElement, WebDriver, Version
 
 
 __all__ = ("ChromeNavigator",)
@@ -68,7 +72,7 @@ class NavigatorMixin:
 
         return
 
-    def highlight(self: "WebDriver", selector: Union[str, List[str]], **kwargs):
+    def highlight(self, selector: Union[str, List[str]], **kwargs):
         elements = self.find(selector, **kwargs)
         if not isinstance(elements, list):
             elements = [elements]
@@ -78,26 +82,27 @@ class NavigatorMixin:
 
     @property
     def current_platform(self):
-        return PLATFORM
+        return PLATFORM_SYS
 
     @property
-    def browser_version(self: "WebDriver"):
-        return Version(self.capabilities["browserVersion"])
+    def browser_version(self: "WebDriver") -> "Version":
+        return version(self.capabilities["browserVersion"])
 
     @property
-    def driver_version(self: "WebDriver"):
-        return Version(self.capabilities["chrome"]["chromedriverVersion"].split(" ")[0])
+    def driver_version(self: "WebDriver") -> "Version":
+        return version(self.capabilities["chrome"]["chromedriverVersion"].split(" ")[0])
 
     @property
-    def are_versions_compatible(self: "WebDriver"):
-        return self.browser_version[:3] == self.driver_version[:3]
+    def are_versions_compatible(self):
+        return self.browser_version[:3] == self.driver_version[:3]  # type: ignore
 
     def find(self: "WebDriver", selector: Union[str, List[str]], **kwargs):
         kwargs.setdefault("inside", self)
+        kwargs.setdefault("many", True)
         return find(selector, **kwargs)
 
     def lookup(self: "WebDriver", *args, **kwargs):
-        return find(inside=self, many=False)(*args, **kwargs)
+        return find(inside=self, default=None)(*args, **kwargs)  # type: ignore
 
 
 class ChromeNavigator(NavigatorMixin, Chrome):
@@ -109,7 +114,7 @@ class ChromeNavigator(NavigatorMixin, Chrome):
         driver_path: Optional[str] = None,
         window_size: Optional[Tuple[int, int]] = None,
     ):
-        driver_path = driver_path or ChromeDriverResource.find()
+        driver_path = driver_path or chrome_driver.get()
 
         chrome_options = ChromeOptions()
         if window_size:

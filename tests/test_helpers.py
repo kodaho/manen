@@ -1,26 +1,53 @@
-from manen.helpers import extract_integer
+import pytest
+
+from manen.helpers import extract_integer, version
 
 
-class TestExtractFigure:
-    def test_extract_simple_integer(self):
-        assert extract_integer("1") == 1
-        assert extract_integer("0") == 0
-        assert extract_integer("1234") == 1234
-        assert extract_integer("01234") == 1234
+@pytest.mark.parametrize(
+    "expected_str,expected_int", [("1", 1), ("0", 0), ("1234", 1234), ("01234", 1234),]
+)
+def test_extract_simple_integer(expected_str, expected_int):
+    assert extract_integer(expected_str) == expected_int
 
-    def test_extract_integer_with_text(self):
-        assert extract_integer("1 thing") == 1
-        assert extract_integer("0 thing") == 0
-        assert extract_integer("10 things and more") == 10
-        assert extract_integer("10 things and more...?!#") == 10
 
-    def test_extract_integer_inside_text(self):
-        assert extract_integer("You have 0 connection.") == 0
-        assert extract_integer("You have 10 connections in your network.") == 10
-        assert (
-            extract_integer("If you want, you can have 12340new connections.") == 12340
-        )
+@pytest.mark.parametrize(
+    "expected_str,expected_int",
+    [
+        ("1 thing", 1),
+        ("0 thing", 0),
+        ("10 things and more", 10),
+        ("10 things and more...?!#", 10),
+        ("There are 1234new things", 1234),
+    ],
+)
+def test_extract_integer_inside_text(expected_str, expected_int):
+    assert extract_integer(expected_str) == expected_int
 
-    def test_extract_integer_from_float(self):
-        assert extract_integer("10,123.23") == 10123
-        assert extract_integer("10.1") == 10
+
+@pytest.mark.parametrize("float_str,value", [("10,123.23", 10123), ("10.1", 10)])
+def test_extract_integer_from_float(float_str, value):
+    assert extract_integer(float_str) == value
+
+
+@pytest.mark.parametrize("ambiguous_str,value", [("1 thing and 2 others", 1)])
+def test_extract_ambiguous_case(ambiguous_str, value):
+    assert extract_integer(ambiguous_str) == value
+
+
+@pytest.mark.parametrize(
+    "version_str,version_tuple",
+    [("1.2.3.4", (1, 2, 3, 4)), ("80.0.0.123", (80, 0, 0, 123)),],
+)
+def test_create_version(version_str, version_tuple):
+    assert version(version_str) == version_tuple
+
+
+@pytest.mark.parametrize(
+    "invalid_version", ["version", "1,2,3", "1.2", "1.2.3.4.5"],
+)
+def test_invalid_version(invalid_version):
+    with pytest.raises(ValueError):
+        version(invalid_version)
+
+
+# Add test for sorting of version

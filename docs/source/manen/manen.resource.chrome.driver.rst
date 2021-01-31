@@ -1,4 +1,4 @@
-.. automodule:: manen.page_object_model
+.. automodule:: manen.resource.chrome.driver
    :members:
    :undoc-members:
    :show-inheritance:

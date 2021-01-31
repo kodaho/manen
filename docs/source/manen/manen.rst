@@ -1,5 +1,17 @@
-API
-===
+manen package
+=============
+
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   manen.resource
+
+Submodules
+----------
 
 .. toctree::
    :maxdepth: 4
@@ -10,4 +22,4 @@ API
    manen.helpers
    manen.navigator
    manen.page_object_model
-   manen.resource
+   manen.typing

@@ -1,0 +1,4 @@
+"""
+manen.resource.firefox.application
+==================================
+"""

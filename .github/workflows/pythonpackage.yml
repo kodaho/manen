@@ -6,12 +6,12 @@ name: Python package
 on:
   push:
     branches:
-      - master
-      - dev
+      - main
+      - develop
   pull_request:
     branches:
-      - master
-      - dev
+      - main
+      - develop
 
 jobs:
   build:

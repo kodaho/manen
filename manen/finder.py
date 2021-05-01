@@ -3,7 +3,7 @@ manen.finder
 ============
 
 Flexible and highly customizable function to find one or several elements
-inside one or serveral Selenium elements.
+inside one or several Selenium elements.
 """
 
 from functools import partial
@@ -148,7 +148,8 @@ def find(  # pylint: disable=bad-continuation
             Defaults to 0.
         default (Any, optional): default value to return if no element is found.
             Specifying this value will prevent the function to raise
-            :py:exc:`manen.exceptions.ElementNotFound` if no element matching the selectors are found.
+            :py:exc:`manen.exceptions.ElementNotFound` if no element matching
+            the selectors are found.
             Defaults to ``NotImplemented``.
         inside (SeleniumElement, optional): where to find the element(s).
             Specifying this argument will restrict the search area. If
@@ -167,7 +168,8 @@ def find(  # pylint: disable=bad-continuation
     Returns:
         Any: as explained in the Arguments description, the return value(s) will
         depend of the type of the arguments. Here is a recap of what will be
-        returned based on the arguments types.
+        returned based on the arguments types (``ans_elt`` is a Selenium
+        element).
 
         +--------------------+---------------------+-----------+------------------------------------------------+
         | `default`          | `inside`            | `many`    | Examples                                       |
@@ -205,6 +207,7 @@ def find(  # pylint: disable=bad-continuation
                 elements = None
             if elements:
                 return elements
+        return None
 
     if wait:
         try:

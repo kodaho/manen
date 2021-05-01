@@ -293,7 +293,7 @@ class DomAccessor:
         selectors = (
             self._selectors
             if self._selectors is not None
-            else area_class._selectors_from_src(  # pylint: disable=protected-access
+            else area_class._selectors_from_meta(  # pylint: disable=protected-access
                 self._name
             )
         )

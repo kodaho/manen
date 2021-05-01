@@ -174,7 +174,7 @@ class WebArea:
         self._container = container
         self._context = _context
         self._driver: "WebDriver" = getattr(container, "parent", container)
-        if self.Meta.selectors_path:
+        if getattr(self.Meta, "selectors_path", None):
             self.Meta.selectors = load_selector_config(self.Meta.selectors_path)
 
     @property

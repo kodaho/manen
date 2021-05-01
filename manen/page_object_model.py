@@ -1,7 +1,7 @@
 # pylint: disable=too-few-public-methods
 """
-manen.page_object_mode
-======================
+manen.page_object_model
+=======================
 
 This module provides an implementation of the `Page Object design pattern
 <https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/>`_
@@ -20,7 +20,8 @@ classes in an external file called ``pypi_pom.py``.
 .. code-block:: python
 
     from manen.page_object_model import (Page, Regions, InputElement,
-                                         TextElement, LinkElement)
+                                         TextElement, LinkElement,
+                                         IntegerElement)
 
     class HomePage(Page):
         query = InputElement("input[id='search']")
@@ -32,7 +33,7 @@ classes in an external file called ``pypi_pom.py``.
             link = LinkElement("a.package-snippet")
             description = TextElement("p.package-snippet__description")
 
-        n_results = FigureElement("//*[@id='content']//form/div[1]/div[1]/p/strong")
+        n_results = IntegerElement("//*[@id='content']//form/div[1]/div[1]/p/strong")
         results = ResultRegions("ul[aria-label='Search results'] li")
 
 
@@ -73,10 +74,20 @@ from contextlib import contextmanager
 from functools import reduce
 from importlib import import_module
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    Callable,
+    Dict,
+    List,
+    Optional,
+    Tuple,
+    Union,
+)
 
 import dateparser  # pylint: disable=unused-import # (see PyCQA/pylint#1603)
 import yaml
+from selenium.webdriver.support.select import Select
 
 from .exceptions import ManenException, UnsettableElement
 from .finder import find
@@ -89,16 +100,17 @@ if TYPE_CHECKING:
 
 __all__ = (
     "Action",
+    "CheckboxElement",
     "DatetimeElement",
     "DatetimeElements",
     "Element",
     "Elements",
     "Frame",
-    "InputElement",
     "ImageSourceElement",
     "ImageSourceElements",
     "InnerHtmlElement",
     "InnerHtmlElements",
+    "InputElement",
     "IntegerElement",
     "IntegerElements",
     "LinkElement",
@@ -106,8 +118,10 @@ __all__ = (
     "OuterHtmlElement",
     "OuterHtmlElements",
     "Page",
+    "RadioButtonElement",
     "Region",
     "Regions",
+    "SelectElement",
     "TextElement",
     "TextElements",
     "WebArea",
@@ -145,6 +159,7 @@ class WebArea:
     class Meta:
         """Metadata for a webarea."""
 
+        selectors_path: str = ""
         selectors: Dict[str, Any] = {}
         url: Optional[str] = None
 
@@ -159,6 +174,8 @@ class WebArea:
         self._container = container
         self._context = _context
         self._driver: "WebDriver" = getattr(container, "parent", container)
+        if self.Meta.selectors_path:
+            self.Meta.selectors = load_selector_config(self.Meta.selectors_path)
 
     @property
     def container(self) -> "SeleniumElement":
@@ -192,7 +209,7 @@ class WebArea:
                 self._driver.switch_to.default_content()
 
     @classmethod
-    def _selectors_from_src(cls, name):
+    def _selectors_from_meta(cls, name):
         if name not in cls.Meta.selectors["elements"]:
             raise ManenException("No selectors defined for element `%s`." % name)
         selectors = cls.Meta.selectors["elements"][name]
@@ -365,16 +382,17 @@ class Page(WebArea):
     @property
     def title(self) -> str:
         """Title of the page."""
-        return self._container.title
+        return self._driver.title
 
     @property
     def page_source(self) -> str:
         """Code source of the page."""
-        return self._container.page_source
+        return self._driver.page_source
 
     def click_with_js(self, element: "WebElement"):
         """Click on an element using a JavaScript script."""
-        return self._container.click_with_js(element)
+        js_script = """arguments[0].click()"""
+        return self._driver.execute_script(js_script, element)
 
     def open(self, **kwargs):
         """Go to the URL specified in the Meta class associated to a Page. Any
@@ -410,7 +428,7 @@ class Region(DomAccessor):
         >>> page.form_region.password = Action("submit")
     """
 
-    def __get__(self, area: WebArea, area_cls) -> WebArea:
+    def __get__(self, area: WebArea, area_cls) -> Union[WebArea, List[WebArea]]:
         element = super()._get_from(area, area_cls)
         element = self._build_elements(element, context="REGION", area=area)
         return element
@@ -523,7 +541,10 @@ class ImageSourceElements(ImageSourceElement, many=True):
 
 
 class InnerHtmlElement(
-    Element, post_processing=[lambda x: x.get_property("innerHTML")]
+    Element,
+    post_processing=[
+        lambda x: x.get_property("innerHTML")
+    ],  # pylint: disable=bad-continuation
 ):
     """Extract the inner HTML from an element."""
 
@@ -553,7 +574,10 @@ class DatetimeElements(DatetimeElement, many=True):
 
 
 class OuterHtmlElement(
-    Element, post_processing=[lambda x: x.get_property("outerHTML")]
+    Element,
+    post_processing=[
+        lambda x: x.get_property("outerHTML")
+    ],  # pylint: disable=bad-continuation
 ):
     """Extract the outer HTML of an element."""
 
@@ -589,6 +613,71 @@ class InputElement(Element, post_processing=[lambda x: x.get_attribute("value")]
                 input_.send_keys(value)
 
 
+class CheckboxElement(
+    Element,
+    post_processing=[
+        lambda x: x.get_attribute("checked") == "true"
+    ],  # pylint: disable=bad-continuation
+):
+    """Get the status of a checkbox element directly as a boolan. Setting a
+    boolean value to a checkbox element will directly change the value of
+    the DOM element.
+    """
+
+    def __set__(self, area: WebArea, value: bool):
+        with area.switch_container() as container:
+            if not isinstance(value, bool):
+                raise ValueError(
+                    f"The value {value} is not a boolean and so cannot be "
+                    "assigned to a checkox element."
+                )
+            element = find(self._selectors, inside=container)
+            if (element.get_attribute("checked") == "true") != value:
+                element.click()
+
+
+class RadioButtonElement(Element):
+    """Mapper to a set of choices controlled by a radio element in the page.
+    Setting the value of the radio button element will directly update the
+    DOM element with the specified value.
+    """
+
+    def __get__(self, area, area_class):
+        elements = self._get_from(area, area_class)
+        right_element = [
+            element
+            for element in elements
+            if element.get_attribute("checked") == "true"
+        ]
+        return right_element[0].get_attribute("value") if right_element else None
+
+    def __set__(self, area: WebArea, value: bool):
+        with area.switch_container() as container:
+            elements = find(self._selectors, inside=container, many=True)
+            right_element = [
+                element
+                for element in elements
+                if element.get_attribute("value") == value
+            ]
+            if not right_element:
+                raise ValueError(
+                    f"The value {value} is not allowed for the radio button element."
+                )
+            else:
+                right_element[0].click()
+
+
+class SelectElement(Element):
+    """A shortcut to get an instance of :py:class:`~selenium.webdriver.support.select.Select`
+    for a select element. See guide to work with ``Select`` element from
+    `official documentation <https://www.selenium.dev/documentation/en/support_packages/working_with_select_elements/>`_.  # pylint: disable=line-too-long
+    """
+
+    def __get__(self, area, area_class):
+        element = self._get_from(area, area_class)
+        return Select(element)
+
+
 class PageObjectLoader(yaml.Loader):  # pylint: disable=too-many-ancestors
     """Loader used to build page from a YAML file. This loader automatically
     registers all classes in the current module having a method ``_yaml_loader``.
@@ -602,3 +691,61 @@ class PageObjectLoader(yaml.Loader):  # pylint: disable=too-many-ancestors
             class_ = getattr(this_module, name)
             if hasattr(class_, "_yaml_loader"):
                 self.add_constructor("!%s" % class_.__name__, class_._yaml_loader)
+
+
+class IgnorePageObjectLoader(yaml.Loader):  # pylint: disable=too-many-ancestors
+    """Loader used to build page from a YAML file. This loader automatically
+    registers all classes in the current module having a method ``_yaml_loader``.
+    """
+
+    def ignore(self, loader: yaml.Loader, node: yaml.Node) -> Any:
+        """Prevent loading a YAML file with special classes when a tag is
+        specified. This is useful when you want to a Manen YAML page without
+        loading the element but only a regular Python object.
+
+        Args:
+            loader (yaml.Loader): instance of YAML Loader which describe how to
+                build an element.
+            node (yaml.Node): node to construct
+
+        Raises:
+            TypeError: Raised if the special tag is set on something different
+                from a SequenceNode or a MappingNode
+
+        Returns:
+            Any: Python object as it should be loaded with a regular YAML
+                Loader
+        """
+        if isinstance(node, yaml.nodes.SequenceNode):
+            return {"selectors": loader.construct_sequence(node)}
+        if isinstance(node, yaml.nodes.MappingNode):
+            return loader.construct_mapping(node)
+        raise TypeError("Unexpected node type encoutered while loading node %s" % node)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        this_module = import_module(".".join([__package__, Path(__file__).stem]))
+        for name in __all__:
+            class_ = getattr(this_module, name)
+            if hasattr(class_, "_yaml_loader"):
+                self.add_constructor("!%s" % class_.__name__, self.ignore)
+
+
+def load_selector_config(path: str, to_element=False) -> Dict[str, Any]:
+    """Load the Manen YAML page from a specified path. You can choose whether
+    or not the element of a Manen page should return Manen elements or just the
+    a regular Python object.
+
+    Args:
+        path (str): filepath of the Manen YAML page
+        to_element (bool, optional): whether or not to return Manen elements if
+            custom tags are specified in the YAML. Defaults to False.
+
+    Returns:
+        Dict[str, Any]: Manen page loaded a Python mapping
+    """
+    with open(path, mode="r") as file:
+        return yaml.load(
+            file, PageObjectLoader if to_element else IgnorePageObjectLoader
+        )

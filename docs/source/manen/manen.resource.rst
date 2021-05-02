@@ -16,15 +16,6 @@ This is for Google Chrome
    manen.resource.chrome
 
 
-This is for firefox
-
-.. toctree::
-   :maxdepth: 4
-   :titlesonly:
-
-   manen.resource.firefox
-
-
 This is for local resources
 
 .. toctree::

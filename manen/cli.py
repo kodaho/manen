@@ -2,15 +2,17 @@
 manen.cli
 =========
 
-CLI for :py:mod:`manen`."""
+CLI for :py:mod:`manen`.
+"""
 
 import argparse
-from manen.helpers import version_as_str
 
 from questionary import Choice, prompt
 
-from .resource import chrome
+from manen.helpers import version_as_str
+
 from .helpers import version_as_str
+from .resource import chrome
 
 
 def get_args():
@@ -39,7 +41,12 @@ def download_workflow():
             "type": "select",
             "name": "browser",
             "message": "For which browser do you want to download the drivers?",
-            "choices": [Choice("Chrome", "chrome"), Choice("Firefox", "firefox")],
+            "choices": [
+                Choice("Chrome", "chrome"),
+                Choice(
+                    "Firefox", "firefox", disabled="Firefox is not supported yet..."
+                ),
+            ],
         },
         {
             "type": "checkbox",

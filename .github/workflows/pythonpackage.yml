@@ -31,7 +31,7 @@ jobs:
           pylint -E --rcfile=./.pylintrc ./manen/
       - name: Run isort to detect incorrectly sorted imports
         run: |
-          isort --color --check-only manen/
+          isort --check-only manen/
 
   test:
     needs: lint

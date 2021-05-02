@@ -174,7 +174,8 @@ class WebArea:
         some elements with selectors.
 
         .. warning:: Prefer using the context manager `switch_container()`
-            rather than this property."""
+            rather than this property.
+        """
         if self._context == "FRAME":
             return self._driver
         return self._container
@@ -204,7 +205,13 @@ class WebArea:
         if name not in cls.Meta.selectors["elements"]:
             raise ManenException("No selectors defined for element `%s`." % name)
         selectors = cls.Meta.selectors["elements"][name]
-        return selectors["selectors"] if isinstance(selectors, dict) else selectors
+        return (
+            selectors["selectors"]
+            if isinstance(selectors, dict)
+            else selectors
+            if isinstance(selectors, list)
+            else [selectors]
+        )
 
 
 class DomAccessor:
@@ -312,13 +319,14 @@ class DomAccessor:
         base = (WebArea,)
         metadata = dict(area.Meta.__dict__) if area else {}
         metadata.update(
-            selectors=area.Meta.selectors.get("elements", {}).get(self._name, {})
+            selectors=getattr(area.Meta, "selectors", {})
+            .get("elements", {})
+            .get(self._name, {})
         )
         base_dict = {
             **dict(self.__class__.__dict__),
             "Meta": type("Meta", (), metadata),
         }
-
         if self._many:
             return [
                 type(name, base, base_dict)(element, _context=context)
@@ -500,7 +508,11 @@ class Element(DomAccessor):
             return cls(selectors=loader.construct_sequence(node))
         if isinstance(node, yaml.nodes.MappingNode):
             return cls(**loader.construct_mapping(node))
-        raise Exception("Unexpected node type encoutered while loading node %s" % node)
+        if isinstance(node, yaml.nodes.ScalarNode):
+            return cls(selectors=[loader.construct_scalar(node)])
+        raise TypeError(
+            "Unexpected node type encoutered while loading node `%s`" % node
+        )
 
 
 class Elements(Element, many=True):
@@ -701,7 +713,9 @@ class IgnorePageObjectLoader(yaml.Loader):  # pylint: disable=too-many-ancestors
             return {"selectors": loader.construct_sequence(node)}
         if isinstance(node, yaml.nodes.MappingNode):
             return loader.construct_mapping(node)
-        raise TypeError("Unexpected node type encoutered while loading node %s" % node)
+        if isinstance(node, yaml.nodes.ScalarNode):
+            return loader.construct_scalar(node)
+        raise TypeError(f"Unexpected node type encoutered while loading node `{node}`")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -23,8 +23,10 @@ from manen.page_object_model import (
     Page,
     PageObjectLoader,
     Region,
+    Regions,
     TextElement,
     TextElements,
+    WebArea,
 )
 
 ExpectedResult = namedtuple("ExpectedResult", ("attr", "strategy", "selector"))
@@ -172,18 +174,27 @@ class TestElementInPage:
         browser.find_element.return_value.send_keys.assert_called_with("this is a test")
 
 
-def test_load_page_objects_from_yaml():
+def test_build_page_objects_from_yaml():
     page_path = Path(__file__).parent / "assets/page.yaml"
     with page_path.open(mode="r") as page_file:
         page = yaml.load(page_file, Loader=PageObjectLoader)
     page_objects = page["elements"]
-    assert isinstance(page_objects["name"], TextElement)
-    assert page_objects["name"]._selectors == ["p.name", "span.name"]
-    assert isinstance(page_objects["links"], LinkElements)
-    assert isinstance(page_objects["description"], TextElement)
-    assert isinstance(page_objects["age"], IntegerElement)
-    assert isinstance(page_objects["button_validate"], Element)
-    assert isinstance(page_objects["login"], InputElement)
+    assert isinstance(page_objects["title"], TextElement)
+    assert isinstance(page_objects["information"], Region)
+    assert isinstance(page_objects["related_librairies"], TextElements)
+    assert isinstance(page_objects["posts"], Regions)
+
+
+def test_build_page_objects_from_yaml_with_special_casee():
+    page_path = Path(__file__).parent / "assets/page.yaml"
+    with page_path.open(mode="r") as page_file:
+        page = yaml.load(page_file, Loader=PageObjectLoader)
+    page_objects = page["elements"]
+
+    assert page_objects["title"]._selectors == ["h1"]
+    assert page_objects["information"]._selectors == ["div.row.info"]
+    assert page_objects["related_librairies"]._selectors == ["//p/code"]
+    assert page_objects["posts"]._selectors == [".post"]
 
 
 def test_page_with_external_selectors():
@@ -237,3 +248,25 @@ def test_page_with_external_selectors():
 
     with pytest.raises(ManenException):
         assert page.my_region.subtitle
+
+
+def test_page_loaded_from_yaml_file():
+    browser = MagicMock()
+
+    page = Page.from_yaml(str(Path(__file__).parent / "assets/page.yaml"))(browser)
+
+    unused_value = page.title
+    browser.find_element.assert_called_with(By.CSS_SELECTOR, "h1")
+
+    information = page.information
+    browser.find_element.assert_called_with(By.CSS_SELECTOR, "div.row.info")
+    assert isinstance(information, WebArea)
+
+    unused_value = information.version
+    browser.find_element.return_value.find_element.assert_called_with(
+        By.CSS_SELECTOR, "code.version"
+    )
+
+    posts = page.posts
+    browser.find_elements.assert_called_with(By.CSS_SELECTOR, ".post")
+    assert isinstance(posts, list)

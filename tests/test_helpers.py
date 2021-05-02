@@ -30,7 +30,7 @@ def test_extract_integer_from_float(float_str, value):
 
 
 @pytest.mark.parametrize("ambiguous_str,value", [("1 thing and 2 others", 1)])
-def test_extract_ambiguous_case(ambiguous_str, value):
+def test_extract_integer_with_ambiguous_case(ambiguous_str, value):
     assert extract_integer(ambiguous_str) == value
 
 
@@ -43,11 +43,16 @@ def test_create_version(version_str, version_tuple):
 
 
 @pytest.mark.parametrize(
-    "invalid_version", ["version", "1,2,3", "1.2", "1.2.3.4.5"],
+    "invalid_version", ["version", "1,2,3", "1.2", "1.2.3.4.5", "1.0.a.1", "1..0.1"],
 )
 def test_invalid_version(invalid_version):
     with pytest.raises(ValueError):
         version(invalid_version)
 
 
-# Add test for sorting of version
+@pytest.mark.parametrize(
+    "version_1,version_2",
+    [("1.0.0.0", "1.0.0.1"), ("0.1.0.0", "1.0.0.0"), ("2.0.0.1", "10.0.0.1")],
+)
+def test_versions_comparison(version_1, version_2):
+    assert version(version_1) < version(version_2)

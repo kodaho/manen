@@ -1,32 +1,44 @@
 name: DemoPage
+
 meta:
-  url: https://www.linkedin.com/in/{profile_id}
+  url: https://manen.example.com/
+
 elements:
-  name: !TextElement
-    - p.name
-    - span.name
+  title: !TextElement h1
 
-  links: !LinkElements
-    - a
-
-  description: !TextElement
-    - p.desc
-    - ul li p.desc-list
-
-  age: !IntegerElement
+  information: !Region
     selectors:
-      - span.age
-
-  button_validate: !Element
-    - button
-
-  login: !InputElement
-    selectors:
-      - input
-
-  results: !Regions
-    selectors:
-      - div.rc
+      - div.row.info
     elements:
-      name: !TextElement
+      creation_date: !DatetimeElement
+        - ./span/span
+      version: !TextElement
+        - code.version
+
+  related_librairies: !TextElements
+    - //p/code
+
+  posts: !Regions
+    selectors: .post
+    elements:
+      title: !TextElement
         - h3
+      subtitle: !TextElement
+        - h4
+      updated_at: !DatetimeElement
+        - span
+      link: !LinkElement
+        - a
+      hint: !TextElement
+        selectors:
+          - span.hint em
+        default: "r"
+
+  form: !Region
+    selectors: div.form
+    elements:
+      number: !InputElement "input#input-number"
+      text: !InputElement "input#input-text"
+      email: !InputElement "input#input-email"
+      password: !InputElement "input#input-password"
+      checkbox: !CheckboxElement "input#input-checkbox"

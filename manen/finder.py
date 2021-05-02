@@ -7,7 +7,7 @@ inside one or several Selenium elements.
 """
 
 from functools import partial
-from typing import Any, List, Tuple, Union, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, List, Tuple, Union
 
 import polling2
 from selenium.common.exceptions import NoSuchElementException
@@ -40,8 +40,13 @@ METHODS_MAPPER = {
 
 def parse_selector(selector: str) -> Tuple[str, str]:
     """Parse a selector string in the format
-    ``{selection_method}:{selector}``. If no selection
-    method is specified, infer it from the selector (XPath or CSS).
+    ``{selection_method}:{selector}``. If no selection method is specified,
+    it will be inferred from the selector itself, by using the following rule:
+    if ``selector`` starts with ``/`` or ``./`` then it is a XPath selector,
+    otherwise, it is a CSS selector.
+
+    .. warning:: :py:mod:`~manen` will only try to guess if this is a XPath
+        or CSS selectors, no more.
 
     Example::
 
@@ -55,8 +60,7 @@ def parse_selector(selector: str) -> Tuple[str, str]:
         ('xpath', '/div/p/span[@class="r"]')
 
     Args:
-        selector (str): selector in the format
-            ``{selection_method}:{selector}```
+        selector (str): selector in the format ``{selection_method}:{selector}``
 
     Returns:
         Tuple[str, str]: Selenium selector in the format
@@ -79,45 +83,49 @@ def find(
     many: bool = False,
 ) -> Any:
     """Retrieve DOM elements from Selenium WebElements matching selector.
-    The function is highly customizable:
+    The function is highly customizable in order to match the different
+    scenarios you may have when retriving elements from HTML source code.
+    For example, you can:
 
-    - try with one multiple selectors, with several selection methods (XPath,
+    - try with one or multiple selectors, with several selection methods (XPath,
       CSS, tag...)
     - return one or several elements
     - wait to an element appears
     - return a default value or raises an error
-    - search in the whole page, in one or several specific areas
+    - search in the whole page or in one or several specific areas
 
     The supported selection methods are:
 
-    +--------------------------+-------------------------------------------------------------+
-    | Selection Method         | Selection Engine                                            |
-    +==========================+=============================================================+
-    | xpath, xp                | XPath (can be inferred if no selection method is specified) |
-    +--------------------------+-------------------------------------------------------------+
-    | css                      | CSS                                                         |
-    +--------------------------+-------------------------------------------------------------+
-    | class_name, class, cls   | Class Name (but Selenium is the CSS method behind)          |
-    +--------------------------+-------------------------------------------------------------+
-    | id                       | ID (but Selenium is the CSS method behind)                  |
-    +--------------------------+-------------------------------------------------------------+
-    | link_text, link          | Link Text                                                   |
-    +--------------------------+-------------------------------------------------------------+
-    | name                     | Name attribute                                              |
-    +--------------------------+-------------------------------------------------------------+
-    | tag_name, tag            | Tag Name                                                    |
-    +--------------------------+-------------------------------------------------------------+
-    | partial_link_text, plink | Partial Link Text                                           |
-    +--------------------------+-------------------------------------------------------------+
+    +--------------------------------------+-------------------------------------------------------------+
+    | Selection Method                     | Selection Engine                                            |
+    +======================================+=============================================================+
+    | ``xpath``, ``xp``                    | XPath (can be inferred if no selection method is specified) |
+    +--------------------------------------+-------------------------------------------------------------+
+    | ``css``                              | CSS                                                         |
+    +--------------------------------------+-------------------------------------------------------------+
+    | ``class_name``, ``class``, ``cls``   | Class Name (but Selenium is the CSS method behind)          |
+    +--------------------------------------+-------------------------------------------------------------+
+    | ``id``                               | ID (but Selenium is the CSS method behind)                  |
+    +--------------------------------------+-------------------------------------------------------------+
+    | ``link_text``, ``link``              | Link Text                                                   |
+    +--------------------------------------+-------------------------------------------------------------+
+    | ``name``                             | Name attribute                                              |
+    +--------------------------------------+-------------------------------------------------------------+
+    | ``tag_name``, ``tag``                | Tag Name                                                    |
+    +--------------------------------------+-------------------------------------------------------------+
+    | ``partial_link_text``, ``plink``     | Partial Link Text                                           |
+    +--------------------------------------+-------------------------------------------------------------+
 
-    :py:mod:`~manen` will infer the selection method if none is specified (if
-    the selector starts with ``/`` or ``./``, XPath is inferred otherwise it
-    will be seen as a CSS selector).
+    The selector should use the pattern ``{selection_method}:{selector}`` to be
+    correctly understood. Because it uses behind the scene
+    :py:func:`~manen.finder.parse_selector`, :py:mod:`~manen` will infer the
+    selection method if none is specified (if the selector starts with ``/`` or
+    ``./`` then XPath is inferred otherwise it will be seen as a CSS selector).
 
-    Another feature of this function is that this is compatible with partial
-    function. If ``selector`` is not specified, it will return a partial
-    function which can be used laters; see example below for better
-    understanding.
+    Another feature of this function is that it offers a way to use functional
+    programming to re-use the function with some parameters. If ``selector``
+    is not specified, it will return a partial function which can be used
+    later. See example below for better understanding.
 
     Example::
 

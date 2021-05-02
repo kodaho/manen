@@ -1,5 +1,5 @@
-manen package
-=============
+Going deeper into ``manen``
+=========================
 
 .. automodule:: manen
    :members:

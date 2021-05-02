@@ -18,13 +18,14 @@
 
 
 # -- Project information -----------------------------------------------------
+from manen import __version__
 
 project = "manen"
 copyright = "2020, kodaho"
 author = "kodaho"
 
 # The full version, including alpha/beta/rc tags
-release = "0.1.0"
+release = __version__
 
 
 # -- General configuration ---------------------------------------------------
@@ -64,7 +65,7 @@ html_theme = "furo"
 html_static_path = ["_static"]
 html_logo = "_static/manen_logo.png"
 html_favicon = "_static/favicon.png"
-# html_context = {"css_files": ["_static/theme_override.css",]}
+html_title = "manen"
 html_theme_options = {}
 
 todo_include_todos = True

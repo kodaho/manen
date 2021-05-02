@@ -15,7 +15,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from .typing import Version
 
-PLATFORM_SYS = platform.system()
+PLATFORM = platform.uname()
 ZIP_UNIX_SYSTEM = 3
 
 
@@ -44,7 +44,7 @@ def version(version_str: str) -> "Version":
     ``^[\\d]+.[\\d]+.[\\d]+.[\\d]+$`` and raised a :py:class:`ValueError` if it doesn't match.
 
     ..  caution::
-    
+
         This versioning system is not compliant with semantic versioning rules.
 
     Args:

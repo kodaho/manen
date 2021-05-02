@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING, Dict, List
 import requests
 
 from ...exceptions import ManenException
-from ...helpers import PLATFORM_SYS
+from ...helpers import PLATFORM
 from ...helpers import version as parse_version
 
 if TYPE_CHECKING:
@@ -26,14 +26,14 @@ COMMANDS = {
 
 
 def installed_version() -> "Version":
-    if PLATFORM_SYS not in COMMANDS:
+    if PLATFORM.system not in COMMANDS:
         raise ManenException(
             "Unable to find the Google Chrome command for the platform `%s`"
-            % PLATFORM_SYS
+            % PLATFORM.system
         )
 
     version_command = Popen(
-        [COMMANDS[PLATFORM_SYS], "--version"], stdout=PIPE, stderr=STDOUT,
+        [COMMANDS[PLATFORM.system], "--version"], stdout=PIPE, stderr=STDOUT,
     )
     ans, stderr = version_command.communicate()
     if stderr:
@@ -50,10 +50,10 @@ def installed_version() -> "Version":
 
 
 def is_installed():
-    return bool(shutil.which(COMMANDS[PLATFORM_SYS]))
+    return bool(shutil.which(COMMANDS[PLATFORM.system]))
 
 
-def list_versions(os: str = PLATFORM_SYS):
+def list_versions(os: str = PLATFORM.system):
     def extractor(prefix):
         return lambda data: {
             "version": parse_version(data[f"{prefix}_version"]),

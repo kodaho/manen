@@ -12,11 +12,11 @@ from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.common.keys import Keys
 
 from .finder import find
-from .helpers import PLATFORM_SYS, version
+from .helpers import PLATFORM, version
 from .resource.chrome import driver as chrome_driver
 
 if TYPE_CHECKING:
-    from .typing import SeleniumElement, WebDriver, Version
+    from .typing import SeleniumElement, Version, WebDriverProtocol
 
 
 __all__ = ("ChromeNavigator",)
@@ -29,12 +29,12 @@ class NavigatorMixin:
     """
 
     @property
-    def cookies(self: "WebDriver"):
+    def cookies(self: "WebDriverProtocol"):
         """Cookies associated to the current domain."""
         return self.get_cookies()
 
     @cookies.setter
-    def cookies(self: "WebDriver", cookies: List[Dict["str", Any]]):
+    def cookies(self: "WebDriverProtocol", cookies: List[Dict["str", Any]]):
         """Install some cookies in the current driver, just by assigning the
         list in the right format.
 
@@ -47,12 +47,12 @@ class NavigatorMixin:
             self.add_cookie(cookie_copy)
 
     @cookies.deleter
-    def cookies(self: "WebDriver"):
-        """Easily delete current cookies inside the driver
+    def cookies(self: "WebDriverProtocol"):
+        """Easily delete current cookies inside the driver.
         """
         self.delete_all_cookies()
 
-    def click_with_js(self: "WebDriver", element: "SeleniumElement"):
+    def click_with_js(self: "WebDriverProtocol", element: "SeleniumElement"):
         """Click on an element using a JavaScript script. Can be useful if you
         want to click on an element outside the current frame.
         """
@@ -60,13 +60,13 @@ class NavigatorMixin:
         return self.execute_script(js_script, element)
 
     def scroll(
-        self: "WebDriver",
+        self: "WebDriverProtocol",
         n_repeat: int = 3,
         wait: int = 1,
         direction: str = "DOWN",
         with_js: bool = False,
     ):
-        """Send a scroll actions to the page.
+        """Perform a scroll action on the page.
 
         Args:
             n_repeat (int, optional): Number of scroll to perform.
@@ -103,7 +103,7 @@ class NavigatorMixin:
             func(arg)
             time.sleep(wait)
 
-    def highlight(self: "WebDriver", selector: Union[str, List[str]], **kwargs):
+    def highlight(self: "WebDriverProtocol", selector: Union[str, List[str]], **kwargs):
         """Highlight an element in the current webpage by drawing a black frame
         around this element. The element will be retrieved using the ``find``
         method and then framed by updating the CSS properties of the retrieved
@@ -126,26 +126,26 @@ class NavigatorMixin:
     @property
     def current_platform(self):
         """Platform (OS information) on which the driver runs."""
-        return PLATFORM_SYS
+        return PLATFORM
 
     @property
-    def browser_version(self: "WebDriver") -> "Version":
+    def browser_version(self: "WebDriverProtocol") -> "Version":
         """Version of the browser in used."""
         return version(self.capabilities["browserVersion"])
 
     @property
-    def driver_version(self: "WebDriver") -> "Version":
+    def driver_version(self: "WebDriverProtocol") -> "Version":
         """Version of the driver in used."""
         return version(self.capabilities["chrome"]["chromedriverVersion"].split(" ")[0])
 
     @property
-    def are_versions_compatible(self: "WebDriver"):
+    def are_versions_compatible(self):
         """Property telling you if the version of the used driver is compatible
         with the one of the browser.
         """
         return self.browser_version[:3] == self.driver_version[:3]
 
-    def find(self: "WebDriver", selector: Union[str, List[str]], **kwargs):
+    def find(self, selector: Union[str, List[str]], **kwargs):
         """This method is basically the same as :py:func:`~manen.finder.find`
         but with the driver instance as default value for the argument
         ``inside`` and True as default value for ``many`` argument.
@@ -168,7 +168,7 @@ class NavigatorMixin:
         kwargs.setdefault("many", True)
         return find(selector, **kwargs)
 
-    def lookup(self: "WebDriver", *args, **kwargs) -> Any:
+    def lookup(self, *args, **kwargs) -> Any:
         """This method is exactly as the method ``find`` but it will always
         return a default value if an element cannot be found (this defaul
         value is by default `None`.
@@ -188,8 +188,18 @@ class NavigatorMixin:
 
 
 class ChromeNavigator(NavigatorMixin, Chrome):
+    """Controls the ChromeDriver and allows you to drive the browser. The main
+    difference with a regulard Selenium WebDriver is that some additional
+    methods are defined in order to give more abilities and flexibilities when
+    controlling the browser.
+    For example, it defines a method ``find`` to easily retrieve elements,
+    ``highlight`` to put an emphasis on elements or cookies property. Go check
+    the documentation of methods inherited from
+    :py:class:`~manen.navigator.NavigatorMixin` for further information.
+    """
+
     @classmethod
-    def initialize(  # pylint: disable=bad-continuation
+    def initialize(
         cls,
         proxy: Optional[str] = None,
         headless: bool = False,
@@ -197,13 +207,8 @@ class ChromeNavigator(NavigatorMixin, Chrome):
         window_size: Optional[Tuple[int, int]] = None,
     ):
         """Class method to easily launch an enhanced new driver based on the
-        browser Chrome. Here you can specify directly if the brwoser should run
+        browser Chrome. Here you can specify directly if the browser should run
         headless or not, if a proxy should be used and many more options.
-        This enhanced driver will define new methods compared to a Selenium
-        webdriver, like ``find`` to easily retrieve elements, ``highlight`` to
-        put an emphasis on elements or cookies property. Go check the
-        documentation of methods inherited from
-        :py:class:`~manen.navigator.NavigatorMixin` for further information.
 
         Args:
             proxy (str, optional): proxy to use. Defaults to ``None``.
@@ -231,4 +236,4 @@ class ChromeNavigator(NavigatorMixin, Chrome):
         if proxy:
             chrome_options.add_argument("--proxy-server=%s" % proxy)
 
-        return cls(driver_path, chrome_options=chrome_options)
+        return cls(driver_path, options=chrome_options)

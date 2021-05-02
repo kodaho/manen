@@ -67,7 +67,7 @@ def download(os, browser, versions):
             print(
                 f"📥 Dowloading version {version} for the {browser} browser on {os}..."
             )
-            driver_file = chrome.driver.download(version=version, os=os)
+            driver_file = chrome.driver.download(version=version, platform_system=os)
             print(f"✅ Driver file available at {driver_file}")
     else:
         raise NotImplementedError

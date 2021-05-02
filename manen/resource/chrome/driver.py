@@ -8,9 +8,8 @@ from typing import TYPE_CHECKING, Dict, Union
 import requests
 
 from ...exceptions import DriverNotFound
-from ...helpers import PLATFORM_SYS, extract
+from ...helpers import PLATFORM, extract, version_as_str
 from ...helpers import version as parse_version
-from ...helpers import version_as_str
 from ..local import LocalAsset
 from .application import installed_version as app_version
 
@@ -23,7 +22,7 @@ CHROMEDRIVER_API = "https://chromedriver.storage.googleapis.com/"
 
 def download(
     version: Union[str, "Version"] = "installed",
-    os: str = PLATFORM_SYS,
+    platform_system: str = PLATFORM.system,
     unzip: bool = True,
     remove_archive: bool = True,
 ):
@@ -50,7 +49,8 @@ def download(
     else:
         target_version = version
 
-    platform_code = {"Darwin": "mac64", "Windows": "win32", "Linux": "linux64"}[os]
+    mapping_platform_code = {"Darwin": "mac64", "Windows": "win32", "Linux": "linux64"}
+    platform_code = mapping_platform_code[platform_system]
     url = (
         CHROMEDRIVER_API + target_version + "/chromedriver_{}.zip".format(platform_code)
     )
@@ -58,7 +58,11 @@ def download(
     response.raise_for_status()
 
     driver = (
-        LocalAsset.PATH / os.lower() / "chrome" / target_version / "chromedriver.zip"
+        LocalAsset.PATH
+        / platform_system.lower()
+        / "chrome"
+        / target_version
+        / "chromedriver.zip"
     )
     driver.parent.mkdir(parents=True, exist_ok=True)
     with open(driver, mode="wb") as zip_file:
@@ -72,7 +76,7 @@ def download(
     return filename
 
 
-def list_versions(query: str = "", os: str = PLATFORM_SYS):
+def list_versions(query: str = "", platform_system: str = PLATFORM.system):
     params: Dict[str, Union[str, int]] = {"marker": 3, "prefix": query}
     response = requests.get(CHROMEDRIVER_API, params=params)
     response.raise_for_status()
@@ -91,7 +95,7 @@ def list_versions(query: str = "", os: str = PLATFORM_SYS):
         for content in root.iterfind(f"{ns}Contents")
         if "chromedriver" in (content.findtext(f"{ns}Key") or "")
     )
-    if os:
+    if platform_system:
         name_by_platform = {
             "Darwin": "chromedriver_mac64.zip",
             "Windows": "chromedriver_win32.zip",
@@ -100,7 +104,7 @@ def list_versions(query: str = "", os: str = PLATFORM_SYS):
         chromedrivers = (
             chromedriver
             for chromedriver in chromedrivers
-            if name_by_platform[os] == chromedriver["name"]
+            if name_by_platform[platform_system] == chromedriver["name"]
         )
 
     return sorted(chromedrivers, key=lambda x: x["version"])
@@ -110,7 +114,7 @@ def latest_release(version="installed"):
     if version == "installed":
         version = version_as_str(app_version(), 3)
 
-    url = f"{CHROMEDRIVER_API}LATEST_RELEASE"
+    url = f"{CHROMEDRIVER_API.rstrip('/')}/LATEST_RELEASE"
     url += f"_{version}" if version else ""
 
     remote_version = requests.get(url).content.decode()

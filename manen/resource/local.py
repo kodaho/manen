@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Optional
 
 from ..exceptions import DriverNotFound
-from ..helpers import PLATFORM_SYS
+from ..helpers import PLATFORM
 
 
 class LocalAsset:
@@ -17,13 +17,15 @@ class LocalAsset:
     def list_drivers(
         cls,
         browser: str,
-        os: Optional[str] = PLATFORM_SYS,
+        platform_system: Optional[str] = PLATFORM.system,
         version: Optional[str] = None,
     ):
-        if os is None:
-            os = "*"
+        if platform_system is None:
+            platform_system = "*"
         version = "*" if version is None else f"{version}*"
-        drivers = list((cls.PATH / os.lower() / browser).glob(f"{version}/*"))
+        drivers = list(
+            (cls.PATH / platform_system.lower() / browser).glob(f"{version}/*")
+        )
         if drivers:
             return [
                 {
@@ -36,5 +38,5 @@ class LocalAsset:
             ]
         raise DriverNotFound(
             'No driver found matching the query browser="{}", '.format(browser)
-            + 'platform="{}" and version="{}".'.format(os, version)
+            + 'platform="{}" and version="{}".'.format(platform_system, version)
         )

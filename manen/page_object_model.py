@@ -74,16 +74,7 @@ from contextlib import contextmanager
 from functools import reduce
 from importlib import import_module
 from pathlib import Path
-from typing import (
-    TYPE_CHECKING,
-    Any,
-    Callable,
-    Dict,
-    List,
-    Optional,
-    Tuple,
-    Union,
-)
+from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple, Union
 
 import dateparser  # pylint: disable=unused-import # (see PyCQA/pylint#1603)
 import yaml
@@ -654,8 +645,7 @@ class RadioButtonElement(Element):
                 raise ValueError(
                     f"The value {value} is not allowed for the radio button element."
                 )
-            else:
-                right_element[0].click()
+            right_element[0].click()
 
 
 class SelectElement(Element):

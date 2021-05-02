@@ -8,8 +8,9 @@ from typing import TYPE_CHECKING, Dict, Union
 import requests
 
 from ...exceptions import DriverNotFound
-from ...helpers import PLATFORM, extract, version_as_str
+from ...helpers import PLATFORM, extract
 from ...helpers import version as parse_version
+from ...helpers import version_as_str
 from ..local import LocalAsset
 from .application import installed_version as app_version
 

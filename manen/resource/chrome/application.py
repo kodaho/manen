@@ -3,9 +3,9 @@ manen.resource.chrome.application
 =================================
 """
 import re
+import shutil
 from datetime import datetime
 from subprocess import PIPE, STDOUT, Popen
-import shutil
 from typing import TYPE_CHECKING, Dict, List
 
 import requests

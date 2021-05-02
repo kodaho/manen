@@ -70,7 +70,7 @@ def parse_selector(selector: str) -> Tuple[str, str]:
     return By.CSS_SELECTOR, selector
 
 
-def find(  # pylint: disable=bad-continuation
+def find(
     selector: Union[str, List[str]] = None,
     *,
     wait: int = 0,

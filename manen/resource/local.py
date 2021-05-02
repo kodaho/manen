@@ -14,7 +14,7 @@ class LocalAsset:
     PATH = Path(__file__).parents[1] / "assets/drivers"
 
     @classmethod
-    def list_drivers(  # pylint: disable=bad-continuation
+    def list_drivers(
         cls,
         browser: str,
         os: Optional[str] = PLATFORM_SYS,

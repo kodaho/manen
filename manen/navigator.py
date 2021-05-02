@@ -59,7 +59,7 @@ class NavigatorMixin:
         js_script = """arguments[0].click()"""
         return self.execute_script(js_script, element)
 
-    def scroll(  # pylint: disable=bad-continuation
+    def scroll(
         self: "WebDriver",
         n_repeat: int = 3,
         wait: int = 1,

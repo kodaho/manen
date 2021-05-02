@@ -163,7 +163,7 @@ class WebArea:
         selectors: Dict[str, Any] = {}
         url: Optional[str] = None
 
-    def __init__(  # pylint: disable=bad-continuation
+    def __init__(
         self, container: "SeleniumElement", _context: str = "PAGE",
     ):
         """
@@ -222,7 +222,7 @@ class DomAccessor:
     _post_processing: List["PostProcessingFunction"] = []
     _many = False
 
-    def __init_subclass__(  # pylint: disable=bad-continuation
+    def __init_subclass__(
         cls,
         many: Optional[bool] = None,
         post_processing: Optional[List["PostProcessingFunction"]] = None,
@@ -235,7 +235,7 @@ class DomAccessor:
         )
         cls._many = cls._many if many is None else many
 
-    def __init__(  # pylint: disable=bad-continuation
+    def __init__(
         self,
         selectors: Optional[Union[str, List[str]]] = None,
         *,
@@ -355,7 +355,7 @@ class Page(WebArea):
     """
 
     @classmethod
-    def from_object(  # pylint: disable=bad-continuation
+    def from_object(
         cls, page_objects: Dict[str, "Element"], bases: Tuple = (), name: str = "Page",
     ):
         """Build a Page class from a dictionary."""
@@ -520,7 +520,7 @@ class LinkElement(Element, post_processing=[lambda x: x.get_attribute("href")]):
     """Extract the link from an element matching one or several selectors."""
 
 
-class LinkElements(LinkElement, many=True):  # pylint: disable=bad-continuation
+class LinkElements(LinkElement, many=True):
     """Pluralized version of :py:class:`~manen.page_object_model.LinkElement`."""
 
 
@@ -541,10 +541,7 @@ class ImageSourceElements(ImageSourceElement, many=True):
 
 
 class InnerHtmlElement(
-    Element,
-    post_processing=[
-        lambda x: x.get_property("innerHTML")
-    ],  # pylint: disable=bad-continuation
+    Element, post_processing=[lambda x: x.get_property("innerHTML")],
 ):
     """Extract the inner HTML from an element."""
 
@@ -558,7 +555,7 @@ class IntegerElement(TextElement, post_processing=[extract_integer]):
     """
 
 
-class IntegerElements(IntegerElement, many=True):  # pylint: disable=bad-continuation
+class IntegerElements(IntegerElement, many=True):
     """Get elements from a HTML page matching a set of selectors and extract a
     integer from each text element.
     Pluralized version of :py:class:`~manen.page_object_model.IntegerElement`
@@ -574,10 +571,7 @@ class DatetimeElements(DatetimeElement, many=True):
 
 
 class OuterHtmlElement(
-    Element,
-    post_processing=[
-        lambda x: x.get_property("outerHTML")
-    ],  # pylint: disable=bad-continuation
+    Element, post_processing=[lambda x: x.get_property("outerHTML")],
 ):
     """Extract the outer HTML of an element."""
 
@@ -614,10 +608,7 @@ class InputElement(Element, post_processing=[lambda x: x.get_attribute("value")]
 
 
 class CheckboxElement(
-    Element,
-    post_processing=[
-        lambda x: x.get_attribute("checked") == "true"
-    ],  # pylint: disable=bad-continuation
+    Element, post_processing=[lambda x: x.get_attribute("checked") == "true"],
 ):
     """Get the status of a checkbox element directly as a boolan. Setting a
     boolean value to a checkbox element will directly change the value of

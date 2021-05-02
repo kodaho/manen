@@ -81,3 +81,26 @@ jobs:
         with:
           name: distributions
           path: dist
+
+  build-documentation:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ".[doc]"
+      - name: Build documentation
+        run: |
+          cd ./docs
+          make html
+      - name: Upload distributions artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: documentation_html
+          path: docs/build/html/

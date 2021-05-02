@@ -3,15 +3,8 @@ name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
 
-[dev-packages]
-manen = {editable = true,path = ".",extras = ["doc", "test", "dev"]}
-isort = "*"
-
 [packages]
-manen = {editable = true,path = "."}
-dateparser = "*"
-polling2 = "*"
-furo = "*"
+manen = {editable = true, path = ".", extras = ["doc", "test", "lint", "deploy"]}
 
 [requires]
 python_version = "3.6"

@@ -5,11 +5,11 @@ manen.typing
 Describe some common types used by :py:mod:`manen`.
 """
 
-from datetime import datetime, date
+from datetime import date
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Tuple, Union, TypedDict
+    from typing import Tuple, TypedDict, Union
 
     from selenium.webdriver.remote.webdriver import WebDriver
     from selenium.webdriver.remote.webelement import WebElement

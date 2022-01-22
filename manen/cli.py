@@ -12,8 +12,9 @@ from questionary import Choice, prompt
 from manen.helpers import version_as_str
 
 from .helpers import version_as_str
-from .resource.chrome import application as chrome_app, driver as chromedriver
 from .resource.brave import application as brave_app
+from .resource.chrome import application as chrome_app
+from .resource.chrome import driver as chromedriver
 
 
 def get_args():

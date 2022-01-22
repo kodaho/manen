@@ -1,4 +1,5 @@
-from .chrome import application as chrome_app, driver
+from .chrome import application as chrome_app
+from .chrome import driver
 
 
 class application(chrome_app):

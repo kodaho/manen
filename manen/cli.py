@@ -12,18 +12,31 @@ from questionary import Choice, prompt
 from manen.helpers import version_as_str
 
 from .helpers import version_as_str
-from .resource import chrome
+from .resource.chrome import application as chrome_app, driver as chromedriver
+from .resource.brave import application as brave_app
 
 
 def get_args():
     parser = argparse.ArgumentParser(prog="manen")
-    choices = ["download", "ls"]
+    choices = ["download"]
     parser.add_argument(dest="command", choices=choices)
     return parser.parse_args()
 
 
 def download_workflow():
-    chrome_version = chrome.application.installed_version()
+    chrome_version = chrome_app.installed_version()
+    brave_version = brave_app.installed_version()
+
+    def is_compatible(version):
+        browsers = []
+        if version[:3] == chrome_version[:3]:
+            browsers.append("Chrome")
+        if version[:3] == brave_version[:3]:
+            browsers.append("Brave")
+        if browsers:
+            return f" (compatible with {', '.join(browsers)})"
+        return ""
+
     return [
         {
             "type": "select",
@@ -32,9 +45,6 @@ def download_workflow():
             "choices": [
                 Choice("Mac OS", "Darwin"),
                 Choice("Linux", "Linux"),
-                Choice(
-                    "Windows", "Windows", disabled="Windows is not supported. Yet..."
-                ),
             ],
         },
         {
@@ -42,10 +52,7 @@ def download_workflow():
             "name": "browser",
             "message": "For which browser do you want to download the drivers?",
             "choices": [
-                Choice("Chrome", "chrome"),
-                Choice(
-                    "Firefox", "firefox", disabled="Firefox is not supported yet..."
-                ),
+                Choice("Chrome / Brave", "chrome"),
             ],
         },
         {
@@ -56,13 +63,11 @@ def download_workflow():
                 Choice(
                     "{}{}".format(
                         version_as_str(item["version"]),
-                        " (compatible)"
-                        if item["version"][:3] == chrome_version[:3]
-                        else "",
+                        is_compatible(item["version"]),
                     ),
                     version_as_str(item["version"]),
                 )
-                for item in chrome.driver.list_versions()[-10:]
+                for item in chromedriver.list_versions()[-10:]
             ],
         },
     ]
@@ -74,7 +79,7 @@ def download(os, browser, versions):
             print(
                 f"📥 Dowloading version {version} for the {browser} browser on {os}..."
             )
-            driver_file = chrome.driver.download(version=version, platform_system=os)
+            driver_file = chromedriver.download(version=version, platform_system=os)
             print(f"✅ Driver file available at {driver_file}")
     else:
         raise NotImplementedError
@@ -88,8 +93,6 @@ def main():
         driver_info = prompt(download_workflow())
         if driver_info:
             download(**driver_info)
-    elif args.command == "ls":
-        pass
     else:
         print("Work In Progress...")
 

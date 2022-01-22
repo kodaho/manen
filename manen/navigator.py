@@ -13,13 +13,18 @@ from selenium.webdriver.common.keys import Keys
 
 from .finder import find
 from .helpers import PLATFORM, version
-from .resource.chrome import driver as chrome_driver
+from .resource.brave import application as brave_app
+from .resource.chrome import application as chrome_app
+from .resource.chrome import driver as chromedriver
 
 if TYPE_CHECKING:
     from .typing import SeleniumElement, Version, WebDriverProtocol
 
 
-__all__ = ("ChromeNavigator",)
+__all__ = (
+    "BraveNavigator",
+    "ChromeNavigator",
+)
 
 
 class NavigatorMixin:
@@ -48,8 +53,7 @@ class NavigatorMixin:
 
     @cookies.deleter
     def cookies(self: "WebDriverProtocol"):
-        """Easily delete current cookies inside the driver.
-        """
+        """Easily delete current cookies inside the driver."""
         self.delete_all_cookies()
 
     def click_with_js(self: "WebDriverProtocol", element: "SeleniumElement"):
@@ -188,15 +192,15 @@ class NavigatorMixin:
 
 
 class ChromeNavigator(NavigatorMixin, Chrome):
-    """Controls the ChromeDriver and allows you to drive the browser. The main
-    difference with a regulard Selenium WebDriver is that some additional
-    methods are defined in order to give more abilities and flexibilities when
-    controlling the browser.
+    """Wrapper around Selenium WebDriver providing additional methods in order to
+    give more abilities and flexibilities when controlling the browser.
     For example, it defines a method ``find`` to easily retrieve elements,
     ``highlight`` to put an emphasis on elements or cookies property. Go check
     the documentation of methods inherited from
     :py:class:`~manen.navigator.NavigatorMixin` for further information.
     """
+
+    BINARIES = chrome_app.BINARIES
 
     @classmethod
     def initialize(
@@ -224,9 +228,10 @@ class ChromeNavigator(NavigatorMixin, Chrome):
         Returns:
             WebDriver: An enhanced Chrome driver
         """
-        driver_path = driver_path or chrome_driver.get()
+        driver_path = driver_path or chromedriver.get()
 
         chrome_options = ChromeOptions()
+        chrome_options.binary_location = cls.BINARIES[PLATFORM.system]
         if window_size:
             chrome_options.add_argument("--window-size=%s,%s" % window_size)
 
@@ -237,3 +242,7 @@ class ChromeNavigator(NavigatorMixin, Chrome):
             chrome_options.add_argument("--proxy-server=%s" % proxy)
 
         return cls(driver_path, options=chrome_options)
+
+
+class BraveNavigator(ChromeNavigator):
+    BINARIES = brave_app.BINARIES

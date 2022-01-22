@@ -1,27 +1,26 @@
-ChangeLog
+Changelog
 =========
 
 
-[0.1.0] - 2021-??
------------------
+[0.1.0] - 2022-02-??
+--------------------
 
-This is the first release of the package named `manen`. This package is still
-in development. For now, the only supported webdriver is Chrome.
+This is the first release of :py:mod:`manen`. The package is still under development
+and so the public API might changed in the future.
 
 Added
 ^^^^^
 
-- `manen.finder.finder.find` allows to easily get element(s) in a Webdriver page.
-  This function support several very different use cases, mainly parametrized
+- :py:func:`~manen.finder.find` allows to easily get element(s) in a WebDriver
+  page. This function support several very different use cases, mainly parametrized
   with the function arguments.
-- `manen.resource` is module to easily interact with all the assets
-    needed by `selenium`. Thanks to that, all the drivers required by Selenium
-    to work will no longer causes issues.
-- `manen.navigator` defined `ChromeNavigator`, an enhanced
-    Selenium's webdriver
-- `manen.page_object_model` is the implementation of page object modelling,
-  described in Selenium documentation. Thanks to that, you can describe the
-  DOM structure only with Python objects.
-- A first version of `manen`'s CLI is shipped with the initial release in order
-  to complement tools provided in `manen.navigator`
-- A full documentation of the package will help getting started with `manen`
+- :py:mod:`~manen.resource` is a module to easily interact with all the assets
+  needed by Selenium. Thanks to that, all the drivers required by Selenium to work
+  will no longer causes issues.
+- :py:mod:`~manen.navigator` defined :py:class:`~manen.navigator.ChromeNavigator`
+  and :py:class:`~manen.navigator.BraveNavigator`, an enhanced Selenium's webdriver.
+- :py:mod:`~manen.page_object_model` is the implementation of `page object
+  modelling described in Selenium documentation <https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/>`_.
+  Thanks to that, you can describe the DOM structure only with Python objects.
+- a :py:mod:`~manen.cli` is shipped with the initial release in order to perform
+  operations such as downloading webdrivers.

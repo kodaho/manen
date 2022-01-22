@@ -7,16 +7,17 @@ manen.resource package
    :show-inheritance:
 
 
-This is for Google Chrome
+This is for Google Chrome and Brave Browser.
 
 .. toctree::
    :maxdepth: 4
    :titlesonly:
 
+   manen.resource.brave
    manen.resource.chrome
 
 
-This is for local resources
+This is for local resources.
 
 .. toctree::
    :maxdepth: 4

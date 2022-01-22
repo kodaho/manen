@@ -21,7 +21,7 @@
 from manen import __version__
 
 project = "manen"
-copyright = "2020, kodaho"
+copyright = "2022, kodaho"
 author = "kodaho"
 
 # The full version, including alpha/beta/rc tags
@@ -34,7 +34,8 @@ release = __version__
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "sphinx_copybutton",
+    "nbsphinx",
+    # "sphinx_copybutton",
     "sphinx_inline_tabs",
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
@@ -66,8 +67,9 @@ html_static_path = ["_static"]
 html_logo = "_static/manen_logo.png"
 html_favicon = "_static/favicon.png"
 html_title = "manen"
-html_theme_options = {}
-
+html_theme_options = {
+    "navigation_with_keys": True,
+}
 todo_include_todos = True
 
 intersphinx_mapping = {

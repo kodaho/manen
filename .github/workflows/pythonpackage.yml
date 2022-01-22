@@ -107,6 +107,7 @@ jobs:
           python-version: 3.8
       - name: Install dependencies
         run: |
+          sudo apt install pandoc
           python -m pip install --upgrade pip
           pip install ".[doc]"
       - name: Build documentation
@@ -128,7 +129,7 @@ jobs:
         with:
           name: documentation_html
           path: html_docs/
-      - name: Upload package to Pypi
+      - name: Deploying documentation
         run: |
-          echo "Uploading to Pypi"
+          echo "Uploading documentation"
           ls -lah

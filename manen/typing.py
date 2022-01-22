@@ -5,10 +5,11 @@ manen.typing
 Describe some common types used by :py:mod:`manen`.
 """
 
+from datetime import datetime, date
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Tuple, Union
+    from typing import Tuple, Union, TypedDict
 
     from selenium.webdriver.remote.webdriver import WebDriver
     from selenium.webdriver.remote.webelement import WebElement
@@ -47,4 +48,12 @@ if TYPE_CHECKING:
         ScriptExecutionProtocol,
         Protocol,
     ):
-        """Minimal protocol used by :py:class:`~manen.navigator.NavigatorMixin`"""
+        """Minimal typing protocol used by
+        :py:class:`~manen.navigator.NavigatorMixin`.
+        """
+
+    class InstalledVersionInfo(TypedDict):
+        channel: str
+        os: str
+        release_date: date
+        version: Version

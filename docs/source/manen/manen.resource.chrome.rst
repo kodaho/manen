@@ -6,7 +6,3 @@ manen.resource.chrome package
    :undoc-members:
    :show-inheritance:
    :noindex:
-
-
-.. include:: manen.resource.chrome.application.rst
-.. include:: manen.resource.chrome.driver.rst

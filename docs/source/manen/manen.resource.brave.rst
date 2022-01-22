@@ -6,7 +6,3 @@ manen.resource.brave package
    :undoc-members:
    :show-inheritance:
    :noindex:
-
-
-.. include:: manen.resource.brave.application.rst
-.. include:: manen.resource.brave.driver.rst

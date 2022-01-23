@@ -70,6 +70,9 @@ html_title = "manen"
 html_theme_options = {
     "navigation_with_keys": True,
 }
+
+pygments_dark_style = "material"
+
 todo_include_todos = True
 
 intersphinx_mapping = {

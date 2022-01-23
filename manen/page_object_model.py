@@ -76,16 +76,17 @@ from importlib import import_module
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple, Union
 
-import dateparser  # pylint: disable=unused-import # (see PyCQA/pylint#1603)
+import dateparser
 import yaml
 from selenium.webdriver.support.select import Select
 
 from .exceptions import ManenException, UnsettableElement
 from .finder import find
-from .helpers import extract_integer  # pylint: disable=unused-import
+from .helpers import extract_integer
+from .typing import WebDriver
 
 if TYPE_CHECKING:
-    from .typing import SeleniumElement, WebDriver, WebElement
+    from .typing import SeleniumElement, WebElement
 
     PostProcessingFunction = Callable[[Any], Any]
 
@@ -155,7 +156,9 @@ class WebArea:
         url: Optional[str] = None
 
     def __init__(
-        self, container: "SeleniumElement", _context: str = "PAGE",
+        self,
+        container: "SeleniumElement",
+        _context: str = "PAGE",
     ):
         """
         Args:
@@ -164,7 +167,10 @@ class WebArea:
         """
         self._container = container
         self._context = _context
-        self._driver: "WebDriver" = getattr(container, "parent", container)
+        if isinstance(container, WebDriver):
+            self._driver = container
+        else:
+            self._driver = container.parent
         if getattr(self.Meta, "selectors_path", None):
             self.Meta.selectors = load_selector_config(self.Meta.selectors_path)
 
@@ -355,16 +361,20 @@ class Page(WebArea):
 
     @classmethod
     def from_object(
-        cls, page_objects: Dict[str, "Element"], bases: Tuple = (), name: str = "Page",
+        cls,
+        page_objects: Dict[str, "Element"],
+        bases: Tuple = (),
+        name: str = "Page",
     ):
         """Build a Page class from a dictionary."""
-        return type(name, (*bases, cls,), page_objects)
+        base = (*bases, cls)
+        return type(name, base, page_objects)  # type: ignore
 
     @classmethod
     def from_yaml(cls, filepath: Union[str, Path]):
         """Build a Page class from a YAML file."""
         path = Path(filepath) if isinstance(filepath, str) else filepath
-        with path.open(mode="r") as page_file:
+        with path.open(mode="r", encoding="utf-8") as page_file:
             page_definition = yaml.load(page_file, Loader=PageObjectLoader)
 
         base_pages = page_definition.get("extends", [])
@@ -509,7 +519,7 @@ class Element(DomAccessor):
         if isinstance(node, yaml.nodes.MappingNode):
             return cls(**loader.construct_mapping(node))
         if isinstance(node, yaml.nodes.ScalarNode):
-            return cls(selectors=[loader.construct_scalar(node)])
+            return cls(selectors=[loader.construct_scalar(node)])  # type: ignore
         raise TypeError(
             "Unexpected node type encoutered while loading node `%s`" % node
         )
@@ -544,7 +554,8 @@ class ImageSourceElements(ImageSourceElement, many=True):
 
 
 class InnerHtmlElement(
-    Element, post_processing=[lambda x: x.get_property("innerHTML")],
+    Element,
+    post_processing=[lambda x: x.get_property("innerHTML")],
 ):
     """Extract the inner HTML from an element."""
 
@@ -554,8 +565,7 @@ class InnerHtmlElements(InnerHtmlElement, many=True):
 
 
 class IntegerElement(TextElement, post_processing=[extract_integer]):
-    """Extract the integer from a text element matching a selector or set of selectors.
-    """
+    """Extract the integer from a text element matching a selector or set of selectors."""
 
 
 class IntegerElements(IntegerElement, many=True):
@@ -574,7 +584,8 @@ class DatetimeElements(DatetimeElement, many=True):
 
 
 class OuterHtmlElement(
-    Element, post_processing=[lambda x: x.get_property("outerHTML")],
+    Element,
+    post_processing=[lambda x: x.get_property("outerHTML")],
 ):
     """Extract the outer HTML of an element."""
 
@@ -611,7 +622,8 @@ class InputElement(Element, post_processing=[lambda x: x.get_attribute("value")]
 
 
 class CheckboxElement(
-    Element, post_processing=[lambda x: x.get_attribute("checked") == "true"],
+    Element,
+    post_processing=[lambda x: x.get_attribute("checked") == "true"],
 ):
     """Get the status of a checkbox element directly as a boolan. Setting a
     boolean value to a checkbox element will directly change the value of
@@ -740,7 +752,7 @@ def load_selector_config(path: str, to_element=False) -> Dict[str, Any]:
     Returns:
         Dict[str, Any]: Manen page loaded a Python mapping
     """
-    with open(path, mode="r") as file:
+    with open(path, mode="r", encoding="utf-8") as file:
         return yaml.load(
             file, PageObjectLoader if to_element else IgnorePageObjectLoader
         )

@@ -68,12 +68,31 @@ def version(version_str: str) -> "Version":
     )
 
 
-def version_as_str(v: "Version", limit: int = 4) -> str:
-    return ".".join(map(str, v[:limit]))
+def version_as_str(version_tuple: "Version", limit: int = 4) -> str:
+    """Format a version tuple as a string in the format:
+        {major}.{minor}.{build}.{patch}
+
+
+    Args:
+        version_tuple (Version): version info as a tuple
+        limit (int, optional): Limit on the length of the tuple to format.
+            Defaults to 4.
+
+    Returns:
+        str: formatted version
+    """
+    return ".".join(map(str, version_tuple[:limit]))
 
 
 def extract(archive_path: str):
-    # This should be a helper function
+    """Uncompress a file in an archive.
+
+    Args:
+        archive_path (str): path where to find the archive
+
+    Returns:
+        str: path of the uncrompressed file
+    """
     path = Path(archive_path)
     final_path = path.with_name(path.stem)
 

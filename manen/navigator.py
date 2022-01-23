@@ -16,9 +16,10 @@ from .helpers import PLATFORM, version
 from .resource.brave import application as brave_app
 from .resource.chrome import application as chrome_app
 from .resource.chrome import driver as chromedriver
+from .typing import WebDriverProtocol
 
 if TYPE_CHECKING:
-    from .typing import SeleniumElement, Version, WebDriverProtocol
+    from .typing import SeleniumElement, Version
 
 
 __all__ = (
@@ -27,19 +28,19 @@ __all__ = (
 )
 
 
-class NavigatorMixin:
+class NavigatorMixin(WebDriverProtocol):
     """Mixin to enrich :py:class:`selenium.webdriver.remote.webdriver.WebDriver`
     with a set of features intended to ease the way to work with such an
     instance.
     """
 
     @property
-    def cookies(self: "WebDriverProtocol"):
+    def cookies(self):
         """Cookies associated to the current domain."""
         return self.get_cookies()
 
     @cookies.setter
-    def cookies(self: "WebDriverProtocol", cookies: List[Dict["str", Any]]):
+    def cookies(self, cookies: List[Dict["str", Any]]):
         """Install some cookies in the current driver, just by assigning the
         list in the right format.
 
@@ -52,11 +53,11 @@ class NavigatorMixin:
             self.add_cookie(cookie_copy)
 
     @cookies.deleter
-    def cookies(self: "WebDriverProtocol"):
+    def cookies(self):
         """Easily delete current cookies inside the driver."""
         self.delete_all_cookies()
 
-    def click_with_js(self: "WebDriverProtocol", element: "SeleniumElement"):
+    def click_with_js(self, element: "SeleniumElement"):
         """Click on an element using a JavaScript script. Can be useful if you
         want to click on an element outside the current frame.
         """
@@ -64,7 +65,7 @@ class NavigatorMixin:
         return self.execute_script(js_script, element)
 
     def scroll(
-        self: "WebDriverProtocol",
+        self,
         n_repeat: int = 3,
         wait: int = 1,
         direction: str = "DOWN",
@@ -99,7 +100,7 @@ class NavigatorMixin:
                 "-" if direction.lower() == "up" else ""
             )
         else:
-            body = self.find_element_by_tag_name("body")
+            body: "SeleniumElement" = self.find_element_by_tag_name("body")
             arg = Keys.PAGE_DOWN if direction.lower() == "down" else Keys.PAGE_UP
             func = body.send_keys
 
@@ -107,7 +108,7 @@ class NavigatorMixin:
             func(arg)
             time.sleep(wait)
 
-    def highlight(self: "WebDriverProtocol", selector: Union[str, List[str]], **kwargs):
+    def highlight(self, selector: Union[str, List[str]], **kwargs):
         """Highlight an element in the current webpage by drawing a black frame
         around this element. The element will be retrieved using the ``find``
         method and then framed by updating the CSS properties of the retrieved
@@ -133,12 +134,12 @@ class NavigatorMixin:
         return PLATFORM
 
     @property
-    def browser_version(self: "WebDriverProtocol") -> "Version":
+    def browser_version(self) -> "Version":
         """Version of the browser in used."""
         return version(self.capabilities["browserVersion"])
 
     @property
-    def driver_version(self: "WebDriverProtocol") -> "Version":
+    def driver_version(self) -> "Version":
         """Version of the driver in used."""
         return version(self.capabilities["chrome"]["chromedriverVersion"].split(" ")[0])
 
@@ -188,12 +189,12 @@ class NavigatorMixin:
         Returns:
             Any: Outputs of :py:func:`~manen.finder.find`
         """
-        return find(inside=self, default=None)(*args, **kwargs)
+        return find(inside=self, default=None)(*args, **kwargs)  # type: ignore
 
 
 class ChromeNavigator(NavigatorMixin, Chrome):
-    """Wrapper around Selenium WebDriver providing additional methods in order to
-    give more abilities and flexibilities when controlling the browser.
+    """Wrapper around Selenium ChromeWebDriver providing additional methods in
+    order to give more abilities and flexibilities when controlling the browser.
     For example, it defines a method ``find`` to easily retrieve elements,
     ``highlight`` to put an emphasis on elements or cookies property. Go check
     the documentation of methods inherited from
@@ -245,4 +246,8 @@ class ChromeNavigator(NavigatorMixin, Chrome):
 
 
 class BraveNavigator(ChromeNavigator):
+    """Enhanced ChromeWebDriver that will launch a Brave browser instead of
+    Google Chrome.
+    """
+
     BINARIES = brave_app.BINARIES

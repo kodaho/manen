@@ -9,7 +9,7 @@ from datetime import date
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Tuple, TypedDict, Union
+    from typing import Any, Dict, Tuple, TypedDict, Union
 
     from selenium.webdriver.remote.webdriver import WebDriver
     from selenium.webdriver.remote.webelement import WebElement
@@ -38,7 +38,7 @@ if TYPE_CHECKING:
 
     class CapabilitiesProtocol(Protocol):
         @property
-        def capabilities(self):
+        def capabilities(self) -> Dict[str, Any]:
             ...
 
     class WebDriverProtocol(

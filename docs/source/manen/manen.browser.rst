@@ -1,4 +1,4 @@
-.. automodule:: manen.navigator
+.. automodule:: manen.browser
    :members:
    :undoc-members:
    :show-inheritance:

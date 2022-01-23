@@ -1,5 +1,5 @@
 """
-manen.navigator
+manen.browser
 ===============
 
 Classes which enrich :py:class:`selenium.webdriver.remote.webdriver.WebDriver`.
@@ -23,12 +23,12 @@ if TYPE_CHECKING:
 
 
 __all__ = (
-    "BraveNavigator",
-    "ChromeNavigator",
+    "BraveBrowser",
+    "ChromeBrowser",
 )
 
 
-class NavigatorMixin(WebDriverProtocol):
+class BrowserMixin(WebDriverProtocol):
     """Mixin to enrich :py:class:`selenium.webdriver.remote.webdriver.WebDriver`
     with a set of features intended to ease the way to work with such an
     instance.
@@ -192,13 +192,13 @@ class NavigatorMixin(WebDriverProtocol):
         return find(inside=self, default=None)(*args, **kwargs)  # type: ignore
 
 
-class ChromeNavigator(NavigatorMixin, Chrome):
+class ChromeBrowser(BrowserMixin, Chrome):
     """Wrapper around Selenium ChromeWebDriver providing additional methods in
     order to give more abilities and flexibilities when controlling the browser.
     For example, it defines a method ``find`` to easily retrieve elements,
     ``highlight`` to put an emphasis on elements or cookies property. Go check
     the documentation of methods inherited from
-    :py:class:`~manen.navigator.NavigatorMixin` for further information.
+    :py:class:`~manen.browser.BrowserMixin` for further information.
     """
 
     BINARIES = chrome_app.BINARIES
@@ -245,7 +245,7 @@ class ChromeNavigator(NavigatorMixin, Chrome):
         return cls(driver_path, options=chrome_options)
 
 
-class BraveNavigator(ChromeNavigator):
+class BraveBrowser(ChromeBrowser):
     """Enhanced ChromeWebDriver that will launch a Brave browser instead of
     Google Chrome.
     """

@@ -10,5 +10,5 @@ User Guide
    :titlesonly:
 
    ./user_guide/managing_resources
-   ./user_guide/navigator
+   ./user_guide/browser
    ./user_guide/separating_selectors

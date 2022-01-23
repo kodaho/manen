@@ -17,8 +17,8 @@ Added
 - :py:mod:`~manen.resource` is a module to easily interact with all the assets
   needed by Selenium. Thanks to that, all the drivers required by Selenium to work
   will no longer causes issues.
-- :py:mod:`~manen.navigator` defined :py:class:`~manen.navigator.ChromeNavigator`
-  and :py:class:`~manen.navigator.BraveNavigator`, an enhanced Selenium's WebDriver.
+- :py:mod:`~manen.browser` defined :py:class:`~manen.browser.ChromeBrowser`
+  and :py:class:`~manen.browser.BraveBrowser`, an enhanced Selenium's WebDriver.
 - :py:mod:`~manen.page_object_model` is the implementation of `page object
   modelling described in Selenium documentation <https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/>`_.
   Thanks to that, you can describe the DOM structure only with Python objects.

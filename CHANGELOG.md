@@ -10,7 +10,7 @@ under development and so the public API might changed in the future.
 - `manen.resource` is a module to easily interact with all the assets
     needed by `selenium`. Thanks to that, all the drivers required by Selenium
     to work will no longer causes issues.
-- `manen.navigator` defined `ChromeNavigator`, an enhanced
+- `manen.browser` defined `ChromeBrowser`, an enhanced
     Selenium's webdriver
 - `manen.page_object_model` is the implementation of page object modelling,
   described in Selenium documentation. Thanks to that, you can describe the

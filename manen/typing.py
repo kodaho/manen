@@ -49,7 +49,7 @@ if TYPE_CHECKING:
         Protocol,
     ):
         """Minimal typing protocol used by
-        :py:class:`~manen.navigator.NavigatorMixin`.
+        :py:class:`~manen.browser.BrowserMixin`.
         """
 
     class InstalledVersionInfo(TypedDict):

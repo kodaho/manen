@@ -78,8 +78,8 @@ from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple, Un
 
 import dateparser
 import yaml
-from selenium.webdriver.support.select import Select
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.support.select import Select
 
 from .exceptions import ManenException, UnsettableElement
 from .finder import find

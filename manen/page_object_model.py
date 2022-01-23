@@ -79,11 +79,11 @@ from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple, Un
 import dateparser
 import yaml
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from .exceptions import ManenException, UnsettableElement
 from .finder import find
 from .helpers import extract_integer
-from .typing import WebDriver
 
 if TYPE_CHECKING:
     from .typing import SeleniumElement, WebElement

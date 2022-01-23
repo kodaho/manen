@@ -3,10 +3,10 @@ from datetime import datetime
 from pathlib import Path
 from unittest.mock import MagicMock, PropertyMock
 
+import pytest
 import yaml
 from selenium.webdriver.common.by import By
 
-import pytest
 from manen.exceptions import ManenException
 from manen.page_object_model import (
     DatetimeElement,
@@ -243,11 +243,11 @@ def test_page_with_external_selectors():
     _ = page.my_region
     browser.find_element.assert_called_with(By.CSS_SELECTOR, "div.region")
 
-    _ = page.my_region.name
-    _ = page.my_region.my_subregion.description
+    _ = page.my_region.name  # type: ignore
+    _ = page.my_region.my_subregion.description  # type: ignore
 
     with pytest.raises(ManenException):
-        assert page.my_region.subtitle
+        assert page.my_region.subtitle  # type: ignore
 
 
 def test_page_loaded_from_yaml_file():
@@ -262,7 +262,7 @@ def test_page_loaded_from_yaml_file():
     browser.find_element.assert_called_with(By.CSS_SELECTOR, "div.row.info")
     assert isinstance(information, WebArea)
 
-    unused_value = information.version
+    unused_value = information.version  # type: ignore
     browser.find_element.return_value.find_element.assert_called_with(
         By.CSS_SELECTOR, "code.version"
     )

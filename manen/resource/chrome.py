@@ -229,11 +229,16 @@ class driver:
         return parse_version(remote_version)
 
     @classmethod
-    def get(cls, query: str = "installed", download_if_missing: bool = True) -> str:
+    def get(
+        cls,
+        query: str = "installed",
+        platform_system: str = PLATFORM.system,
+        download_if_missing: bool = True,
+    ) -> str:
         query = version_as_str(cls.latest_release(version=query))
         try:
             return LocalAsset.list_drivers(browser="chrome", version=query)[-1]["path"]
         except DriverNotFound as exception:
             if download_if_missing:
-                return cls.download(version=query)
+                return cls.download(version=query, platform_system=platform_system)
             raise exception

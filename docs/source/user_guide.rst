@@ -6,7 +6,8 @@ User Guide
     Write `User Guide` documentation
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
+   :titlesonly:
 
    ./user_guide/managing_resources
    ./user_guide/navigator

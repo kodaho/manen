@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to manen's documentation!
--------------------------------------
+---------------------------------
 
 .. image:: https://img.shields.io/badge/python-%3E=3.6-informational?style=for-the-badge&logo=python
 .. image:: https://img.shields.io/badge/version-0.1.0-informational?style=for-the-badge
@@ -15,6 +15,29 @@ Welcome to manen's documentation!
 
 In simple terms, it will let you design production-ready application based on Selenium.
 
+
+.. tab:: With manen
+
+   .. code-block:: python
+
+      from manen import page_object_model as pom
+
+      class BlogPage(pom.Page):
+         class Article(pom.Regions):
+            title = pom.TextElement('h1')
+            n_likes = pom.IntegerElement('span.n_likes')
+            tags = pom.TextElements('span.tag', default=[])
+            updated_at = pom.DateElement('p.date')
+
+         articles = Article('article', wait=3)
+
+      page = BlogPage(driver)
+      article = page.articles[0]
+      print(article.title, article.n_likes, article.tags, article.updated_at)
+      # ('manen, a new tool around Selenium',
+      #  100,
+      #  [], # Because no tags were found
+      #  datetime.date(2021, 1, 1))
 
 .. tab:: Without manen
 
@@ -44,33 +67,6 @@ In simple terms, it will let you design production-ready application based on Se
       #  datetime.date(2021, 1, 1))
 
 
-.. tab:: With manen
-
-   .. code-block:: python
-
-      from manen import page_object_model as pom
-
-      class BlogPage(pom.Page):
-         class Meta:
-            selectors_file = "./selectors.yaml"
-
-         class Article(pom.Regions):
-            title = pom.TextElement('h1')
-            n_likes = pom.IntegerElement('span.n_likes')
-            tags = pom.TextElements('span.tag', default=[])
-            updated_at = pom.DateElement('p.date')
-
-         articles = Article('article', wait=3)
-
-      page = BlogPage(driver)
-      article = page.articles[0]
-      print(article.title, article.n_likes, article.tags, article.updated_at)
-      # ('manen, a new tool around Selenium',
-      #  100,
-      #  [], # Because no tags were found
-      #  datetime.date(2021, 1, 1))
-
-
 Why ``manen``?
 ==============
 
@@ -80,6 +76,7 @@ Why ``manen``?
 
 
 Design to be be simple and speed up your development with Selenium.
+Hide complexity to work with Selenium.
 
 Can be used for scraping (legal scraping of course), testing and automatize
 heavy process. Goal is to be build a reliable tool which can be used
@@ -88,7 +85,7 @@ in production.
 Among the features, you will find:
 
 - a helper tool to find and download all drivers needed by Selenium; no need to
-  find the right driver compatible with the installed browser. :py:mod:`manen`
+  find the right driver compatible with the installed browser, :py:mod:`manen`
   will do it for you!
 - a quite complete list of classes you can use to easily interact with the DOM
   structure: it is basically an implementation of the
@@ -121,12 +118,13 @@ documentation and Github's issues.
 Table of contents
 =================
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    ./installation.rst
    ./user_guide.rst
    ./manen/manen.rst
    ./changelog.rst
+   ./contributing.rst
 
 
 Indices and tables

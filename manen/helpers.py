@@ -15,6 +15,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from .typing import Version
 
+
 PLATFORM = platform.uname()
 ZIP_UNIX_SYSTEM = 3
 
@@ -54,7 +55,7 @@ def version(version_str: str) -> "Version":
     Returns:
         Tuple[int, int, Optional[int], int]: parsed version
     """
-    if not re.match(r"^[\d]+.[\d]+.[\d]+.[\d]+?$", version_str):
+    if not re.match(r"^[\d]+.[\d]+.[\d]+(.[\d]+)?$", version_str):
         raise ValueError(
             f"The version `{version_str}` is not compatible with the pattern"
             " MAJOR.MINOR(.BRANCH)?.PATH."
@@ -63,7 +64,7 @@ def version(version_str: str) -> "Version":
     return (
         splitted_version[0],
         splitted_version[1],
-        splitted_version[2],
+        splitted_version[2] if len(splitted_version) == 4 else None,
         splitted_version[-1],
     )
 
@@ -107,3 +108,17 @@ def extract(archive_path: str):
                 chmod(extracted_path, unix_attributes)
 
     return extracted_path
+
+
+def batch(iterable, size: int = 1):
+    """Slice an iterable into batches of given size.
+
+    Args:
+        iterable (Iterable): iterable to slice into batches
+        n (int, optional): size of each batch. Default to 1.
+    Returns:
+        Iterable:
+    """
+    length = len(iterable)
+    for ndx in range(0, length, size):
+        yield iterable[ndx : min(ndx + size, length)]

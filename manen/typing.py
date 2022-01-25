@@ -9,14 +9,14 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from datetime import date
-    from typing import Any, Dict, Tuple, TypedDict, Union
+    from typing import Any, Dict, Optional, Tuple, TypedDict, Union
 
     from selenium.webdriver.remote.webdriver import WebDriver
     from selenium.webdriver.remote.webelement import WebElement
     from typing_extensions import Protocol
 
     SeleniumElement = Union[WebDriver, WebElement]
-    Version = Tuple[int, int, int, int]
+    Version = Tuple[int, int, Optional[int], int]
 
     class CookieProtocol(Protocol):
         def get_cookies(self):

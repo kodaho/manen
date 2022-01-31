@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center"> <img src="./docs/source/_static/manen_logo_xs.png" width="24" height="24"> manen</h1>
+  <h1 align="center"> 🌔  manen</h1>
 </p>
 
 ----

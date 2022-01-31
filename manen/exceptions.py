@@ -1,4 +1,9 @@
-"""Exceptions raised by :py:mod:`manen`."""
+"""
+manen.exceptions
+================
+
+Exceptions raised by :py:mod:`manen`.
+"""
 
 
 class ManenException(Exception):

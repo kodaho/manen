@@ -1,4 +1,5 @@
-.. automodule:: manen.page_object_model
+.. automodule:: manen.resource.brave
    :members:
    :undoc-members:
    :show-inheritance:
+   :noindex:

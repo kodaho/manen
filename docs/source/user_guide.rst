@@ -1,9 +1,14 @@
 User Guide
 ==========
 
-Start working with ``manen``
-----------------------------
+.. todo::
 
+    Write `User Guide` documentation
 
-Advanced Usage
---------------
+.. toctree::
+   :maxdepth: 4
+   :titlesonly:
+
+   ./user_guide/managing_resources
+   ./user_guide/browser
+   ./user_guide/separating_selectors

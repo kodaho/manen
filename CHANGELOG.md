@@ -1,21 +1,19 @@
 # CHANGELOG
 
-## WIP
-- Compatibility with Selenium core features:
-    - https://www.browserstack.com/guide/selenium-grid-tutorial
-    - https://www.selenium.dev/downloads/
-    - https://www.browserstack.com/guide/selenium-webdriver-tricks
-
-## [0.1.0] - 2020-04
-This is the first release of the package named `manen`. This package is still
-in development. For now, the only webdriver you can work with is Chrome.
+## [0.1.0] - 2022-02-??
+This is the first release of `manen`. At this moment, the package is still
+under development and so the public API might changed in the future.
 ### Added
-- Add `manen.finder.find` function to easily get element(s) in a Webdriver page
-    of `selenium` element.
-- Add `manen.resource` module to easily interact with all the assets
-    needed by `selenium`
-- Add `manen.navigator` module which `Navigator` object (an enhanced
-    Selenium's webdriver)
-- Add `manen.dom` module which defines several objects to build `Page`
-    objects (which ease the way to work with Selenium)
-- Add first version of `manen`'s CLI.
+- `manen.finder.find` allows to easily get element(s) in a Webdriver page.
+  This function support several very different use cases, mainly parametrized
+  with the function arguments.
+- `manen.resource` is a module to easily interact with all the assets
+    needed by `selenium`. Thanks to that, all the drivers required by Selenium
+    to work will no longer causes issues.
+- `manen.browser` defined `ChromeBrowser`, an enhanced
+    Selenium's webdriver
+- `manen.page_object_model` is the implementation of page object modelling,
+  described in Selenium documentation. Thanks to that, you can describe the
+  DOM structure only with Python objects.
+- a CLI is shipped with the initial release in order to perform operations such
+  as downloading webdriver

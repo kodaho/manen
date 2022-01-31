@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>manen - Test Page #1</title>
+</head>
+
+<body>
+  <h1>manen test file</h1>
+
+  <div class="row info">
+    <span>Created on <span class="date">2020/05/01 at 10:00</span></span>
+    |
+    <span>Version: <code class="version">1.0.0</code></span>
+  </div>
+
+  <h2>Description</h2>
+  <p>
+    This file is a test file in order to verify that the package <code>manen</code> is working well. It will used
+    <code>Jinja2</code> in order to generate a template that will later be parsed by <code>manen</code>.
+  </p>
+
+  {% if posts %}
+  <h2>Posts</h2>
+  <div class="loop-posts">
+    {% for post in posts %}
+    <div class="post">
+      <h3 class="{{ loop.cycle('odd', 'even') }}"> Post #{{loop.index }} | {{ post.title }}</h3>
+      <h4> {{ post.subtitle }}</h4>
+      <span>Updated {{ post.updated_at }}</span>
+      <a href="{{post.href}}">{{post.link}}</a>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit sed ex nobis laborum, ea eos impedit
+        distinctio earum, vel quam accusamus eum adipisci officia incidunt reprehenderit voluptas dolor
+        voluptatem cum?
+      </p>
+      {% if loop.last %}
+      <span class="hint"> <em>This is the last post available.</em> </span>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if form %}
+  <h2>Form Elements</h2>
+  <div class="form">
+    <div class="row">
+      <label for="input-number">Input Number</label>
+      <input type="number" name="input-number" id="input-number">
+    </div>
+
+    <div class="row">
+      <label for="input-text">Input Text</label>
+      <input type="text" name="input-text" id="input-text">
+    </div>
+
+    <div class="row">
+      <label for="input-email">Input Email</label>
+      <input type="email" name="input-email" id="input-email">
+    </div>
+
+    <div class="row">
+      <label for="input-password">Input Password</label>
+      <input type="password" name="input-password" id="input-password">
+    </div>
+
+    <div class="row">
+      <label for="input-checkbox">Input Checkbox</label>
+      <input type="checkbox" name="input-checkbox" id="input-checkbox">
+    </div>
+  </div>
+
+  <div class="row">
+    <button>Click Me</button>
+    <button disabled>You can't click me</button>
+  </div>
+  {% endif %}
+
+  {% if table_job %}
+  <h2>Some Developers...</h2>
+  <table class="job">
+    <thead>
+      <th>Name</th>
+      <th>Job</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>kodaho</td>
+        <td>Just a Developer Full Stack</td>
+      </tr>
+      <tr>
+        <td>Guido Van Rossum</td>
+        <td>Benevolant Dictator For Life</td>
+      </tr>
+    </tbody>
+  </table>
+  {% endif %}
+
+  {% if table_dependencies %}
+  <h2>Dependencies</h2>
+  <table class="dependencies">
+    <thead>
+      <th>Package</th>
+      <th>Version</th>
+      <th>Required</th>
+      <th>Category</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>selenium</td>
+        <td>3.141.0</td>
+        <td>Yes</td>
+        <td>core, framework</td>
+      </tr>
+      <tr>
+        <td>requests</td>
+        <td>2.22</td>
+        <td>Yes</td>
+        <td>core, http, client</td>
+      </tr>
+      <tr>
+        <td>pytest</td>
+        <td>1.0</td>
+        <td>No</td>
+        <td>test</td>
+      </tr>
+      <tr>
+        <td>questionary</td>
+        <td>0.5</td>
+        <td>Yes</td>
+        <td>cli, core</td>
+      </tr>
+      <tr>
+        <td>sphinx</td>
+        <td>3.0.0</td>
+        <td>No</td>
+        <td>html_build, doc</td>
+      </tr>
+    </tbody>
+  </table>
+  {% endif %}
+
+  <style>
+    .css {
+      display: flex;
+      flex-direction: row;
+    }
+
+    h2 {
+      margin-top: 20px;
+    }
+  </style>
+</body>
+
+</html>

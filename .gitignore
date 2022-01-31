@@ -143,3 +143,6 @@ manen/assets/*
 
 # IDE files
 .vscode
+
+# Mac files
+.DS_Store

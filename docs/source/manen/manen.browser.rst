@@ -1,4 +1,4 @@
-.. automodule:: manen.page_object_model
+.. automodule:: manen.browser
    :members:
    :undoc-members:
    :show-inheritance:

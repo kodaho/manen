@@ -1,6 +1,3 @@
-``manen.exceptions``
-====================
-
 .. automodule:: manen.exceptions
    :members:
    :undoc-members:

@@ -48,9 +48,7 @@ class BrowserMixin(WebDriverProtocol):
             cookies (List[Dict["str", Any]): cookies as a list of dictionaries
         """
         for cookie in cookies:
-            cookie_copy = cookie.copy()
-            cookie_copy.pop("expiry", None)
-            self.add_cookie(cookie_copy)
+            self.add_cookie(cookie)
 
     @cookies.deleter
     def cookies(self):

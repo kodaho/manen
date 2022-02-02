@@ -10,7 +10,7 @@ Going deeper into ``manen``
 API Documentation
 -----------------
 
-Examine directly the code to discover all features proposed by :py:mod:`manen`
+Explore directly the code to discover all features proposed by :py:mod:`manen`
 
 .. toctree::
    :maxdepth: 4

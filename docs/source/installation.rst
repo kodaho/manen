@@ -1,7 +1,10 @@
 Installation
 ============
 
-The package can be installed from the official Python package index using `pip`.
+Regular installation with ``pip``
+---------------------------------
+
+The package can be installed from the official Python package index using ``pip``.
 
 .. code-block:: bash
 
@@ -9,6 +12,9 @@ The package can be installed from the official Python package index using `pip`.
 
 This command will install the `latest version <https://pypi.org/project/manen/>`_
 available on PyPI.
+
+Cloning the source code
+-----------------------
 
 An alternative is to retrieve the source code from the `official repository <https://github.com/kodaho/manen>`_
 by cloning it:

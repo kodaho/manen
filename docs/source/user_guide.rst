@@ -7,7 +7,6 @@ User Guide
 
 .. toctree::
    :maxdepth: 4
-   :titlesonly:
 
    ./user_guide/managing_resources
    ./user_guide/browser

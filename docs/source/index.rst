@@ -11,10 +11,19 @@ Welcome to manen's documentation!
 .. image:: https://img.shields.io/badge/status-in%20development-yellow?style=for-the-badge
 
 
-:py:mod:`manen` is a package built around Selenium to ....
+:py:mod:`manen` is a package built to extend Selenium user experience.
+Among the core features, you can find:
 
-In simple terms, it will let you design production-ready application based on Selenium.
+- an implementation of the page object modelling
+- a class which completes :py:class:`~selenium.webdriver.remote.webdriver.WebDriver`
+- some helpers to manage resources usually required by Selenium
+- a function to easily find and isolate DOM elements inside a page
 
+More details in `About the project > Why such package? </about.html#why-such-package>`_ .
+
+This package will allow you to write more concise, flexible and powerful code compared to
+what you could do by using only Selenium. For example, here is a comparison of the same
+code with and without ``manen``:
 
 .. tab:: With manen
 
@@ -66,60 +75,15 @@ In simple terms, it will let you design production-ready application based on Se
       #  [], # Because no tags were found
       #  datetime.date(2021, 1, 1))
 
-
-Why ``manen``?
-==============
-
-.. todo::
-
-   Add pain points encoutered when working with Selenium
-
-
-Design to be be simple and speed up your development with Selenium.
-Hide complexity to work with Selenium.
-
-Can be used for scraping (legal scraping of course), testing and automatize
-heavy process. Goal is to be build a reliable tool which can be used
-in production.
-
-Among the features, you will find:
-
-- a helper tool to find and download all drivers needed by Selenium; no need to
-  find the right driver compatible with the installed browser, :py:mod:`manen`
-  will do it for you!
-- a quite complete list of classes you can use to easily interact with the DOM
-  structure: it is basically an implementation of the
-  `page object model <https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/>`_)
-  described in official documentation of Selenium.
-- an enhanced WebDriver, build around the one defined by Selenium, allowing you
-  to perform some basic actions quite quickly.
-
-
-Current status and roadmap
-==========================
-
-:py:mod:`manen` is still under active development but has been used on some
-private projects for quite a time.
-
-Feebacks are more than welcome so don't hesitate to open a Github issue if you
-have any questions or concerns about the project!
-
-Because manen uses `semantic versioning <https://semver.org>`_, it will keep 0
-as major version until it is ready for the first stable release.
-
-.. note:: There is no guarantee that the API will remain the same. The current
-   architecture is probably the definitive one, but some breaking changes can
-   be introduced if needed. Any change will be detailed in the ChangeLog page.
-
-No roadmap because it is still a "side project" but you can follow the project through this
-documentation and Github's issues.
-
+Besides being more concise, the version using ``manen`` is also more verbose, meaning
+that it can ease the comprehension of your source code.
 
 Table of contents
 =================
 .. toctree::
    :maxdepth: 3
 
+   ./about.rst
    ./installation.rst
    ./user_guide.rst
    ./manen/manen.rst

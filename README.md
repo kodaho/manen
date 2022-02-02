@@ -6,7 +6,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-%3E=3.6-informational?style=for-the-badge&logo=python">
-  <img src="https://img.shields.io/badge/version-0.1.0-informational?style=for-the-badge">
+  <img alt="PyPI" src="https://img.shields.io/pypi/v/manen?logo=pypi&style=for-the-badge">
   <img src="https://img.shields.io/badge/status-in%20development-yellow?style=for-the-badge">
 </p>
 

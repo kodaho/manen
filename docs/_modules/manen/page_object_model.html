@@ -1,0 +1,1003 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <link rel="shortcut icon" href="../../_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.01.02"/>
+        <title>manen.page_object_model - manen</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  body[data-theme="dark"] {
+    --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) {
+      --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">manen</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/manen_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">manen</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About the project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/managing_resources.html">Managing resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/separating_selectors.html">Separating how and what to select (WIP)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../manen/manen.cli.html">manen.cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../manen/manen.exceptions.html">manen.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../manen/manen.finder.html">manen.finder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../manen/manen.helpers.html">manen.helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../manen/manen.browser.html">manen.browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../manen/manen.page_object_model.html">manen.page_object_model</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../manen/manen.resource.html">manen.resource package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../manen/manen.resource.brave.html">manen.resource.brave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manen/manen.resource.chrome.html">manen.resource.chrome</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manen/manen.resource.local.html">manen.resource.local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <h1>Source code for manen.page_object_model</h1><div class="highlight"><pre>
+<span></span><span class="c1"># pylint: disable=too-few-public-methods</span>
+<span class="sd">"""</span>
+<span class="sd">manen.page_object_model</span>
+<span class="sd">=======================</span>
+
+<span class="sd">This module provides an implementation of the `Page Object design pattern</span>
+<span class="sd">&lt;https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/&gt;`_</span>
+<span class="sd">described in Selenium documentation. By combining the classes</span>
+<span class="sd">:py:class:`~manen.page_object_model.Page` and :py:class:`~manen.page_object_model.Region`</span>
+<span class="sd">with the :py:class:`~manen.page_object_model.Element` object (and all its subclasses),</span>
+<span class="sd">you can easily describe any web pages and access all the DOM elements in a simple</span>
+<span class="sd">way through a Python class.</span>
+
+<span class="sd">Let's say that you want, given a query, to get all the packages information from</span>
+<span class="sd">the website `PyPi &lt;https://pypi.org/&gt;`_ (e.g.: "selenium"). The first step to</span>
+<span class="sd">work with :py:mod:`manen.page_object_model` is to define the Python classes which</span>
+<span class="sd">will describe the web pages you are working on. Here we will define all the</span>
+<span class="sd">classes in an external file called ``pypi_pom.py``.</span>
+
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    from manen.page_object_model import (Page, Regions, InputElement,</span>
+<span class="sd">                                         TextElement, LinkElement,</span>
+<span class="sd">                                         IntegerElement)</span>
+
+<span class="sd">    class HomePage(Page):</span>
+<span class="sd">        query = InputElement("input[id='search']")</span>
+
+<span class="sd">    class SearchResultPage(Page):</span>
+<span class="sd">        class ResultRegions(Regions):</span>
+<span class="sd">            name = TextElement("h3 span.package-snippet__name")</span>
+<span class="sd">            version = TextElement("h3 span.package-snippet__version")</span>
+<span class="sd">            link = LinkElement("a.package-snippet")</span>
+<span class="sd">            description = TextElement("p.package-snippet__description")</span>
+
+<span class="sd">        n_results = IntegerElement("//*[@id='content']//form/div[1]/div[1]/p/strong")</span>
+<span class="sd">        results = ResultRegions("ul[aria-label='Search results'] li")</span>
+
+
+<span class="sd">Once you have defined all the classes describing the web pages, you can start</span>
+<span class="sd">interacting by instanciating the :py:class:`~manen.page_object_model.Page` subclass</span>
+<span class="sd">with an instance of :py:class:`~selenium.webdriver.remote.webdriver.WebDriver`. Here</span>
+<span class="sd">we will suppose that you have an instance of</span>
+<span class="sd">:py:class:`~selenium.webdriver.remote.webdriver.WebDriver` stored in the variable</span>
+<span class="sd">``browser``.</span>
+
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    &gt;&gt;&gt; from pypi_pom import HomePage, SearchResultPage</span>
+<span class="sd">    &gt;&gt;&gt; home_page = HomePage(browser)</span>
+<span class="sd">    &gt;&gt;&gt; home_page.query = "selenium"</span>
+<span class="sd">    &gt;&gt;&gt; home_page.query = Action("submit")</span>
+<span class="sd">    # This will direct you to a search result page of PyPi.</span>
+<span class="sd">    &gt;&gt;&gt; browser.current_url</span>
+<span class="sd">    "https://pypi.org/search/?q=selenium"</span>
+<span class="sd">    &gt;&gt;&gt; page = SearchResultPage(browser)</span>
+<span class="sd">    &gt;&gt;&gt; page.n_results</span>
+<span class="sd">    1600</span>
+<span class="sd">    &gt;&gt;&gt; len(page.results)</span>
+<span class="sd">    20</span>
+<span class="sd">    &gt;&gt;&gt; page.results[0]</span>
+<span class="sd">    &lt;pypi_pom.ResultRegions&gt;</span>
+<span class="sd">    &gt;&gt;&gt; page.results[0].name</span>
+<span class="sd">    "selenium"</span>
+<span class="sd">    &gt;&gt;&gt; page.results[0].version</span>
+<span class="sd">    "3.141.0"</span>
+<span class="sd">    &gt;&gt;&gt; page.results[0].link</span>
+<span class="sd">    "https://pypi.org/project/selenium/"</span>
+
+<span class="sd">This is a glitch of what you can do with :py:mod:`manen.page_object_model`. See the</span>
+<span class="sd">documentation of each objects to check all the features provided by the module.</span>
+<span class="sd">"""</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">dateparser</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.remote.webdriver</span> <span class="kn">import</span> <span class="n">WebDriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.support.select</span> <span class="kn">import</span> <span class="n">Select</span>
+
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="n">ManenException</span><span class="p">,</span> <span class="n">UnsettableElement</span>
+<span class="kn">from</span> <span class="nn">.finder</span> <span class="kn">import</span> <span class="n">find</span>
+<span class="kn">from</span> <span class="nn">.helpers</span> <span class="kn">import</span> <span class="n">extract_integer</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">.typing</span> <span class="kn">import</span> <span class="n">SeleniumElement</span><span class="p">,</span> <span class="n">WebElement</span>
+
+    <span class="n">PostProcessingFunction</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"Action"</span><span class="p">,</span>
+    <span class="s2">"CheckboxElement"</span><span class="p">,</span>
+    <span class="s2">"DatetimeElement"</span><span class="p">,</span>
+    <span class="s2">"DatetimeElements"</span><span class="p">,</span>
+    <span class="s2">"Element"</span><span class="p">,</span>
+    <span class="s2">"Elements"</span><span class="p">,</span>
+    <span class="s2">"Frame"</span><span class="p">,</span>
+    <span class="s2">"ImageSourceElement"</span><span class="p">,</span>
+    <span class="s2">"ImageSourceElements"</span><span class="p">,</span>
+    <span class="s2">"InnerHtmlElement"</span><span class="p">,</span>
+    <span class="s2">"InnerHtmlElements"</span><span class="p">,</span>
+    <span class="s2">"InputElement"</span><span class="p">,</span>
+    <span class="s2">"IntegerElement"</span><span class="p">,</span>
+    <span class="s2">"IntegerElements"</span><span class="p">,</span>
+    <span class="s2">"LinkElement"</span><span class="p">,</span>
+    <span class="s2">"LinkElements"</span><span class="p">,</span>
+    <span class="s2">"OuterHtmlElement"</span><span class="p">,</span>
+    <span class="s2">"OuterHtmlElements"</span><span class="p">,</span>
+    <span class="s2">"Page"</span><span class="p">,</span>
+    <span class="s2">"RadioButtonElement"</span><span class="p">,</span>
+    <span class="s2">"Region"</span><span class="p">,</span>
+    <span class="s2">"Regions"</span><span class="p">,</span>
+    <span class="s2">"SelectElement"</span><span class="p">,</span>
+    <span class="s2">"TextElement"</span><span class="p">,</span>
+    <span class="s2">"TextElements"</span><span class="p">,</span>
+    <span class="s2">"WebArea"</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="WebArea"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.WebArea">[docs]</a><span class="k">class</span> <span class="nc">WebArea</span><span class="p">:</span>
+    <span class="sd">"""Wrapper around a Selenium element which works together with an</span>
+<span class="sd">    :py:class:`~manen.page_object_model.Element` (and its subclasses). Any class</span>
+<span class="sd">    attribute instanciated with :py:class:`~manen.page_object_model.Element`</span>
+<span class="sd">    will be accessible as an instance attribute; it will, when accessed, evaluate</span>
+<span class="sd">    the selector to retrieve the element.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        class Area(WebArea):</span>
+<span class="sd">            body = Element("css:body")</span>
+<span class="sd">            first_div = Element("css:div")</span>
+<span class="sd">            links = Elements("css:a")</span>
+
+<span class="sd">        &gt;&gt;&gt; area = Area(browser)</span>
+<span class="sd">        &gt;&gt;&gt; area.body</span>
+<span class="sd">        &lt;selenium.webdriver.remote.webelement.WebElement id="abcdef-1234"&gt;</span>
+<span class="sd">        &gt;&gt;&gt; div_area = Area(area.first_div)</span>
+<span class="sd">        &gt;&gt;&gt; div_area.links # Find all the links in the first div element of the body</span>
+
+<span class="sd">    .. note:: This class is mainly used internally to build the classes</span>
+<span class="sd">      :py:class:`~manen.page_object_model.Page`,</span>
+<span class="sd">      :py:class:`~manen.page_object_model.Region` and</span>
+<span class="sd">      :py:class:`~manen.page_object_model.Frame`. You shouldn't need to use this</span>
+<span class="sd">      class to create basic page objects (see the documentation of each object to</span>
+<span class="sd">      see how to efficiently used page object modelling).</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="WebArea.Meta"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.WebArea.Meta">[docs]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="sd">"""Metadata for a webarea."""</span>
+
+        <span class="n">selectors_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+        <span class="n">selectors</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">container</span><span class="p">:</span> <span class="s2">"SeleniumElement"</span><span class="p">,</span>
+        <span class="n">_context</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"PAGE"</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Args:</span>
+<span class="sd">            container ("SeleniumElement"): Parent element in which all the</span>
+<span class="sd">                elements will be searched.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_container</span> <span class="o">=</span> <span class="n">container</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">=</span> <span class="n">_context</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">WebDriver</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span> <span class="o">=</span> <span class="n">container</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">parent</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="p">,</span> <span class="s2">"selectors_path"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">selectors</span> <span class="o">=</span> <span class="n">load_selector_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">selectors_path</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">container</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"SeleniumElement"</span><span class="p">:</span>
+        <span class="sd">"""Selenium element where to perform the query in order to retrieve</span>
+<span class="sd">        some elements with selectors.</span>
+
+<span class="sd">        .. warning:: Prefer using the context manager `switch_container()`</span>
+<span class="sd">            rather than this property.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">==</span> <span class="s2">"FRAME"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_container</span>
+
+<div class="viewcode-block" id="WebArea.switch_container"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.WebArea.switch_container">[docs]</a>    <span class="nd">@contextmanager</span>
+    <span class="k">def</span> <span class="nf">switch_container</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Context manager which returns the container where to perform the query.</span>
+<span class="sd">        In most cases, it is the container used to instanciate `WebArea` but some</span>
+<span class="sd">        additional computing may be needed in some cases (for example, when working</span>
+<span class="sd">        with frame element). The additional computation will occur based on the</span>
+<span class="sd">        value of the attribute `_context`, entered at instanciation.</span>
+
+<span class="sd">        Yields:</span>
+<span class="sd">            container (:py:class:`selenium.webdriver.remote.webelement.WebElement`):</span>
+<span class="sd">                Selenium element where to evaluate a selector</span>
+<span class="sd">        """</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">==</span> <span class="s2">"FRAME"</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span><span class="o">.</span><span class="n">switch_to</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">container</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">==</span> <span class="s2">"FRAME"</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span><span class="o">.</span><span class="n">switch_to</span><span class="o">.</span><span class="n">default_content</span><span class="p">()</span></div>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_selectors_from_meta</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">selectors</span><span class="p">[</span><span class="s2">"elements"</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">ManenException</span><span class="p">(</span><span class="s2">"No selectors defined for element `</span><span class="si">%s</span><span class="s2">`."</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">selectors</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">selectors</span><span class="p">[</span><span class="s2">"elements"</span><span class="p">][</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">selectors</span><span class="p">[</span><span class="s2">"selectors"</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+            <span class="k">else</span> <span class="n">selectors</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+            <span class="k">else</span> <span class="p">[</span><span class="n">selectors</span><span class="p">]</span>
+        <span class="p">)</span></div>
+
+
+<span class="k">class</span> <span class="nc">DomAccessor</span><span class="p">:</span>
+    <span class="sd">"""Main interface of a DOM element."""</span>
+
+    <span class="n">_post_processing</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">"PostProcessingFunction"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">_many</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">__init_subclass__</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">many</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">post_processing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="s2">"PostProcessingFunction"</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init_subclass__</span><span class="p">()</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_post_processing</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_post_processing</span>
+            <span class="k">if</span> <span class="n">post_processing</span> <span class="ow">is</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_post_processing</span> <span class="o">+</span> <span class="n">post_processing</span>
+        <span class="p">)</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_many</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_many</span> <span class="k">if</span> <span class="n">many</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">many</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">selectors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">NotImplemented</span><span class="p">,</span>
+        <span class="n">wait</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">post_processing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"PostProcessingFunction"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">"""Main interface with a DOM element.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            selectors (Union[str, List[str]]): Selector or sets of selectors</span>
+<span class="sd">                used to identify the DOM element(s). Each selector must be in</span>
+<span class="sd">                form of {selection_method}:{selector} where {selection_method}</span>
+<span class="sd">                is in .... Note that if no selection method is specified, it</span>
+<span class="sd">                will be inferred from the selector (but only the CSS and XPath</span>
+<span class="sd">                method can be inferred).</span>
+<span class="sd">            default (Any, optional): Default value to returned if no element</span>
+<span class="sd">                matching the selector(s) is found. Defaults to NotImplemented.</span>
+<span class="sd">            wait (int, optional): Time to wait before throwing an error.</span>
+<span class="sd">                Defaults to 0.</span>
+<span class="sd">            post_processing (Callable[[Any], Any]): Callable called after</span>
+<span class="sd">                getting the element from the DOM. Defaults to None.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_selectors</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">selectors</span>
+            <span class="k">if</span> <span class="n">selectors</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+            <span class="k">else</span> <span class="p">[</span><span class="n">selectors</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default</span> <span class="o">=</span> <span class="n">default</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wait</span> <span class="o">=</span> <span class="n">wait</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_post_processing</span> <span class="o">=</span> <span class="p">[</span><span class="n">post_processing</span><span class="p">]</span> <span class="k">if</span> <span class="n">post_processing</span> <span class="k">else</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">:</span> <span class="nb">str</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__set_name__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"_"</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ManenException</span><span class="p">(</span>
+                <span class="s2">"To prevent any side effect, the element name cannot start with '_'."</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">addr</span> <span class="k">for</span> <span class="n">addr</span> <span class="ow">in</span> <span class="n">owner</span><span class="o">.</span><span class="vm">__qualname__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="n">addr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_apply_post_processing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">:</span> <span class="s2">"WebElement"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="n">x</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">_post_processing</span>  <span class="c1"># pylint: disable=protected-access</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_processing</span><span class="p">,</span>
+            <span class="n">element</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_from</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">area_class</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">area</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="n">selectors</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_selectors</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_selectors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="n">area_class</span><span class="o">.</span><span class="n">_selectors_from_meta</span><span class="p">(</span>  <span class="c1"># pylint: disable=protected-access</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">area</span><span class="o">.</span><span class="n">switch_container</span><span class="p">()</span> <span class="k">as</span> <span class="n">container</span><span class="p">:</span>
+            <span class="n">lookup</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span>
+                <span class="n">inside</span><span class="o">=</span><span class="n">container</span><span class="p">,</span>
+                <span class="n">many</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_many"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+                <span class="n">wait</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wait</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_default</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">elements</span> <span class="o">=</span> <span class="n">lookup</span><span class="p">(</span><span class="n">selectors</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">elements</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">elements</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_apply_post_processing</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_post_processing</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_build_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">area</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">WebArea</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">WebArea</span><span class="p">]]:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">area</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__qualname__</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="p">(</span><span class="n">WebArea</span><span class="p">,)</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">area</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span> <span class="k">if</span> <span class="n">area</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">selectors</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">area</span><span class="o">.</span><span class="n">Meta</span><span class="p">,</span> <span class="s2">"selectors"</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"elements"</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="p">)</span>
+        <span class="n">base_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">),</span>
+            <span class="s2">"Meta"</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="s2">"Meta"</span><span class="p">,</span> <span class="p">(),</span> <span class="n">metadata</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_many</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span>
+                <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">base_dict</span><span class="p">)(</span><span class="n">element</span><span class="p">,</span> <span class="n">_context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span>
+            <span class="p">]</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">base_dict</span><span class="p">)(</span><span class="n">elements</span><span class="p">,</span> <span class="n">_context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Page"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Page">[docs]</a><span class="k">class</span> <span class="nc">Page</span><span class="p">(</span><span class="n">WebArea</span><span class="p">):</span>
+    <span class="sd">"""Modelize a HTML page in the Page Object Model design pattern. The attributes of</span>
+<span class="sd">    :py:class:`~manen.page_object_model.Page` should be an instance of</span>
+<span class="sd">    :py:class:`~manen.page_object_model.Element` (or any subclass) or an instance of</span>
+<span class="sd">    :py:class:`~manen.page_object_model.Region`.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        class QueryPage(Page):</span>
+<span class="sd">            main_title = TextElement("h1")</span>
+<span class="sd">            search = InputElement("input[name='query']")</span>
+<span class="sd">            button_validate = Element("button#validate")</span>
+
+<span class="sd">        &gt;&gt;&gt; page = QueryPage(browser)</span>
+<span class="sd">        &gt;&gt;&gt; page.search = "python manen"</span>
+<span class="sd">        &gt;&gt;&gt; button_validate.click()</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="Page.from_object"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Page.from_object">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_object</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">page_objects</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"Element"</span><span class="p">],</span>
+        <span class="n">bases</span><span class="p">:</span> <span class="n">Tuple</span> <span class="o">=</span> <span class="p">(),</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Page"</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">"""Build a Page class from a dictionary."""</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">bases</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">page_objects</span><span class="p">)</span>  <span class="c1"># type: ignore</span></div>
+
+<div class="viewcode-block" id="Page.from_yaml"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Page.from_yaml">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_yaml</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]):</span>
+        <span class="sd">"""Build a Page class from a YAML file."""</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">filepath</span>
+        <span class="k">with</span> <span class="n">path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">page_file</span><span class="p">:</span>
+            <span class="n">page_definition</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">page_file</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">PageObjectLoader</span><span class="p">)</span>
+
+        <span class="n">base_pages</span> <span class="o">=</span> <span class="n">page_definition</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"extends"</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">bases</span> <span class="o">=</span> <span class="p">(</span><span class="n">Page</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="n">base_page</span><span class="p">)</span> <span class="k">for</span> <span class="n">base_page</span> <span class="ow">in</span> <span class="n">base_pages</span><span class="p">)</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">page_definition</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">path</span><span class="o">.</span><span class="n">stem</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2">Page"</span><span class="p">)</span>
+
+        <span class="n">page_objects</span> <span class="o">=</span> <span class="n">page_definition</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"elements"</span><span class="p">)</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="n">page_definition</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"meta"</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">page_objects</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">Meta</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="s2">"Meta"</span><span class="p">,</span> <span class="p">(),</span> <span class="n">metadata</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">page_objects</span><span class="p">,</span> <span class="n">bases</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">bases</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">title</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">"""Title of the page."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span><span class="o">.</span><span class="n">title</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">page_source</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">"""Code source of the page."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span><span class="o">.</span><span class="n">page_source</span>
+
+<div class="viewcode-block" id="Page.click_with_js"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Page.click_with_js">[docs]</a>    <span class="k">def</span> <span class="nf">click_with_js</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">:</span> <span class="s2">"WebElement"</span><span class="p">):</span>
+        <span class="sd">"""Click on an element using a JavaScript script."""</span>
+        <span class="n">js_script</span> <span class="o">=</span> <span class="s2">"""arguments[0].click()"""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="n">js_script</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Page.open"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Page.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">"""Go to the URL specified in the Meta class associated to a Page. Any</span>
+<span class="sd">        keywords arguments will be passed to the URL to format it.</span>
+<span class="sd">        """</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">url</span>
+        <span class="k">if</span> <span class="n">url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="n">ManenException</span><span class="p">(</span><span class="s2">"No URL specified."</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Region"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Region">[docs]</a><span class="k">class</span> <span class="nc">Region</span><span class="p">(</span><span class="n">DomAccessor</span><span class="p">):</span>
+    <span class="sd">"""Modelize a region of a webpage. A region is a set of elements contained</span>
+<span class="sd">    in the same container.</span>
+
+<span class="sd">    .. note:: Contrary to :py:class:`~manen.page_object_model.Page`, this class</span>
+<span class="sd">       should not be instanciated with an instance of WebDriver. This class is</span>
+<span class="sd">       closer to an :py:class:`~manen.page_object_model.Element` than a</span>
+<span class="sd">       :py:class:`~manen.page_object_model.Element`.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        class LoginPage(Page):</span>
+<span class="sd">            class FormRegion(Region):</span>
+<span class="sd">                email = InputElement("input#email")</span>
+<span class="sd">                password = InputElement("input#password")</span>
+
+<span class="sd">            form_region = FormRegion("div#form-container")</span>
+
+<span class="sd">        &gt;&gt;&gt; page = LoginPage(browser)</span>
+<span class="sd">        &gt;&gt;&gt; page.form_region.email = "hello@manen.com"</span>
+<span class="sd">        &gt;&gt;&gt; page.form_region.password = "strong_password"</span>
+<span class="sd">        &gt;&gt;&gt; page.form_region.password = Action("submit")</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">WebArea</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">WebArea</span><span class="p">]]:</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_from</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">)</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_elements</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">"REGION"</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">element</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">UnsettableElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_yaml_loader</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">loader</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Loader</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Node</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">MappingNode</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span>
+        <span class="n">region</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">construct_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="n">region</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"elements"</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">region</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="bp">cls</span><span class="p">,),</span> <span class="n">elements</span><span class="p">)(</span><span class="o">**</span><span class="n">region</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Regions"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Regions">[docs]</a><span class="k">class</span> <span class="nc">Regions</span><span class="p">(</span><span class="n">Region</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">"""Pluralized version of :py:class:`~manen.page_object_model.Region`."""</span></div>
+
+
+<div class="viewcode-block" id="Frame"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Frame">[docs]</a><span class="k">class</span> <span class="nc">Frame</span><span class="p">(</span><span class="n">DomAccessor</span><span class="p">):</span>
+    <span class="sd">"""Enable to work with &lt;iframe&gt; element."""</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WebArea</span><span class="p">:</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_from</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">)</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_elements</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">"FRAME"</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">WebArea</span><span class="p">)</span>  <span class="c1"># For mypy</span>
+        <span class="k">return</span> <span class="n">element</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">UnsettableElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Action"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Action">[docs]</a><span class="k">class</span> <span class="nc">Action</span><span class="p">:</span>
+    <span class="sd">"""Enable to interact with an input by calling a method of the WebElement. This is</span>
+<span class="sd">    intended to be used by a subtype of :py:class:`~manen.page_object_model.Element`</span>
+<span class="sd">    which can be set.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        &gt;&gt;&gt; page.query = "python manen"</span>
+<span class="sd">        &gt;&gt;&gt; page.query = Action("submit")</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Args:</span>
+<span class="sd">            method (str): name of the method to call. This should be a method ones</span>
+<span class="sd">                of a method of :py:class:`selenium.webdriver.remote.webelement.WebElement`</span>
+<span class="sd">            *args (Any): positional arguments called with the method</span>
+<span class="sd">            **kwargs : keyword arguments called with the method</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">method</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span></div>
+
+
+<div class="viewcode-block" id="Element"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Element">[docs]</a><span class="k">class</span> <span class="nc">Element</span><span class="p">(</span><span class="n">DomAccessor</span><span class="p">):</span>
+    <span class="sd">"""Based on one or several selectors, extract a</span>
+<span class="sd">    :py:class:`selenium.webdriver.remote.webelement.WebElement` from a region or page.</span>
+
+<span class="sd">    An element should be used to initialize a class attribute of a subclass of</span>
+<span class="sd">    :py:class:`~manen.page_object_model.Page`, :py:class:`~manen.page_object_model.Region`</span>
+<span class="sd">    or :py:class:`~manen.page_object_model.Frame` (or any subtypes of</span>
+<span class="sd">    :py:class:`~manen.page_object_model.WebArea`)</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"WebElement"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_from</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">UnsettableElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_yaml_loader</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">loader</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Loader</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Node</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">SequenceNode</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">selectors</span><span class="o">=</span><span class="n">loader</span><span class="o">.</span><span class="n">construct_sequence</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">MappingNode</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">loader</span><span class="o">.</span><span class="n">construct_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">ScalarNode</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">selectors</span><span class="o">=</span><span class="p">[</span><span class="n">loader</span><span class="o">.</span><span class="n">construct_scalar</span><span class="p">(</span><span class="n">node</span><span class="p">)])</span>  <span class="c1"># type: ignore</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">"Unexpected node type encoutered while loading node `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">node</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Elements"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Elements">[docs]</a><span class="k">class</span> <span class="nc">Elements</span><span class="p">(</span><span class="n">Element</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">"""Pluralized version of :py:class:`~manen.page_object_model.Element`."""</span></div>
+
+
+<div class="viewcode-block" id="LinkElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.LinkElement">[docs]</a><span class="k">class</span> <span class="nc">LinkElement</span><span class="p">(</span><span class="n">Element</span><span class="p">,</span> <span class="n">post_processing</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"href"</span><span class="p">)]):</span>
+    <span class="sd">"""Extract the link from an element matching one or several selectors."""</span></div>
+
+
+<div class="viewcode-block" id="LinkElements"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.LinkElements">[docs]</a><span class="k">class</span> <span class="nc">LinkElements</span><span class="p">(</span><span class="n">LinkElement</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">"""Pluralized version of :py:class:`~manen.page_object_model.LinkElement`."""</span></div>
+
+
+<div class="viewcode-block" id="TextElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.TextElement">[docs]</a><span class="k">class</span> <span class="nc">TextElement</span><span class="p">(</span><span class="n">Element</span><span class="p">,</span> <span class="n">post_processing</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">text</span><span class="p">]):</span>
+    <span class="sd">"""Extract text from an element matching one or several selectors."""</span></div>
+
+
+<div class="viewcode-block" id="TextElements"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.TextElements">[docs]</a><span class="k">class</span> <span class="nc">TextElements</span><span class="p">(</span><span class="n">TextElement</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">"""Pluralized version of :py:class:`~manen.page_object_model.TextElement`."""</span></div>
+
+
+<div class="viewcode-block" id="ImageSourceElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.ImageSourceElement">[docs]</a><span class="k">class</span> <span class="nc">ImageSourceElement</span><span class="p">(</span><span class="n">Element</span><span class="p">,</span> <span class="n">post_processing</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"src"</span><span class="p">)]):</span>
+    <span class="sd">"""Extract the source URL of an image."""</span></div>
+
+
+<div class="viewcode-block" id="ImageSourceElements"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.ImageSourceElements">[docs]</a><span class="k">class</span> <span class="nc">ImageSourceElements</span><span class="p">(</span><span class="n">ImageSourceElement</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">"""Pluralized version of :py:class:`~manen.page_object_model.ImageSourceElement`."""</span></div>
+
+
+<div class="viewcode-block" id="InnerHtmlElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.InnerHtmlElement">[docs]</a><span class="k">class</span> <span class="nc">InnerHtmlElement</span><span class="p">(</span>
+    <span class="n">Element</span><span class="p">,</span>
+    <span class="n">post_processing</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="s2">"innerHTML"</span><span class="p">)],</span>
+<span class="p">):</span>
+    <span class="sd">"""Extract the inner HTML from an element."""</span></div>
+
+
+<div class="viewcode-block" id="InnerHtmlElements"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.InnerHtmlElements">[docs]</a><span class="k">class</span> <span class="nc">InnerHtmlElements</span><span class="p">(</span><span class="n">InnerHtmlElement</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">"""Pluralized version of :py:class:`manen.page_object_model.InnerHtmlElement`."""</span></div>
+
+
+<div class="viewcode-block" id="IntegerElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.IntegerElement">[docs]</a><span class="k">class</span> <span class="nc">IntegerElement</span><span class="p">(</span><span class="n">TextElement</span><span class="p">,</span> <span class="n">post_processing</span><span class="o">=</span><span class="p">[</span><span class="n">extract_integer</span><span class="p">]):</span>
+    <span class="sd">"""Extract the integer from a text element matching a selector or set of selectors."""</span></div>
+
+
+<div class="viewcode-block" id="IntegerElements"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.IntegerElements">[docs]</a><span class="k">class</span> <span class="nc">IntegerElements</span><span class="p">(</span><span class="n">IntegerElement</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">"""Get elements from a HTML page matching a set of selectors and extract a</span>
+<span class="sd">    integer from each text element.</span>
+<span class="sd">    Pluralized version of :py:class:`~manen.page_object_model.IntegerElement`</span>
+<span class="sd">    """</span></div>
+
+
+<div class="viewcode-block" id="DatetimeElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.DatetimeElement">[docs]</a><span class="k">class</span> <span class="nc">DatetimeElement</span><span class="p">(</span><span class="n">TextElement</span><span class="p">,</span> <span class="n">post_processing</span><span class="o">=</span><span class="p">[</span><span class="n">dateparser</span><span class="o">.</span><span class="n">parse</span><span class="p">]):</span>
+    <span class="sd">"""Extract a datetime from a text element matching a set of selectors."""</span></div>
+
+
+<div class="viewcode-block" id="DatetimeElements"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.DatetimeElements">[docs]</a><span class="k">class</span> <span class="nc">DatetimeElements</span><span class="p">(</span><span class="n">DatetimeElement</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">"""Pluralized version of :py:class:`~manen.page_object_model.DatetimeElement`."""</span></div>
+
+
+<div class="viewcode-block" id="OuterHtmlElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.OuterHtmlElement">[docs]</a><span class="k">class</span> <span class="nc">OuterHtmlElement</span><span class="p">(</span>
+    <span class="n">Element</span><span class="p">,</span>
+    <span class="n">post_processing</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="s2">"outerHTML"</span><span class="p">)],</span>
+<span class="p">):</span>
+    <span class="sd">"""Extract the outer HTML of an element."""</span></div>
+
+
+<div class="viewcode-block" id="OuterHtmlElements"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.OuterHtmlElements">[docs]</a><span class="k">class</span> <span class="nc">OuterHtmlElements</span><span class="p">(</span><span class="n">OuterHtmlElement</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">"""Pluralized version of :py:class:`~manen.page_object_model.OuterHtmlElement`."""</span></div>
+
+
+<div class="viewcode-block" id="InputElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.InputElement">[docs]</a><span class="k">class</span> <span class="nc">InputElement</span><span class="p">(</span><span class="n">Element</span><span class="p">,</span> <span class="n">post_processing</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)]):</span>
+    <span class="sd">"""Interface with an &lt;input&gt; element of a DOM. Setting the variable of the</span>
+<span class="sd">    InputElement will also set the value of the DOM.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        class LoginPage(Page):</span>
+<span class="sd">            email = InputElement("input[type='email']")</span>
+<span class="sd">            password = InputElement("input[type='password']")</span>
+
+<span class="sd">        &gt;&gt;&gt; from manen.page_object_model import Action</span>
+<span class="sd">        &gt;&gt;&gt; login_page = LoginPage(browser)</span>
+<span class="sd">        &gt;&gt;&gt; login_page.email = "username@manen.co"</span>
+<span class="sd">        &gt;&gt;&gt; login_page.password = "dummypassword"</span>
+<span class="sd">        &gt;&gt;&gt; login_page.password = Action("submit")</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">area</span><span class="o">.</span><span class="n">switch_container</span><span class="p">()</span> <span class="k">as</span> <span class="n">container</span><span class="p">:</span>
+            <span class="n">input_</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_selectors</span><span class="p">,</span> <span class="n">inside</span><span class="o">=</span><span class="n">container</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Action</span><span class="p">):</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="n">input_</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">method</span><span class="p">)(</span><span class="o">*</span><span class="n">value</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">value</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">input_</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="n">input_</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CheckboxElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.CheckboxElement">[docs]</a><span class="k">class</span> <span class="nc">CheckboxElement</span><span class="p">(</span>
+    <span class="n">Element</span><span class="p">,</span>
+    <span class="n">post_processing</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"checked"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"true"</span><span class="p">],</span>
+<span class="p">):</span>
+    <span class="sd">"""Get the status of a checkbox element directly as a boolan. Setting a</span>
+<span class="sd">    boolean value to a checkbox element will directly change the value of</span>
+<span class="sd">    the DOM element.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">area</span><span class="o">.</span><span class="n">switch_container</span><span class="p">()</span> <span class="k">as</span> <span class="n">container</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"The value </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> is not a boolean and so cannot be "</span>
+                    <span class="s2">"assigned to a checkox element."</span>
+                <span class="p">)</span>
+            <span class="n">element</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_selectors</span><span class="p">,</span> <span class="n">inside</span><span class="o">=</span><span class="n">container</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"checked"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"true"</span><span class="p">)</span> <span class="o">!=</span> <span class="n">value</span><span class="p">:</span>
+                <span class="n">element</span><span class="o">.</span><span class="n">click</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="RadioButtonElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.RadioButtonElement">[docs]</a><span class="k">class</span> <span class="nc">RadioButtonElement</span><span class="p">(</span><span class="n">Element</span><span class="p">):</span>
+    <span class="sd">"""Mapper to a set of choices controlled by a radio element in the page.</span>
+<span class="sd">    Setting the value of the radio button element will directly update the</span>
+<span class="sd">    DOM element with the specified value.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">area_class</span><span class="p">):</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_from</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">area_class</span><span class="p">)</span>
+        <span class="n">right_element</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">element</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span>
+            <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"checked"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"true"</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">right_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span> <span class="k">if</span> <span class="n">right_element</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">area</span><span class="o">.</span><span class="n">switch_container</span><span class="p">()</span> <span class="k">as</span> <span class="n">container</span><span class="p">:</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_selectors</span><span class="p">,</span> <span class="n">inside</span><span class="o">=</span><span class="n">container</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">right_element</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">element</span>
+                <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span>
+                <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span> <span class="o">==</span> <span class="n">value</span>
+            <span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">right_element</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"The value </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> is not allowed for the radio button element."</span>
+                <span class="p">)</span>
+            <span class="n">right_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">click</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SelectElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.SelectElement">[docs]</a><span class="k">class</span> <span class="nc">SelectElement</span><span class="p">(</span><span class="n">Element</span><span class="p">):</span>
+    <span class="sd">"""A shortcut to get an instance of :py:class:`~selenium.webdriver.support.select.Select`</span>
+<span class="sd">    for a select element. See guide to work with ``Select`` element from</span>
+<span class="sd">    `official documentation &lt;https://www.selenium.dev/documentation/en/support_packages/working_with_select_elements/&gt;`_.  # pylint: disable=line-too-long</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">area_class</span><span class="p">):</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_from</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">area_class</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Select</span><span class="p">(</span><span class="n">element</span><span class="p">)</span></div>
+
+
+<span class="k">class</span> <span class="nc">PageObjectLoader</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">Loader</span><span class="p">):</span>  <span class="c1"># pylint: disable=too-many-ancestors</span>
+    <span class="sd">"""Loader used to build page from a YAML file. This loader automatically</span>
+<span class="sd">    registers all classes in the current module having a method ``_yaml_loader``.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">this_module</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">__package__</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span><span class="p">]))</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">__all__</span><span class="p">:</span>
+            <span class="n">class_</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">this_module</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">class_</span><span class="p">,</span> <span class="s2">"_yaml_loader"</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_constructor</span><span class="p">(</span><span class="s2">"!</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">class_</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">class_</span><span class="o">.</span><span class="n">_yaml_loader</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">IgnorePageObjectLoader</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">Loader</span><span class="p">):</span>  <span class="c1"># pylint: disable=too-many-ancestors</span>
+    <span class="sd">"""Loader used to build page from a YAML file. This loader automatically</span>
+<span class="sd">    registers all classes in the current module having a method ``_yaml_loader``.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="nf">ignore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loader</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Loader</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sd">"""Prevent loading a YAML file with special classes when a tag is</span>
+<span class="sd">        specified. This is useful when you want to a Manen YAML page without</span>
+<span class="sd">        loading the element but only a regular Python object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            loader (yaml.Loader): instance of YAML Loader which describe how to</span>
+<span class="sd">                build an element.</span>
+<span class="sd">            node (yaml.Node): node to construct</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: Raised if the special tag is set on something different</span>
+<span class="sd">                from a SequenceNode or a MappingNode</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Any: Python object as it should be loaded with a regular YAML</span>
+<span class="sd">                Loader</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">SequenceNode</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">"selectors"</span><span class="p">:</span> <span class="n">loader</span><span class="o">.</span><span class="n">construct_sequence</span><span class="p">(</span><span class="n">node</span><span class="p">)}</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">MappingNode</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">loader</span><span class="o">.</span><span class="n">construct_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">ScalarNode</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">loader</span><span class="o">.</span><span class="n">construct_scalar</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unexpected node type encoutered while loading node `</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">`"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">this_module</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">__package__</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span><span class="p">]))</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">__all__</span><span class="p">:</span>
+            <span class="n">class_</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">this_module</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">class_</span><span class="p">,</span> <span class="s2">"_yaml_loader"</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_constructor</span><span class="p">(</span><span class="s2">"!</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">class_</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">load_selector_config</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">to_element</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">"""Load the Manen YAML page from a specified path. You can choose whether</span>
+<span class="sd">    or not the element of a Manen page should return Manen elements or just the</span>
+<span class="sd">    a regular Python object.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path (str): filepath of the Manen YAML page</span>
+<span class="sd">        to_element (bool, optional): whether or not to return Manen elements if</span>
+<span class="sd">            custom tags are specified in the YAML. Defaults to False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dict[str, Any]: Manen page loaded a Python mapping</span>
+<span class="sd">    """</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="n">file</span><span class="p">,</span> <span class="n">PageObjectLoader</span> <span class="k">if</span> <span class="n">to_element</span> <span class="k">else</span> <span class="n">IgnorePageObjectLoader</span>
+        <span class="p">)</span>
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2022, kodaho |
+          Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    </body>
+</html>

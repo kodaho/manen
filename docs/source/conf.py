@@ -63,9 +63,9 @@ html_theme = "furo"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
-html_logo = "_static/manen_logo.png"
-html_favicon = "_static/favicon.png"
+html_static_path = ["static"]
+html_logo = "static/manen_logo.png"
+html_favicon = "static/favicon.png"
 html_title = "manen"
 html_theme_options = {
     "navigation_with_keys": True,

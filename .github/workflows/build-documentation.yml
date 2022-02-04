@@ -24,6 +24,14 @@ jobs:
         run: |
           cd ./docs
           make html
+      - name: Get version
+        run: |
+          python -c "import manen;print(manen.__version__)" > manen_version.txt
+      - name: Upload package version info
+        uses: actions/upload-artifact@v2
+        with:
+          name: version
+          path: manen_version.txt
       - name: Upload distributions artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -43,10 +51,15 @@ jobs:
         with:
           name: documentation_html
           path: docs/
+      - name: Download package version
+        uses: actions/download-artifact@v2
+        with:
+          name: version
+          path: manen_version.txt
       - name: Deploying documentation
         run: |
           git config user.name ${{ github.repository_owner }}
           git config user.email "23268819+kodaho@users.noreply.github.com"
           git add docs/*
-          git commit -m "📚 Built documentation"
+          git commit -m "📚 Built documentation (v$(cat manen_version.txt) - $(echo "${{ github.sha }}" | cut -c1-7))"
           git push origin gh-pages

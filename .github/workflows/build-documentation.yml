@@ -36,6 +36,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+        with:
+          ref: gh-pages
       - name: Download built documentation
         uses: actions/download-artifact@v2
         with:
@@ -43,5 +45,6 @@ jobs:
           path: docs/
       - name: Deploying documentation
         run: |
-          echo "Deploying documentation"
-          tree -L 3
+          git add docs/*
+          git commit -m "📚 Built documentation"
+          git push origin gh-pages

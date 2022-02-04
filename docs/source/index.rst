@@ -7,8 +7,11 @@ Welcome to manen's documentation!
 ---------------------------------
 
 .. image:: https://img.shields.io/badge/python-%3E=3.6-informational?style=for-the-badge&logo=python
+   :alt: Python Version
 .. image:: https://img.shields.io/pypi/v/manen?logo=pypi&style=for-the-badge
+   :alt: Package Version
 .. image:: https://img.shields.io/badge/status-in%20development-yellow?style=for-the-badge
+   :alt: Status
 
 
 :py:mod:`manen` is a package built to extend Selenium user experience.

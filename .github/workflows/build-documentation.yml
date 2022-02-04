@@ -26,12 +26,12 @@ jobs:
           make html
       - name: Get version
         run: |
-          python -c "import manen;print(manen.__version__)" > manen_version.txt
+          mkdir version/ && python -c "import manen;print(manen.__version__)" > version/manen_version.txt
       - name: Upload package version info
         uses: actions/upload-artifact@v2
         with:
           name: version
-          path: manen_version.txt
+          path: version
       - name: Upload distributions artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -55,11 +55,15 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: version
-          path: manen_version.txt
-      - name: Deploying documentation
+          path: version
+      - name: Test
         run: |
-          git config user.name ${{ github.repository_owner }}
-          git config user.email "23268819+kodaho@users.noreply.github.com"
-          git add docs/*
-          git commit -m "📚 Built documentation (v$(cat manen_version.txt) - $(echo "${{ github.sha }}" | cut -c1-7))"
-          git push origin gh-pages
+          tree -L 3
+          echo "📚 Built documentation (v$(cat version/manen_version.txt) - $(echo "${{ github.sha }}" | cut -c1-7))"
+      # - name: Deploying documentation
+      #   run: |
+      #     git config user.name ${{ github.repository_owner }}
+      #     git config user.email "23268819+kodaho@users.noreply.github.com"
+      #     git add docs/*
+      #     git commit -m "📚 Built documentation (v$(cat version/manen_version.txt) - $(echo "${{ github.sha }}" | cut -c1-7))"
+      #     git push origin gh-pages

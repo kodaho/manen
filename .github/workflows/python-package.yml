@@ -1,7 +1,4 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
-
-name: Python package
+name: Python Package
 
 on:
   push:
@@ -62,7 +59,8 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v2
       - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
@@ -86,6 +84,7 @@ jobs:
   deploy-package:
     needs: build-package
     runs-on: ubuntu-latest
+    if: github.repository == 'refs/heads/main'
     steps:
       - name: Download distributions
         uses: actions/download-artifact@v2
@@ -95,42 +94,4 @@ jobs:
       - name: Upload package to Pypi
         run: |
           echo "Uploading to Pypi"
-          ls -lah
-
-  build-documentation:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.8
-      - name: Install dependencies
-        run: |
-          sudo apt install pandoc
-          python -m pip install --upgrade pip
-          pip install ".[doc]"
-      - name: Build documentation
-        run: |
-          cd ./docs
-          make html
-      - name: Upload distributions artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: documentation_html
-          path: docs/build/html/
-
-  deploy-documentation:
-    needs: build-documentation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download distributions
-        uses: actions/download-artifact@v2
-        with:
-          name: documentation_html
-          path: html_docs/
-      - name: Deploying documentation
-        run: |
-          echo "Uploading documentation"
           ls -lah

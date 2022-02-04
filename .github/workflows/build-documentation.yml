@@ -1,0 +1,47 @@
+name: Build documentation
+
+on:
+  push:
+    branches:
+      - main
+      - dev/ci-workflows
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          sudo apt install pandoc
+          python -m pip install --upgrade pip
+          pip install ".[doc]"
+      - name: Build documentation
+        run: |
+          cd ./docs
+          make html
+      - name: Upload distributions artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: documentation_html
+          path: docs/build/html/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Download built documentation
+        uses: actions/download-artifact@v2
+        with:
+          name: documentation_html
+          path: docs/
+      - name: Deploying documentation
+        run: |
+          echo "Deploying documentation"
+          tree -L 3

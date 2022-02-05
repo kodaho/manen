@@ -121,10 +121,10 @@ In [7]: from manen.page_object_model import Action
 In [8]: page.query = Action("submit")
 ```
 
-![PyPI home page](./docs/source/user_guide/screenshot_pypi_search_results.png)
-
 Submitting the form will refer to a page with the results of our query. Let's use the class
 `SearchResultPage` to retrieve the results.
+
+![PyPI home page](./docs/source/user_guide/screenshot_pypi_search_results.png)
 
 ```python
 In [9]: page = SearchResultPage(browser)

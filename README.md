@@ -152,3 +152,16 @@ Last step is to close the browser to avoid any remaining running application onc
 ```python
 In [13]: browser.quit()
 ```
+
+
+# 🦾 Going further
+
+The best way to have full knowledge of the package is to read
+[the documentation of the project](https://kodaho.github.io/manen/)!
+
+If you want to have the exhaustive list of improvements of the package, check the
+[Changelog](https://kodaho.github.io/manen/changelog.html) page.
+
+Looking to contribute to fix or add new features? Just read
+[this page](https://kodaho.github.io/manen/contributing.html),
+fork the official repository and start doing the modifications you want.

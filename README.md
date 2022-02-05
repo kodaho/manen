@@ -17,7 +17,11 @@
 ----
 
 <p align="center">
-<a href="https://pypi.org/project/manen">PyPI package</a> ・ <a href="https://kodaho.github.io/manen/">Documentation</a> ・ <a href="https://github.com/kodaho/manen/issues">Issue tracking</a>
+  <a href="https://pypi.org/project/manen" target="_blank">PyPI package</a>
+  ・
+  <a href="https://kodaho.github.io/manen/" target="_blank">Documentation</a>
+  ・
+  <a href="https://github.com/kodaho/manen/issues" target="_blank">Issue tracking</a>
 </p>
 
 <p align="center">🚧 </p>

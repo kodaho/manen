@@ -129,11 +129,10 @@ class WebArea:
 
     Example::
 
-        class Area(WebArea):
-            body = Element("css:body")
-            first_div = Element("css:div")
-            links = Elements("css:a")
-
+        >>> class Area(WebArea):
+        ...    body = Element("css:body")
+        ...    first_div = Element("css:div")
+        ...    links = Elements("css:a")
         >>> area = Area(browser)
         >>> area.body
         <selenium.webdriver.remote.webelement.WebElement id="abcdef-1234">
@@ -349,11 +348,10 @@ class Page(WebArea):
 
     Example::
 
-        class QueryPage(Page):
-            main_title = TextElement("h1")
-            search = InputElement("input[name='query']")
-            button_validate = Element("button#validate")
-
+        >>> class QueryPage(Page):
+        ...     main_title = TextElement("h1")
+        ...     search = InputElement("input[name='query']")
+        ...     button_validate = Element("button#validate")
         >>> page = QueryPage(browser)
         >>> page.search = "python manen"
         >>> button_validate.click()

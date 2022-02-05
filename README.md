@@ -154,7 +154,7 @@ In [13]: browser.quit()
 ```
 
 
-# 🦾 Going further
+## 🦾 Going further
 
 The best way to have full knowledge of the package is to read
 [the documentation of the project](https://kodaho.github.io/manen/)!

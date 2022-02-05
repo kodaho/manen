@@ -30,4 +30,4 @@ The package can then be installed from the local folder:
     $ pip install manen/
 
 If you want to install the package for development purpose, you can check the
-`Contributing </contributing.html>`_ page for further instructions.
+:ref:`Contributing` page for further instructions.

@@ -38,6 +38,7 @@ extensions = [
     "sphinx_copybutton",
     "sphinx_inline_tabs",
     "sphinx.ext.autodoc",
+    "sphinx.ext.autosectionlabel",
     "sphinx.ext.intersphinx",
     "sphinx.ext.napoleon",
     "sphinx.ext.todo",

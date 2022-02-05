@@ -57,5 +57,4 @@ as major version until it is ready for the first stable release.
 No roadmap because it is still a "side project" but you can follow the project through this
 documentation and Github's issues.
 
-See `Contributing </contributing.html>`_ if you want to participate to this
-project.
+See :ref:`Contributing` if you want to participate to this project.

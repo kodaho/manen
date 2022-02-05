@@ -22,8 +22,6 @@ Among the core features, you can find:
 - some helpers to manage resources usually required by Selenium
 - a function to easily find and isolate DOM elements inside a page
 
-More details in `About the project > Why such package? </about.html#why-such-package>`_ .
-
 This package will allow you to write more concise, flexible and powerful code compared to
 what you could do by using only Selenium. For example, here is a comparison of the same
 code with and without ``manen``:
@@ -76,6 +74,9 @@ code with and without ``manen``:
 
 Besides being more concise, the version using ``manen`` is also more verbose, meaning
 that it can ease the comprehension of your source code.
+
+You can find a deeper explanation that motivated the development of ``manen`` in the
+section :ref:`Why such package?`.
 
 Table of contents
 =================

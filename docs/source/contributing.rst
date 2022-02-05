@@ -16,14 +16,14 @@ use Pipenv to recreate the environment with the command
 
 .. code-block:: bash
 
-    pipenv sync
+    $ pipenv sync
 
 Note that using Pipenv is not required. You can reproduce the development environment
 by re-installing the same package specified in the setup file of the package
 
 .. code-block:: bash
 
-    pip install -e ".[doc,test,lint]"
+    $ pip install -e ".[doc,test,lint]"
 
 This will install ``manen`` with extra dependencies for development workflows, described
 in the next section.
@@ -52,13 +52,14 @@ Documentation
 
         .. code-block:: bash
 
-            cd docs && make html
+            $ cd docs && make html
 
         **Build the documentation at any modifications**
 
         .. code-block:: bash
 
-            sphinx-autobuild docs/source docs/build/html --watch manen/
+           $ pip install sphinx-autobuild
+           $ sphinx-autobuild docs/source docs/build/html --watch manen/
 
 
 Testing
@@ -73,7 +74,7 @@ Testing
 
         .. code-block:: bash
 
-            pytest
+           $ pytest
 
 
 Linting
@@ -88,10 +89,10 @@ Linting
 
         .. code-block:: bash
 
-            isort --check-only manen/
+            $ isort --check-only manen/
 
         **Linting all the files**
 
         .. code-block:: bash
 
-            pylint -E --rcfile=./.pylintrc ./manen/
+            $ pylint -E --rcfile=./.pylintrc ./manen/

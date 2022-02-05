@@ -30,53 +30,49 @@ code with and without ``manen``:
 
 .. tab:: With manen
 
-   .. code-block:: python
+   .. code-block:: ipython
 
-      from manen import page_object_model as pom
+      In [1]: from manen import page_object_model as pom
+         ...:
+         ...: class BlogPage(pom.Page):
+         ...:     class Article(pom.Regions):
+         ...:         title = pom.TextElement("h1")
+         ...:         n_likes = pom.IntegerElement("span.n_likes")
+         ...:         tags = pom.TextElements("span.tag", default=[])
+         ...:         updated_at = pom.DateElement("p.date")
+         ...:
+         ...:     articles = Article("article", wait=3)
+         ...:
+         ...: page = BlogPage(driver)
+         ...: article = page.articles[0]
+         ...: print(article.title, article.n_likes, article.tags, article.updated_at)
 
-      class BlogPage(pom.Page):
-         class Article(pom.Regions):
-            title = pom.TextElement('h1')
-            n_likes = pom.IntegerElement('span.n_likes')
-            tags = pom.TextElements('span.tag', default=[])
-            updated_at = pom.DateElement('p.date')
-
-         articles = Article('article', wait=3)
-
-      page = BlogPage(driver)
-      article = page.articles[0]
-      print(article.title, article.n_likes, article.tags, article.updated_at)
-      # ('manen, a new tool around Selenium',
-      #  100,
-      #  [], # Because no tags were found
-      #  datetime.date(2021, 1, 1))
+      ('manen, a new tool around Selenium', 100, [], datetime.date(2021, 1, 1))
 
 .. tab:: Without manen
 
-   .. code-block:: python
+   .. code-block:: ipython
 
-      from dateparser import dateparser
-      from selenium.common.exceptions import NoSuchElementException
-      from selenium.webdriver.common.by import By
-      from selenium.webdriver.support import expected_conditions as EC
-      from selenium.webdriver.support.ui import WebDriverWait
+      In [1]: from dateparser import dateparser
+         ...: from selenium.common.exceptions import NoSuchElementException
+         ...: from selenium.webdriver.common.by import By
+         ...: from selenium.webdriver.support import expected_conditions as EC
+         ...: from selenium.webdriver.support.ui import WebDriverWait
+         ...:
+         ...: articles = WebDriverWait(driver, 3).until(
+         ...:     EC.presence_of_elements_located((By.CSS, "article"))
+         ...: )
+         ...: title = articles[0].find_element_by_css("h1").text
+         ...: n_likes = int(articles[0].find_element_by_css("span.n_likes").text)
+         ...: try:
+         ...:     tags = articles[0].find_elements_by_css("span.tags")
+         ...: except NoSuchElementException:
+         ...:     tags = []
+         ...: updated_at = dateparser(articles[0].find_element_by_css("p.date").text)
+         ...:
+         ...: print(title, n_likes, tags, updated_at)
 
-      articles = WebDriverWait(driver, 3).until(
-         EC.presence_of_elements_located((By.CSS, "article"))
-      )
-      title = articles[0].find_element_by_css('h1').text
-      n_likes = int(articles[0].find_element_by_css('span.n_likes').text)
-      try:
-         tags = articles[0].find_elements_by_css('span.tags')
-      except NoSuchElementException:
-         tags = []
-      updated_at = dateparser(articles[0].find_element_by_css('p.date').text)
-
-      print(title, n_likes, tags, updated_at)
-      # ('manen, a new tool around Selenium',
-      #  100,
-      #  [], # Because no tags were found
-      #  datetime.date(2021, 1, 1))
+      ('manen, a new tool around Selenium', 100, [], datetime.date(2021, 1, 1))
 
 Besides being more concise, the version using ``manen`` is also more verbose, meaning
 that it can ease the comprehension of your source code.

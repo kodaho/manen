@@ -424,13 +424,12 @@ class Region(DomAccessor):
 
     Example::
 
-        class LoginPage(Page):
-            class FormRegion(Region):
-                email = InputElement("input#email")
-                password = InputElement("input#password")
-
-            form_region = FormRegion("div#form-container")
-
+        >>> from manen.page_object_model import Page, Region, InputElement, Action
+        >>> class LoginPage(Page):
+        ...     class FormRegion(Region):
+        ...         email = InputElement("input#email")
+        ...         password = InputElement("input#password")
+        ...     form_region = FormRegion("div#form-container")
         >>> page = LoginPage(browser)
         >>> page.form_region.email = "hello@manen.com"
         >>> page.form_region.password = "strong_password"
@@ -600,9 +599,10 @@ class InputElement(Element, post_processing=[lambda x: x.get_attribute("value")]
 
     Example::
 
-        class LoginPage(Page):
-            email = InputElement("input[type='email']")
-            password = InputElement("input[type='password']")
+        >>> from manen.page_object_model import Page, InputElement
+        >>> class LoginPage(Page):
+        ...     email = InputElement("input[type='email']")
+        ...     password = InputElement("input[type='password']")
 
         >>> from manen.page_object_model import Action
         >>> login_page = LoginPage(browser)

@@ -43,9 +43,9 @@ code with and without ``manen``:
          ...:
          ...: page = BlogPage(driver)
          ...: article = page.articles[0]
-         ...: print(article.title, article.n_likes, article.tags, article.updated_at)
 
-      ('manen, a new tool around Selenium', 100, [], datetime.date(2021, 1, 1))
+      In [2]: article.title, article.n_likes, article.tags, article.updated_at
+      Out[2]: ('manen, a new tool around Selenium', 100, [], datetime.date(2021, 1, 1))
 
 .. tab:: Without manen
 
@@ -67,10 +67,9 @@ code with and without ``manen``:
          ...: except NoSuchElementException:
          ...:     tags = []
          ...: updated_at = dateparser(articles[0].find_element_by_css("p.date").text)
-         ...:
-         ...: print(title, n_likes, tags, updated_at)
 
-      ('manen, a new tool around Selenium', 100, [], datetime.date(2021, 1, 1))
+      In [2]: title, n_likes, tags, updated_at
+      Out[2]: ('manen, a new tool around Selenium', 100, [], datetime.date(2021, 1, 1))
 
 Besides being more concise, the version using ``manen`` is also more verbose, meaning
 that it can ease the comprehension of your source code.

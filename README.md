@@ -56,9 +56,29 @@ It will install the package as well as the associated CLI.
 
 ## 🚀 Getting started
 
+`manen` offers several features, that are mostly described in the User Guide of the documentation.
+We will describe a small minimal example of what can be done with it; the goal will be to use
+Selenium to explore the PyPI page of `manen` and extract some information from it.
+
+The first step is to create an instance of a Selenium `WebDriver` or Manen `WebBrowser` that will be
+used to browse the Internet.
 
 ```python
-In [1]: import manen.page_object_model as pom
+In [1]: from manen.browser import ChromeBrowser
+
+In [2]: browser = ChromeBrowser.initialize(proxy=None, headless=True)
+
+In [3]: browser.get("https://pypi.org")
+```
+
+![PyPI home page](./docs/source/user_guide/screenshot_pypi_home.png)
+
+We are now on the home page of PyPI. What we are going to do now is interact with the webpage
+using a manen `Page`. It will essentially use the package `manen.page_object_model`, that
+stores all the classes used to do the interface with each web element.
+
+```python
+In [4]: import manen.page_object_model as pom
    ...:
    ...:
    ...: class HomePage(pom.Page):
@@ -76,17 +96,18 @@ In [1]: import manen.page_object_model as pom
    ...:     results = ResultRegions("ul[aria-label='Search results'] li")
 ```
 
-```python
-In [2]: from manen.browser import ChromeBrowser
+The `Page` class is used to modelize a whole WebDriver page; all elements defined inside the class
+should modelize a given element on the page, identified with the selectors (XPath, CSS or else).
+For example, the class `TextElement` will extract the text from a HTML element, `LinkElement` will
+extrac the `href` attribute from an `a` tag. A lot of different classes exist, all of them in charge
+of a special extraction; they are defined and documented in the module `manen.page_object_model`.
 
-In [3]: browser = ChromeBrowser.initialize(proxy=None, headless=True)
-```
+The class `Region` is used to modelize a sub-part of a webpage. Each region can have its own inner
+elements. You can have as many levels as wanted.
 
-```python
-In [4]: browser.get("https://pypi.org")
-```
-
-![PyPI home page](./docs/source/user_guide/screenshot_pypi_home.png)
+For example, the class `HomePage` defines an `InputElement` that do the link with the search bar.
+To fill a value in this search bar, you can simply assign a value to the attribute `query` of
+the instance of an `HomePage` initialized with the browser.
 
 ```python
 In [5]: page = HomePage(browser)
@@ -97,7 +118,11 @@ In [7]: from manen.page_object_model import Action
 
 In [8]: page.query = Action("submit")
 ```
+
 ![PyPI home page](./docs/source/user_guide/screenshot_pypi_search_results.png)
+
+Submitting the form will refer to a page with the results of our query. Let's use the class
+`SearchResultPage` to retrieve the results.
 
 ```python
 In [9]: page = SearchResultPage(browser)
@@ -110,15 +135,18 @@ Out[11]: [<__main__.SearchResultPage.ResultRegions at 0x1058e97c0>]
 
 In [12]: print(
     ...:     f"Name: {page.results[0].name}",
-    ...:     f"Description: {page.results[0].description}",
+    ...:     f"Description: {page.results[0].description[:80]}...",
     ...:     f"Version: {page.results[0].version}",
+    ...:     f"Link: {page.results[0].link}",
     ...:     sep="\n",
     ...: )
 Name: manen
-Description: A package around `selenium` offering, among other features, an implementation of Page Object Model, an enhanced WebDriver and a `find` function to quickly retrieve elements.
+Description: A package around `selenium` offering, among other features, an implementation of...
 Version: 0.1.0
+Link: https://pypi.org/project/manen/
 ```
 
+Last step is to close the browser to avoid any remaining running application once we close Python.
 ```python
 In [13]: browser.quit()
 ```

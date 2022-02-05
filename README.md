@@ -16,6 +16,10 @@
 
 ----
 
+<p align="center">
+<a href="https://pypi.org/project/manen">PyPI package</a> ・ <a href="https://kodaho.github.io/manen/">Documentation</a> ・ <a href="https://github.com/kodaho/manen/issues">Issue tracking</a>
+</p>
+
 <p align="center">🚧 </p>
 
 ## 📥  Installation

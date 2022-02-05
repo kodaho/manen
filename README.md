@@ -56,8 +56,8 @@ It will install the package as well as the associated CLI.
 
 ## 🚀 Getting started
 
-`manen` offers several features, that are mostly described in the User Guide of the documentation.
-We will describe a small minimal example of what can be done with it; the goal will be to use
+`manen` offers several features described in the [User Guide](https://kodaho.github.io/manen/user_guide.html)
+of the documentation. We will give here a minimal example of what can be done with it; the goal will be to use
 Selenium to explore the PyPI page of `manen` and extract some information from it.
 
 The first step is to create an instance of a Selenium `WebDriver` or Manen `WebBrowser` that will be
@@ -74,7 +74,8 @@ In [3]: browser.get("https://pypi.org")
 ![PyPI home page](./docs/source/user_guide/screenshot_pypi_home.png)
 
 We are now on the home page of PyPI. What we are going to do now is interact with the webpage
-using a manen `Page`. It will essentially use the package `manen.page_object_model`, that
+using a manen `Page`. It will essentially use the package
+[`manen.page_object_model`](https://kodaho.github.io/manen/manen/manen.page_object_model.html), that
 stores all the classes used to do the interface with each web element.
 
 ```python
@@ -99,15 +100,16 @@ In [4]: import manen.page_object_model as pom
 The `Page` class is used to modelize a whole WebDriver page; all elements defined inside the class
 should modelize a given element on the page, identified with the selectors (XPath, CSS or else).
 For example, the class `TextElement` will extract the text from a HTML element, `LinkElement` will
-extrac the `href` attribute from an `a` tag. A lot of different classes exist, all of them in charge
-of a special extraction; they are defined and documented in the module `manen.page_object_model`.
+extract the `href` attribute from an `a` tag. A lot of different classes exist, all of them in charge
+of a special extraction; they are defined and documented in the module
+[`manen.page_object_model`](https://kodaho.github.io/manen/manen/manen.page_object_model.html).
 
 The class `Region` is used to modelize a sub-part of a webpage. Each region can have its own inner
-elements. You can have as many levels as wanted.
+elements. You can have as many imbricated levels as wanted.
 
 For example, the class `HomePage` defines an `InputElement` that do the link with the search bar.
 To fill a value in this search bar, you can simply assign a value to the attribute `query` of
-the instance of an `HomePage` initialized with the browser.
+the instance of an `HomePage`, initialized with `browser` as argument.
 
 ```python
 In [5]: page = HomePage(browser)

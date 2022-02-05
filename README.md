@@ -26,30 +26,17 @@
 
 <p align="center">🚧 </p>
 
+
 ## 📥  Installation
+
+The package can be installed using the official package manager `pip`.
 
 ```bash
 pip install manen
 ```
 
-## 🚀 Getting started
+It will install the package as well as the associated CLI.
 
-```python
-import manen.page_object_model as pom
-
-class HomePage(pom.Page):
-    query = pom.InputElement("input[id='search']")
-
-class SearchResultPage(pom.Page):
-    class ResultRegions(pom.Regions):
-        name = pom.TextElement("h3 span.package-snippet__name")
-        version = pom.TextElement("h3 span.package-snippet__version")
-        link = pom.LinkElement("a.package-snippet")
-        description = pom.TextElement("p.package-snippet__description")
-
-    n_results = pom.IntegerElement("//*[@id='content']//form/div[1]/div[1]/p/strong")
-    results = ResultRegions("ul[aria-label='Search results'] li")
-```
 
 ## ✨ Features
 
@@ -65,3 +52,73 @@ class SearchResultPage(pom.Page):
   DOM structure only with Python objects.
 - a CLI is shipped with the initial release in order to perform operations such
   as downloading webdriver
+
+
+## 🚀 Getting started
+
+
+```python
+In [1]: import manen.page_object_model as pom
+   ...:
+   ...:
+   ...: class HomePage(pom.Page):
+   ...:     query = pom.InputElement("input[id='search']")
+   ...:
+   ...:
+   ...: class SearchResultPage(pom.Page):
+   ...:     class ResultRegions(pom.Regions):
+   ...:         name = pom.TextElement("h3 span.package-snippet__name")
+   ...:         version = pom.TextElement("h3 span.package-snippet__version")
+   ...:         link = pom.LinkElement("a.package-snippet")
+   ...:         description = pom.TextElement("p.package-snippet__description")
+   ...:
+   ...:     n_results = pom.IntegerElement("//*[@id='content']//form/div[1]/div[1]/p/strong")
+   ...:     results = ResultRegions("ul[aria-label='Search results'] li")
+```
+
+```python
+In [2]: from manen.browser import ChromeBrowser
+
+In [3]: browser = ChromeBrowser.initialize(proxy=None, headless=True)
+```
+
+```python
+In [4]: browser.get("https://pypi.org")
+```
+
+![PyPI home page](./docs/source/user_guide/screenshot_pypi_home.png)
+
+```python
+In [5]: page = HomePage(browser)
+
+In [6]: page.query = "manen"
+
+In [7]: from manen.page_object_model import Action
+
+In [8]: page.query = Action("submit")
+```
+![PyPI home page](./docs/source/user_guide/screenshot_pypi_search_results.png)
+
+```python
+In [9]: page = SearchResultPage(browser)
+
+In [10]: page.n_results
+Out[10]: 1
+
+In [11]: page.results
+Out[11]: [<__main__.SearchResultPage.ResultRegions at 0x1058e97c0>]
+
+In [12]: print(
+    ...:     f"Name: {page.results[0].name}",
+    ...:     f"Description: {page.results[0].description}",
+    ...:     f"Version: {page.results[0].version}",
+    ...:     sep="\n",
+    ...: )
+Name: manen
+Description: A package around `selenium` offering, among other features, an implementation of Page Object Model, an enhanced WebDriver and a `find` function to quickly retrieve elements.
+Version: 0.1.0
+```
+
+```python
+In [13]: browser.quit()
+```

@@ -4,38 +4,37 @@ About the project
 Why such package?
 -----------------
 
-Design to be be simple and speed up your development with Selenium.
-Hide complexity to work with Selenium.
+:py:mod:`manen` has been designed to keep every project using Selenium simple and to
+speed up the development of these projects. Working with :py:mod:`selenium` can quickly
+lead to non beautiful code because Selenium project often merge two functionalities:
 
-It was originally built to have faster development process when using Selenium. Working with
-Selenium often requires to have a source code having two functionalities:
+#. **Browser interactions**: This part of the code is in charge of defining how to
+   retrieve and interact with web elements. The retrieval is done with selectors
+   (XPath, CSS, tag name...) and once you got the elements, the next step can be to
+   extract some attributes from these elements (a text, an integer, a timestamp, an
+   image, a form...).
+#. **Workflow definition**: Clicking with some elements, filling a form, checking the
+   value displayed: the logic here will implement the different pipelines to solve your
+   specific use cases.
 
-- the first one is relative to the interactions with the browser, materialized with the
-  WebDriver. Here, you need to define how you will retrieve the elements in the DOM, manage
-  exceptions if an element is not found... You should specify selectors that can evolve
-  through times.
-- second element is your custom workflow: click here, retrieve this element, fill this form
+:py:mod:`manen` helps for the first functionality, the browser interactions. Each
+package have its own set of features:
 
-``manen`` = a solution for the first point (and only the first point)
-
-It can be used to design applications for testing, heavy process automatisation or legal scraping. Note that the goal behind `manen` is to have a production-ready tool, not to develop a package that can only be used locally.
-
-Among the features, you will find:
-
-- a helper tool to find and download all drivers needed by Selenium; no need to
-  find the right driver compatible with the installed browser, :py:mod:`manen`
+- :py:mod:`~manen.finder` defines a helper function allowing to easily find one or
+  several elements in a page
+- :py:mod:`~manen.resource` allows to download drivers needed by Selenium; no longer
+  need to find the right drivers compatible with the installed browser, ``manen``
   will do it for you!
-- a quite complete list of classes you can use to easily interact with the DOM
-  structure: it is basically an implementation of the
-  `page object model <https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/>`_)
+- :py:mod:`~manen.page_object_model` implements a quite complete list of classes
+  you can use to easily interact with the DOM structure: it is basically an
+  implementation of the `page object model <https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/>`_)
   described in official documentation of Selenium.
-- an enhanced WebDriver, build around the one defined by Selenium, allowing you
-  to perform some basic actions quite quickly.
+- :py:mod:`~manen.browser` defines new browser classes by enriching Selenium
+  WebDriver with a :py:mod:`~manen.browser.BrowserMixin`
 
-.. admonition:: Where does the name come from?
-   :class: note
-
-   An explanation about the name...
+At the end, ``manen`` can be used for various use cases: testing, heavy process
+automation or scraping. Note that the goal behind ``manen`` is to have a
+production-ready tool.
 
 
 Current status and roadmap

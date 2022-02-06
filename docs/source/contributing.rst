@@ -48,13 +48,17 @@ Documentation
     .. admonition:: Command
         :class: seealso
 
-        **Build the documentation in one shot**
+        **Build the documentation**
 
         .. code-block:: bash
 
             $ cd docs && make html
 
-        **Build the documentation at any modifications**
+        **Trigger a build of the documentation for any changes in the source**
+
+        `sphinx-autobuild <https://pypi.org/project/sphinx-autobuild/>`_ can be used to launch
+        a process that will watch any modification in the source files of the package or
+        documentation and re-build the HTML pages at each event.
 
         .. code-block:: bash
 

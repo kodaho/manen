@@ -17,7 +17,8 @@ Welcome to manen's documentation!
 :py:mod:`manen` is a package built to extend Selenium user experience.
 Among the core features, you can find:
 
-- an implementation of the `page object modelling <https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/>`_
+- an implementation of the `page object model <https://www.selenium.dev/documentation/en/
+  guidelines_and_recommendations/page_object_models/>`_
 - a class which completes :py:class:`~selenium.webdriver.remote.webdriver.WebDriver`
 - some helpers to manage resources usually required by Selenium
 - a function to easily find and isolate DOM elements inside a page

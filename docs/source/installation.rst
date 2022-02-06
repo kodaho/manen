@@ -16,8 +16,8 @@ available on PyPI.
 Cloning the source code
 -----------------------
 
-An alternative is to retrieve the source code from the `official repository <https://github.com/kodaho/manen>`_
-by cloning it:
+An alternative is to retrieve the source code from the `official repository
+<https://github.com/kodaho/manen>`_ by cloning it:
 
 .. code-block:: bash
 

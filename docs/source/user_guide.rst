@@ -10,6 +10,12 @@ Next one explains the plus of using a ``Browser`` compared to a
 :py:class:`~selenium.webdriver.remote.webdriver.WebDriver`. The last one details how to
 implement the page object model using ``manen``.
 
+.. admonition:: Associated notebooks
+   :class: seealso
+
+   All the user guides are available on `Github <https://github.com/kodaho/manen/tree/
+   doc-improvements/docs/source/user_guide>`_ as notebooks.
+
 .. toctree::
    :maxdepth: 4
 

@@ -6,6 +6,7 @@ CLI for :py:mod:`manen`.
 """
 
 import argparse
+from typing import List
 
 from questionary import Choice, prompt
 
@@ -18,6 +19,7 @@ from .resource.chrome import driver as chromedriver
 
 
 def get_args():
+    """Get arguments from the command line."""
     parser = argparse.ArgumentParser(prog="manen")
     choices = ["download"]
     parser.add_argument(dest="command", choices=choices)
@@ -25,6 +27,9 @@ def get_args():
 
 
 def download_workflow():
+    """Build the pipeline of successive questions used to identify the drivers
+    to be downloaded.
+    """
     chrome_version = chrome_app.installed_version()
     brave_version = brave_app.installed_version()
 
@@ -74,19 +79,32 @@ def download_workflow():
     ]
 
 
-def download(os, browser, versions):
+def download(platform: str, browser: str, versions: List[str]):
+    """Download the drivers based on the information provided in questionary pipeline.
+
+    Args:
+        os (str): platform on which the drivers will run (1st answer in CLI workflow)
+        browser (str): browser associated to the drivers (2nd anwser in CLI workflow)
+        versions (List[str]): versions to be downloaded (3rd answer in CLI workflow)
+
+    Raises:
+        NotImplementedError: if the browser is different from Chrome or Brave.
+    """
     if browser == "chrome":
         for version in versions:
             print(
-                f"📥 Dowloading version {version} for the {browser} browser on {os}..."
+                f"📥 Dowloading version {version} for the {browser} browser on {platform}..."
             )
-            driver_file = chromedriver.download(version=version, platform_system=os)
+            driver_file = chromedriver.download(
+                version=version, platform_system=platform
+            )
             print(f"✅ Driver file available at {driver_file}")
     else:
         raise NotImplementedError
 
 
 def main():
+    """Main function run by the CLI."""
     print(" 🌔 manen CLI\n")
     args = get_args()
     if args.command == "download":

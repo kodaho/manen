@@ -12,6 +12,7 @@
 
 <p align="center">
   <i><b>A package around <a href="https://pypi.org/project/selenium/"><code>selenium</code></a> to easily construct Python objects which reflect the DOM of any webpages.</b></i>
+  <i>Delivered with other features like an enhanced WebDriver and a resource manager.</i>
 </p>
 
 ----
@@ -24,8 +25,16 @@
   <a href="https://github.com/kodaho/manen/issues">Issue tracking</a>
 </p>
 
-<p align="center">🚧 </p>
+:py:mod:`manen` is a package built to extend Selenium user experience.
+Among the core features, you can find:
 
+- an implementation of the [page object model](https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/)
+- a class which completes `selenium.webdriver.remote.webdriver.WebDriver`
+- some helpers to manage resources usually required by Selenium
+- a function to easily find and isolate DOM elements inside a page
+
+This package will allow you to write more concise, flexible and powerful code compared to
+what you could do by using only Selenium.
 
 ## 📥  Installation
 

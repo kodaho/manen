@@ -28,7 +28,7 @@ __all__ = (
 )
 
 
-class BrowserMixin(WebDriverProtocol):
+class BrowserMixin(WebDriverProtocol):  # type: ignore
     """Mixin to enrich :py:class:`selenium.webdriver.remote.webdriver.WebDriver`
     with a set of features intended to ease the way to work with such an
     instance.

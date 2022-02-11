@@ -35,9 +35,10 @@ release = __version__
 # ones.
 extensions = [
     "nbsphinx",
-    # "sphinx_copybutton",
+    "sphinx_copybutton",
     "sphinx_inline_tabs",
     "sphinx.ext.autodoc",
+    "sphinx.ext.autosectionlabel",
     "sphinx.ext.intersphinx",
     "sphinx.ext.napoleon",
     "sphinx.ext.todo",
@@ -74,6 +75,9 @@ html_theme_options = {
 pygments_dark_style = "material"
 
 todo_include_todos = True
+
+copybutton_prompt_text = r">>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "
+copybutton_prompt_is_regexp = True
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),

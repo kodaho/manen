@@ -1,22 +1,25 @@
 Changelog
 =========
 
-Unreleased
-----------
+[0.1.1] - 2022-02-12
+--------------------
 
 **Mainly documentation improvements**
 
 Changed
 ^^^^^^^
 
-- Complete README page.
+- Make documentation publicly available under
+  `kodaho.github.io/manen <https://kodaho.github.io/manen/>`_.
+- Complete `README.md` page.
 - Add the section `About the project` in the documentation (moved from home page).
-- Improve several pages of the documentation.
+- Complete user guides.
+- Rewording and reformatting of several sections.
 
 [0.1.0] - 2022-01-31
 --------------------
 
-**First release of** :py:mod:`manen`
+**First release of the package**
 
 Added
 ^^^^^
@@ -30,8 +33,8 @@ Added
 - :py:mod:`~manen.browser` defined :py:class:`~manen.browser.ChromeBrowser`
   and :py:class:`~manen.browser.BraveBrowser`, an enhanced Selenium WebDriver.
 - :py:mod:`~manen.page_object_model` is the implementation of `page object
-  modelling described in Selenium documentation <https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/>`_.
-  Thanks to that, you can describe and interact with the DOM structure through
-  Python classes.
+  model <https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/>`_
+  described in Selenium documentation. Thanks to that, you can describe and
+  interact with the DOM structure through Python classes.
 - a :py:mod:`~manen.cli` is shipped with the initial release in order to download
   drivers files.

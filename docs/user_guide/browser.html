@@ -3,12 +3,13 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Separating how and what to select (WIP)" href="separating_selectors.html" /><link rel="prev" title="Managing resources" href="managing_resources.html" />
+<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Modelling DOM elements with Python class" href="modelling_dom.html" /><link rel="prev" title="Managing resources" href="managing_resources.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.01.02"/>
         <title>An enhanced WebDriver: manen’s Browser - manen</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -164,7 +165,7 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../user_guide.html">User Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="managing_resources.html">Managing resources</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -460,10 +461,26 @@ div.rendered_html tbody tr:hover {
 </style>
 <section id="An-enhanced-WebDriver:-manen’s-Browser">
 <h1>An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code><a class="headerlink" href="#An-enhanced-WebDriver:-manen’s-Browser" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p>new class that inherits from <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> which is quite comprehensive. Only here to add new methods that I think are missing.</p></li>
-<li><p>new methods are for instanciation, exploring some DOMs and some utils methods</p></li>
-</ul>
+<p>The module <code class="docutils literal notranslate"><span class="pre">manen.browser</span></code> defines several <code class="docutils literal notranslate"><span class="pre">Browser</span></code> classes such as <code class="docutils literal notranslate"><span class="pre">ChromeBrowser</span></code>. These classes inherits from <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> and are designed to only completes the original classes and not overwrite the base methods. These new methods are used for instanciation, DOMs exploration and some utils methods. This guide completes the documentation of these methods (that can be getting the help on the class <code class="docutils literal notranslate"><span class="pre">manen.browser.BrowserMixin</span></code>).</p>
+<p>Note that all the browsers are not currently supported. To see the list of browser classes, you can use the values returned by <code class="docutils literal notranslate"><span class="pre">manen.browser.__all__</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manen.browser</span> <span class="kn">import</span> <span class="n">__all__</span>
+<span class="n">__all__</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+('BraveBrowser', 'ChromeBrowser')
+</pre></div></div>
+</div>
 <section id="Instanciating-a-browser">
 <h2>Instanciating a browser<a class="headerlink" href="#Instanciating-a-browser" title="Permalink to this headline">¶</a></h2>
 <p>Each browser class implemented in <code class="docutils literal notranslate"><span class="pre">manen</span></code> provides the same additional methods compared to a WebDriver. One of the method is <code class="docutils literal notranslate"><span class="pre">initialize</span></code> which allows to instanciate a new browser with some common options:</p>
@@ -474,21 +491,285 @@ div.rendered_html tbody tr:hover {
 <li><p><code class="docutils literal notranslate"><span class="pre">window_size</span></code> which will the dimensions in pixel of the created browser window.</p></li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from manen.browser import ChromeBrowser
-browser = ChromeBrowser.initialize(proxy=None, headless=False)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manen.browser</span> <span class="kn">import</span> <span class="n">ChromeBrowser</span>
+<span class="n">browser</span> <span class="o">=</span> <span class="n">ChromeBrowser</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">proxy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headless</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1152</span><span class="p">,</span> <span class="mi">864</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
+<p>Given that a browser class just inherits from a <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code>, all the usual methods such as <code class="docutils literal notranslate"><span class="pre">get</span></code>, <code class="docutils literal notranslate"><span class="pre">save_screenshot</span></code>, <code class="docutils literal notranslate"><span class="pre">find_element(s)*</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://kodaho.github.io/manen"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
+<span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="n">browser</span><span class="o">.</span><span class="n">find_elements</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">CSS_SELECTOR</span><span class="p">,</span> <span class="s2">"div.sidebar-tree&gt;ul&gt;li.toctree-l1&gt;a"</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">elt</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s1">'innerText'</span><span class="p">)</span><span class="si">:</span><span class="s2">25</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">elt</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="s1">'href'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+About the project         -&gt; https://kodaho.github.io/manen/about.html
+Installation              -&gt; https://kodaho.github.io/manen/installation.html
+User Guide                -&gt; https://kodaho.github.io/manen/user_guide.html
+Going deeper into manen   -&gt; https://kodaho.github.io/manen/manen/manen.html
+Changelog                 -&gt; https://kodaho.github.io/manen/changelog.html
+Contributing              -&gt; https://kodaho.github.io/manen/contributing.html
+</pre></div></div>
+</div>
+</section>
+<section id="Exploring-the-DOM">
+<h2>Exploring the DOM<a class="headerlink" href="#Exploring-the-DOM" title="Permalink to this headline">¶</a></h2>
+<p>Retrieving web elements is usually done with the methods <code class="docutils literal notranslate"><span class="pre">find_element</span></code> or <code class="docutils literal notranslate"><span class="pre">find_elements</span></code>. Even if these methods fulfil several use cases, the retrieval of web elements sometimes requires to handle more cases; the function <code class="docutils literal notranslate"><span class="pre">manen.finder.find()</span></code> has been designed to answer this problematic and has been integrated to the browser class. Please refer to the documentation of this function to get the exhaustive list of what can be done with this function. The <code class="docutils literal notranslate"><span class="pre">find</span></code> method of a browser and
+the function in <code class="docutils literal notranslate"><span class="pre">manen.finder</span></code> have approximately the same signature: the only differences is that it will retrieve by default all the elements matching the given selectors.</p>
+<p>Let’s dig into the <code class="docutils literal notranslate"><span class="pre">find()</span></code> method, with an example by exploring the results matching the query “selenium” on PyPI.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://pypi.org/search/?q=selenium"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NAME_SELECTOR</span> <span class="o">=</span> <span class="s2">"ul[aria-label='Search results']&gt;li&gt;a&gt;h3&gt;span.package-snippet__name"</span>
+<span class="n">elements</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">NAME_SELECTOR</span><span class="p">)</span> <span class="c1"># equivalent to browser.find(NAME_SELECTOR, many=True)</span>
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s1">'innerText'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+selenium
+selenium-wire
+selenium-generator
+Selenium-Screenshot
+auto-selenium
+django-selenium
+selenium-robot
+selenium_wrapper
+datetime-selenium
+fasttest-selenium
+selenium-findtext
+selenium-pinterest
+selenium-elements
+nose-selenium
+ctreport-selenium
+masonite-selenium
+play-selenium
+amazon-selenium
+selenium-configurator
+selenium-firefox
+</pre></div></div>
+</div>
+<p>If you want to get only one hit, you can set the keyword argument <code class="docutils literal notranslate"><span class="pre">many</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"xpath://*[@id='content']//form/div[1]/div[1]/p"</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s1">'innerText'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+'1,436 projects for "selenium"'
+</pre></div></div>
+</div>
+<p>The function has been designed to be scalable, meaning that instead of searching inside the whole page, you can search inside a specific element.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"ul[aria-label='Search results'] li"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s search the name of the first package in the results.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"h3 span.package-snippet__name"</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inside</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="s1">'innerText'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+'selenium'
+</pre></div></div>
+</div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">inside</span></code> keyword argument is a list instead of a single element, it will return one result for each element in the list.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elements_name</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"h3 span.package-snippet__name"</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inside</span><span class="o">=</span><span class="n">results</span><span class="p">)</span>
+<span class="n">elements_name</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;selenium.webdriver.remote.webelement.WebElement (session="a49cbf2183c8851614afed4cc983838f", element="2031bbcb-bf43-47a4-afde-3e5020003bd6")&gt;,
+ &lt;selenium.webdriver.remote.webelement.WebElement (session="a49cbf2183c8851614afed4cc983838f", element="a2aa299d-6159-45d9-8b9c-fb026b517782")&gt;,
+ &lt;selenium.webdriver.remote.webelement.WebElement (session="a49cbf2183c8851614afed4cc983838f", element="a7686b0d-7494-450a-865e-8f2fca2a93c8")&gt;,
+ &lt;selenium.webdriver.remote.webelement.WebElement (session="a49cbf2183c8851614afed4cc983838f", element="394fab67-20fb-407b-8da2-2d5a0010d9e7")&gt;,
+ &lt;selenium.webdriver.remote.webelement.WebElement (session="a49cbf2183c8851614afed4cc983838f", element="ca69129b-bf8e-4854-a707-f05a3d9972b5")&gt;]
+</pre></div></div>
+</div>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">manen</span></code> will raise a <code class="docutils literal notranslate"><span class="pre">ElementNotFound</span></code> exception if the specified selectors match no elements in the area to inspect.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"css:fake-selector"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ElementNotFound</span>                           Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">/Users/kodjo/Documents/Projects/manen/docs/source/user_guide/browser.ipynb Cell 23'</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; &lt;a href='vscode-notebook-cell:/Users/kodjo/Documents/Projects/manen/docs/source/user_guide/browser.ipynb#ch0000037?line=0'&gt;1&lt;/a&gt;</span> browser.find("css:fake-selector")
+
+File <span class="ansi-green-fg">~/Documents/Projects/manen/manen/browser.py:172</span>, in <span class="ansi-cyan-fg">BrowserMixin.find</span><span class="ansi-blue-fg">(self, selector, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href='file:///~/Documents/Projects/manen/manen/browser.py?line=169'&gt;170&lt;/a&gt;</span> kwargs.setdefault("inside", self)
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href='file:///~/Documents/Projects/manen/manen/browser.py?line=170'&gt;171&lt;/a&gt;</span> kwargs.setdefault("many", True)
+<span class="ansi-green-fg">--&gt; &lt;a href='file:///~/Documents/Projects/manen/manen/browser.py?line=171'&gt;172&lt;/a&gt;</span> return find(selector, **kwargs)
+
+File <span class="ansi-green-fg">~/Documents/Projects/manen/manen/finder.py:237</span>, in <span class="ansi-cyan-fg">find</span><span class="ansi-blue-fg">(selector, wait, default, inside, many)</span>
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href='file:///~/Documents/Projects/manen/manen/finder.py?line=233'&gt;234&lt;/a&gt;</span>     return default
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href='file:///~/Documents/Projects/manen/manen/finder.py?line=235'&gt;236&lt;/a&gt;</span> driver = inside if isinstance(inside, WebDriver) else inside.parent
+<span class="ansi-green-fg">--&gt; &lt;a href='file:///~/Documents/Projects/manen/manen/finder.py?line=236'&gt;237&lt;/a&gt;</span> raise ElementNotFound(selectors=selectors, driver=driver)
+
+<span class="ansi-red-fg">ElementNotFound</span>: Unable to find inside document an element matching the selectors :
+&gt; css:fake-selector
+
+Context of the exception:
+- Title page: Search results · PyPI
+- URL: https://pypi.org/search/?q=selenium
+</pre></div></div>
+</div>
+<p>To avoid raising an error, you can specify a default value to be returned if any element is found.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'css:fake-selector'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Note that the browser has a method <code class="docutils literal notranslate"><span class="pre">lookup()</span></code> that is equivalent to the <code class="docutils literal notranslate"><span class="pre">find()</span></code> method, except that it will never raise an error; the default value for an unfound element is, by default, <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>By specifying the <code class="docutils literal notranslate"><span class="pre">wait</span></code> keyword argument, you can specify the number of seconds to wait until trying to locate the element(s).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'css:fake-selector'</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 13.8 ms, sys: 3.33 ms, total: 17.1 ms
+Wall time: 3.08 s
+</pre></div></div>
+</div>
+<p>Another use case supported by <code class="docutils literal notranslate"><span class="pre">manen</span></code> is trying several different selectors to locate an element. Just specify a list of selectors instead of just a selector. It will try all the selectors by order and return an element as soon as a selector hits a result.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">find</span><span class="p">([</span><span class="s1">'fake-link-selector'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">],</span> <span class="n">many</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="s1">'href'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+'https://pypi.org/search/?q=selenium#content'
+</pre></div></div>
+</div>
+<p>In order to help the development of your project, the browser has a method <code class="docutils literal notranslate"><span class="pre">highlight</span></code> that will draw a frame around each element matching the specified selectors.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">browser</span><span class="o">.</span><span class="n">highlight</span><span class="p">(</span><span class="n">NAME_SELECTOR</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">save_screenshot</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">'.png'</span><span class="p">)</span>
+    <span class="n">highlight_screenshot</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">'.png'</span><span class="p">)</span>
+<span class="n">highlight_screenshot</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/user_guide_browser_31_0.png" src="../_images/user_guide_browser_31_0.png"/>
+</div>
+</div>
+</section>
+<section id="Cookies-management">
+<h2>Cookies management<a class="headerlink" href="#Cookies-management" title="Permalink to this headline">¶</a></h2>
 <p>One of the feature offered by <code class="docutils literal notranslate"><span class="pre">manen</span></code>’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code> is an interface for cookies. With a <code class="docutils literal notranslate"><span class="pre">selenium.WebDriver</span></code>, you will have to use the methods <code class="docutils literal notranslate"><span class="pre">get_cookies</span></code>, <code class="docutils literal notranslate"><span class="pre">add_cookie</span></code> and <code class="docutils literal notranslate"><span class="pre">delete_all_cookies</span></code>. With a <code class="docutils literal notranslate"><span class="pre">Browser</span></code>, you can interact with cookies through the properties <code class="docutils literal notranslate"><span class="pre">cookies</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>browser.get("https://httpbin.org/cookies/set/test/manen")
-browser.cookies
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://httpbin.org/cookies/set/test/manen"</span><span class="p">)</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">cookies</span>
 </pre></div>
 </div>
 </div>
@@ -507,10 +788,10 @@ browser.cookies
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># browser.cookies = list_of_cookies_dict
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># browser.cookies = list_of_cookies_dict</span>
 </pre></div>
 </div>
 </div>
@@ -518,60 +799,19 @@ browser.cookies
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>del browser.cookies
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">browser</span><span class="o">.</span><span class="n">cookies</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">browser</span><span class="o">.</span><span class="n">get_cookies</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>browser.cookies
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-[]
-</pre></div></div>
-</div>
-</section>
-<section id="Exploring-the-DOM-(WIP)">
-<h2>Exploring the DOM (WIP)<a class="headerlink" href="#Exploring-the-DOM-(WIP)" title="Permalink to this headline">¶</a></h2>
-<section id="A-new-way-to-retrieve-elements">
-<h3>A new way to retrieve elements<a class="headerlink" href="#A-new-way-to-retrieve-elements" title="Permalink to this headline">¶</a></h3>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>browser.find
-</pre></div>
-</div>
-</div>
-</section>
-<section id="Modelling-a-page-with-Python-objects">
-<h3>Modelling a page with Python objects<a class="headerlink" href="#Modelling-a-page-with-Python-objects" title="Permalink to this headline">¶</a></h3>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>browser.quit()
-</pre></div>
-</div>
-</div>
-</section>
 </section>
 </section>
 
@@ -580,12 +820,12 @@ browser.cookies
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="separating_selectors.html">
+          <a class="next-page" href="modelling_dom.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Separating how and what to select (WIP)</div>
+                <div class="title">Modelling DOM elements with Python class</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -628,11 +868,8 @@ browser.cookies
             <ul>
 <li><a class="reference internal" href="#">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a><ul>
 <li><a class="reference internal" href="#Instanciating-a-browser">Instanciating a browser</a></li>
-<li><a class="reference internal" href="#Exploring-the-DOM-(WIP)">Exploring the DOM (WIP)</a><ul>
-<li><a class="reference internal" href="#A-new-way-to-retrieve-elements">A new way to retrieve elements</a></li>
-<li><a class="reference internal" href="#Modelling-a-page-with-Python-objects">Modelling a page with Python objects</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#Exploring-the-DOM">Exploring the DOM</a></li>
+<li><a class="reference internal" href="#Cookies-management">Cookies management</a></li>
 </ul>
 </li>
 </ul>
@@ -649,6 +886,8 @@ browser.cookies
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
     <script src="../_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>

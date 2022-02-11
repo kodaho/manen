@@ -3,12 +3,13 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="manen.cli" href="manen.cli.html" /><link rel="prev" title="Separating how and what to select (WIP)" href="../user_guide/separating_selectors.html" />
+<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="manen.cli" href="manen.cli.html" /><link rel="prev" title="Modelling DOM elements with Python class" href="../user_guide/modelling_dom.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.01.02"/>
         <title>Going deeper into manen - manen</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -164,7 +165,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../user_guide/managing_resources.html">Managing resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user_guide/separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -215,23 +216,23 @@
 <p><a class="reference internal" href="#module-manen" title="manen"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen</span></code></a> is a module to ease the interaction with Selenium. Its features
 are splitted into four (almost) independant modules:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="manen.resource.html#module-manen.resource" title="manen.resource"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.resource</span></code></a> : set of helpers to get the drivers needed by Selenium to work</p></li>
-<li><p><a class="reference internal" href="manen.finder.html#module-manen.finder" title="manen.finder"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.finder</span></code></a>: define a function <a class="reference internal" href="manen.finder.html#manen.finder.find" title="manen.finder.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">find()</span></code></a> in order to
-avoid calling the methods <code class="docutils literal notranslate"><span class="pre">find_element</span></code> or <code class="docutils literal notranslate"><span class="pre">find_elements</span></code> of a
-<a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webelement.WebElement" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Selenium</span> <span class="pre">WebElement</span></code></a></p></li>
-<li><p><a class="reference internal" href="manen.browser.html#module-manen.browser" title="manen.browser"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.browser</span></code></a>: a wrapper around
+<li><p><a class="reference internal" href="manen.resource.html#module-manen.resource" title="manen.resource"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code></a> : set of helpers to get the drivers needed by Selenium to work</p></li>
+<li><p><a class="reference internal" href="manen.finder.html#module-manen.finder" title="manen.finder"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finder</span></code></a>: define a function <a class="reference internal" href="manen.finder.html#manen.finder.find" title="manen.finder.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">find()</span></code></a> in order to
+avoid calling the methods <code class="docutils literal notranslate"><span class="pre">find_element_by_*</span></code> or <code class="docutils literal notranslate"><span class="pre">find_elements_by_*</span></code> of a Selenium
+<a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webelement.WebElement" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebElement</span></code></a></p></li>
+<li><p><a class="reference internal" href="manen.browser.html#module-manen.browser" title="manen.browser"><code class="xref py py-mod docutils literal notranslate"><span class="pre">browser</span></code></a>: a wrapper around
 <a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebDriver</span></code></a> to more easily create
-instance of web drivers. Only compatible with Chrome (for now).</p></li>
-<li><p><a class="reference internal" href="manen.page_object_model.html#module-manen.page_object_model" title="manen.page_object_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.page_object_model</span></code></a>: an implementation of the design pattern
-<a class="reference external" href="https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/">Page Objects Model</a>
+instance of web drivers. Only compatible with Chrome and Brave (for now).</p></li>
+<li><p><a class="reference internal" href="manen.page_object_model.html#module-manen.page_object_model" title="manen.page_object_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">page_object_model</span></code></a>: an implementation of the design pattern
+<a class="reference external" href="https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/">Page Object Models</a>
 in order to easily interact with the DOM of a webpage.</p></li>
 </ul>
-<p>Each module are built to be quite independant from each other. For example, you can
-use the module <a class="reference internal" href="manen.finder.html#module-manen.finder" title="manen.finder"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.finder</span></code></a> without <a class="reference internal" href="manen.browser.html#module-manen.browser" title="manen.browser"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.browser</span></code></a> or
-<a class="reference internal" href="manen.page_object_model.html#module-manen.page_object_model" title="manen.page_object_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.page_object_model</span></code></a> without <a class="reference internal" href="manen.browser.html#module-manen.browser" title="manen.browser"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.browser</span></code></a>.</p>
+<p>Each module is built to be quite independant from each other. For example, you can
+use the module <a class="reference internal" href="manen.finder.html#module-manen.finder" title="manen.finder"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finder</span></code></a> without <a class="reference internal" href="manen.browser.html#module-manen.browser" title="manen.browser"><code class="xref py py-mod docutils literal notranslate"><span class="pre">browser</span></code></a> or
+<a class="reference internal" href="manen.page_object_model.html#module-manen.page_object_model" title="manen.page_object_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">page_object_model</span></code></a> without <a class="reference internal" href="manen.browser.html#module-manen.browser" title="manen.browser"><code class="xref py py-mod docutils literal notranslate"><span class="pre">browser</span></code></a>.</p>
 <section id="api-documentation">
 <h2>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
-<p>Explore directly the code to discover all features proposed by <a class="reference internal" href="#module-manen" title="manen"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen</span></code></a></p>
+<p>Explore directly the code to discover all features proposed by <a class="reference internal" href="#module-manen" title="manen"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen</span></code></a>.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="manen.cli.html">manen.cli</a></li>
@@ -265,14 +266,14 @@ use the module <a class="reference internal" href="manen.finder.html#module-mane
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../user_guide/separating_selectors.html">
+          <a class="prev-page" href="../user_guide/modelling_dom.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Separating how and what to select (WIP)</div>
+                <div class="title">Modelling DOM elements with Python class</div>
                 
               </div>
             </a>
@@ -320,6 +321,8 @@ use the module <a class="reference internal" href="manen.finder.html#module-mane
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
     <script src="../_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

@@ -8,6 +8,7 @@
         <title>manen.browser - manen</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -163,7 +164,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../user_guide/managing_resources.html">Managing resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../user_guide/separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -240,7 +241,7 @@
 <span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">BrowserMixin</span><span class="p">(</span><span class="n">WebDriverProtocol</span><span class="p">):</span>
+<div class="viewcode-block" id="BrowserMixin"><a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.BrowserMixin">[docs]</a><span class="k">class</span> <span class="nc">BrowserMixin</span><span class="p">(</span><span class="n">WebDriverProtocol</span><span class="p">):</span>
     <span class="sd">"""Mixin to enrich :py:class:`selenium.webdriver.remote.webdriver.WebDriver`</span>
 <span class="sd">    with a set of features intended to ease the way to work with such an</span>
 <span class="sd">    instance.</span>
@@ -267,14 +268,14 @@
         <span class="sd">"""Easily delete current cookies inside the driver."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">delete_all_cookies</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">click_with_js</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">:</span> <span class="s2">"SeleniumElement"</span><span class="p">):</span>
+<div class="viewcode-block" id="BrowserMixin.click_with_js"><a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.BrowserMixin.click_with_js">[docs]</a>    <span class="k">def</span> <span class="nf">click_with_js</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">:</span> <span class="s2">"SeleniumElement"</span><span class="p">):</span>
         <span class="sd">"""Click on an element using a JavaScript script. Can be useful if you</span>
 <span class="sd">        want to click on an element outside the current frame.</span>
 <span class="sd">        """</span>
         <span class="n">js_script</span> <span class="o">=</span> <span class="s2">"""arguments[0].click()"""</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="n">js_script</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="n">js_script</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">scroll</span><span class="p">(</span>
+<div class="viewcode-block" id="BrowserMixin.scroll"><a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.BrowserMixin.scroll">[docs]</a>    <span class="k">def</span> <span class="nf">scroll</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">n_repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
         <span class="n">wait</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -316,9 +317,9 @@
 
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_repeat</span><span class="p">):</span>
             <span class="n">func</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">highlight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="BrowserMixin.highlight"><a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.BrowserMixin.highlight">[docs]</a>    <span class="k">def</span> <span class="nf">highlight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">"""Highlight an element in the current webpage by drawing a black frame</span>
 <span class="sd">        around this element. The element will be retrieved using the ``find``</span>
 <span class="sd">        method and then framed by updating the CSS properties of the retrieved</span>
@@ -336,7 +337,7 @@
             <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">elements</span><span class="p">]</span>
         <span class="n">highlight_script</span> <span class="o">=</span> <span class="s2">"arguments[</span><span class="si">%d</span><span class="s2">].style.border = '3px solid black';"</span>
         <span class="n">script</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">highlight_script</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">))])</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="o">*</span><span class="n">elements</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="o">*</span><span class="n">elements</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">current_platform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -360,7 +361,7 @@
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">browser_version</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver_version</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="BrowserMixin.find"><a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.BrowserMixin.find">[docs]</a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">"""This method is basically the same as :py:func:`~manen.finder.find`</span>
 <span class="sd">        but with the driver instance as default value for the argument</span>
 <span class="sd">        ``inside`` and True as default value for ``many`` argument.</span>
@@ -381,9 +382,9 @@
 <span class="sd">        """</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">"inside"</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">"many"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<div class="viewcode-block" id="BrowserMixin.lookup"><a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.BrowserMixin.lookup">[docs]</a>    <span class="k">def</span> <span class="nf">lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="sd">"""This method is exactly as the method ``find`` but it will always</span>
 <span class="sd">        return a default value if an element cannot be found (this defaul</span>
 <span class="sd">        value is by default `None`.</span>
@@ -399,7 +400,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Any: Outputs of :py:func:`~manen.finder.find`</span>
 <span class="sd">        """</span>
-        <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">inside</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">inside</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore</span></div></div>
 
 
 <div class="viewcode-block" id="ChromeBrowser"><a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.ChromeBrowser">[docs]</a><span class="k">class</span> <span class="nc">ChromeBrowser</span><span class="p">(</span><span class="n">BrowserMixin</span><span class="p">,</span> <span class="n">Chrome</span><span class="p">):</span>
@@ -490,6 +491,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

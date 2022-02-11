@@ -9,6 +9,7 @@
         <title>Installation - manen</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -164,7 +165,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/managing_resources.html">Managing resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -215,7 +216,7 @@
 <section id="regular-installation-with-pip">
 <h2>Regular installation with <code class="docutils literal notranslate"><span class="pre">pip</span></code><a class="headerlink" href="#regular-installation-with-pip" title="Permalink to this headline">¶</a></h2>
 <p>The package can be installed from the official Python package index using <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install manen
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install manen
 </pre></div>
 </div>
 <p>This command will install the <a class="reference external" href="https://pypi.org/project/manen/">latest version</a>
@@ -223,17 +224,16 @@ available on PyPI.</p>
 </section>
 <section id="cloning-the-source-code">
 <h2>Cloning the source code<a class="headerlink" href="#cloning-the-source-code" title="Permalink to this headline">¶</a></h2>
-<p>An alternative is to retrieve the source code from the <a class="reference external" href="https://github.com/kodaho/manen">official repository</a>
-by cloning it:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:kodaho/manen.git
+<p>An alternative is to retrieve the source code from the <a class="reference external" href="https://github.com/kodaho/manen">official repository</a> by cloning it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone git@github.com:kodaho/manen.git
 </pre></div>
 </div>
 <p>The package can then be installed from the local folder:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install manen/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install manen/
 </pre></div>
 </div>
 <p>If you want to install the package for development purpose, you can check the
-<a class="reference external" href="/contributing.html">Contributing</a> page for further instructions.</p>
+<a class="reference internal" href="contributing.html#contributing"><span class="std std-ref">Contributing</span></a> page for further instructions.</p>
 </section>
 </section>
 
@@ -307,6 +307,8 @@ by cloning it:</p>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
     <script src="_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

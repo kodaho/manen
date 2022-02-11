@@ -9,6 +9,7 @@
         <title>manen</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -164,7 +165,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/managing_resources.html">Managing resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -218,67 +219,63 @@
 <p><a class="reference internal" href="manen/manen.html#module-manen" title="manen"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen</span></code></a> is a package built to extend Selenium user experience.
 Among the core features, you can find:</p>
 <ul class="simple">
-<li><p>an implementation of the page object modelling</p></li>
+<li><p>an implementation of the <a class="reference external" href="https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/">page object model</a></p></li>
 <li><p>a class which completes <a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebDriver</span></code></a></p></li>
 <li><p>some helpers to manage resources usually required by Selenium</p></li>
 <li><p>a function to easily find and isolate DOM elements inside a page</p></li>
 </ul>
-<p>More details in <a class="reference external" href="/about.html#why-such-package">About the project &gt; Why such package?</a> .</p>
 <p>This package will allow you to write more concise, flexible and powerful code compared to
 what you could do by using only Selenium. For example, here is a comparison of the same
 code with and without <code class="docutils literal notranslate"><span class="pre">manen</span></code>:</p>
 <div class="tab-set docutils container">
 <input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"/><label class="tab-label" for="tab-set--0-input--1">With manen</label><div class="tab-content docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manen</span> <span class="kn">import</span> <span class="n">page_object_model</span> <span class="k">as</span> <span class="n">pom</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">manen</span> <span class="kn">import</span> <span class="n">page_object_model</span> <span class="k">as</span> <span class="n">pom</span>
+   <span class="o">...</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span> <span class="k">class</span> <span class="nc">BlogPage</span><span class="p">(</span><span class="n">pom</span><span class="o">.</span><span class="n">Page</span><span class="p">):</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="k">class</span> <span class="nc">Article</span><span class="p">(</span><span class="n">pom</span><span class="o">.</span><span class="n">Regions</span><span class="p">):</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="n">title</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">"h1"</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="n">n_likes</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">IntegerElement</span><span class="p">(</span><span class="s2">"span.n_likes"</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="n">tags</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElements</span><span class="p">(</span><span class="s2">"span.tag"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="n">updated_at</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">DateElement</span><span class="p">(</span><span class="s2">"p.date"</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="n">articles</span> <span class="o">=</span> <span class="n">Article</span><span class="p">(</span><span class="s2">"article"</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">page</span> <span class="o">=</span> <span class="n">BlogPage</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">article</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="k">class</span> <span class="nc">BlogPage</span><span class="p">(</span><span class="n">pom</span><span class="o">.</span><span class="n">Page</span><span class="p">):</span>
-   <span class="k">class</span> <span class="nc">Article</span><span class="p">(</span><span class="n">pom</span><span class="o">.</span><span class="n">Regions</span><span class="p">):</span>
-      <span class="n">title</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">)</span>
-      <span class="n">n_likes</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">IntegerElement</span><span class="p">(</span><span class="s1">'span.n_likes'</span><span class="p">)</span>
-      <span class="n">tags</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElements</span><span class="p">(</span><span class="s1">'span.tag'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
-      <span class="n">updated_at</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">DateElement</span><span class="p">(</span><span class="s1">'p.date'</span><span class="p">)</span>
-
-   <span class="n">articles</span> <span class="o">=</span> <span class="n">Article</span><span class="p">(</span><span class="s1">'article'</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="n">page</span> <span class="o">=</span> <span class="n">BlogPage</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
-<span class="n">article</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">article</span><span class="o">.</span><span class="n">n_likes</span><span class="p">,</span> <span class="n">article</span><span class="o">.</span><span class="n">tags</span><span class="p">,</span> <span class="n">article</span><span class="o">.</span><span class="n">updated_at</span><span class="p">)</span>
-<span class="c1"># ('manen, a new tool around Selenium',</span>
-<span class="c1">#  100,</span>
-<span class="c1">#  [], # Because no tags were found</span>
-<span class="c1">#  datetime.date(2021, 1, 1))</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">article</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">article</span><span class="o">.</span><span class="n">n_likes</span><span class="p">,</span> <span class="n">article</span><span class="o">.</span><span class="n">tags</span><span class="p">,</span> <span class="n">article</span><span class="o">.</span><span class="n">updated_at</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">(</span><span class="s1">'manen, a new tool around Selenium'</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="p">[],</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"/><label class="tab-label" for="tab-set--0-input--2">Without manen</label><div class="tab-content docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dateparser</span> <span class="kn">import</span> <span class="n">dateparser</span>
-<span class="kn">from</span> <span class="nn">selenium.common.exceptions</span> <span class="kn">import</span> <span class="n">NoSuchElementException</span>
-<span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
-<span class="kn">from</span> <span class="nn">selenium.webdriver.support</span> <span class="kn">import</span> <span class="n">expected_conditions</span> <span class="k">as</span> <span class="n">EC</span>
-<span class="kn">from</span> <span class="nn">selenium.webdriver.support.ui</span> <span class="kn">import</span> <span class="n">WebDriverWait</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">dateparser</span> <span class="kn">import</span> <span class="n">dateparser</span>
+   <span class="o">...</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">selenium.common.exceptions</span> <span class="kn">import</span> <span class="n">NoSuchElementException</span>
+   <span class="o">...</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
+   <span class="o">...</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">selenium.webdriver.support</span> <span class="kn">import</span> <span class="n">expected_conditions</span> <span class="k">as</span> <span class="n">EC</span>
+   <span class="o">...</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">selenium.webdriver.support.ui</span> <span class="kn">import</span> <span class="n">WebDriverWait</span>
+   <span class="o">...</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">articles</span> <span class="o">=</span> <span class="n">WebDriverWait</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">until</span><span class="p">(</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="n">EC</span><span class="o">.</span><span class="n">presence_of_elements_located</span><span class="p">((</span><span class="n">By</span><span class="o">.</span><span class="n">CSS</span><span class="p">,</span> <span class="s2">"article"</span><span class="p">))</span>
+   <span class="o">...</span><span class="p">:</span> <span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">title</span> <span class="o">=</span> <span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element_by_css</span><span class="p">(</span><span class="s2">"h1"</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">n_likes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element_by_css</span><span class="p">(</span><span class="s2">"span.n_likes"</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span> <span class="k">try</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="n">tags</span> <span class="o">=</span> <span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_elements_by_css</span><span class="p">(</span><span class="s2">"span.tags"</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span> <span class="k">except</span> <span class="n">NoSuchElementException</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">updated_at</span> <span class="o">=</span> <span class="n">dateparser</span><span class="p">(</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element_by_css</span><span class="p">(</span><span class="s2">"p.date"</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 
-<span class="n">articles</span> <span class="o">=</span> <span class="n">WebDriverWait</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">until</span><span class="p">(</span>
-   <span class="n">EC</span><span class="o">.</span><span class="n">presence_of_elements_located</span><span class="p">((</span><span class="n">By</span><span class="o">.</span><span class="n">CSS</span><span class="p">,</span> <span class="s2">"article"</span><span class="p">))</span>
-<span class="p">)</span>
-<span class="n">title</span> <span class="o">=</span> <span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element_by_css</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-<span class="n">n_likes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element_by_css</span><span class="p">(</span><span class="s1">'span.n_likes'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-<span class="k">try</span><span class="p">:</span>
-   <span class="n">tags</span> <span class="o">=</span> <span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_elements_by_css</span><span class="p">(</span><span class="s1">'span.tags'</span><span class="p">)</span>
-<span class="k">except</span> <span class="n">NoSuchElementException</span><span class="p">:</span>
-   <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">updated_at</span> <span class="o">=</span> <span class="n">dateparser</span><span class="p">(</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element_by_css</span><span class="p">(</span><span class="s1">'p.date'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">n_likes</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">updated_at</span><span class="p">)</span>
-<span class="c1"># ('manen, a new tool around Selenium',</span>
-<span class="c1">#  100,</span>
-<span class="c1">#  [], # Because no tags were found</span>
-<span class="c1">#  datetime.date(2021, 1, 1))</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">title</span><span class="p">,</span> <span class="n">n_likes</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">updated_at</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">(</span><span class="s1">'manen, a new tool around Selenium'</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="p">[],</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>Besides being more concise, the version using <code class="docutils literal notranslate"><span class="pre">manen</span></code> is also more verbose, meaning
 that it can ease the comprehension of your source code.</p>
+<p>You can find a deeper explanation that motivated the development of <code class="docutils literal notranslate"><span class="pre">manen</span></code> in the
+section <a class="reference internal" href="about.html#why-such-package"><span class="std std-ref">Why such package?</span></a>.</p>
 <section id="table-of-contents">
 <h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -301,11 +298,13 @@ that it can ease the comprehension of your source code.</p>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="user_guide/browser.html#Instanciating-a-browser">Instanciating a browser</a></li>
-<li class="toctree-l3"><a class="reference internal" href="user_guide/browser.html#Exploring-the-DOM-(WIP)">Exploring the DOM (WIP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_guide/browser.html#Exploring-the-DOM">Exploring the DOM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_guide/browser.html#Cookies-management">Cookies management</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/separating_selectors.html">Separating how and what to select (WIP)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="user_guide/separating_selectors.html#Externalizing-selectors-in-YAML-files">Externalizing selectors in YAML files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/modelling_dom.html">Modelling DOM elements with Python class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user_guide/modelling_dom.html#Basic-DOM-interacting">Basic DOM interacting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_guide/modelling_dom.html#List-of-available-elements">List of available elements</a></li>
 </ul>
 </li>
 </ul>
@@ -324,11 +323,11 @@ that it can ease the comprehension of your source code.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#unreleased">Unreleased</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id1">[0.1.1] - 2022-02-12</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#changed">Changed</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id1">[0.1.0] - 2022-01-31</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id2">[0.1.0] - 2022-01-31</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#added">Added</a></li>
 </ul>
 </li>
@@ -412,6 +411,8 @@ that it can ease the comprehension of your source code.</p>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
     <script src="_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

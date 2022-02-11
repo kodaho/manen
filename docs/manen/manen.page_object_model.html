@@ -9,6 +9,7 @@
         <title>manen.page_object_model - manen</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -164,7 +165,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../user_guide/managing_resources.html">Managing resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user_guide/separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
@@ -358,15 +359,16 @@ or <a class="reference internal" href="#manen.page_object_model.Frame" title="ma
 <p>Interface with an &lt;input&gt; element of a DOM. Setting the variable of the
 InputElement will also set the value of the DOM.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LoginPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
-    <span class="n">email</span> <span class="o">=</span> <span class="n">InputElement</span><span class="p">(</span><span class="s2">"input[type='email']"</span><span class="p">)</span>
-    <span class="n">password</span> <span class="o">=</span> <span class="n">InputElement</span><span class="p">(</span><span class="s2">"input[type='password']"</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">manen.page_object_model</span> <span class="kn">import</span> <span class="n">Page</span><span class="p">,</span> <span class="n">InputElement</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">LoginPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">email</span> <span class="o">=</span> <span class="n">InputElement</span><span class="p">(</span><span class="s2">"input[type='email']"</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">password</span> <span class="o">=</span> <span class="n">InputElement</span><span class="p">(</span><span class="s2">"input[type='password']"</span><span class="p">)</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">manen.page_object_model</span> <span class="kn">import</span> <span class="n">Action</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">login_page</span> <span class="o">=</span> <span class="n">LoginPage</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">login_page</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="s2">"username@manen.co"</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">login_page</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s2">"dummypassword"</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">login_page</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">Action</span><span class="p">(</span><span class="s2">"submit"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">manen.page_object_model</span> <span class="kn">import</span> <span class="n">Action</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">login_page</span> <span class="o">=</span> <span class="n">LoginPage</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">login_page</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="s2">"username@manen.co"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">login_page</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s2">"dummypassword"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">login_page</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">Action</span><span class="p">(</span><span class="s2">"submit"</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -417,14 +419,13 @@ Pluralized version of <a class="reference internal" href="#manen.page_object_mod
 <a class="reference internal" href="#manen.page_object_model.Element" title="manen.page_object_model.Element"><code class="xref py py-class docutils literal notranslate"><span class="pre">Element</span></code></a> (or any subclass) or an instance of
 <a class="reference internal" href="#manen.page_object_model.Region" title="manen.page_object_model.Region"><code class="xref py py-class docutils literal notranslate"><span class="pre">Region</span></code></a>.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QueryPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
-    <span class="n">main_title</span> <span class="o">=</span> <span class="n">TextElement</span><span class="p">(</span><span class="s2">"h1"</span><span class="p">)</span>
-    <span class="n">search</span> <span class="o">=</span> <span class="n">InputElement</span><span class="p">(</span><span class="s2">"input[name='query']"</span><span class="p">)</span>
-    <span class="n">button_validate</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s2">"button#validate"</span><span class="p">)</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">page</span> <span class="o">=</span> <span class="n">QueryPage</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">page</span><span class="o">.</span><span class="n">search</span> <span class="o">=</span> <span class="s2">"python manen"</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">button_validate</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">QueryPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">main_title</span> <span class="o">=</span> <span class="n">TextElement</span><span class="p">(</span><span class="s2">"h1"</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">search</span> <span class="o">=</span> <span class="n">InputElement</span><span class="p">(</span><span class="s2">"input[name='query']"</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">button_validate</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s2">"button#validate"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">page</span> <span class="o">=</span> <span class="n">QueryPage</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">page</span><span class="o">.</span><span class="n">search</span> <span class="o">=</span> <span class="s2">"python manen"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">button_validate</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
 </pre></div>
 </div>
 <dl class="py method">
@@ -481,17 +482,16 @@ closer to an <a class="reference internal" href="#manen.page_object_model.Elemen
 <a class="reference internal" href="#manen.page_object_model.Element" title="manen.page_object_model.Element"><code class="xref py py-class docutils literal notranslate"><span class="pre">Element</span></code></a>.</p>
 </div>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LoginPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
-    <span class="k">class</span> <span class="nc">FormRegion</span><span class="p">(</span><span class="n">Region</span><span class="p">):</span>
-        <span class="n">email</span> <span class="o">=</span> <span class="n">InputElement</span><span class="p">(</span><span class="s2">"input#email"</span><span class="p">)</span>
-        <span class="n">password</span> <span class="o">=</span> <span class="n">InputElement</span><span class="p">(</span><span class="s2">"input#password"</span><span class="p">)</span>
-
-    <span class="n">form_region</span> <span class="o">=</span> <span class="n">FormRegion</span><span class="p">(</span><span class="s2">"div#form-container"</span><span class="p">)</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">page</span> <span class="o">=</span> <span class="n">LoginPage</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">page</span><span class="o">.</span><span class="n">form_region</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="s2">"hello@manen.com"</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">page</span><span class="o">.</span><span class="n">form_region</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s2">"strong_password"</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">page</span><span class="o">.</span><span class="n">form_region</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">Action</span><span class="p">(</span><span class="s2">"submit"</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">manen.page_object_model</span> <span class="kn">import</span> <span class="n">Page</span><span class="p">,</span> <span class="n">Region</span><span class="p">,</span> <span class="n">InputElement</span><span class="p">,</span> <span class="n">Action</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">LoginPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">class</span> <span class="nc">FormRegion</span><span class="p">(</span><span class="n">Region</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">email</span> <span class="o">=</span> <span class="n">InputElement</span><span class="p">(</span><span class="s2">"input#email"</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">password</span> <span class="o">=</span> <span class="n">InputElement</span><span class="p">(</span><span class="s2">"input#password"</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">form_region</span> <span class="o">=</span> <span class="n">FormRegion</span><span class="p">(</span><span class="s2">"div#form-container"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">page</span> <span class="o">=</span> <span class="n">LoginPage</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">page</span><span class="o">.</span><span class="n">form_region</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="s2">"hello@manen.com"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">page</span><span class="o">.</span><span class="n">form_region</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s2">"strong_password"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">page</span><span class="o">.</span><span class="n">form_region</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">Action</span><span class="p">(</span><span class="s2">"submit"</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -531,16 +531,15 @@ attribute instanciated with <a class="reference internal" href="#manen.page_obje
 will be accessible as an instance attribute; it will, when accessed, evaluate
 the selector to retrieve the element.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Area</span><span class="p">(</span><span class="n">WebArea</span><span class="p">):</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s2">"css:body"</span><span class="p">)</span>
-    <span class="n">first_div</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s2">"css:div"</span><span class="p">)</span>
-    <span class="n">links</span> <span class="o">=</span> <span class="n">Elements</span><span class="p">(</span><span class="s2">"css:a"</span><span class="p">)</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">area</span> <span class="o">=</span> <span class="n">Area</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">area</span><span class="o">.</span><span class="n">body</span>
-<span class="o">&lt;</span><span class="n">selenium</span><span class="o">.</span><span class="n">webdriver</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">webelement</span><span class="o">.</span><span class="n">WebElement</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"abcdef-1234"</span><span class="o">&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">div_area</span> <span class="o">=</span> <span class="n">Area</span><span class="p">(</span><span class="n">area</span><span class="o">.</span><span class="n">first_div</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">div_area</span><span class="o">.</span><span class="n">links</span> <span class="c1"># Find all the links in the first div element of the body</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Area</span><span class="p">(</span><span class="n">WebArea</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="n">body</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s2">"css:body"</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="n">first_div</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s2">"css:div"</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="n">links</span> <span class="o">=</span> <span class="n">Elements</span><span class="p">(</span><span class="s2">"css:a"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="n">Area</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span><span class="o">.</span><span class="n">body</span>
+<span class="go">&lt;selenium.webdriver.remote.webelement.WebElement id="abcdef-1234"&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">div_area</span> <span class="o">=</span> <span class="n">Area</span><span class="p">(</span><span class="n">area</span><span class="o">.</span><span class="n">first_div</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">div_area</span><span class="o">.</span><span class="n">links</span> <span class="c1"># Find all the links in the first div element of the body</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -648,6 +647,8 @@ value of the attribute <cite>_context</cite>, entered at instanciation.</p>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
     <script src="../_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

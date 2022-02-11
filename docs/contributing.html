@@ -9,6 +9,7 @@
         <title>Contributing - manen</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -164,7 +165,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/managing_resources.html">Managing resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -222,12 +223,12 @@ issue (if one isn’t opened yet about the same bug) or/and open a pull request.
 environment. If you want to help in the development of <code class="docutils literal notranslate"><span class="pre">manen</span></code>, reproducing a dev
 environment similar to the original one will be needed. To do so, you can whether
 use Pipenv to recreate the environment with the command</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pipenv sync
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pipenv sync
 </pre></div>
 </div>
 <p>Note that using Pipenv is not required. You can reproduce the development environment
 by re-installing the same package specified in the setup file of the package</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -e <span class="s2">".[doc,test,lint]"</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install -e <span class="s2">".[doc,test,lint]"</span>
 </pre></div>
 </div>
 <p>This will install <code class="docutils literal notranslate"><span class="pre">manen</span></code> with extra dependencies for development workflows, described
@@ -246,12 +247,16 @@ with <code class="docutils literal notranslate"><span class="pre">pip</span></co
 <p>Workflow used to build HTML pages for the documentation</p>
 <div class="seealso admonition">
 <p class="admonition-title">Command</p>
-<p><strong>Build the documentation in one shot</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> docs <span class="o">&amp;&amp;</span> make html
+<p><strong>Build the documentation</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> docs <span class="o">&amp;&amp;</span> make html
 </pre></div>
 </div>
-<p><strong>Build the documentation at any modifications</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sphinx-autobuild docs/source docs/build/html --watch manen/
+<p><strong>Trigger a build of the documentation for any changes in the source</strong></p>
+<p><a class="reference external" href="https://pypi.org/project/sphinx-autobuild/">sphinx-autobuild</a> can be used to launch
+a process that will watch any modification in the source files of the package or
+documentation and re-build the HTML pages at each event.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install sphinx-autobuild
+$ sphinx-autobuild docs/source docs/build/html --watch manen/
 </pre></div>
 </div>
 </div>
@@ -261,7 +266,7 @@ with <code class="docutils literal notranslate"><span class="pre">pip</span></co
 <div class="seealso admonition">
 <p class="admonition-title">Command</p>
 <p><strong>Launching all the tests</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pytest
 </pre></div>
 </div>
 </div>
@@ -271,11 +276,11 @@ with <code class="docutils literal notranslate"><span class="pre">pip</span></co
 <div class="seealso admonition">
 <p class="admonition-title">Command</p>
 <p><strong>Checking tha the imports are well sorted</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>isort --check-only manen/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ isort --check-only manen/
 </pre></div>
 </div>
 <p><strong>Linting all the files</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pylint -E --rcfile<span class="o">=</span>./.pylintrc ./manen/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pylint -E --rcfile<span class="o">=</span>./.pylintrc ./manen/
 </pre></div>
 </div>
 </div>
@@ -346,6 +351,8 @@ with <code class="docutils literal notranslate"><span class="pre">pip</span></co
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
     <script src="_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

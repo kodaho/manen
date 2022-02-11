@@ -9,6 +9,7 @@
         <title>Managing resources - manen</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -164,7 +165,7 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../user_guide.html">User Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Managing resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -480,7 +481,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from manen.resource import chrome
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manen.resource</span> <span class="kn">import</span> <span class="n">chrome</span>
 </pre></div>
 </div>
 </div>
@@ -489,9 +490,9 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>assert chrome.application.is_installed()
-chrome_version = chrome.application.installed_version()
-chrome_version
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">chrome</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">is_installed</span><span class="p">()</span>
+<span class="n">chrome_version</span> <span class="o">=</span> <span class="n">chrome</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">installed_version</span><span class="p">()</span>
+<span class="n">chrome_version</span>
 </pre></div>
 </div>
 </div>
@@ -509,7 +510,7 @@ chrome_version
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from manen.resource import brave
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manen.resource</span> <span class="kn">import</span> <span class="n">brave</span>
 </pre></div>
 </div>
 </div>
@@ -517,9 +518,9 @@ chrome_version
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>assert brave.application.is_installed()
-brave_version = brave.application.installed_version()
-brave_version
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">brave</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">is_installed</span><span class="p">()</span>
+<span class="n">brave_version</span> <span class="o">=</span> <span class="n">brave</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">installed_version</span><span class="p">()</span>
+<span class="n">brave_version</span>
 </pre></div>
 </div>
 </div>
@@ -541,8 +542,8 @@ brave_version
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>available_drivers = chrome.driver.list_versions(query='97.0.4692')
-available_drivers
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">available_drivers</span> <span class="o">=</span> <span class="n">chrome</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">list_versions</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s1">'97.0.4692'</span><span class="p">)</span>
+<span class="n">available_drivers</span>
 </pre></div>
 </div>
 </div>
@@ -571,8 +572,8 @@ available_drivers
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>latest_release = chrome.driver.latest_release()
-latest_release
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">latest_release</span> <span class="o">=</span> <span class="n">chrome</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">latest_release</span><span class="p">()</span>
+<span class="n">latest_release</span>
 </pre></div>
 </div>
 </div>
@@ -601,9 +602,9 @@ latest_release
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># A function to hide the path that is specific to each environment
-import re
-obfuscate = lambda path: re.sub('/Users/.*?/manen/', '/***/', path)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A function to hide the path that is specific to each environment</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="n">obfuscate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">path</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">'/Users/.*?/manen/'</span><span class="p">,</span> <span class="s1">'/***/'</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -611,8 +612,8 @@ obfuscate = lambda path: re.sub('/Users/.*?/manen/', '/***/', path)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>chromedriver_path = chrome.driver.download(version=latest_release)
-obfuscate(chromedriver_path)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chromedriver_path</span> <span class="o">=</span> <span class="n">chrome</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="n">latest_release</span><span class="p">)</span>
+<span class="n">obfuscate</span><span class="p">(</span><span class="n">chromedriver_path</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -631,8 +632,8 @@ obfuscate(chromedriver_path)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>chromedriver_path = chrome.driver.get(query='97')
-obfuscate(chromedriver_path)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chromedriver_path</span> <span class="o">=</span> <span class="n">chrome</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s1">'97'</span><span class="p">)</span>
+<span class="n">obfuscate</span><span class="p">(</span><span class="n">chromedriver_path</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -650,7 +651,7 @@ obfuscate(chromedriver_path)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from manen.resource.local import LocalAsset as local
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manen.resource.local</span> <span class="kn">import</span> <span class="n">LocalAsset</span> <span class="k">as</span> <span class="n">local</span>
 </pre></div>
 </div>
 </div>
@@ -658,7 +659,7 @@ obfuscate(chromedriver_path)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>obfuscate = lambda item: {**item, 'path': re.sub('/Users/.*?/manen/', '/***/', item['path'])}
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obfuscate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="p">{</span><span class="o">**</span><span class="n">item</span><span class="p">,</span> <span class="s1">'path'</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">'/Users/.*?/manen/'</span><span class="p">,</span> <span class="s1">'/***/'</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="s1">'path'</span><span class="p">])}</span>
 </pre></div>
 </div>
 </div>
@@ -666,7 +667,7 @@ obfuscate(chromedriver_path)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>[obfuscate(item) for item in local.list_drivers(browser='chrome')]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">obfuscate</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">local</span><span class="o">.</span><span class="n">list_drivers</span><span class="p">(</span><span class="n">browser</span><span class="o">=</span><span class="s1">'chrome'</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -804,6 +805,8 @@ optional arguments:
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
     <script src="../_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>

@@ -1,0 +1,827 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Going deeper into manen" href="../manen/manen.html" /><link rel="prev" title="An enhanced WebDriver: manen’s Browser" href="browser.html" />
+
+    <link rel="shortcut icon" href="../_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.01.02"/>
+        <title>Modelling DOM elements with Python class - manen</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  body[data-theme="dark"] {
+    --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) {
+      --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">manen</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/manen_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">manen</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About the project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../user_guide.html">User Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="managing_resources.html">Managing resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Modelling DOM elements with Python class</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.cli.html">manen.cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.exceptions.html">manen.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.finder.html">manen.finder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.helpers.html">manen.helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.browser.html">manen.browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html">manen.page_object_model</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../manen/manen.resource.html">manen.resource package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../manen/manen.resource.brave.html">manen.resource.brave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manen/manen.resource.chrome.html">manen.resource.chrome</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manen/manen.resource.local.html">manen.resource.local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<section id="Modelling-DOM-elements-with-Python-class">
+<h1>Modelling DOM elements with Python class<a class="headerlink" href="#Modelling-DOM-elements-with-Python-class" title="Permalink to this headline">¶</a></h1>
+<p>One of the core feature of <code class="docutils literal notranslate"><span class="pre">manen</span></code> is to provide some classes that will allow to modelize most of the elements in a HTML page. This design pattern, known as Page Object Model, will allow you to have an easy interface between your application and the web interface. To quote <a class="reference external" href="https://twitter.com/martinfowler">Martin Fowler</a>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>A page object wraps an HTML page, or fragment, with an application-specific API, allowing you to manipulate page elements without digging around in the HTML.</p></li>
+<li><p>A page object should also provide an interface that’s easy to program to and hides the underlying widgetry in the window page.</p></li>
+<li><p>The page object should encapsulate the mechanics required to find and manipulate the data in the page itself. A good rule of thumb is to imagine changing the concrete page -in which case the page object interface shouldn’t change.</p></li>
+</ul>
+</div></blockquote>
+<p>With <code class="docutils literal notranslate"><span class="pre">manen</span></code>, the page that you want to modelize will be represented by a class that inherits from <code class="docutils literal notranslate"><span class="pre">manen.page_object_model.Page</span></code>. All the elements inside this page will be represented by <code class="docutils literal notranslate"><span class="pre">manen.page_object_model.Elements</span></code> and its derivates.</p>
+<p>Let’s explore together how to apply the page object model design pattern by exploring the online PyPI page of <code class="docutils literal notranslate"><span class="pre">manen</span></code>.</p>
+<section id="Basic-DOM-interacting">
+<h2>Basic DOM interacting<a class="headerlink" href="#Basic-DOM-interacting" title="Permalink to this headline">¶</a></h2>
+<p>First things first, we need a WebDriver to be able to browse the Internet. Note that we will use here a <code class="docutils literal notranslate"><span class="pre">manen</span></code> browser but it will work the same with a Selenium WebDriver. Once initialized, we will go <a class="reference external" href="https://pypi.org">PyPI home page</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
+<span class="kn">from</span> <span class="nn">manen.browser</span> <span class="kn">import</span> <span class="n">ChromeBrowser</span>
+<span class="kn">from</span> <span class="nn">manen</span> <span class="kn">import</span> <span class="n">page_object_model</span> <span class="k">as</span> <span class="n">pom</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span> <span class="o">=</span> <span class="n">ChromeBrowser</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">proxy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headless</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1152</span><span class="p">,</span> <span class="mi">864</span><span class="p">))</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://pypi.org"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">highlight</span><span class="p">(</span><span class="s2">"input[id='search']"</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">'.png'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">save_screenshot</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">screenshot</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">screenshot</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/user_guide_modelling_dom_6_0.png" src="../_images/user_guide_modelling_dom_6_0.png"/>
+</div>
+</div>
+<p>What we want to do here is to be able to interact with the input search bar to fill it with the query <code class="docutils literal notranslate"><span class="pre">manen</span></code>. To do so, we will start by creating a <code class="docutils literal notranslate"><span class="pre">PyPIHomePage</span></code> class, inheriting from <code class="docutils literal notranslate"><span class="pre">HomePage</span></code>; all the attributes of this class will represent one element of the UI.</p>
+<p>In order to represent the search bar as a <code class="docutils literal notranslate"><span class="pre">manen</span></code> element, we will use <code class="docutils literal notranslate"><span class="pre">InputElement</span></code>, that will allow us to easily fill a value inside. To initialize an element, you need to provide the selectors that will be used to identify the element inside the HTML source code. Note that instead of only one selector, you can specify a list of selectors: in this case, <code class="docutils literal notranslate"><span class="pre">manen</span></code> will try each selector until one returns a result.</p>
+<p>Once the page is modelized, we have to create an instance by initializing it with the Browser or WebDriver used to navigate online.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PyPIHomePage</span><span class="p">(</span><span class="n">pom</span><span class="o">.</span><span class="n">Page</span><span class="p">):</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">InputElement</span><span class="p">(</span><span class="s2">"input[id='search']"</span><span class="p">)</span>
+
+<span class="n">page</span> <span class="o">=</span> <span class="n">PyPIHomePage</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We can now interact directly with the search by simply setting a value to <code class="docutils literal notranslate"><span class="pre">page.query</span></code>; this is the goal of <code class="docutils literal notranslate"><span class="pre">manen</span></code>: having very Pythonic way to retrieve and interact with a HTML page.</p>
+<p>In order to press <em>Enter</em>, you can use an <code class="docutils literal notranslate"><span class="pre">Action</span></code> that will trigger an event in the HTML page. Here by using <code class="docutils literal notranslate"><span class="pre">Action("submit")</span></code>, we submit the form and so launching a search inside PyPI.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">page</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="s2">"manen selenium"</span>
+<span class="n">page</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">Action</span><span class="p">(</span><span class="s2">"submit"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We are now on the results page matching our query; let’s modelize this page once again.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">highlight</span><span class="p">(</span><span class="s2">"ul[aria-label='Search results'] li"</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">'.png'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">save_screenshot</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">screenshot</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">screenshot</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/user_guide_modelling_dom_12_0.png" src="../_images/user_guide_modelling_dom_12_0.png"/>
+</div>
+</div>
+<p>This page can contain unique elements (like the number of results matching our query), but also some elements that can be repeated; this is for example the case for the result frames. Each frame has the same structure: in <code class="docutils literal notranslate"><span class="pre">manen</span></code>, this is called a region, represented with a <code class="docutils literal notranslate"><span class="pre">Region</span></code>. A region will itself contain several elements.</p>
+<p>Inside each frame, we want to retrieve the information about a package like the name, URL, release date… Each of this piece of information can have its own type in Python (a string, a datetime, an integer…). <code class="docutils literal notranslate"><span class="pre">manen</span></code> provides several kind of elements that will extract the information for you; at the end, you will obtain directly what you need, preventing you to use methods of a Selenium WebElement to extract the real data you want.</p>
+<p>Besides the selector(s), an <code class="docutils literal notranslate"><span class="pre">Element</span></code> can also be initialized with the following keyword arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">wait</span></code>: maximum number of seconds to wait until the element arrived in the HTML page</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">default</span></code>: default value to be returned if the element matches nothing in the HTML page</p></li>
+</ul>
+<p>At the end, this search results page can be modelized as follow:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SearchResultPage</span><span class="p">(</span><span class="n">pom</span><span class="o">.</span><span class="n">Page</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">ResultRegions</span><span class="p">(</span><span class="n">pom</span><span class="o">.</span><span class="n">Regions</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">"h3 span.package-snippet__name"</span><span class="p">)</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">"h3 span.package-snippet__version"</span><span class="p">)</span>
+        <span class="n">link</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">LinkElement</span><span class="p">(</span><span class="s2">"a.package-snippet"</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">"p.package-snippet__description"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">"(no description provided)"</span><span class="p">)</span>
+        <span class="n">release_date</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">DatetimeElement</span><span class="p">(</span><span class="s2">"span.package-snippet__released"</span><span class="p">)</span>
+
+    <span class="n">n_results</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">IntegerElement</span><span class="p">(</span><span class="s2">"//*[@id='content']//form/div[1]/div[1]/p/strong"</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">order_by</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">SelectElement</span><span class="p">(</span><span class="s1">'select#order'</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">ResultRegions</span><span class="p">(</span><span class="s2">"ul[aria-label='Search results'] li"</span><span class="p">)</span>
+
+<span class="n">page</span> <span class="o">=</span> <span class="n">SearchResultPage</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Number of results:"</span><span class="p">,</span> <span class="n">page</span><span class="o">.</span><span class="n">n_results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Number of results: 1439
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">page.results</span></code> will be a list of special classes, that will contain all the elements we have specified inside the region.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>                    <span class="c1"># type: ignore</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;__main__.SearchResultPage.ResultRegions at 0x10cc08c10&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'Name:'</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>                 <span class="c1"># type: ignore</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Version:'</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>           <span class="c1"># type: ignore</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Release date:'</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">release_date</span><span class="p">)</span> <span class="c1"># type: ignore</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'URL:'</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">link</span><span class="p">)</span>                  <span class="c1"># type: ignore</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Name: manen
+Version: 0.1.0
+Release date: 2022-01-31 00:00:00
+URL: https://pypi.org/project/manen/
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/kodjo/.local/share/virtualenvs/manen-6kXEiGtM/lib/python3.8/site-packages/dateparser/date_parser.py:35: PytzUsageWarning: The localize method is no longer necessary, as this time zone supports the fold attribute (PEP 495). For more details on migrating to a PEP 495-compliant implementation, see https://pytz-deprecation-shim.readthedocs.io/en/latest/migration.html
+  date_obj = stz.localize(date_obj)
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">manen</span></code> provides a lot of different elements which are introduced in the next section.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="List-of-available-elements">
+<h2>List of available elements<a class="headerlink" href="#List-of-available-elements" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">manen</span></code> provides out of the box a lot of different elements which can be used to modelize different tags/elements of a HTML page.</p>
+<p>This section aims to list all of the element currently available and provide a quick introduction for some of them.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manen.page_object_model</span> <span class="kn">import</span> <span class="n">__all__</span>
+<span class="p">[</span><span class="n">elt</span> <span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="n">__all__</span> <span class="k">if</span> <span class="s1">'Element'</span> <span class="ow">in</span> <span class="n">elt</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+['CheckboxElement',
+ 'DatetimeElement',
+ 'DatetimeElements',
+ 'Element',
+ 'Elements',
+ 'ImageSourceElement',
+ 'ImageSourceElements',
+ 'InnerHtmlElement',
+ 'InnerHtmlElements',
+ 'InputElement',
+ 'IntegerElement',
+ 'IntegerElements',
+ 'LinkElement',
+ 'LinkElements',
+ 'OuterHtmlElement',
+ 'OuterHtmlElements',
+ 'RadioButtonElement',
+ 'SelectElement',
+ 'TextElement',
+ 'TextElements']
+</pre></div></div>
+</div>
+<p>Note that most of the elements come in pair: the only difference between <code class="docutils literal notranslate"><span class="pre">...Element</span></code> and <code class="docutils literal notranslate"><span class="pre">...Elements</span></code> is that an <code class="docutils literal notranslate"><span class="pre">Element</span></code> will return only one result whereas an <code class="docutils literal notranslate"><span class="pre">Elements</span></code> will return a list of all the hits matching the selectors.</p>
+<p>Here is a quick explanation of each elements:</p>
+<div class="table-wrapper"><table class="docutils align-default">
+<colgroup>
+<col style="width: 22%"/>
+<col style="width: 78%"/>
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Element(s)</span></code></p></td>
+<td><p>Return the raw Selenium WebElement</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TextElement(s)</span></code></p></td>
+<td><p>Extract the inner text of an element.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">IntegerElement(s)</span></code></p></td>
+<td><p>Extract an integer of an element (the element can also contain text).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DateTimeElement(s)</span></code></p></td>
+<td><p>Extract the text and then infer a DateTime from its content.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">LinkElement(s)</span></code></p></td>
+<td><p>Extract the <code class="docutils literal notranslate"><span class="pre">href</span></code> property of an <code class="docutils literal notranslate"><span class="pre">a</span></code> tag element.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ImageSourceElement(s)</span></code></p></td>
+<td><p>Return the <code class="docutils literal notranslate"><span class="pre">src</span></code> property of an image.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">InnerHTMLElement(s)</span></code></p></td>
+<td><p>Return the raw HTML of all children elements.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">InputElement</span></code></p></td>
+<td><p>Modelize an input element in a form. Setting the value will fill the bar with the value.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SelectElement</span></code></p></td>
+<td><p>Return a Selenium <code class="docutils literal notranslate"><span class="pre">Select</span></code> object.</p></td>
+</tr>
+</tbody>
+</table></div>
+<p>Please refer to the code documentation for more information.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../manen/manen.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="browser.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2022, kodaho |
+          Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            | <a class="muted-link" href="../_sources/user_guide/modelling_dom.ipynb.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Modelling DOM elements with Python class</a><ul>
+<li><a class="reference internal" href="#Basic-DOM-interacting">Basic DOM interacting</a></li>
+<li><a class="reference internal" href="#List-of-available-elements">List of available elements</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

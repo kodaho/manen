@@ -8,6 +8,7 @@
         <title>manen.cli - manen</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -163,7 +164,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../user_guide/managing_resources.html">Managing resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../user_guide/separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -218,6 +219,7 @@
 <span class="sd">"""</span>
 
 <span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="kn">from</span> <span class="nn">questionary</span> <span class="kn">import</span> <span class="n">Choice</span><span class="p">,</span> <span class="n">prompt</span>
 
@@ -230,6 +232,7 @@
 
 
 <div class="viewcode-block" id="get_args"><a class="viewcode-back" href="../../manen/manen.cli.html#manen.cli.get_args">[docs]</a><span class="k">def</span> <span class="nf">get_args</span><span class="p">():</span>
+    <span class="sd">"""Get arguments from the command line."""</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s2">"manen"</span><span class="p">)</span>
     <span class="n">choices</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"download"</span><span class="p">]</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="n">dest</span><span class="o">=</span><span class="s2">"command"</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">choices</span><span class="p">)</span>
@@ -237,6 +240,9 @@
 
 
 <div class="viewcode-block" id="download_workflow"><a class="viewcode-back" href="../../manen/manen.cli.html#manen.cli.download_workflow">[docs]</a><span class="k">def</span> <span class="nf">download_workflow</span><span class="p">():</span>
+    <span class="sd">"""Build the pipeline of successive questions used to identify the drivers</span>
+<span class="sd">    to be downloaded.</span>
+<span class="sd">    """</span>
     <span class="n">chrome_version</span> <span class="o">=</span> <span class="n">chrome_app</span><span class="o">.</span><span class="n">installed_version</span><span class="p">()</span>
     <span class="n">brave_version</span> <span class="o">=</span> <span class="n">brave_app</span><span class="o">.</span><span class="n">installed_version</span><span class="p">()</span>
 
@@ -286,19 +292,32 @@
     <span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="download"><a class="viewcode-back" href="../../manen/manen.cli.html#manen.cli.download">[docs]</a><span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="n">browser</span><span class="p">,</span> <span class="n">versions</span><span class="p">):</span>
+<div class="viewcode-block" id="download"><a class="viewcode-back" href="../../manen/manen.cli.html#manen.cli.download">[docs]</a><span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">platform</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">browser</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">versions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+    <span class="sd">"""Download the drivers based on the information provided in questionary pipeline.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        os (str): platform on which the drivers will run (1st answer in CLI workflow)</span>
+<span class="sd">        browser (str): browser associated to the drivers (2nd anwser in CLI workflow)</span>
+<span class="sd">        versions (List[str]): versions to be downloaded (3rd answer in CLI workflow)</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NotImplementedError: if the browser is different from Chrome or Brave.</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">browser</span> <span class="o">==</span> <span class="s2">"chrome"</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">versions</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">"📥 Dowloading version </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2"> for the </span><span class="si">{</span><span class="n">browser</span><span class="si">}</span><span class="s2"> browser on </span><span class="si">{</span><span class="n">os</span><span class="si">}</span><span class="s2">..."</span>
+                <span class="sa">f</span><span class="s2">"📥 Dowloading version </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2"> for the </span><span class="si">{</span><span class="n">browser</span><span class="si">}</span><span class="s2"> browser on </span><span class="si">{</span><span class="n">platform</span><span class="si">}</span><span class="s2">..."</span>
             <span class="p">)</span>
-            <span class="n">driver_file</span> <span class="o">=</span> <span class="n">chromedriver</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">platform_system</span><span class="o">=</span><span class="n">os</span><span class="p">)</span>
+            <span class="n">driver_file</span> <span class="o">=</span> <span class="n">chromedriver</span><span class="o">.</span><span class="n">download</span><span class="p">(</span>
+                <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">platform_system</span><span class="o">=</span><span class="n">platform</span>
+            <span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Driver file available at </span><span class="si">{</span><span class="n">driver_file</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../../manen/manen.cli.html#manen.cli.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">"""Main function run by the CLI."""</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">" 🌔 manen CLI</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">get_args</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s2">"download"</span><span class="p">:</span>
@@ -341,6 +360,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

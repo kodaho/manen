@@ -9,6 +9,7 @@
         <title>Changelog - manen</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -164,7 +165,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/managing_resources.html">Managing resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -212,21 +213,24 @@
         <article role="main">
           <section id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
-<section id="unreleased">
-<h2>Unreleased<a class="headerlink" href="#unreleased" title="Permalink to this headline">¶</a></h2>
+<section id="id1">
+<h2>[0.1.1] - 2022-02-12<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p><strong>Mainly documentation improvements</strong></p>
 <section id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Complete README page.</p></li>
+<li><p>Make documentation publicly available under
+<a class="reference external" href="https://kodaho.github.io/manen/">kodaho.github.io/manen</a>.</p></li>
+<li><p>Complete <cite>README.md</cite> page.</p></li>
 <li><p>Add the section <cite>About the project</cite> in the documentation (moved from home page).</p></li>
-<li><p>Improve several pages of the documentation.</p></li>
+<li><p>Complete user guides.</p></li>
+<li><p>Rewording and reformatting of several sections.</p></li>
 </ul>
 </section>
 </section>
-<section id="id1">
-<h2>[0.1.0] - 2022-01-31<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p><strong>First release of</strong> <a class="reference internal" href="manen/manen.html#module-manen" title="manen"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen</span></code></a></p>
+<section id="id2">
+<h2>[0.1.0] - 2022-01-31<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p><strong>First release of the package</strong></p>
 <section id="added">
 <h3>Added<a class="headerlink" href="#added" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -239,9 +243,9 @@ required to launch a WebDriver.</p></li>
 <li><p><a class="reference internal" href="manen/manen.browser.html#module-manen.browser" title="manen.browser"><code class="xref py py-mod docutils literal notranslate"><span class="pre">browser</span></code></a> defined <a class="reference internal" href="manen/manen.browser.html#manen.browser.ChromeBrowser" title="manen.browser.ChromeBrowser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChromeBrowser</span></code></a>
 and <a class="reference internal" href="manen/manen.browser.html#manen.browser.BraveBrowser" title="manen.browser.BraveBrowser"><code class="xref py py-class docutils literal notranslate"><span class="pre">BraveBrowser</span></code></a>, an enhanced Selenium WebDriver.</p></li>
 <li><p><a class="reference internal" href="manen/manen.page_object_model.html#module-manen.page_object_model" title="manen.page_object_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">page_object_model</span></code></a> is the implementation of <a class="reference external" href="https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/">page object
-modelling described in Selenium documentation</a>.
-Thanks to that, you can describe and interact with the DOM structure through
-Python classes.</p></li>
+model</a>
+described in Selenium documentation. Thanks to that, you can describe and
+interact with the DOM structure through Python classes.</p></li>
 <li><p>a <a class="reference internal" href="manen/manen.cli.html#module-manen.cli" title="manen.cli"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cli</span></code></a> is shipped with the initial release in order to download
 drivers files.</p></li>
 </ul>
@@ -301,11 +305,11 @@ drivers files.</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Changelog</a><ul>
-<li><a class="reference internal" href="#unreleased">Unreleased</a><ul>
+<li><a class="reference internal" href="#id1">[0.1.1] - 2022-02-12</a><ul>
 <li><a class="reference internal" href="#changed">Changed</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id1">[0.1.0] - 2022-01-31</a><ul>
+<li><a class="reference internal" href="#id2">[0.1.0] - 2022-01-31</a><ul>
 <li><a class="reference internal" href="#added">Added</a></li>
 </ul>
 </li>
@@ -325,6 +329,8 @@ drivers files.</p></li>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
     <script src="_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

@@ -9,6 +9,7 @@
         <title>User Guide - manen</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -164,7 +165,7 @@
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">User Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/managing_resources.html">Managing resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -212,9 +213,16 @@
         <article role="main">
           <section id="user-guide">
 <h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Write <cite>User Guide</cite> documentation</p>
+<p>This part of the section helps you to get the most of <code class="docutils literal notranslate"><span class="pre">manen</span></code>. By following the different
+guides, you will get familiar with main features of the package.</p>
+<p>The first user guide will show you how to manage the resources needed to launch a Selenium
+or <code class="docutils literal notranslate"><span class="pre">manen</span></code> application (mainly automatically donwload the required drivers executable).
+Next one explains the plus of using a <code class="docutils literal notranslate"><span class="pre">Browser</span></code> compared to a
+<a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebDriver</span></code></a>. The last one details how to
+implement the page object model using <code class="docutils literal notranslate"><span class="pre">manen</span></code>.</p>
+<div class="seealso admonition">
+<p class="admonition-title">Associated notebooks</p>
+<p>All the user guides are available on <a class="reference external" href="https://github.com/kodaho/manen/tree/doc-improvements/docs/source/user_guide">Github</a> as notebooks.</p>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
@@ -225,15 +233,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/browser.html#Instanciating-a-browser">Instanciating a browser</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/browser.html#Exploring-the-DOM-(WIP)">Exploring the DOM (WIP)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="user_guide/browser.html#A-new-way-to-retrieve-elements">A new way to retrieve elements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="user_guide/browser.html#Modelling-a-page-with-Python-objects">Modelling a page with Python objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/browser.html#Exploring-the-DOM">Exploring the DOM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/browser.html#Cookies-management">Cookies management</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="user_guide/separating_selectors.html">Separating how and what to select (WIP)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/separating_selectors.html#Externalizing-selectors-in-YAML-files">Externalizing selectors in YAML files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/modelling_dom.html">Modelling DOM elements with Python class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/modelling_dom.html#Basic-DOM-interacting">Basic DOM interacting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/modelling_dom.html#List-of-available-elements">List of available elements</a></li>
 </ul>
 </li>
 </ul>
@@ -290,6 +296,8 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
     <script src="_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

@@ -8,6 +8,7 @@
         <title>manen.page_object_model - manen</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -163,7 +164,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../user_guide/managing_resources.html">Managing resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../user_guide/separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -341,11 +342,10 @@
 
 <span class="sd">    Example::</span>
 
-<span class="sd">        class Area(WebArea):</span>
-<span class="sd">            body = Element("css:body")</span>
-<span class="sd">            first_div = Element("css:div")</span>
-<span class="sd">            links = Elements("css:a")</span>
-
+<span class="sd">        &gt;&gt;&gt; class Area(WebArea):</span>
+<span class="sd">        ...    body = Element("css:body")</span>
+<span class="sd">        ...    first_div = Element("css:div")</span>
+<span class="sd">        ...    links = Elements("css:a")</span>
 <span class="sd">        &gt;&gt;&gt; area = Area(browser)</span>
 <span class="sd">        &gt;&gt;&gt; area.body</span>
 <span class="sd">        &lt;selenium.webdriver.remote.webelement.WebElement id="abcdef-1234"&gt;</span>
@@ -561,11 +561,10 @@
 
 <span class="sd">    Example::</span>
 
-<span class="sd">        class QueryPage(Page):</span>
-<span class="sd">            main_title = TextElement("h1")</span>
-<span class="sd">            search = InputElement("input[name='query']")</span>
-<span class="sd">            button_validate = Element("button#validate")</span>
-
+<span class="sd">        &gt;&gt;&gt; class QueryPage(Page):</span>
+<span class="sd">        ...     main_title = TextElement("h1")</span>
+<span class="sd">        ...     search = InputElement("input[name='query']")</span>
+<span class="sd">        ...     button_validate = Element("button#validate")</span>
 <span class="sd">        &gt;&gt;&gt; page = QueryPage(browser)</span>
 <span class="sd">        &gt;&gt;&gt; page.search = "python manen"</span>
 <span class="sd">        &gt;&gt;&gt; button_validate.click()</span>
@@ -636,13 +635,12 @@
 
 <span class="sd">    Example::</span>
 
-<span class="sd">        class LoginPage(Page):</span>
-<span class="sd">            class FormRegion(Region):</span>
-<span class="sd">                email = InputElement("input#email")</span>
-<span class="sd">                password = InputElement("input#password")</span>
-
-<span class="sd">            form_region = FormRegion("div#form-container")</span>
-
+<span class="sd">        &gt;&gt;&gt; from manen.page_object_model import Page, Region, InputElement, Action</span>
+<span class="sd">        &gt;&gt;&gt; class LoginPage(Page):</span>
+<span class="sd">        ...     class FormRegion(Region):</span>
+<span class="sd">        ...         email = InputElement("input#email")</span>
+<span class="sd">        ...         password = InputElement("input#password")</span>
+<span class="sd">        ...     form_region = FormRegion("div#form-container")</span>
 <span class="sd">        &gt;&gt;&gt; page = LoginPage(browser)</span>
 <span class="sd">        &gt;&gt;&gt; page.form_region.email = "hello@manen.com"</span>
 <span class="sd">        &gt;&gt;&gt; page.form_region.password = "strong_password"</span>
@@ -812,9 +810,10 @@
 
 <span class="sd">    Example::</span>
 
-<span class="sd">        class LoginPage(Page):</span>
-<span class="sd">            email = InputElement("input[type='email']")</span>
-<span class="sd">            password = InputElement("input[type='password']")</span>
+<span class="sd">        &gt;&gt;&gt; from manen.page_object_model import Page, InputElement</span>
+<span class="sd">        &gt;&gt;&gt; class LoginPage(Page):</span>
+<span class="sd">        ...     email = InputElement("input[type='email']")</span>
+<span class="sd">        ...     password = InputElement("input[type='password']")</span>
 
 <span class="sd">        &gt;&gt;&gt; from manen.page_object_model import Action</span>
 <span class="sd">        &gt;&gt;&gt; login_page = LoginPage(browser)</span>
@@ -997,6 +996,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

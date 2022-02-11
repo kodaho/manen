@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.01.02"/><title>Index - manen</title>
 <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -162,7 +163,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/managing_resources.html">Managing resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -211,13 +212,17 @@
           
 <section class="genindex-section">
   <h1 id="index">Index</h1>
-  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a></div>
+  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a></div>
 </section>
 <section id="A" class="genindex-section">
   <h2>A</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="manen/manen.page_object_model.html#manen.page_object_model.Action">Action (class in manen.page_object_model)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="manen/manen.browser.html#manen.browser.BrowserMixin.are_versions_compatible">are_versions_compatible (manen.browser.BrowserMixin property)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -239,6 +244,10 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="manen/manen.browser.html#manen.browser.BraveBrowser">BraveBrowser (class in manen.browser)</a>
 </li>
+        <li><a href="manen/manen.browser.html#manen.browser.BrowserMixin.browser_version">browser_version (manen.browser.BrowserMixin property)</a>
+</li>
+        <li><a href="manen/manen.browser.html#manen.browser.BrowserMixin">BrowserMixin (class in manen.browser)</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -251,11 +260,19 @@
 </li>
         <li><a href="manen/manen.browser.html#manen.browser.ChromeBrowser">ChromeBrowser (class in manen.browser)</a>
 </li>
+        <li><a href="manen/manen.browser.html#manen.browser.BrowserMixin.click_with_js">click_with_js() (manen.browser.BrowserMixin method)</a>
+
+        <ul>
+          <li><a href="manen/manen.page_object_model.html#manen.page_object_model.Page.click_with_js">(manen.page_object_model.Page method)</a>
+</li>
+        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="manen/manen.page_object_model.html#manen.page_object_model.Page.click_with_js">click_with_js() (manen.page_object_model.Page method)</a>
-</li>
         <li><a href="manen/manen.page_object_model.html#manen.page_object_model.WebArea.container">container (manen.page_object_model.WebArea property)</a>
+</li>
+        <li><a href="manen/manen.browser.html#manen.browser.BrowserMixin.cookies">cookies (manen.browser.BrowserMixin property)</a>
+</li>
+        <li><a href="manen/manen.browser.html#manen.browser.BrowserMixin.current_platform">current_platform (manen.browser.BrowserMixin property)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -269,11 +286,13 @@
 </li>
         <li><a href="manen/manen.page_object_model.html#manen.page_object_model.DatetimeElements">DatetimeElements (class in manen.page_object_model)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="manen/manen.cli.html#manen.cli.download">download() (in module manen.cli)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="manen/manen.cli.html#manen.cli.download_workflow">download_workflow() (in module manen.cli)</a>
+</li>
+        <li><a href="manen/manen.browser.html#manen.browser.BrowserMixin.driver_version">driver_version (manen.browser.BrowserMixin property)</a>
 </li>
         <li><a href="manen/manen.exceptions.html#manen.exceptions.DriverNotFound">DriverNotFound</a>
 </li>
@@ -306,11 +325,15 @@
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="manen/manen.finder.html#manen.finder.find">find() (in module manen.finder)</a>
+
+        <ul>
+          <li><a href="manen/manen.browser.html#manen.browser.BrowserMixin.find">(manen.browser.BrowserMixin method)</a>
 </li>
-        <li><a href="manen/manen.page_object_model.html#manen.page_object_model.Frame">Frame (class in manen.page_object_model)</a>
-</li>
+        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="manen/manen.page_object_model.html#manen.page_object_model.Frame">Frame (class in manen.page_object_model)</a>
+</li>
         <li><a href="manen/manen.page_object_model.html#manen.page_object_model.Page.from_object">from_object() (manen.page_object_model.Page class method)</a>
 </li>
         <li><a href="manen/manen.page_object_model.html#manen.page_object_model.Page.from_yaml">from_yaml() (manen.page_object_model.Page class method)</a>
@@ -324,6 +347,16 @@
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="manen/manen.cli.html#manen.cli.get_args">get_args() (in module manen.cli)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="H" class="genindex-section">
+  <h2>H</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="manen/manen.browser.html#manen.browser.BrowserMixin.highlight">highlight() (manen.browser.BrowserMixin method)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -368,6 +401,8 @@
         <li><a href="manen/manen.resource.local.html#manen.resource.local.LocalAsset.list_drivers">list_drivers() (manen.resource.local.LocalAsset class method)</a>
 </li>
         <li><a href="manen/manen.resource.local.html#manen.resource.local.LocalAsset">LocalAsset (class in manen.resource.local)</a>
+</li>
+        <li><a href="manen/manen.browser.html#manen.browser.BrowserMixin.lookup">lookup() (manen.browser.BrowserMixin method)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -529,12 +564,14 @@
   <h2>S</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="manen/manen.page_object_model.html#manen.page_object_model.SelectElement">SelectElement (class in manen.page_object_model)</a>
+        <li><a href="manen/manen.browser.html#manen.browser.BrowserMixin.scroll">scroll() (manen.browser.BrowserMixin method)</a>
 </li>
-        <li><a href="manen/manen.page_object_model.html#manen.page_object_model.WebArea.Meta.selectors">selectors (manen.page_object_model.WebArea.Meta attribute)</a>
+        <li><a href="manen/manen.page_object_model.html#manen.page_object_model.SelectElement">SelectElement (class in manen.page_object_model)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="manen/manen.page_object_model.html#manen.page_object_model.WebArea.Meta.selectors">selectors (manen.page_object_model.WebArea.Meta attribute)</a>
+</li>
         <li><a href="manen/manen.page_object_model.html#manen.page_object_model.WebArea.Meta.selectors_path">selectors_path (manen.page_object_model.WebArea.Meta attribute)</a>
 </li>
         <li><a href="manen/manen.page_object_model.html#manen.page_object_model.WebArea.switch_container">switch_container() (manen.page_object_model.WebArea method)</a>
@@ -630,6 +667,8 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
     <script src="_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

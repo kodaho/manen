@@ -9,6 +9,7 @@
         <title>About the project - manen</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
@@ -164,7 +165,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/managing_resources.html">Managing resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/separating_selectors.html">Separating how and what to select (WIP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -214,40 +215,43 @@
 <h1>About the project<a class="headerlink" href="#about-the-project" title="Permalink to this headline">¶</a></h1>
 <section id="why-such-package">
 <h2>Why such package?<a class="headerlink" href="#why-such-package" title="Permalink to this headline">¶</a></h2>
-<p>Design to be be simple and speed up your development with Selenium.
-Hide complexity to work with Selenium.</p>
-<p>It was originally built to have faster development process when using Selenium. Working with
-Selenium often requires to have a source code having two functionalities:</p>
+<p><code class="docutils literal notranslate"><span class="pre">manen</span></code> has been designed to keep every project using Selenium simple and to
+speed up the development of these projects. Working with <code class="xref py py-mod docutils literal notranslate"><span class="pre">selenium</span></code> can quickly
+lead to non beautiful code because Selenium project often merge two functionalities:</p>
+<ol class="arabic simple">
+<li><p><strong>Browser interactions</strong>: This part of the code is in charge of defining how to
+retrieve and interact with web elements. The retrieval is done with selectors
+(XPath, CSS, tag name…) and once you got the elements, the next step can be to
+extract some attributes from these elements (a text, an integer, a timestamp, an
+image, a form…).</p></li>
+<li><p><strong>Workflow definition</strong>: Clicking with some elements, filling a form, checking the
+value displayed: the logic here will implement the different pipelines to solve your
+specific use cases.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">manen</span></code> helps for the first functionality, the browser interactions. Each
+package have its own set of features:</p>
 <ul class="simple">
-<li><p>the first one is relative to the interactions with the browser, materialized with the
-WebDriver. Here, you need to define how you will retrieve the elements in the DOM, manage
-exceptions if an element is not found… You should specify selectors that can evolve
-through times.</p></li>
-<li><p>second element is your custom workflow: click here, retrieve this element, fill this form</p></li>
-</ul>
-<p><code class="docutils literal notranslate"><span class="pre">manen</span></code> = a solution for the first point (and only the first point)</p>
-<p>It can be used to design applications for testing, heavy process automatisation or legal scraping. Note that the goal behind <cite>manen</cite> is to have a production-ready tool, not to develop a package that can only be used locally.</p>
-<p>Among the features, you will find:</p>
-<ul class="simple">
-<li><p>a helper tool to find and download all drivers needed by Selenium; no need to
-find the right driver compatible with the installed browser, <a class="reference internal" href="manen/manen.html#module-manen" title="manen"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen</span></code></a>
+<li><p><a class="reference internal" href="manen/manen.finder.html#module-manen.finder" title="manen.finder"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finder</span></code></a> defines a helper function allowing to easily find one or
+several elements in a page.</p></li>
+<li><p><a class="reference internal" href="manen/manen.resource.html#module-manen.resource" title="manen.resource"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code></a> allows to download drivers needed by Selenium; no longer
+need to find the right drivers compatible with the installed browser, <code class="docutils literal notranslate"><span class="pre">manen</span></code>
 will do it for you!</p></li>
-<li><p>a quite complete list of classes you can use to easily interact with the DOM
-structure: it is basically an implementation of the
-<a class="reference external" href="https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/">page object model</a>)
+<li><p><a class="reference internal" href="manen/manen.page_object_model.html#module-manen.page_object_model" title="manen.page_object_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">page_object_model</span></code></a> implements a quite complete list of classes
+you can use to easily interact with the DOM structure; it is basically an
+implementation of the <a class="reference external" href="https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/">page object model</a>
 described in official documentation of Selenium.</p></li>
-<li><p>an enhanced WebDriver, build around the one defined by Selenium, allowing you
-to perform some basic actions quite quickly.</p></li>
+<li><p><a class="reference internal" href="manen/manen.browser.html#module-manen.browser" title="manen.browser"><code class="xref py py-mod docutils literal notranslate"><span class="pre">browser</span></code></a> defines new browser classes by enriching Selenium
+<a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebDriver</span></code></a> with a
+<a class="reference internal" href="manen/manen.browser.html#manen.browser.BrowserMixin" title="manen.browser.BrowserMixin"><code class="xref py py-mod docutils literal notranslate"><span class="pre">BrowserMixin</span></code></a>.</p></li>
 </ul>
-<div class="note admonition">
-<p class="admonition-title">Where does the name come from?</p>
-<p>An explanation about the name…</p>
-</div>
+<p>At the end, <code class="docutils literal notranslate"><span class="pre">manen</span></code> can be used for various use cases: testing, heavy process
+automation or scraping. Note that the goal behind <code class="docutils literal notranslate"><span class="pre">manen</span></code> is to have a
+production-ready tool.</p>
 </section>
 <section id="current-status-and-roadmap">
 <h2>Current status and roadmap<a class="headerlink" href="#current-status-and-roadmap" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="manen/manen.html#module-manen" title="manen"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen</span></code></a> is still under active development but has been used on some
-private projects for quite a time.</p>
+<p><code class="docutils literal notranslate"><span class="pre">manen</span></code> is still under active development but has been used on some private projects
+for quite a time.</p>
 <p>Feebacks are more than welcome so don’t hesitate to open a Github issue if you
 have any questions or concerns about the project!</p>
 <p>Because manen uses <a class="reference external" href="https://semver.org">semantic versioning</a>, it will keep 0
@@ -258,10 +262,9 @@ as major version until it is ready for the first stable release.</p>
 architecture is probably the definitive one, but some breaking changes can
 be introduced if needed. Any change will be detailed in the ChangeLog page.</p>
 </div>
-<p>No roadmap because it is still a “side project” but you can follow the project through this
-documentation and Github’s issues.</p>
-<p>See <a class="reference external" href="/contributing.html">Contributing</a> if you want to participate to this
-project.</p>
+<p>No roadmap because it is still a “side project” but you can follow the project through
+this documentation and Github’s issues.</p>
+<p>See <a class="reference internal" href="contributing.html#contributing"><span class="std std-ref">Contributing</span></a> if you want to participate to this project.</p>
 </section>
 </section>
 
@@ -335,6 +338,8 @@ project.</p>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
     <script src="_static/tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

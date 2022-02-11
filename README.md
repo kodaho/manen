@@ -40,18 +40,17 @@ It will install the package as well as the associated CLI.
 
 ## ✨ Features
 
-- `manen.finder.find` allows to easily get element(s) in a HTML page.
-  This function support several very different use cases, mainly parametrized
-  with the function arguments.
-- `manen.resource` is a module to easily interact with all the assets
-  needed by `selenium`. It allows for example to download all the drivers required
-  to work with Selenium.
-- `manen.browser` defined browsers objects, an enhanced Selenium's webdriver
-- `manen.page_object_model` is the implementation of page object modelling,
-  described in Selenium documentation. Thanks to that, you can describe the
-  DOM structure only with Python objects.
-- a CLI is shipped with the initial release in order to perform operations such
-  as downloading webdriver
+- `manen.finder.find` allows to easily get element(s) in a HTML page. This function support
+  several very different use cases, to help reduce your code complexity when fecthing for
+  elements.
+- `manen.resource` is a module to easily interact with all the assets needed by Selenium.
+  It allows for example to download all the drivers required to interact with web browsers.
+- `manen.browser` defined `Browser` objects, an enhanced Selenium's `WebDriver`.
+- `manen.page_object_model` is the implementation of page object model described in Selenium
+  documentation. Thanks to that, you can wrap a HTML page inside Python class and so provides
+  readability and stability to your code.
+- a CLI is shipped with the initial release in order to perform operations such as downloading
+  driver executables.
 
 
 ## 🚀 Getting started
@@ -71,7 +70,7 @@ In [2]: browser = ChromeBrowser.initialize(proxy=None, headless=True)
 In [3]: browser.get("https://pypi.org")
 ```
 
-![PyPI home page](./docs/source/user_guide/screenshot_pypi_home.png)
+![PyPI home page](./docs/assets/screenshot_pypi_home.png)
 
 We are now on the home page of PyPI. What we are going to do now is interact with the webpage
 using a manen `Page`. It will essentially use the package
@@ -124,7 +123,7 @@ In [8]: page.query = Action("submit")
 Submitting the form will refer to a page with the results of our query. Let's use the class
 `SearchResultPage` to retrieve the results.
 
-![PyPI home page](./docs/source/user_guide/screenshot_pypi_search_results.png)
+![PyPI home page](./docs/assets/screenshot_pypi_search_results.png)
 
 ```python
 In [9]: page = SearchResultPage(browser)

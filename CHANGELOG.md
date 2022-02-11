@@ -10,7 +10,7 @@
   [kodaho.github.io/manen](<https://kodaho.github.io/manen/>).
 - Complete `README.md` page.
 - Add the section `About the project` in the documentation (moved from home page).
-- Complete User Guide section.
+- Complete user guides.
 - Rewording and reformatting of several sections.
 
 ## [0.1.0] - 2022-01-31

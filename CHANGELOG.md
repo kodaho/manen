@@ -1,14 +1,17 @@
 # Changelog
 
-## Unreleased
+## [0.1.1] - 2022-02-12
 
 **Mainly documentation improvements**
 
 ### Changed
 
-- Complete README page.
+- Make documentation publicly available under
+  [kodaho.github.io/manen](<https://kodaho.github.io/manen/>).
+- Complete `README.md` page.
 - Add the section `About the project` in the documentation (moved from home page).
-- Improve several pages of the documentation.
+- Complete User Guide section.
+- Rewording and reformatting of several sections.
 
 ## [0.1.0] - 2022-01-31
 

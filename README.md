@@ -25,7 +25,7 @@
   <a href="https://github.com/kodaho/manen/issues">Issue tracking</a>
 </p>
 
-:py:mod:`manen` is a package built to extend Selenium user experience.
+`manen` is a package built to extend Selenium user experience.
 Among the core features, you can find:
 
 - an implementation of the [page object model](https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/)

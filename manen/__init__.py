@@ -18,4 +18,4 @@ use the module :py:mod:`~manen.finder` without :py:mod:`~manen.browser` or
 :py:mod:`~manen.page_object_model` without :py:mod:`~manen.browser`.
 """
 
-__version__ = "0.1.1.dev1"
+__version__ = "0.1.1"

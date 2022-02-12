@@ -60,9 +60,8 @@ jobs:
           pytest
 
   build-package:
-    needs: test
     runs-on: ubuntu-latest
-    if: ${{ always() }}
+    if: ${{ needs.test.result == 'success' || needs.test.result == 'cancelled' }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2

@@ -111,8 +111,8 @@ jobs:
           path: dist/
       - name: Upload package to Pypi
         env:
-          TWINE_USERNAME: ${{ secret.TWINE_USERNAME }}
-          TWINE_PASSWORD: ${{ secret.TWINE_PASSWORD }}
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
         run: |
           echo "Uploading to Pypi"
           # twine upload --repository testpypi dist/* --verbose

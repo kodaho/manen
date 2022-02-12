@@ -3,9 +3,8 @@ name: Deploy Package
 on:
   workflow_run:
     workflows: ["Test Package"]
-    push:
-      tags:
-        - v[0-9]+.[0-9]+.[0-9]+*
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+*
 
 jobs:
   build-package:

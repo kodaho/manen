@@ -114,4 +114,4 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
         run: |
           echo "Uploading to Pypi"
-          twine upload --repository testpypi dist/* --verbose
+          twine upload dist/* --verbose

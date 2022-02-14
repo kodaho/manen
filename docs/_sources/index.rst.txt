@@ -10,6 +10,7 @@ Welcome to manen's documentation!
    :alt: Python Version
 .. image:: https://img.shields.io/pypi/v/manen?logo=pypi&style=for-the-badge
    :alt: Package Version
+   :target: https://pypi.org/project/manen
 .. image:: https://img.shields.io/badge/status-in%20development-yellow?style=for-the-badge
    :alt: Status
 

@@ -46,7 +46,7 @@ def download_workflow():
     return [
         {
             "type": "select",
-            "name": "os",
+            "name": "platform",
             "message": "What is your OS?",
             "choices": [
                 Choice("Mac OS", "Darwin"),
@@ -83,7 +83,7 @@ def download(platform: str, browser: str, versions: List[str]):
     """Download the drivers based on the information provided in questionary pipeline.
 
     Args:
-        os (str): platform on which the drivers will run (1st answer in CLI workflow)
+        platform (str): platform on which the drivers will run (1st answer in CLI workflow)
         browser (str): browser associated to the drivers (2nd anwser in CLI workflow)
         versions (List[str]): versions to be downloaded (3rd answer in CLI workflow)
 
@@ -92,12 +92,8 @@ def download(platform: str, browser: str, versions: List[str]):
     """
     if browser == "chrome":
         for version in versions:
-            print(
-                f"📥 Dowloading version {version} for the {browser} browser on {platform}..."
-            )
-            driver_file = chromedriver.download(
-                version=version, platform_system=platform
-            )
+            print(f"📥 Dowloading version {version} for the {browser} browser on {platform}...")
+            driver_file = chromedriver.download(version=version, platform_system=platform)
             print(f"✅ Driver file available at {driver_file}")
     else:
         raise NotImplementedError

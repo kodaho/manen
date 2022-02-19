@@ -1,3 +1,4 @@
+# pylint: disable=missing-module-docstring, missing-function-docstring, missing-class-docstring
 from collections import namedtuple
 from datetime import datetime
 from pathlib import Path
@@ -9,8 +10,8 @@ from selenium.webdriver.common.by import By
 
 from manen.exceptions import ManenException
 from manen.page_object_model import (
-    DatetimeElement,
-    DatetimeElements,
+    DateTimeElement,
+    DateTimeElements,
     Element,
     ImageSourceElement,
     ImageSourceElements,
@@ -73,7 +74,7 @@ def test_choose_right_selection_method_for_element(
     [
         (TextElement, "this is a text", "this is a text"),
         (IntegerElement, "3 values", 3),
-        (DatetimeElement, "2020/05/01 at 12:00", datetime(2020, 5, 1, 12, 00)),
+        (DateTimeElement, "2020/05/01 at 12:00", datetime(2020, 5, 1, 12, 00)),
     ],
 )
 def test_post_processing_of_text_element(element_class, text_value, expected_value):
@@ -101,7 +102,7 @@ def test_post_processing_of_text_element(element_class, text_value, expected_val
             ["3 values", "2 values", "just 1 value", "and 10,000 others"],
             [3, 2, 1, 10000],
         ),
-        (DatetimeElements, ["2020/05/01 at 12:00"], [datetime(2020, 5, 1, 12, 00)]),
+        (DateTimeElements, ["2020/05/01 at 12:00"], [datetime(2020, 5, 1, 12, 00)]),
     ],
 )
 def test_post_processing_of_text_elements(element_class, values, expected_values):

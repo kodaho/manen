@@ -2,3 +2,6 @@
    :members:
    :undoc-members:
    :show-inheritance:
+   :ignore-module-all:
+   :special-members:
+   :private-members:

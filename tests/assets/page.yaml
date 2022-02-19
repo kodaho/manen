@@ -10,7 +10,7 @@ elements:
     selectors:
       - div.row.info
     elements:
-      creation_date: !DatetimeElement
+      creation_date: !DateTimeElement
         - ./span/span
       version: !TextElement
         - code.version
@@ -25,7 +25,7 @@ elements:
         - h3
       subtitle: !TextElement
         - h4
-      updated_at: !DatetimeElement
+      updated_at: !DateTimeElement
         - span
       link: !LinkElement
         - a

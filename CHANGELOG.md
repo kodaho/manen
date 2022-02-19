@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.2.0] - 2022-02-19
+
+### Changed
+
+- Improve CLI command to download drivers executable (now launched with `manen driver download`).
+- Rename `manen.page_object_model.DateTimeElement` (previously `DatetimeElement`).
+- Rename `manen.page_object_model.DOMAccessor` (previously `DomAccessor`).
+
+### Fixed
+
+- Fix link to notebooks in the info section of User Guide
+
+### Added
+
+- Specify link to changelog in documentation in package metadata.
+- Introduce new options in `manen driver download` to set the specifications of the drivers
+  to be downloaded directly from the command line.
+- Add exhaustivity in documentation of `manen.page_object_model` to describe
+  private/special methods and classes other than the ones in `__all__`.
+
 ## [0.1.2] - 2022-02-19
 
 **Fix bug in the download workflow of the CLI**

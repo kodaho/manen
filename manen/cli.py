@@ -210,8 +210,8 @@ def cli():
     if args.command == "download":
         if args.interactive and (args.browser or args.version):
             print(
-                "⤫ Inconsistent CLI options choices; if you specified the interactive mode, "
-                "the specifications of the drivers must not be set in the same time."
+                "⤫ Inconsistent CLI options choice; if you want to interactive mode, "
+                "the specifications of the drivers must not be set at the same time."
             )
             sys.exit(1)
         elif args.interactive:

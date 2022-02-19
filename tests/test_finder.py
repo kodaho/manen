@@ -1,6 +1,7 @@
+# pylint: disable=missing-module-docstring, missing-function-docstring, missing-class-docstring
+import pytest
 from selenium.webdriver.common.by import By
 
-import pytest
 from manen.finder import parse_selector
 
 

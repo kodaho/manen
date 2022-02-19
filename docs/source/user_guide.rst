@@ -13,8 +13,8 @@ implement the page object model using ``manen``.
 .. admonition:: Associated notebooks
    :class: seealso
 
-   All the user guides are available on `Github <https://github.com/kodaho/manen/tree/
-   doc-improvements/docs/source/user_guide>`_ as notebooks.
+   All the user guides are available on `Github <https://github.com/kodaho/manen/tree/main/
+   docs/source/user_guide>`_ as notebooks.
 
 .. toctree::
    :maxdepth: 4

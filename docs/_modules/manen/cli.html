@@ -255,7 +255,7 @@
     <span class="k">return</span> <span class="p">[</span>
         <span class="p">{</span>
             <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"select"</span><span class="p">,</span>
-            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"os"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"platform"</span><span class="p">,</span>
             <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"What is your OS?"</span><span class="p">,</span>
             <span class="s2">"choices"</span><span class="p">:</span> <span class="p">[</span>
                 <span class="n">Choice</span><span class="p">(</span><span class="s2">"Mac OS"</span><span class="p">,</span> <span class="s2">"Darwin"</span><span class="p">),</span>
@@ -292,7 +292,7 @@
     <span class="sd">"""Download the drivers based on the information provided in questionary pipeline.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        os (str): platform on which the drivers will run (1st answer in CLI workflow)</span>
+<span class="sd">        platform (str): platform on which the drivers will run (1st answer in CLI workflow)</span>
 <span class="sd">        browser (str): browser associated to the drivers (2nd anwser in CLI workflow)</span>
 <span class="sd">        versions (List[str]): versions to be downloaded (3rd answer in CLI workflow)</span>
 
@@ -301,12 +301,8 @@
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">browser</span> <span class="o">==</span> <span class="s2">"chrome"</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">versions</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">"📥 Dowloading version </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2"> for the </span><span class="si">{</span><span class="n">browser</span><span class="si">}</span><span class="s2"> browser on </span><span class="si">{</span><span class="n">platform</span><span class="si">}</span><span class="s2">..."</span>
-            <span class="p">)</span>
-            <span class="n">driver_file</span> <span class="o">=</span> <span class="n">chromedriver</span><span class="o">.</span><span class="n">download</span><span class="p">(</span>
-                <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">platform_system</span><span class="o">=</span><span class="n">platform</span>
-            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"📥 Dowloading version </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2"> for the </span><span class="si">{</span><span class="n">browser</span><span class="si">}</span><span class="s2"> browser on </span><span class="si">{</span><span class="n">platform</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+            <span class="n">driver_file</span> <span class="o">=</span> <span class="n">chromedriver</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">platform_system</span><span class="o">=</span><span class="n">platform</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Driver file available at </span><span class="si">{</span><span class="n">driver_file</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>

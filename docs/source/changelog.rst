@@ -1,19 +1,60 @@
 Changelog
 =========
 
-[0.1.2] - 2022-02-19
---------------------
+.. |s| raw:: html
+
+  ⇲ <span style="border-bottom: 1px dashed grey;padding-bottom: 2px; font-size:85%; margin-right:8px">Release date</span> <span style="font-size:90%">
+
+.. |e| raw:: html
+
+  </span>
+
+0.2.0
+-----
+
+|s| 2022-02-19 |e|
+
+**Rename some classes in** :py:mod:`~manen.page_object_model` **and improve CLI**
+
+Changed
+^^^^^^^
+
+- Improve CLI command to download drivers executable (now launched with ``manen driver download``).
+- Rename :py:class:`~manen.page_object_model.DateTimeElement` (previously ``DatetimeElement``).
+- Rename :py:class:`~manen.page_object_model.DOMAccessor` (previously ``DomAccessor``).
+
+Fixed
+^^^^^
+- Fix link to notebooks in the info section of :ref:`User Guide`
+
+Added
+^^^^^
+- Specify link to changelog in documentation in package metadata.
+- Introduce new options in ``manen driver download`` to set the specifications of the drivers
+  to be downloaded directly from the command line.
+- Add exhaustivity in documentation of :py:mod:`~manen.page_object_model` to describe
+  private/special methods and classes other than the ones in ``__all__``.
+
+|
+
+0.1.2
+-----
+
+|s| 2022-02-19 |e|
 
 **Fix bug in the download workflow of the CLI**
 
 Fixed
 ^^^^^
 
-- Fix a ``TypeError`` in the download workflow (variable wrongly named)
+- Fix a ``TypeError`` in the download workflow (variable wrongly named).
 
+|
 
-[0.1.1] - 2022-02-12
---------------------
+0.1.1
+-----
+
+|s| 2022-02-12 |e|
 
 **Mainly documentation improvements**
 
@@ -27,9 +68,12 @@ Changed
 - Complete user guides.
 - Rewording and reformatting of several sections.
 
+|
 
-[0.1.0] - 2022-01-31
---------------------
+0.1.0
+-----
+
+|s| 2022-01-31 |e|
 
 **First release of the package**
 

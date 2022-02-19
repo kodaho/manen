@@ -498,7 +498,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(97, 0, 4692, 71)
+(98, 0, 4758, 102)
 </pre></div></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">manen</span></code> also provides the same interface for the browser Brave.</p>
@@ -526,7 +526,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(97, 1, 34, 80)
+(98, 1, 35, 101)
 </pre></div></div>
 </div>
 <div class="admonition note">
@@ -579,7 +579,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(97, 0, 4692, 71)
+(98, 0, 4758, 102)
 </pre></div></div>
 </div>
 <p>Now that we have a version of the Chromedriver compatible with our installed Chrome, let’s download the binary file in order to be able to use it locally with Selenium. The drivers resource manager provides a method that will fetch the chromedriver archive and unzip it.</p>
@@ -619,7 +619,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-'/***/manen/assets/drivers/darwin/chrome/97.0.4692.71/chromedriver'
+'/***/manen/assets/drivers/darwin/chrome/98.0.4758.102/chromedriver'
 </pre></div></div>
 </div>
 <p>The download will always retrieve the file online; if the driver has already been downloaded, you can instead use the method <code class="docutils literal notranslate"><span class="pre">get</span></code>. This method will first check that the driver is not available locally and, if not, download it.</p>
@@ -673,7 +673,11 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[{'path': '/***/manen/assets/drivers/darwin/chrome/97.0.4692.71/chromedriver',
+[{'path': '/***/manen/assets/drivers/darwin/chrome/98.0.4758.102/chromedriver',
+  'version': '98.0.4758',
+  'browser': 'chrome',
+  'os': 'darwin'},
+ {'path': '/***/manen/assets/drivers/darwin/chrome/97.0.4692.71/chromedriver',
   'version': '97.0.4692',
   'browser': 'chrome',
   'os': 'darwin'}]
@@ -688,7 +692,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-bash notranslate"><div class="highlight"><pre><span></span>%%bash
-manen -h
+manen driver download -h
 </pre></div>
 </div>
 </div>
@@ -697,21 +701,31 @@ manen -h
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
- 🌔 manen CLI
+usage: manen driver download [-h] [-i] [-b {chrome,brave}] [-p {Darwin,Linux}]
+                             [-v VERSION [VERSION ...]]
 
-usage: manen [-h] {download}
-
-positional arguments:
-  {download}
+Download one or several drivers for a specific browser on a given OS.
 
 optional arguments:
-  -h, --help  show this help message and exit
+  -h, --help            show this help message and exit
+  -i, --interactive     Set the specifications for the download through a
+                        serie of interactive questions. If specified, the
+                        options of the specifications group must not be set.
+
+specifications:
+  -b {chrome,brave}, --browser {chrome,brave}
+                        Browser that will be used to launch the Selenium/manen
+                        application.
+  -p {Darwin,Linux}, --platform {Darwin,Linux}
+                        Platform (OS) on which the driver binary will run.
+                        Note that 'Darwin' is for MacOS and you can use the
+                        alias 'Mac' for this OS.
+  -v VERSION [VERSION ...], --version VERSION [VERSION ...]
+                        List of driver versions to be downloaded
 </pre></div></div>
 </div>
 <p>Let’s download all the drivers we need with the CLI. At the end, the drivers will be available at the same location as it was downloaded through the API.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ manen download
- 🌔 manen CLI
-
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ manen driver download -i
 » Starting interactive CLI to download webdrivers...
 ? What is your OS? Mac OS
 ? For which browser <span class="k">do</span> you want to download the drivers? Chrome / Brave

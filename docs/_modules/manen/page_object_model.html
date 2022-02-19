@@ -302,8 +302,8 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
     <span class="s2">"Action"</span><span class="p">,</span>
     <span class="s2">"CheckboxElement"</span><span class="p">,</span>
-    <span class="s2">"DatetimeElement"</span><span class="p">,</span>
-    <span class="s2">"DatetimeElements"</span><span class="p">,</span>
+    <span class="s2">"DateTimeElement"</span><span class="p">,</span>
+    <span class="s2">"DateTimeElements"</span><span class="p">,</span>
     <span class="s2">"Element"</span><span class="p">,</span>
     <span class="s2">"Elements"</span><span class="p">,</span>
     <span class="s2">"Frame"</span><span class="p">,</span>
@@ -363,7 +363,7 @@
         <span class="n">selectors</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></div>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<div class="viewcode-block" id="WebArea.__init__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.WebArea.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">container</span><span class="p">:</span> <span class="s2">"SeleniumElement"</span><span class="p">,</span>
         <span class="n">_context</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"PAGE"</span><span class="p">,</span>
@@ -380,7 +380,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">parent</span>
         <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="p">,</span> <span class="s2">"selectors_path"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">selectors</span> <span class="o">=</span> <span class="n">load_selector_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">selectors_path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">selectors</span> <span class="o">=</span> <span class="n">load_selector_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">selectors_path</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">container</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"SeleniumElement"</span><span class="p">:</span>
@@ -414,7 +414,7 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">==</span> <span class="s2">"FRAME"</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span><span class="o">.</span><span class="n">switch_to</span><span class="o">.</span><span class="n">default_content</span><span class="p">()</span></div>
 
-    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="WebArea._selectors_from_meta"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.WebArea._selectors_from_meta">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_selectors_from_meta</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">selectors</span><span class="p">[</span><span class="s2">"elements"</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="n">ManenException</span><span class="p">(</span><span class="s2">"No selectors defined for element `</span><span class="si">%s</span><span class="s2">`."</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
@@ -425,16 +425,16 @@
             <span class="k">else</span> <span class="n">selectors</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
             <span class="k">else</span> <span class="p">[</span><span class="n">selectors</span><span class="p">]</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">DomAccessor</span><span class="p">:</span>
+<div class="viewcode-block" id="DOMAccessor"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.DOMAccessor">[docs]</a><span class="k">class</span> <span class="nc">DOMAccessor</span><span class="p">:</span>
     <span class="sd">"""Main interface of a DOM element."""</span>
 
     <span class="n">_post_processing</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">"PostProcessingFunction"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">_many</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="nf">__init_subclass__</span><span class="p">(</span>
+<div class="viewcode-block" id="DOMAccessor.__init_subclass__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.DOMAccessor.__init_subclass__">[docs]</a>    <span class="k">def</span> <span class="nf">__init_subclass__</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">many</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">post_processing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="s2">"PostProcessingFunction"</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -445,9 +445,9 @@
             <span class="k">if</span> <span class="n">post_processing</span> <span class="ow">is</span> <span class="kc">None</span>
             <span class="k">else</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_post_processing</span> <span class="o">+</span> <span class="n">post_processing</span>
         <span class="p">)</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="n">_many</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_many</span> <span class="k">if</span> <span class="n">many</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">many</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_many</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_many</span> <span class="k">if</span> <span class="n">many</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">many</span></div>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<div class="viewcode-block" id="DOMAccessor.__init__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.DOMAccessor.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">selectors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
@@ -472,42 +472,38 @@
 <span class="sd">                getting the element from the DOM. Defaults to None.</span>
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_selectors</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">selectors</span>
-            <span class="k">if</span> <span class="n">selectors</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
-            <span class="k">else</span> <span class="p">[</span><span class="n">selectors</span><span class="p">]</span>
+            <span class="n">selectors</span> <span class="k">if</span> <span class="n">selectors</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">selectors</span><span class="p">]</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_default</span> <span class="o">=</span> <span class="n">default</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_wait</span> <span class="o">=</span> <span class="n">wait</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_post_processing</span> <span class="o">=</span> <span class="p">[</span><span class="n">post_processing</span><span class="p">]</span> <span class="k">if</span> <span class="n">post_processing</span> <span class="k">else</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">:</span> <span class="nb">str</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span></div>
 
-    <span class="k">def</span> <span class="nf">__set_name__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="viewcode-block" id="DOMAccessor.__set_name__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.DOMAccessor.__set_name__">[docs]</a>    <span class="k">def</span> <span class="nf">__set_name__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"_"</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">ManenException</span><span class="p">(</span>
                 <span class="s2">"To prevent any side effect, the element name cannot start with '_'."</span>
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">addr</span> <span class="k">for</span> <span class="n">addr</span> <span class="ow">in</span> <span class="n">owner</span><span class="o">.</span><span class="vm">__qualname__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="n">addr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">addr</span> <span class="k">for</span> <span class="n">addr</span> <span class="ow">in</span> <span class="n">owner</span><span class="o">.</span><span class="vm">__qualname__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="n">addr</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_apply_post_processing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">:</span> <span class="s2">"WebElement"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<div class="viewcode-block" id="DOMAccessor._apply_post_processing"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.DOMAccessor._apply_post_processing">[docs]</a>    <span class="k">def</span> <span class="nf">_apply_post_processing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">:</span> <span class="s2">"WebElement"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span>
             <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="n">x</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">_post_processing</span>  <span class="c1"># pylint: disable=protected-access</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_processing</span><span class="p">,</span>
             <span class="n">element</span><span class="p">,</span>
-        <span class="p">)</span>
+        <span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_get_from</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">area_class</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<div class="viewcode-block" id="DOMAccessor._get_from"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.DOMAccessor._get_from">[docs]</a>    <span class="k">def</span> <span class="nf">_get_from</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">area_class</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">area</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span>
 
         <span class="n">selectors</span> <span class="o">=</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_selectors</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_selectors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="n">area_class</span><span class="o">.</span><span class="n">_selectors_from_meta</span><span class="p">(</span>  <span class="c1"># pylint: disable=protected-access</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
-            <span class="p">)</span>
+            <span class="k">else</span> <span class="n">area_class</span><span class="o">.</span><span class="n">_selectors_from_meta</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>  <span class="c1"># pylint: disable=protected-access</span>
         <span class="p">)</span>
 
         <span class="k">with</span> <span class="n">area</span><span class="o">.</span><span class="n">switch_container</span><span class="p">()</span> <span class="k">as</span> <span class="n">container</span><span class="p">:</span>
@@ -526,16 +522,14 @@
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
                 <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_apply_post_processing</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span>
 
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_post_processing</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_post_processing</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_build_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">area</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">WebArea</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">WebArea</span><span class="p">]]:</span>
+<div class="viewcode-block" id="DOMAccessor._build_elements"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.DOMAccessor._build_elements">[docs]</a>    <span class="k">def</span> <span class="nf">_build_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">area</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">WebArea</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">WebArea</span><span class="p">]]:</span>
         <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">area</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__qualname__</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span>
         <span class="n">base</span> <span class="o">=</span> <span class="p">(</span><span class="n">WebArea</span><span class="p">,)</span>
         <span class="n">metadata</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">area</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span> <span class="k">if</span> <span class="n">area</span> <span class="k">else</span> <span class="p">{}</span>
         <span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-            <span class="n">selectors</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">area</span><span class="o">.</span><span class="n">Meta</span><span class="p">,</span> <span class="s2">"selectors"</span><span class="p">,</span> <span class="p">{})</span>
-            <span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"elements"</span><span class="p">,</span> <span class="p">{})</span>
-            <span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="n">selectors</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">area</span><span class="o">.</span><span class="n">Meta</span><span class="p">,</span> <span class="s2">"selectors"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"elements"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="p">{})</span>
         <span class="p">)</span>
         <span class="n">base_dict</span> <span class="o">=</span> <span class="p">{</span>
             <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">),</span>
@@ -543,10 +537,9 @@
         <span class="p">}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_many</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span>
-                <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">base_dict</span><span class="p">)(</span><span class="n">element</span><span class="p">,</span> <span class="n">_context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span>
+                <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">base_dict</span><span class="p">)(</span><span class="n">element</span><span class="p">,</span> <span class="n">_context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span>
             <span class="p">]</span>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">base_dict</span><span class="p">)(</span><span class="n">elements</span><span class="p">,</span> <span class="n">_context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">base_dict</span><span class="p">)(</span><span class="n">elements</span><span class="p">,</span> <span class="n">_context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="Page"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Page">[docs]</a><span class="k">class</span> <span class="nc">Page</span><span class="p">(</span><span class="n">WebArea</span><span class="p">):</span>
@@ -620,7 +613,7 @@
         <span class="k">raise</span> <span class="n">ManenException</span><span class="p">(</span><span class="s2">"No URL specified."</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="Region"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Region">[docs]</a><span class="k">class</span> <span class="nc">Region</span><span class="p">(</span><span class="n">DomAccessor</span><span class="p">):</span>
+<div class="viewcode-block" id="Region"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Region">[docs]</a><span class="k">class</span> <span class="nc">Region</span><span class="p">(</span><span class="n">DOMAccessor</span><span class="p">):</span>
     <span class="sd">"""Modelize a region of a webpage. A region is a set of elements contained</span>
 <span class="sd">    in the same container.</span>
 
@@ -643,39 +636,39 @@
 <span class="sd">        &gt;&gt;&gt; page.form_region.password = Action("submit")</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">WebArea</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">WebArea</span><span class="p">]]:</span>
+<div class="viewcode-block" id="Region.__get__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Region.__get__">[docs]</a>    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">WebArea</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">WebArea</span><span class="p">]]:</span>
         <span class="n">element</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_from</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">)</span>
         <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_elements</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">"REGION"</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">element</span>
+        <span class="k">return</span> <span class="n">element</span></div>
 
-    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">UnsettableElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<div class="viewcode-block" id="Region.__set__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Region.__set__">[docs]</a>    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">UnsettableElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></div>
 
-    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Region._yaml_loader"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Region._yaml_loader">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_yaml_loader</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">loader</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Loader</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Node</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">MappingNode</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">Exception</span>
         <span class="n">region</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">construct_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">elements</span> <span class="o">=</span> <span class="n">region</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"elements"</span><span class="p">)</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">region</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="bp">cls</span><span class="p">,),</span> <span class="n">elements</span><span class="p">)(</span><span class="o">**</span><span class="n">region</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="bp">cls</span><span class="p">,),</span> <span class="n">elements</span><span class="p">)(</span><span class="o">**</span><span class="n">region</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="Regions"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Regions">[docs]</a><span class="k">class</span> <span class="nc">Regions</span><span class="p">(</span><span class="n">Region</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">"""Pluralized version of :py:class:`~manen.page_object_model.Region`."""</span></div>
 
 
-<div class="viewcode-block" id="Frame"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Frame">[docs]</a><span class="k">class</span> <span class="nc">Frame</span><span class="p">(</span><span class="n">DomAccessor</span><span class="p">):</span>
+<div class="viewcode-block" id="Frame"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Frame">[docs]</a><span class="k">class</span> <span class="nc">Frame</span><span class="p">(</span><span class="n">DOMAccessor</span><span class="p">):</span>
     <span class="sd">"""Enable to work with &lt;iframe&gt; element."""</span>
 
-    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WebArea</span><span class="p">:</span>
+<div class="viewcode-block" id="Frame.__get__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Frame.__get__">[docs]</a>    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WebArea</span><span class="p">:</span>
         <span class="n">element</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_from</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">)</span>
         <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_elements</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">"FRAME"</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">WebArea</span><span class="p">)</span>  <span class="c1"># For mypy</span>
-        <span class="k">return</span> <span class="n">element</span>
+        <span class="k">return</span> <span class="n">element</span></div>
 
-    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">UnsettableElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></div>
+<div class="viewcode-block" id="Frame.__set__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Frame.__set__">[docs]</a>    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">UnsettableElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="Action"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Action">[docs]</a><span class="k">class</span> <span class="nc">Action</span><span class="p">:</span>
@@ -689,7 +682,7 @@
 <span class="sd">        &gt;&gt;&gt; page.query = Action("submit")</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Action.__init__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Action.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Args:</span>
 <span class="sd">            method (str): name of the method to call. This should be a method ones</span>
@@ -699,10 +692,10 @@
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">method</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span></div></div>
 
 
-<div class="viewcode-block" id="Element"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Element">[docs]</a><span class="k">class</span> <span class="nc">Element</span><span class="p">(</span><span class="n">DomAccessor</span><span class="p">):</span>
+<div class="viewcode-block" id="Element"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Element">[docs]</a><span class="k">class</span> <span class="nc">Element</span><span class="p">(</span><span class="n">DOMAccessor</span><span class="p">):</span>
     <span class="sd">"""Based on one or several selectors, extract a</span>
 <span class="sd">    :py:class:`selenium.webdriver.remote.webelement.WebElement` from a region or page.</span>
 
@@ -712,13 +705,13 @@
 <span class="sd">    :py:class:`~manen.page_object_model.WebArea`)</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"WebElement"</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_from</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">)</span>
+<div class="viewcode-block" id="Element.__get__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Element.__get__">[docs]</a>    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"WebElement"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_from</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">area_cls</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">UnsettableElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<div class="viewcode-block" id="Element.__set__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Element.__set__">[docs]</a>    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">UnsettableElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></div>
 
-    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Element._yaml_loader"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Element._yaml_loader">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_yaml_loader</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">loader</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Loader</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Node</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">SequenceNode</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">selectors</span><span class="o">=</span><span class="n">loader</span><span class="o">.</span><span class="n">construct_sequence</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
@@ -726,9 +719,7 @@
             <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">loader</span><span class="o">.</span><span class="n">construct_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">ScalarNode</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">selectors</span><span class="o">=</span><span class="p">[</span><span class="n">loader</span><span class="o">.</span><span class="n">construct_scalar</span><span class="p">(</span><span class="n">node</span><span class="p">)])</span>  <span class="c1"># type: ignore</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-            <span class="s2">"Unexpected node type encoutered while loading node `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">node</span>
-        <span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Unexpected node type encoutered while loading node `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">node</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="Elements"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.Elements">[docs]</a><span class="k">class</span> <span class="nc">Elements</span><span class="p">(</span><span class="n">Element</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -781,12 +772,12 @@
 <span class="sd">    """</span></div>
 
 
-<div class="viewcode-block" id="DatetimeElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.DatetimeElement">[docs]</a><span class="k">class</span> <span class="nc">DatetimeElement</span><span class="p">(</span><span class="n">TextElement</span><span class="p">,</span> <span class="n">post_processing</span><span class="o">=</span><span class="p">[</span><span class="n">dateparser</span><span class="o">.</span><span class="n">parse</span><span class="p">]):</span>
+<div class="viewcode-block" id="DateTimeElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.DateTimeElement">[docs]</a><span class="k">class</span> <span class="nc">DateTimeElement</span><span class="p">(</span><span class="n">TextElement</span><span class="p">,</span> <span class="n">post_processing</span><span class="o">=</span><span class="p">[</span><span class="n">dateparser</span><span class="o">.</span><span class="n">parse</span><span class="p">]):</span>
     <span class="sd">"""Extract a datetime from a text element matching a set of selectors."""</span></div>
 
 
-<div class="viewcode-block" id="DatetimeElements"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.DatetimeElements">[docs]</a><span class="k">class</span> <span class="nc">DatetimeElements</span><span class="p">(</span><span class="n">DatetimeElement</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">"""Pluralized version of :py:class:`~manen.page_object_model.DatetimeElement`."""</span></div>
+<div class="viewcode-block" id="DateTimeElements"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.DateTimeElements">[docs]</a><span class="k">class</span> <span class="nc">DateTimeElements</span><span class="p">(</span><span class="n">DateTimeElement</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">"""Pluralized version of :py:class:`~manen.page_object_model.DateTimeElement`."""</span></div>
 
 
 <div class="viewcode-block" id="OuterHtmlElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.OuterHtmlElement">[docs]</a><span class="k">class</span> <span class="nc">OuterHtmlElement</span><span class="p">(</span>
@@ -818,14 +809,14 @@
 <span class="sd">        &gt;&gt;&gt; login_page.password = Action("submit")</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+<div class="viewcode-block" id="InputElement.__set__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.InputElement.__set__">[docs]</a>    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
         <span class="k">with</span> <span class="n">area</span><span class="o">.</span><span class="n">switch_container</span><span class="p">()</span> <span class="k">as</span> <span class="n">container</span><span class="p">:</span>
             <span class="n">input_</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_selectors</span><span class="p">,</span> <span class="n">inside</span><span class="o">=</span><span class="n">container</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Action</span><span class="p">):</span>
                 <span class="nb">getattr</span><span class="p">(</span><span class="n">input_</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">method</span><span class="p">)(</span><span class="o">*</span><span class="n">value</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">value</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">input_</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-                <span class="n">input_</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+                <span class="n">input_</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="CheckboxElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.CheckboxElement">[docs]</a><span class="k">class</span> <span class="nc">CheckboxElement</span><span class="p">(</span>
@@ -837,7 +828,7 @@
 <span class="sd">    the DOM element.</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<div class="viewcode-block" id="CheckboxElement.__set__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.CheckboxElement.__set__">[docs]</a>    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">with</span> <span class="n">area</span><span class="o">.</span><span class="n">switch_container</span><span class="p">()</span> <span class="k">as</span> <span class="n">container</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -846,7 +837,7 @@
                 <span class="p">)</span>
             <span class="n">element</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_selectors</span><span class="p">,</span> <span class="n">inside</span><span class="o">=</span><span class="n">container</span><span class="p">)</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"checked"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"true"</span><span class="p">)</span> <span class="o">!=</span> <span class="n">value</span><span class="p">:</span>
-                <span class="n">element</span><span class="o">.</span><span class="n">click</span><span class="p">()</span></div>
+                <span class="n">element</span><span class="o">.</span><span class="n">click</span><span class="p">()</span></div></div>
 
 
 <div class="viewcode-block" id="RadioButtonElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.RadioButtonElement">[docs]</a><span class="k">class</span> <span class="nc">RadioButtonElement</span><span class="p">(</span><span class="n">Element</span><span class="p">):</span>
@@ -855,28 +846,24 @@
 <span class="sd">    DOM element with the specified value.</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">area_class</span><span class="p">):</span>
+<div class="viewcode-block" id="RadioButtonElement.__get__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.RadioButtonElement.__get__">[docs]</a>    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">area_class</span><span class="p">):</span>
         <span class="n">elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_from</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">area_class</span><span class="p">)</span>
         <span class="n">right_element</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">element</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span>
-            <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"checked"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"true"</span>
+            <span class="n">element</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span> <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"checked"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"true"</span>
         <span class="p">]</span>
-        <span class="k">return</span> <span class="n">right_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span> <span class="k">if</span> <span class="n">right_element</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">right_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span> <span class="k">if</span> <span class="n">right_element</span> <span class="k">else</span> <span class="kc">None</span></div>
 
-    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<div class="viewcode-block" id="RadioButtonElement.__set__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.RadioButtonElement.__set__">[docs]</a>    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">WebArea</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">with</span> <span class="n">area</span><span class="o">.</span><span class="n">switch_container</span><span class="p">()</span> <span class="k">as</span> <span class="n">container</span><span class="p">:</span>
             <span class="n">elements</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_selectors</span><span class="p">,</span> <span class="n">inside</span><span class="o">=</span><span class="n">container</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">right_element</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">element</span>
-                <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span>
-                <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span> <span class="o">==</span> <span class="n">value</span>
+                <span class="n">element</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span> <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span> <span class="o">==</span> <span class="n">value</span>
             <span class="p">]</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">right_element</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="sa">f</span><span class="s2">"The value </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> is not allowed for the radio button element."</span>
                 <span class="p">)</span>
-            <span class="n">right_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">click</span><span class="p">()</span></div>
+            <span class="n">right_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">click</span><span class="p">()</span></div></div>
 
 
 <div class="viewcode-block" id="SelectElement"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.SelectElement">[docs]</a><span class="k">class</span> <span class="nc">SelectElement</span><span class="p">(</span><span class="n">Element</span><span class="p">):</span>
@@ -885,32 +872,32 @@
 <span class="sd">    `official documentation &lt;https://www.selenium.dev/documentation/en/support_packages/working_with_select_elements/&gt;`_.  # pylint: disable=line-too-long</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">area_class</span><span class="p">):</span>
+<div class="viewcode-block" id="SelectElement.__get__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.SelectElement.__get__">[docs]</a>    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">area_class</span><span class="p">):</span>
         <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_from</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">area_class</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">Select</span><span class="p">(</span><span class="n">element</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">Select</span><span class="p">(</span><span class="n">element</span><span class="p">)</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">PageObjectLoader</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">Loader</span><span class="p">):</span>  <span class="c1"># pylint: disable=too-many-ancestors</span>
+<div class="viewcode-block" id="PageObjectLoader"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.PageObjectLoader">[docs]</a><span class="k">class</span> <span class="nc">PageObjectLoader</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">Loader</span><span class="p">):</span>  <span class="c1"># pylint: disable=too-many-ancestors</span>
     <span class="sd">"""Loader used to build page from a YAML file. This loader automatically</span>
 <span class="sd">    registers all classes in the current module having a method ``_yaml_loader``.</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="PageObjectLoader.__init__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.PageObjectLoader.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="n">this_module</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">__package__</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span><span class="p">]))</span>
         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">__all__</span><span class="p">:</span>
             <span class="n">class_</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">this_module</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">class_</span><span class="p">,</span> <span class="s2">"_yaml_loader"</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">add_constructor</span><span class="p">(</span><span class="s2">"!</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">class_</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">class_</span><span class="o">.</span><span class="n">_yaml_loader</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_constructor</span><span class="p">(</span><span class="s2">"!</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">class_</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">class_</span><span class="o">.</span><span class="n">_yaml_loader</span><span class="p">)</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">IgnorePageObjectLoader</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">Loader</span><span class="p">):</span>  <span class="c1"># pylint: disable=too-many-ancestors</span>
+<div class="viewcode-block" id="IgnorePageObjectLoader"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.IgnorePageObjectLoader">[docs]</a><span class="k">class</span> <span class="nc">IgnorePageObjectLoader</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">Loader</span><span class="p">):</span>  <span class="c1"># pylint: disable=too-many-ancestors</span>
     <span class="sd">"""Loader used to build page from a YAML file. This loader automatically</span>
 <span class="sd">    registers all classes in the current module having a method ``_yaml_loader``.</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="nf">ignore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loader</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Loader</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<div class="viewcode-block" id="IgnorePageObjectLoader.ignore"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.IgnorePageObjectLoader.ignore">[docs]</a>    <span class="k">def</span> <span class="nf">ignore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loader</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Loader</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="sd">"""Prevent loading a YAML file with special classes when a tag is</span>
 <span class="sd">        specified. This is useful when you want to a Manen YAML page without</span>
 <span class="sd">        loading the element but only a regular Python object.</span>
@@ -934,19 +921,19 @@
             <span class="k">return</span> <span class="n">loader</span><span class="o">.</span><span class="n">construct_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">ScalarNode</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">loader</span><span class="o">.</span><span class="n">construct_scalar</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unexpected node type encoutered while loading node `</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">`"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unexpected node type encoutered while loading node `</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">`"</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="IgnorePageObjectLoader.__init__"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.IgnorePageObjectLoader.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="n">this_module</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">__package__</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span><span class="p">]))</span>
         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">__all__</span><span class="p">:</span>
             <span class="n">class_</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">this_module</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">class_</span><span class="p">,</span> <span class="s2">"_yaml_loader"</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">add_constructor</span><span class="p">(</span><span class="s2">"!</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">class_</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_constructor</span><span class="p">(</span><span class="s2">"!</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">class_</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore</span><span class="p">)</span></div></div>
 
 
-<span class="k">def</span> <span class="nf">load_selector_config</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">to_element</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<div class="viewcode-block" id="load_selector_config"><a class="viewcode-back" href="../../manen/manen.page_object_model.html#manen.page_object_model.load_selector_config">[docs]</a><span class="k">def</span> <span class="nf">load_selector_config</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">to_element</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
     <span class="sd">"""Load the Manen YAML page from a specified path. You can choose whether</span>
 <span class="sd">    or not the element of a Manen page should return Manen elements or just the</span>
 <span class="sd">    a regular Python object.</span>
@@ -960,9 +947,7 @@
 <span class="sd">        Dict[str, Any]: Manen page loaded a Python mapping</span>
 <span class="sd">    """</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
-            <span class="n">file</span><span class="p">,</span> <span class="n">PageObjectLoader</span> <span class="k">if</span> <span class="n">to_element</span> <span class="k">else</span> <span class="n">IgnorePageObjectLoader</span>
-        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">PageObjectLoader</span> <span class="k">if</span> <span class="n">to_element</span> <span class="k">else</span> <span class="n">IgnorePageObjectLoader</span><span class="p">)</span></div>
 </pre></div>
         </article>
       </div>

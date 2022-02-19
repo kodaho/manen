@@ -576,7 +576,7 @@ div.rendered_html tbody tr:hover {
         <span class="n">version</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">"h3 span.package-snippet__version"</span><span class="p">)</span>
         <span class="n">link</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">LinkElement</span><span class="p">(</span><span class="s2">"a.package-snippet"</span><span class="p">)</span>
         <span class="n">description</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">"p.package-snippet__description"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">"(no description provided)"</span><span class="p">)</span>
-        <span class="n">release_date</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">DatetimeElement</span><span class="p">(</span><span class="s2">"span.package-snippet__released"</span><span class="p">)</span>
+        <span class="n">release_date</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">DateTimeElement</span><span class="p">(</span><span class="s2">"span.package-snippet__released"</span><span class="p">)</span>
 
     <span class="n">n_results</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">IntegerElement</span><span class="p">(</span><span class="s2">"//*[@id='content']//form/div[1]/div[1]/p/strong"</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">order_by</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">SelectElement</span><span class="p">(</span><span class="s1">'select#order'</span><span class="p">)</span>
@@ -593,7 +593,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Number of results: 1439
+Number of results: 1445
 </pre></div></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">page.results</span></code> will be a list of special classes, that will contain all the elements we have specified inside the region.</p>
@@ -612,7 +612,7 @@ Number of results: 1439
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;__main__.SearchResultPage.ResultRegions at 0x10cc08c10&gt;
+&lt;__main__.SearchResultPage.ResultRegions at 0x107fb0a30&gt;
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -632,8 +632,8 @@ Number of results: 1439
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Name: manen
-Version: 0.1.0
-Release date: 2022-01-31 00:00:00
+Version: 0.1.1
+Release date: 2022-02-12 00:00:00
 URL: https://pypi.org/project/manen/
 </pre></div></div>
 </div>
@@ -676,8 +676,8 @@ URL: https://pypi.org/project/manen/
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 ['CheckboxElement',
- 'DatetimeElement',
- 'DatetimeElements',
+ 'DateTimeElement',
+ 'DateTimeElements',
  'Element',
  'Elements',
  'ImageSourceElement',

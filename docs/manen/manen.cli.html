@@ -209,7 +209,13 @@
         <article role="main">
           <span class="target" id="module-manen.cli"></span><section id="manen-cli">
 <h1>manen.cli<a class="headerlink" href="#manen-cli" title="Permalink to this headline">#</a></h1>
-<p>CLI for <a class="reference internal" href="manen.html#module-manen" title="manen"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen</span></code></a>.</p>
+<p>Command Line Interface for <a class="reference internal" href="manen.html#module-manen" title="manen"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen</span></code></a>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="manen.cli.cli">
+<span class="sig-prename descclassname"><span class="pre">manen.cli.</span></span><span class="sig-name descname"><span class="pre">cli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/cli.html#cli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.cli.cli" title="Permalink to this definition">#</a></dt>
+<dd><p>Command line entrypoint for the package. After retrieving the given argument(s) and
+option(s), it will run the right workflow according to the specified options.</p>
+</dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="manen.cli.download">
 <span class="sig-prename descclassname"><span class="pre">manen.cli.</span></span><span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">platform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">browser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">versions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/cli.html#download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.cli.download" title="Permalink to this definition">#</a></dt>
@@ -230,18 +236,68 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="manen.cli.download_workflow">
 <span class="sig-prename descclassname"><span class="pre">manen.cli.</span></span><span class="sig-name descname"><span class="pre">download_workflow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/cli.html#download_workflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.cli.download_workflow" title="Permalink to this definition">#</a></dt>
-<dd><p>Build the pipeline of successive questions used to identify the drivers
-to be downloaded.</p>
+<dd><p>Build the pipeline of successive questions used to identify the drivers to be downloaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>list with metadata about the successive questions to be asked by</dt><dd><p><cite>questionary.</cite></p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List[Dict]</p>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="manen.cli.get_args">
-<span class="sig-prename descclassname"><span class="pre">manen.cli.</span></span><span class="sig-name descname"><span class="pre">get_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/cli.html#get_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.cli.get_args" title="Permalink to this definition">#</a></dt>
-<dd><p>Get arguments from the command line.</p>
+<span class="sig-prename descclassname"><span class="pre">manen.cli.</span></span><span class="sig-name descname"><span class="pre">get_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.Namespace" title="(in Python v3.10)"><span class="pre">argparse.Namespace</span></a></span></span><a class="reference internal" href="../_modules/manen/cli.html#get_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.cli.get_args" title="Permalink to this definition">#</a></dt>
+<dd><p>Parse the arguments specified in the command line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>class containing all options as attributes</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.Namespace" title="(in Python v3.10)">argparse.Namespace</a></p>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="manen.cli.main">
-<span class="sig-prename descclassname"><span class="pre">manen.cli.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/cli.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.cli.main" title="Permalink to this definition">#</a></dt>
-<dd><p>Main function run by the CLI.</p>
+<dt class="sig sig-object py" id="manen.cli.with_browser_parser">
+<span class="sig-prename descclassname"><span class="pre">manen.cli.</span></span><span class="sig-name descname"><span class="pre">with_browser_parser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subparser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">argparse._SubParsersAction</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/cli.html#with_browser_parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.cli.with_browser_parser" title="Permalink to this definition">#</a></dt>
+<dd><p>Build the parser for the <cite>driver</cite> sub-command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>subparser</strong> (<em>argparse._SubParsersAction</em>) – subparser in which the command <cite>browser</cite> will
+be add</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>argparse.ArgumentParser</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="manen.cli.with_driver_download_parser">
+<span class="sig-prename descclassname"><span class="pre">manen.cli.</span></span><span class="sig-name descname"><span class="pre">with_driver_download_parser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subparser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">argparse._SubParsersAction</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/cli.html#with_driver_download_parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.cli.with_driver_download_parser" title="Permalink to this definition">#</a></dt>
+<dd><p>Build the subparser used for the download sub-command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>subparser</strong> (<em>argparse._SubParsersAction</em>) – subparser in which the command
+<cite>driver download</cite> will be add</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="manen.cli.with_driver_parser">
+<span class="sig-prename descclassname"><span class="pre">manen.cli.</span></span><span class="sig-name descname"><span class="pre">with_driver_parser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subparser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">argparse._SubParsersAction</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/cli.html#with_driver_parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.cli.with_driver_parser" title="Permalink to this definition">#</a></dt>
+<dd><p>Build the parser for the <cite>driver</cite> sub-command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>subparser</strong> (<em>argparse._SubParsersAction</em>) – subparser in which the command <cite>driver</cite> will
+be add</p>
+</dd>
+</dl>
 </dd></dl>
 </section>
 

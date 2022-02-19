@@ -68,7 +68,7 @@
     {
      "data": {
       "text/plain": [
-       "(97, 0, 4692, 71)"
+       "(98, 0, 4758, 102)"
       ]
      },
      "execution_count": 2,
@@ -109,7 +109,7 @@
     {
      "data": {
       "text/plain": [
-       "(97, 1, 34, 80)"
+       "(98, 1, 35, 101)"
       ]
      },
      "execution_count": 4,
@@ -187,7 +187,7 @@
     {
      "data": {
       "text/plain": [
-       "(97, 0, 4692, 71)"
+       "(98, 0, 4758, 102)"
       ]
      },
      "execution_count": 6,
@@ -240,7 +240,7 @@
     {
      "data": {
       "text/plain": [
-       "'/***/manen/assets/drivers/darwin/chrome/97.0.4692.71/chromedriver'"
+       "'/***/manen/assets/drivers/darwin/chrome/98.0.4758.102/chromedriver'"
       ]
      },
      "execution_count": 8,
@@ -322,7 +322,11 @@
     {
      "data": {
       "text/plain": [
-       "[{'path': '/***/manen/assets/drivers/darwin/chrome/97.0.4692.71/chromedriver',\n",
+       "[{'path': '/***/manen/assets/drivers/darwin/chrome/98.0.4758.102/chromedriver',\n",
+       "  'version': '98.0.4758',\n",
+       "  'browser': 'chrome',\n",
+       "  'os': 'darwin'},\n",
+       " {'path': '/***/manen/assets/drivers/darwin/chrome/97.0.4692.71/chromedriver',\n",
        "  'version': '97.0.4692',\n",
        "  'browser': 'chrome',\n",
        "  'os': 'darwin'}]"
@@ -363,21 +367,33 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      " 🌔 manen CLI\n",
+      "usage: manen driver download [-h] [-i] [-b {chrome,brave}] [-p {Darwin,Linux}]\n",
+      "                             [-v VERSION [VERSION ...]]\n",
       "\n",
-      "usage: manen [-h] {download}\n",
-      "\n",
-      "positional arguments:\n",
-      "  {download}\n",
+      "Download one or several drivers for a specific browser on a given OS.\n",
       "\n",
       "optional arguments:\n",
-      "  -h, --help  show this help message and exit\n"
+      "  -h, --help            show this help message and exit\n",
+      "  -i, --interactive     Set the specifications for the download through a\n",
+      "                        serie of interactive questions. If specified, the\n",
+      "                        options of the specifications group must not be set.\n",
+      "\n",
+      "specifications:\n",
+      "  -b {chrome,brave}, --browser {chrome,brave}\n",
+      "                        Browser that will be used to launch the Selenium/manen\n",
+      "                        application.\n",
+      "  -p {Darwin,Linux}, --platform {Darwin,Linux}\n",
+      "                        Platform (OS) on which the driver binary will run.\n",
+      "                        Note that 'Darwin' is for MacOS and you can use the\n",
+      "                        alias 'Mac' for this OS.\n",
+      "  -v VERSION [VERSION ...], --version VERSION [VERSION ...]\n",
+      "                        List of driver versions to be downloaded\n"
      ]
     }
    ],
    "source": [
     "%%bash\n",
-    "manen -h"
+    "manen driver download -h"
    ]
   },
   {
@@ -394,9 +410,7 @@
    "metadata": {},
    "source": [
     "```shell\n",
-    "$ manen download\n",
-    " 🌔 manen CLI\n",
-    "\n",
+    "$ manen driver download -i\n",
     "» Starting interactive CLI to download webdrivers...\n",
     "? What is your OS? Mac OS\n",
     "? For which browser do you want to download the drivers? Chrome / Brave\n",
@@ -413,6 +427,12 @@
     "   ○ 98.0.4758.48\n",
     "```"
    ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b0355fe9",
+   "metadata": {},
+   "source": []
   }
  ],
  "metadata": {

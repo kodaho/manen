@@ -93,8 +93,8 @@ if TYPE_CHECKING:
 __all__ = (
     "Action",
     "CheckboxElement",
-    "DatetimeElement",
-    "DatetimeElements",
+    "DateTimeElement",
+    "DateTimeElements",
     "Element",
     "Elements",
     "Frame",
@@ -219,7 +219,7 @@ class WebArea:
         )
 
 
-class DomAccessor:
+class DOMAccessor:
     """Main interface of a DOM element."""
 
     _post_processing: List["PostProcessingFunction"] = []
@@ -263,9 +263,7 @@ class DomAccessor:
                 getting the element from the DOM. Defaults to None.
         """
         self._selectors = (
-            selectors
-            if selectors is None or isinstance(selectors, list)
-            else [selectors]
+            selectors if selectors is None or isinstance(selectors, list) else [selectors]
         )
         self._default = default
         self._wait = wait
@@ -296,9 +294,7 @@ class DomAccessor:
         selectors = (
             self._selectors
             if self._selectors is not None
-            else area_class._selectors_from_meta(  # pylint: disable=protected-access
-                self._name
-            )
+            else area_class._selectors_from_meta(self._name)  # pylint: disable=protected-access
         )
 
         with area.switch_container() as container:
@@ -324,9 +320,7 @@ class DomAccessor:
         base = (WebArea,)
         metadata = dict(area.Meta.__dict__) if area else {}
         metadata.update(
-            selectors=getattr(area.Meta, "selectors", {})
-            .get("elements", {})
-            .get(self._name, {})
+            selectors=getattr(area.Meta, "selectors", {}).get("elements", {}).get(self._name, {})
         )
         base_dict = {
             **dict(self.__class__.__dict__),
@@ -334,8 +328,7 @@ class DomAccessor:
         }
         if self._many:
             return [
-                type(name, base, base_dict)(element, _context=context)
-                for element in elements
+                type(name, base, base_dict)(element, _context=context) for element in elements
             ]
         return type(name, base, base_dict)(elements, _context=context)
 
@@ -411,7 +404,7 @@ class Page(WebArea):
         raise ManenException("No URL specified.")
 
 
-class Region(DomAccessor):
+class Region(DOMAccessor):
     """Modelize a region of a webpage. A region is a set of elements contained
     in the same container.
 
@@ -456,7 +449,7 @@ class Regions(Region, many=True):
     """Pluralized version of :py:class:`~manen.page_object_model.Region`."""
 
 
-class Frame(DomAccessor):
+class Frame(DOMAccessor):
     """Enable to work with <iframe> element."""
 
     def __get__(self, area, area_cls) -> WebArea:
@@ -493,7 +486,7 @@ class Action:
         self.kwargs = kwargs
 
 
-class Element(DomAccessor):
+class Element(DOMAccessor):
     """Based on one or several selectors, extract a
     :py:class:`selenium.webdriver.remote.webelement.WebElement` from a region or page.
 
@@ -517,9 +510,7 @@ class Element(DomAccessor):
             return cls(**loader.construct_mapping(node))
         if isinstance(node, yaml.nodes.ScalarNode):
             return cls(selectors=[loader.construct_scalar(node)])  # type: ignore
-        raise TypeError(
-            "Unexpected node type encoutered while loading node `%s`" % node
-        )
+        raise TypeError("Unexpected node type encoutered while loading node `%s`" % node)
 
 
 class Elements(Element, many=True):
@@ -572,12 +563,12 @@ class IntegerElements(IntegerElement, many=True):
     """
 
 
-class DatetimeElement(TextElement, post_processing=[dateparser.parse]):
+class DateTimeElement(TextElement, post_processing=[dateparser.parse]):
     """Extract a datetime from a text element matching a set of selectors."""
 
 
-class DatetimeElements(DatetimeElement, many=True):
-    """Pluralized version of :py:class:`~manen.page_object_model.DatetimeElement`."""
+class DateTimeElements(DateTimeElement, many=True):
+    """Pluralized version of :py:class:`~manen.page_object_model.DateTimeElement`."""
 
 
 class OuterHtmlElement(
@@ -649,9 +640,7 @@ class RadioButtonElement(Element):
     def __get__(self, area, area_class):
         elements = self._get_from(area, area_class)
         right_element = [
-            element
-            for element in elements
-            if element.get_attribute("checked") == "true"
+            element for element in elements if element.get_attribute("checked") == "true"
         ]
         return right_element[0].get_attribute("value") if right_element else None
 
@@ -659,9 +648,7 @@ class RadioButtonElement(Element):
         with area.switch_container() as container:
             elements = find(self._selectors, inside=container, many=True)
             right_element = [
-                element
-                for element in elements
-                if element.get_attribute("value") == value
+                element for element in elements if element.get_attribute("value") == value
             ]
             if not right_element:
                 raise ValueError(
@@ -751,6 +738,4 @@ def load_selector_config(path: str, to_element=False) -> Dict[str, Any]:
         Dict[str, Any]: Manen page loaded a Python mapping
     """
     with open(path, mode="r", encoding="utf-8") as file:
-        return yaml.load(
-            file, PageObjectLoader if to_element else IgnorePageObjectLoader
-        )
+        return yaml.load(file, PageObjectLoader if to_element else IgnorePageObjectLoader)

@@ -1,6 +1,17 @@
 Changelog
 =========
 
+[0.1.2] - 2022-02-19
+--------------------
+
+**Fix bug in the download workflow of the CLI**
+
+Fixed
+^^^^^
+
+- Fix a ``TypeError`` in the download workflow (variable wrongly named)
+
+
 [0.1.1] - 2022-02-12
 --------------------
 
@@ -15,6 +26,7 @@ Changed
 - Add the section `About the project` in the documentation (moved from home page).
 - Complete user guides.
 - Rewording and reformatting of several sections.
+
 
 [0.1.0] - 2022-01-31
 --------------------

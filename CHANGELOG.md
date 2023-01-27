@@ -3,7 +3,7 @@
 ## [0.2.1] - (unreleased)
 
 ### Changed
-- `download` CLI command no longer raise an error if a browser is not installed.
+- `download` CLI command no longer raises an error if a browser is not installed.
 - Allow browser version to have only major and minor components.
 
 ### Fixed

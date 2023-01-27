@@ -4,13 +4,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
-    <link rel="shortcut icon" href="../../_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
+    <link rel="shortcut icon" href="../../_static/favicon.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
         <title>manen.cli - manen</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -21,24 +21,28 @@
   --color-code-foreground: black;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #263238;
-  --color-code-foreground: #EEFFFF;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #263238;
   --color-code-foreground: #EEFFFF;
   
     }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+      }
+    }
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -192,7 +196,14 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -207,12 +218,12 @@
         </div>
         <article role="main">
           <h1>Source code for manen.cli</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">manen.cli</span>
 <span class="sd">=========</span>
 
 <span class="sd">Command Line Interface for :py:mod:`manen`.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -230,135 +241,135 @@
 
 
 <div class="viewcode-block" id="with_browser_parser"><a class="viewcode-back" href="../../manen/manen.cli.html#manen.cli.with_browser_parser">[docs]</a><span class="k">def</span> <span class="nf">with_browser_parser</span><span class="p">(</span><span class="n">subparser</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">_SubParsersAction</span><span class="p">):</span>
-    <span class="sd">"""Build the parser for the `driver` sub-command.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the parser for the `driver` sub-command.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        subparser (argparse._SubParsersAction): subparser in which the command `browser` will</span>
 <span class="sd">            be add</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        argparse.ArgumentParser</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">subparser</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
-        <span class="s2">"browser"</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">"Utils to get information about the installed browser."</span><span class="p">,</span>
+        <span class="s2">&quot;browser&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Utils to get information about the installed browser.&quot;</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="with_driver_parser"><a class="viewcode-back" href="../../manen/manen.cli.html#manen.cli.with_driver_parser">[docs]</a><span class="k">def</span> <span class="nf">with_driver_parser</span><span class="p">(</span><span class="n">subparser</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">_SubParsersAction</span><span class="p">):</span>
-    <span class="sd">"""Build the parser for the `driver` sub-command.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the parser for the `driver` sub-command.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        subparser (argparse._SubParsersAction): subparser in which the command `driver` will</span>
 <span class="sd">            be add</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">parser</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span> <span class="o">=</span> <span class="n">subparser</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
-        <span class="s2">"driver"</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">"Management of the drivers executable needed to launch a Selenium/manen application."</span><span class="p">,</span>
+        <span class="s2">&quot;driver&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Management of the drivers executable needed to launch a Selenium/manen application.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">child_parser</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">_SubParsersAction</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">(</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s2">"command"</span><span class="p">,</span>
-        <span class="n">title</span><span class="o">=</span><span class="s2">"subcommands"</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;command&quot;</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;subcommands&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">with_driver_download_parser</span><span class="p">(</span><span class="n">child_parser</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="with_driver_download_parser"><a class="viewcode-back" href="../../manen/manen.cli.html#manen.cli.with_driver_download_parser">[docs]</a><span class="k">def</span> <span class="nf">with_driver_download_parser</span><span class="p">(</span><span class="n">subparser</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">_SubParsersAction</span><span class="p">):</span>
-    <span class="sd">"""Build the subparser used for the download sub-command.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the subparser used for the download sub-command.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        subparser (argparse._SubParsersAction): subparser in which the command</span>
 <span class="sd">            `driver download` will be add</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">subparser</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
-        <span class="s2">"download"</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">"Download one or several drivers for a specific browser on a given OS."</span><span class="p">,</span>
+        <span class="s2">&quot;download&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Download one or several drivers for a specific browser on a given OS.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">"-i"</span><span class="p">,</span>
-        <span class="s2">"--interactive"</span><span class="p">,</span>
-        <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">"Set the specifications for the download through a serie of interactive questions. "</span>
-        <span class="s2">"If specified, the options of the specifications group must not be set."</span><span class="p">,</span>
+        <span class="s2">&quot;-i&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--interactive&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Set the specifications for the download through a serie of interactive questions. &quot;</span>
+        <span class="s2">&quot;If specified, the options of the specifications group must not be set.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">spec_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">"specifications"</span><span class="p">)</span>
+    <span class="n">spec_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;specifications&quot;</span><span class="p">)</span>
     <span class="n">spec_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">"-b"</span><span class="p">,</span>
-        <span class="s2">"--browser"</span><span class="p">,</span>
+        <span class="s2">&quot;-b&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--browser&quot;</span><span class="p">,</span>
         <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">"chrome"</span><span class="p">,</span> <span class="s2">"brave"</span><span class="p">],</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chrome&quot;</span><span class="p">,</span> <span class="s2">&quot;brave&quot;</span><span class="p">],</span>
         <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">"Browser that will be used to launch the Selenium/manen application."</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Browser that will be used to launch the Selenium/manen application.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">spec_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">"-p"</span><span class="p">,</span>
-        <span class="s2">"--platform"</span><span class="p">,</span>
+        <span class="s2">&quot;-p&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--platform&quot;</span><span class="p">,</span>
         <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">"Mac"</span><span class="p">,</span>
-        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">"Darwin"</span><span class="p">,</span> <span class="s2">"Linux"</span><span class="p">],</span>
-        <span class="nb">type</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="p">{</span><span class="s2">"mac"</span><span class="p">:</span> <span class="s2">"Darwin"</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">"Platform (OS) on which the driver binary will run. Note that 'Darwin' is for MacOS "</span>
-        <span class="s2">"and you can use the alias 'Mac' for this OS."</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;Mac&quot;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Darwin&quot;</span><span class="p">,</span> <span class="s2">&quot;Linux&quot;</span><span class="p">],</span>
+        <span class="nb">type</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mac&quot;</span><span class="p">:</span> <span class="s2">&quot;Darwin&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Platform (OS) on which the driver binary will run. Note that &#39;Darwin&#39; is for MacOS &quot;</span>
+        <span class="s2">&quot;and you can use the alias &#39;Mac&#39; for this OS.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">spec_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">"-v"</span><span class="p">,</span>
-        <span class="s2">"--version"</span><span class="p">,</span>
-        <span class="n">nargs</span><span class="o">=</span><span class="s2">"+"</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">"List of driver versions to be downloaded"</span><span class="p">,</span>
+        <span class="s2">&quot;-v&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--version&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;List of driver versions to be downloaded&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">parser</span></div>
 
 
 <div class="viewcode-block" id="download_workflow"><a class="viewcode-back" href="../../manen/manen.cli.html#manen.cli.download_workflow">[docs]</a><span class="k">def</span> <span class="nf">download_workflow</span><span class="p">():</span>
-    <span class="sd">"""Build the pipeline of successive questions used to identify the drivers to be downloaded.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the pipeline of successive questions used to identify the drivers to be downloaded.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        List[Dict]: list with metadata about the successive questions to be asked by</span>
 <span class="sd">            `questionary.`</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">chrome_version</span> <span class="o">=</span> <span class="n">chrome_app</span><span class="o">.</span><span class="n">installed_version</span><span class="p">()</span>
     <span class="n">brave_version</span> <span class="o">=</span> <span class="n">brave_app</span><span class="o">.</span><span class="n">installed_version</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">is_compatible</span><span class="p">(</span><span class="n">version</span><span class="p">):</span>
         <span class="n">browsers</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">version</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="n">chrome_version</span><span class="p">[:</span><span class="mi">3</span><span class="p">]:</span>
-            <span class="n">browsers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Chrome"</span><span class="p">)</span>
+            <span class="n">browsers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Chrome&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">version</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="n">brave_version</span><span class="p">[:</span><span class="mi">3</span><span class="p">]:</span>
-            <span class="n">browsers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Brave"</span><span class="p">)</span>
+            <span class="n">browsers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Brave&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">browsers</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">" (compatible with </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">browsers</span><span class="p">)</span><span class="si">}</span><span class="s2">)"</span>
-        <span class="k">return</span> <span class="s2">""</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot; (compatible with </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">browsers</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
 
     <span class="k">return</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"select"</span><span class="p">,</span>
-            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"platform"</span><span class="p">,</span>
-            <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"What is your OS?"</span><span class="p">,</span>
-            <span class="s2">"choices"</span><span class="p">:</span> <span class="p">[</span>
-                <span class="n">Choice</span><span class="p">(</span><span class="s2">"Mac OS"</span><span class="p">,</span> <span class="s2">"Darwin"</span><span class="p">),</span>
-                <span class="n">Choice</span><span class="p">(</span><span class="s2">"Linux"</span><span class="p">,</span> <span class="s2">"Linux"</span><span class="p">),</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;select&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;platform&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;What is your OS?&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;choices&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Choice</span><span class="p">(</span><span class="s2">&quot;Mac OS&quot;</span><span class="p">,</span> <span class="s2">&quot;Darwin&quot;</span><span class="p">),</span>
+                <span class="n">Choice</span><span class="p">(</span><span class="s2">&quot;Linux&quot;</span><span class="p">,</span> <span class="s2">&quot;Linux&quot;</span><span class="p">),</span>
             <span class="p">],</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"select"</span><span class="p">,</span>
-            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"browser"</span><span class="p">,</span>
-            <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"For which browser do you want to download the drivers?"</span><span class="p">,</span>
-            <span class="s2">"choices"</span><span class="p">:</span> <span class="p">[</span>
-                <span class="n">Choice</span><span class="p">(</span><span class="s2">"Chrome / Brave"</span><span class="p">,</span> <span class="s2">"chrome"</span><span class="p">),</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;select&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;browser&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;For which browser do you want to download the drivers?&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;choices&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Choice</span><span class="p">(</span><span class="s2">&quot;Chrome / Brave&quot;</span><span class="p">,</span> <span class="s2">&quot;chrome&quot;</span><span class="p">),</span>
             <span class="p">],</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"checkbox"</span><span class="p">,</span>
-            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"versions"</span><span class="p">,</span>
-            <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Choose the version you want to download."</span><span class="p">,</span>
-            <span class="s2">"choices"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">choices</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;checkbox&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;versions&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Choose the version you want to download.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;choices&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">choices</span><span class="p">:</span> <span class="p">[</span>
                 <span class="n">Choice</span><span class="p">(</span>
-                    <span class="s2">"</span><span class="si">{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="n">version_as_str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">"version"</span><span class="p">]),</span>
-                        <span class="n">is_compatible</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">"version"</span><span class="p">]),</span>
+                    <span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">version_as_str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]),</span>
+                        <span class="n">is_compatible</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]),</span>
                     <span class="p">),</span>
-                    <span class="n">version_as_str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">"version"</span><span class="p">]),</span>
+                    <span class="n">version_as_str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]),</span>
                 <span class="p">)</span>
                 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">chromedriver</span><span class="o">.</span><span class="n">list_versions</span><span class="p">()[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span>
             <span class="p">],</span>
@@ -367,7 +378,7 @@
 
 
 <div class="viewcode-block" id="download"><a class="viewcode-back" href="../../manen/manen.cli.html#manen.cli.download">[docs]</a><span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">platform</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">browser</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">versions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
-    <span class="sd">"""Download the drivers based on the information provided in questionary pipeline.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download the drivers based on the information provided in questionary pipeline.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        platform (str): platform on which the drivers will run (1st answer in CLI workflow)</span>
@@ -376,35 +387,35 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        NotImplementedError: if the browser is different from Chrome or Brave.</span>
-<span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">browser</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"chrome"</span><span class="p">,</span> <span class="s2">"brave"</span><span class="p">):</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">browser</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;chrome&quot;</span><span class="p">,</span> <span class="s2">&quot;brave&quot;</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">versions</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">"↧ Dowloading version </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2"> for the </span><span class="si">{</span><span class="n">browser</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2"> browser on "</span><span class="p">,</span>
-                <span class="s2">"Mac"</span> <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"darwin"</span> <span class="k">else</span> <span class="n">platform</span><span class="p">,</span>
-                <span class="s2">"..."</span><span class="p">,</span>
-                <span class="n">sep</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;↧ Dowloading version </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2"> for the </span><span class="si">{</span><span class="n">browser</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2"> browser on &quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Mac&quot;</span> <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;darwin&quot;</span> <span class="k">else</span> <span class="n">platform</span><span class="p">,</span>
+                <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+                <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">driver_file</span> <span class="o">=</span> <span class="n">chromedriver</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">platform_system</span><span class="o">=</span><span class="n">platform</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Driver file available at </span><span class="si">{</span><span class="n">driver_file</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Driver file available at </span><span class="si">{</span><span class="n">driver_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"Dowloading drivers for browser </span><span class="si">{</span><span class="n">browser</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2"> is not currently supported."</span>
+            <span class="sa">f</span><span class="s2">&quot;Dowloading drivers for browser </span><span class="si">{</span><span class="n">browser</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2"> is not currently supported.&quot;</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="get_args"><a class="viewcode-back" href="../../manen/manen.cli.html#manen.cli.get_args">[docs]</a><span class="k">def</span> <span class="nf">get_args</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">:</span>
-    <span class="sd">"""Parse the arguments specified in the command line.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse the arguments specified in the command line.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        argparse.Namespace: class containing all options as attributes</span>
-<span class="sd">    """</span>
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s2">"manen"</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--version"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"version"</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="sa">f</span><span class="s2">"%(prog)s </span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s2">&quot;manen&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--version&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;%(prog)s </span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">subparser</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">(</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s2">"section"</span><span class="p">,</span>
-        <span class="n">title</span><span class="o">=</span><span class="s2">"commands"</span><span class="p">,</span>
-        <span class="n">metavar</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">  Command managed by manen for resource management"</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;section&quot;</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;commands&quot;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Command managed by manen for resource management&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">with_driver_parser</span><span class="p">(</span><span class="n">subparser</span><span class="p">)</span>
     <span class="c1"># with_browser_parser(subparser)</span>
@@ -412,31 +423,31 @@
 
 
 <div class="viewcode-block" id="cli"><a class="viewcode-back" href="../../manen/manen.cli.html#manen.cli.cli">[docs]</a><span class="k">def</span> <span class="nf">cli</span><span class="p">():</span>
-    <span class="sd">"""Command line entrypoint for the package. After retrieving the given argument(s) and</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Command line entrypoint for the package. After retrieving the given argument(s) and</span>
 <span class="sd">    option(s), it will run the right workflow according to the specified options.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">get_args</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s2">"download"</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;download&quot;</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">interactive</span> <span class="ow">and</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">browser</span> <span class="ow">or</span> <span class="n">args</span><span class="o">.</span><span class="n">version</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span>
-                <span class="s2">"⤫ Inconsistent CLI options choice; if you want to interactive mode, "</span>
-                <span class="s2">"the specifications of the drivers must not be set at the same time."</span>
+                <span class="s2">&quot;⤫ Inconsistent CLI options choice; if you want to interactive mode, &quot;</span>
+                <span class="s2">&quot;the specifications of the drivers must not be set at the same time.&quot;</span>
             <span class="p">)</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">"» Starting interactive CLI to download webdrivers..."</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;» Starting interactive CLI to download webdrivers...&quot;</span><span class="p">)</span>
             <span class="n">specifications</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">(</span><span class="n">download_workflow</span><span class="p">())</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">specifications</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s2">"platform"</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">platform</span><span class="p">,</span>
-                <span class="s2">"browser"</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">browser</span><span class="p">,</span>
-                <span class="s2">"versions"</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
+                <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">platform</span><span class="p">,</span>
+                <span class="s2">&quot;browser&quot;</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">browser</span><span class="p">,</span>
+                <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
             <span class="p">}</span>
-        <span class="k">if</span> <span class="n">specifications</span> <span class="ow">and</span> <span class="n">specifications</span><span class="p">[</span><span class="s2">"browser"</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">specifications</span> <span class="ow">and</span> <span class="n">specifications</span><span class="p">[</span><span class="s2">&quot;browser&quot;</span><span class="p">]:</span>
             <span class="n">download</span><span class="p">(</span><span class="o">**</span><span class="n">specifications</span><span class="p">)</span></div>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">cli</span><span class="p">()</span>
 </pre></div>
         </article>

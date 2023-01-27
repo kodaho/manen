@@ -5,13 +5,13 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="manen.helpers" href="manen.helpers.html" /><link rel="prev" title="manen.exceptions" href="manen.exceptions.html" />
 
-    <link rel="shortcut icon" href="../_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
+    <link rel="shortcut icon" href="../_static/favicon.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
         <title>manen.finder - manen</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -22,24 +22,28 @@
   --color-code-foreground: black;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #263238;
-  --color-code-foreground: #EEFFFF;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #263238;
   --color-code-foreground: #EEFFFF;
   
     }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+      }
+    }
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -193,7 +197,15 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -213,7 +225,7 @@
 inside one or several Selenium elements.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="manen.finder.find">
-<span class="sig-prename descclassname"><span class="pre">manen.finder.</span></span><span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><span class="pre">Any</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NotImplemented</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inside</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">SeleniumElement</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">SeleniumElement</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">many</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="../_modules/manen/finder.html#find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.finder.find" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">manen.finder.</span></span><span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NotImplemented</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inside</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">SeleniumElement</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">SeleniumElement</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">many</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="../_modules/manen/finder.html#find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.finder.find" title="Permalink to this definition">#</a></dt>
 <dd><p>Retrieve DOM elements from Selenium WebElements matching selector.
 The function is highly customizable in order to match the different
 scenarios you may have when retriving elements from HTML source code.
@@ -227,10 +239,11 @@ CSS, tag…)</p></li>
 <li><p>search in the whole page or in one or several specific areas</p></li>
 </ul>
 <p>The supported selection methods are:</p>
-<div class="table-wrapper"><table class="docutils align-default">
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
 <colgroup>
-<col style="width: 38%"/>
-<col style="width: 62%"/>
+<col style="width: 38%" />
+<col style="width: 62%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Selection Method</p></th>
@@ -263,7 +276,8 @@ CSS, tag…)</p></li>
 <td><p>Partial Link Text</p></td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
 <p>The selector should use the pattern <code class="docutils literal notranslate"><span class="pre">{selection_method}:{selector}</span></code> to be
 correctly understood. Because it uses behind the scene
 <a class="reference internal" href="#manen.finder.parse_selector" title="manen.finder.parse_selector"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_selector()</span></code></a>, <a class="reference internal" href="manen.html#module-manen" title="manen"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen</span></code></a> will infer the
@@ -274,31 +288,31 @@ programming to re-use the function with some parameters. If <code class="docutil
 is not specified, it will return a partial function which can be used
 later. See example below for better understanding.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">divs</span> <span class="o">=</span> <span class="n">find</span><span class="p">([</span><span class="s1">'div.tryClass1'</span><span class="p">,</span> <span class="s1">'div.tryClass2'</span><span class="p">],</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">inside</span><span class="o">=</span><span class="n">driver</span><span class="p">)</span>
-<span class="go">[&lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "a1")&gt;,</span>
-<span class="go"> &lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "a3")&gt;,</span>
-<span class="go"> &lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "a3")&gt;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">links</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inside</span><span class="o">=</span><span class="n">divs</span><span class="p">)</span>
-<span class="go">[&lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "b1")&gt;,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">divs</span> <span class="o">=</span> <span class="n">find</span><span class="p">([</span><span class="s1">&#39;div.tryClass1&#39;</span><span class="p">,</span> <span class="s1">&#39;div.tryClass2&#39;</span><span class="p">],</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">inside</span><span class="o">=</span><span class="n">driver</span><span class="p">)</span>
+<span class="go">[&lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;a1&quot;)&gt;,</span>
+<span class="go"> &lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;a3&quot;)&gt;,</span>
+<span class="go"> &lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;a3&quot;)&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">links</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inside</span><span class="o">=</span><span class="n">divs</span><span class="p">)</span>
+<span class="go">[&lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;b1&quot;)&gt;,</span>
 <span class="go"> None,</span>
-<span class="go"> &lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "b2")&gt;]</span>
+<span class="go"> &lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;b2&quot;)&gt;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">inside</span><span class="o">=</span><span class="n">driver</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span><span class="p">([</span><span class="s1">'p.tryMe'</span><span class="p">,</span> <span class="s1">'p.orTryMe'</span><span class="p">])</span>
-<span class="go">[&lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "b1")&gt;,</span>
-<span class="go"> &lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "b2")&gt;,</span>
-<span class="go"> &lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "b3")&gt;,</span>
-<span class="go"> &lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "b4")&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span><span class="p">([</span><span class="s1">&#39;p.tryMe&#39;</span><span class="p">,</span> <span class="s1">&#39;p.orTryMe&#39;</span><span class="p">])</span>
+<span class="go">[&lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;b1&quot;)&gt;,</span>
+<span class="go"> &lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;b2&quot;)&gt;,</span>
+<span class="go"> &lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;b3&quot;)&gt;,</span>
+<span class="go"> &lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;b4&quot;)&gt;]</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>selector</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> or </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – Selectors to be used to find the
+<li><p><strong>selector</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> or </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – Selectors to be used to find the
 element(s). If it is a list, it will try each selector until at
 least one element is found. If it is <code class="docutils literal notranslate"><span class="pre">None</span></code>, it returns a partial
 function which can be used later to find the elements. Defaults to
 <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
-<li><p><strong>wait</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">wait</span></code> &gt; 0 and no element is currently found,
+<li><p><strong>wait</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">wait</span></code> &gt; 0 and no element is currently found,
 the function will retry every 500ms, for <code class="docutils literal notranslate"><span class="pre">wait</span></code> seconds maximum.
 Defaults to 0.</p></li>
 <li><p><strong>default</strong> (<em>Any</em><em>, </em><em>optional</em>) – default value to return if no element is found.
@@ -311,13 +325,13 @@ Specifying this argument will restrict the search area. If
 <code class="docutils literal notranslate"><span class="pre">None</span></code>, it will search the whole page. If it’s a list, the
 function will map over each element of that list. Defaults to
 <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
-<li><p><strong>many</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to return a single element or all the
+<li><p><strong>many</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to return a single element or all the
 elements matching the selectors. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.10)"><strong>ValueError</strong></a> – raised if the function is called with <code class="docutils literal notranslate"><span class="pre">selector</span></code> but
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.11)"><strong>ValueError</strong></a> – raised if the function is called with <code class="docutils literal notranslate"><span class="pre">selector</span></code> but
     without <code class="docutils literal notranslate"><span class="pre">inside</span></code>.</p></li>
 <li><p><a class="reference internal" href="manen.exceptions.html#manen.exceptions.ElementNotFound" title="manen.exceptions.ElementNotFound"><strong>ElementNotFound</strong></a> – raised if no default value is specified and no element
     matching the selector(s) has been found</p></li>
@@ -328,12 +342,13 @@ elements matching the selectors. Defaults to <code class="docutils literal notra
 depend of the type of the arguments. Here is a recap of what will be
 returned based on the arguments types (<code class="docutils literal notranslate"><span class="pre">ans_elt</span></code> is a Selenium
 element).</p>
-<div class="table-wrapper"><table class="docutils align-default">
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
 <colgroup>
-<col style="width: 20%"/>
-<col style="width: 21%"/>
-<col style="width: 11%"/>
-<col style="width: 48%"/>
+<col style="width: 20%" />
+<col style="width: 21%" />
+<col style="width: 11%" />
+<col style="width: 48%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><cite>default</cite></p></th>
@@ -364,7 +379,8 @@ element).</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">[[ans_elt11,</span> <span class="pre">ans_elt12],</span> <span class="pre">[],</span> <span class="pre">[ans_elt_31]]</span></code></p></td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
 </p>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -372,9 +388,10 @@ element).</p>
 </dd>
 </dl>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="manen.finder.parse_selector">
-<span class="sig-prename descclassname"><span class="pre">manen.finder.</span></span><span class="sig-name descname"><span class="pre">parse_selector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.10)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/manen/finder.html#parse_selector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.finder.parse_selector" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">manen.finder.</span></span><span class="sig-name descname"><span class="pre">parse_selector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/manen/finder.html#parse_selector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.finder.parse_selector" title="Permalink to this definition">#</a></dt>
 <dd><p>Parse a selector string in the format
 <code class="docutils literal notranslate"><span class="pre">{selection_method}:{selector}</span></code>. If no selection method is specified,
 it will be inferred from the selector itself, by using the following rule:
@@ -386,29 +403,30 @@ otherwise, it is a CSS selector.</p>
 or CSS selectors, no more.</p>
 </div>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_selector</span><span class="p">(</span><span class="s1">'css:h1.title'</span><span class="p">)</span>
-<span class="go">('css selector', 'h1.title')</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_selector</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span>
-<span class="go">('css selector', 'a')</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_selector</span><span class="p">(</span><span class="s1">'tag:span'</span><span class="p">)</span>
-<span class="go">('tag name', 'span')</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_selector</span><span class="p">(</span><span class="s1">'/div/p/span[@class="r"]'</span><span class="p">)</span>
-<span class="go">('xpath', '/div/p/span[@class="r"]')</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_selector</span><span class="p">(</span><span class="s1">&#39;css:h1.title&#39;</span><span class="p">)</span>
+<span class="go">(&#39;css selector&#39;, &#39;h1.title&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_selector</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="go">(&#39;css selector&#39;, &#39;a&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_selector</span><span class="p">(</span><span class="s1">&#39;tag:span&#39;</span><span class="p">)</span>
+<span class="go">(&#39;tag name&#39;, &#39;span&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_selector</span><span class="p">(</span><span class="s1">&#39;/div/p/span[@class=&quot;r&quot;]&#39;</span><span class="p">)</span>
+<span class="go">(&#39;xpath&#39;, &#39;/div/p/span[@class=&quot;r&quot;]&#39;)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>selector</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – selector in the format <code class="docutils literal notranslate"><span class="pre">{selection_method}:{selector}</span></code></p>
+<dd class="field-odd"><p><strong>selector</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – selector in the format <code class="docutils literal notranslate"><span class="pre">{selection_method}:{selector}</span></code></p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Selenium selector in the format
 <code class="docutils literal notranslate"><span class="pre">(selection_method,</span> <span class="pre">selector)</span></code></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
 </dd>
 </dl>
 </dd></dl>
+
 </section>
 
         </article>
@@ -423,10 +441,10 @@ or CSS selectors, no more.</p>
                 </div>
                 <div class="title">manen.helpers</div>
               </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
           <a class="prev-page" href="manen.exceptions.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>

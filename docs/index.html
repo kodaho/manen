@@ -5,13 +5,13 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="About the project" href="about.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
+    <link rel="shortcut icon" href="_static/favicon.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
         <title>manen</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -22,24 +22,28 @@
   --color-code-foreground: black;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #263238;
-  --color-code-foreground: #EEFFFF;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #263238;
   --color-code-foreground: #EEFFFF;
   
     }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+      }
+    }
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -193,7 +197,15 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -209,9 +221,9 @@
         <article role="main">
           <section id="welcome-to-manen-s-documentation">
 <h1>Welcome to manen’s documentation!<a class="headerlink" href="#welcome-to-manen-s-documentation" title="Permalink to this headline">#</a></h1>
-<img alt="Python Version" src="https://img.shields.io/badge/python-%3E=3.6-informational?style=for-the-badge&amp;logo=python"/>
-<a class="reference external image-reference" href="https://pypi.org/project/manen"><img alt="Package Version" src="https://img.shields.io/pypi/v/manen?logo=pypi&amp;style=for-the-badge"/></a>
-<img alt="Status" src="https://img.shields.io/badge/status-in%20development-yellow?style=for-the-badge"/>
+<img alt="Python Version" src="https://img.shields.io/badge/python-%3E=3.6-informational?style=for-the-badge&amp;logo=python" />
+<a class="reference external image-reference" href="https://pypi.org/project/manen"><img alt="Package Version" src="https://img.shields.io/pypi/v/manen?logo=pypi&amp;style=for-the-badge" /></a>
+<img alt="Status" src="https://img.shields.io/badge/status-in%20development-yellow?style=for-the-badge" />
 <p><a class="reference internal" href="manen/manen.html#module-manen" title="manen"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen</span></code></a> is a package built to extend Selenium user experience.
 Among the core features, you can find:</p>
 <ul class="simple">
@@ -224,27 +236,27 @@ Among the core features, you can find:</p>
 what you could do by using only Selenium. For example, here is a comparison of the same
 code with and without <code class="docutils literal notranslate"><span class="pre">manen</span></code>:</p>
 <div class="tab-set docutils container">
-<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"/><label class="tab-label" for="tab-set--0-input--1">With manen</label><div class="tab-content docutils container">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">With manen</label><div class="tab-content docutils container">
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">manen</span> <span class="kn">import</span> <span class="n">page_object_model</span> <span class="k">as</span> <span class="n">pom</span>
    <span class="o">...</span><span class="p">:</span>
    <span class="o">...</span><span class="p">:</span> <span class="k">class</span> <span class="nc">BlogPage</span><span class="p">(</span><span class="n">pom</span><span class="o">.</span><span class="n">Page</span><span class="p">):</span>
    <span class="o">...</span><span class="p">:</span>     <span class="k">class</span> <span class="nc">Article</span><span class="p">(</span><span class="n">pom</span><span class="o">.</span><span class="n">Regions</span><span class="p">):</span>
-   <span class="o">...</span><span class="p">:</span>         <span class="n">title</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">"h1"</span><span class="p">)</span>
-   <span class="o">...</span><span class="p">:</span>         <span class="n">n_likes</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">IntegerElement</span><span class="p">(</span><span class="s2">"span.n_likes"</span><span class="p">)</span>
-   <span class="o">...</span><span class="p">:</span>         <span class="n">tags</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElements</span><span class="p">(</span><span class="s2">"span.tag"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
-   <span class="o">...</span><span class="p">:</span>         <span class="n">updated_at</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">DateElement</span><span class="p">(</span><span class="s2">"p.date"</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="n">title</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="n">n_likes</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">IntegerElement</span><span class="p">(</span><span class="s2">&quot;span.n_likes&quot;</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="n">tags</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElements</span><span class="p">(</span><span class="s2">&quot;span.tag&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="n">updated_at</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">DateElement</span><span class="p">(</span><span class="s2">&quot;p.date&quot;</span><span class="p">)</span>
    <span class="o">...</span><span class="p">:</span>
-   <span class="o">...</span><span class="p">:</span>     <span class="n">articles</span> <span class="o">=</span> <span class="n">Article</span><span class="p">(</span><span class="s2">"article"</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="n">articles</span> <span class="o">=</span> <span class="n">Article</span><span class="p">(</span><span class="s2">&quot;article&quot;</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
    <span class="o">...</span><span class="p">:</span>
    <span class="o">...</span><span class="p">:</span> <span class="n">page</span> <span class="o">=</span> <span class="n">BlogPage</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
    <span class="o">...</span><span class="p">:</span> <span class="n">article</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">article</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">article</span><span class="o">.</span><span class="n">n_likes</span><span class="p">,</span> <span class="n">article</span><span class="o">.</span><span class="n">tags</span><span class="p">,</span> <span class="n">article</span><span class="o">.</span><span class="n">updated_at</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">(</span><span class="s1">'manen, a new tool around Selenium'</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="p">[],</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">(</span><span class="s1">&#39;manen, a new tool around Selenium&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="p">[],</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"/><label class="tab-label" for="tab-set--0-input--2">Without manen</label><div class="tab-content docutils container">
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Without manen</label><div class="tab-content docutils container">
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">dateparser</span> <span class="kn">import</span> <span class="n">dateparser</span>
    <span class="o">...</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">selenium.common.exceptions</span> <span class="kn">import</span> <span class="n">NoSuchElementException</span>
    <span class="o">...</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
@@ -252,18 +264,18 @@ code with and without <code class="docutils literal notranslate"><span class="pr
    <span class="o">...</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">selenium.webdriver.support.ui</span> <span class="kn">import</span> <span class="n">WebDriverWait</span>
    <span class="o">...</span><span class="p">:</span>
    <span class="o">...</span><span class="p">:</span> <span class="n">articles</span> <span class="o">=</span> <span class="n">WebDriverWait</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">until</span><span class="p">(</span>
-   <span class="o">...</span><span class="p">:</span>     <span class="n">EC</span><span class="o">.</span><span class="n">presence_of_elements_located</span><span class="p">((</span><span class="n">By</span><span class="o">.</span><span class="n">CSS</span><span class="p">,</span> <span class="s2">"article"</span><span class="p">))</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="n">EC</span><span class="o">.</span><span class="n">presence_of_elements_located</span><span class="p">((</span><span class="n">By</span><span class="o">.</span><span class="n">CSS</span><span class="p">,</span> <span class="s2">&quot;article&quot;</span><span class="p">))</span>
    <span class="o">...</span><span class="p">:</span> <span class="p">)</span>
-   <span class="o">...</span><span class="p">:</span> <span class="n">title</span> <span class="o">=</span> <span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element_by_css</span><span class="p">(</span><span class="s2">"h1"</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-   <span class="o">...</span><span class="p">:</span> <span class="n">n_likes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element_by_css</span><span class="p">(</span><span class="s2">"span.n_likes"</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">title</span> <span class="o">=</span> <span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element_by_css</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">n_likes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element_by_css</span><span class="p">(</span><span class="s2">&quot;span.n_likes&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
    <span class="o">...</span><span class="p">:</span> <span class="k">try</span><span class="p">:</span>
-   <span class="o">...</span><span class="p">:</span>     <span class="n">tags</span> <span class="o">=</span> <span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_elements_by_css</span><span class="p">(</span><span class="s2">"span.tags"</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="n">tags</span> <span class="o">=</span> <span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_elements_by_css</span><span class="p">(</span><span class="s2">&quot;span.tags&quot;</span><span class="p">)</span>
    <span class="o">...</span><span class="p">:</span> <span class="k">except</span> <span class="n">NoSuchElementException</span><span class="p">:</span>
    <span class="o">...</span><span class="p">:</span>     <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
-   <span class="o">...</span><span class="p">:</span> <span class="n">updated_at</span> <span class="o">=</span> <span class="n">dateparser</span><span class="p">(</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element_by_css</span><span class="p">(</span><span class="s2">"p.date"</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">updated_at</span> <span class="o">=</span> <span class="n">dateparser</span><span class="p">(</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element_by_css</span><span class="p">(</span><span class="s2">&quot;p.date&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 
 <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">title</span><span class="p">,</span> <span class="n">n_likes</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">updated_at</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">(</span><span class="s1">'manen, a new tool around Selenium'</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="p">[],</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">(</span><span class="s1">&#39;manen, a new tool around Selenium&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="p">[],</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -368,7 +380,7 @@ section <a class="reference internal" href="about.html#why-such-package"><span c
                 </div>
                 <div class="title">About the project</div>
               </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
           
         </div>
@@ -402,7 +414,7 @@ section <a class="reference internal" href="about.html#why-such-package"><span c
       <div class="toc-sticky toc-scroll">
         <div class="toc-title-container">
           <span class="toc-title">
-            Contents
+            On this page
           </span>
         </div>
         <div class="toc-tree-container">

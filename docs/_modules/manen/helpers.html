@@ -4,13 +4,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
-    <link rel="shortcut icon" href="../../_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
+    <link rel="shortcut icon" href="../../_static/favicon.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
         <title>manen.helpers - manen</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -21,24 +21,28 @@
   --color-code-foreground: black;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #263238;
-  --color-code-foreground: #EEFFFF;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #263238;
   --color-code-foreground: #EEFFFF;
   
     }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+      }
+    }
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -192,7 +196,14 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -207,12 +218,12 @@
         </div>
         <article role="main">
           <h1>Source code for manen.helpers</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">manen.helpers</span>
 <span class="sd">=============</span>
 
 <span class="sd">Helpers functions used by :py:mod:`manen`.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">import</span> <span class="nn">re</span>
@@ -230,7 +241,7 @@
 
 
 <div class="viewcode-block" id="extract_integer"><a class="viewcode-back" href="../../manen/manen.helpers.html#manen.helpers.extract_integer">[docs]</a><span class="k">def</span> <span class="nf">extract_integer</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">"""Extract an integer from a string.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract an integer from a string.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        string (str): text to process</span>
@@ -238,20 +249,20 @@
 <span class="sd">        ValueError: exception raised if no integer were fonnd in the string.</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        int: integer extracted from the string</span>
-<span class="sd">    """</span>
-    <span class="n">string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[\s,]"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
-    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"(?P&lt;figure&gt;[\d]+)"</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[\s,]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?P&lt;figure&gt;[\d]+)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">"figure"</span><span class="p">))</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"No figure detected in </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">string</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">))</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No figure detected in </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">string</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="version"><a class="viewcode-back" href="../../manen/manen.helpers.html#manen.helpers.version">[docs]</a><span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="n">version_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Version"</span><span class="p">:</span>
-    <span class="sd">"""</span>
+<div class="viewcode-block" id="version"><a class="viewcode-back" href="../../manen/manen.helpers.html#manen.helpers.version">[docs]</a><span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="n">version_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Version&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper function to convert a version string into a tuple. The versioning</span>
 <span class="sd">    scheme is described `here &lt;https://www.chromium.org/developers/version-numbers&gt;`_.</span>
 <span class="sd">    The input will be validated with the regular expression</span>
-<span class="sd">    ``^[\\d]+.[\\d]+.[\\d]+.[\\d]+$`` and raised a :py:class:`ValueError` if it doesn't match.</span>
+<span class="sd">    ``^[\\d]+.[\\d]+.[\\d]+.[\\d]+$`` and raised a :py:class:`ValueError` if it doesn&#39;t match.</span>
 
 <span class="sd">    ..  caution::</span>
 
@@ -260,16 +271,16 @@
 <span class="sd">    Args:</span>
 <span class="sd">        version_str: string to be converted to a tuple</span>
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: raised if the input doesn't match the pattern</span>
+<span class="sd">        ValueError: raised if the input doesn&#39;t match the pattern</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        Tuple[int, int, Optional[int], int]: parsed version</span>
-<span class="sd">    """</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^[\d]+.[\d]+.[\d]+(.[\d]+)?$"</span><span class="p">,</span> <span class="n">version_str</span><span class="p">):</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[\d]+.[\d]+.[\d]+(.[\d]+)?$&quot;</span><span class="p">,</span> <span class="n">version_str</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"The version `</span><span class="si">{</span><span class="n">version_str</span><span class="si">}</span><span class="s2">` is not compatible with the pattern"</span>
-            <span class="s2">" MAJOR.MINOR(.BRANCH)?.PATH."</span>
+            <span class="sa">f</span><span class="s2">&quot;The version `</span><span class="si">{</span><span class="n">version_str</span><span class="si">}</span><span class="s2">` is not compatible with the pattern&quot;</span>
+            <span class="s2">&quot; MAJOR.MINOR(.BRANCH)?.PATH.&quot;</span>
         <span class="p">)</span>
-    <span class="n">splitted_version</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">version_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)])</span>
+    <span class="n">splitted_version</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">version_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)])</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="n">splitted_version</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
         <span class="n">splitted_version</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -278,8 +289,8 @@
     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="version_as_str"><a class="viewcode-back" href="../../manen/manen.helpers.html#manen.helpers.version_as_str">[docs]</a><span class="k">def</span> <span class="nf">version_as_str</span><span class="p">(</span><span class="n">version_tuple</span><span class="p">:</span> <span class="s2">"Version"</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""Format a version tuple as a string in the format:</span>
+<div class="viewcode-block" id="version_as_str"><a class="viewcode-back" href="../../manen/manen.helpers.html#manen.helpers.version_as_str">[docs]</a><span class="k">def</span> <span class="nf">version_as_str</span><span class="p">(</span><span class="n">version_tuple</span><span class="p">:</span> <span class="s2">&quot;Version&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Format a version tuple as a string in the format:</span>
 <span class="sd">        {major}.{minor}.{build}.{patch}</span>
 
 
@@ -290,24 +301,24 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: formatted version</span>
-<span class="sd">    """</span>
-    <span class="k">return</span> <span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">version_tuple</span><span class="p">[:</span><span class="n">limit</span><span class="p">]))</span></div>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">version_tuple</span><span class="p">[:</span><span class="n">limit</span><span class="p">]))</span></div>
 
 
 <div class="viewcode-block" id="extract"><a class="viewcode-back" href="../../manen/manen.helpers.html#manen.helpers.extract">[docs]</a><span class="k">def</span> <span class="nf">extract</span><span class="p">(</span><span class="n">archive_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""Uncompress a file in an archive.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Uncompress a file in an archive.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        archive_path (str): path where to find the archive</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: path of the uncrompressed file</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">archive_path</span><span class="p">)</span>
     <span class="n">final_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">stem</span><span class="p">)</span>
 
-    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">archive_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_file</span><span class="p">:</span>
-        <span class="n">member</span> <span class="o">=</span> <span class="n">zip_file</span><span class="o">.</span><span class="n">getinfo</span><span class="p">(</span><span class="s2">"chromedriver"</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">archive_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_file</span><span class="p">:</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="n">zip_file</span><span class="o">.</span><span class="n">getinfo</span><span class="p">(</span><span class="s2">&quot;chromedriver&quot;</span><span class="p">)</span>
         <span class="n">member</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">final_path</span><span class="o">.</span><span class="n">stem</span>
         <span class="n">extracted_path</span> <span class="o">=</span> <span class="n">zip_file</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">final_path</span><span class="o">.</span><span class="n">parent</span><span class="p">))</span>
         <span class="c1"># Add the right permissions to the extracted file</span>
@@ -320,14 +331,14 @@
 
 
 <div class="viewcode-block" id="batch"><a class="viewcode-back" href="../../manen/manen.helpers.html#manen.helpers.batch">[docs]</a><span class="k">def</span> <span class="nf">batch</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="sd">"""Slice an iterable into batches of given size.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Slice an iterable into batches of given size.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        iterable (Iterable): iterable to slice into batches</span>
 <span class="sd">        n (int, optional): size of each batch. Default to 1.</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        Iterable:</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">ndx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
         <span class="k">yield</span> <span class="n">iterable</span><span class="p">[</span><span class="n">ndx</span> <span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">ndx</span> <span class="o">+</span> <span class="n">size</span><span class="p">,</span> <span class="n">length</span><span class="p">)]</span></div>

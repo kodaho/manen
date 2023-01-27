@@ -5,13 +5,13 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="An enhanced WebDriver: manen’s Browser" href="browser.html" /><link rel="prev" title="User Guide" href="../user_guide.html" />
 
-    <link rel="shortcut icon" href="../_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
+    <link rel="shortcut icon" href="../_static/favicon.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
         <title>Managing resources - manen</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -22,24 +22,28 @@
   --color-code-foreground: black;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #263238;
-  --color-code-foreground: #EEFFFF;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #263238;
   --color-code-foreground: #EEFFFF;
   
     }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+      }
+    }
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -193,7 +197,15 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -317,10 +329,11 @@ div.nboutput.container div.prompt > div {
     }
 }
 
-/* disable scrollbars on prompts */
+/* disable scrollbars and line breaks on prompts */
 div.nbinput.container div.prompt pre,
 div.nboutput.container div.prompt pre {
     overflow: hidden;
+    white-space: pre;
 }
 
 /* input/output area */
@@ -422,6 +435,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -430,10 +444,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -445,12 +463,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -538,7 +559,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">available_drivers</span> <span class="o">=</span> <span class="n">chrome</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">list_versions</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s1">'97.0.4692'</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">available_drivers</span> <span class="o">=</span> <span class="n">chrome</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">list_versions</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s1">&#39;97.0.4692&#39;</span><span class="p">)</span>
 <span class="n">available_drivers</span>
 </pre></div>
 </div>
@@ -549,18 +570,18 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[{'version': (97, 0, 4692, 20),
-  'name': 'chromedriver_mac64.zip',
-  'updated_at': '2021-11-19T10:02:37.708Z',
-  'size': 8258658},
- {'version': (97, 0, 4692, 36),
-  'name': 'chromedriver_mac64.zip',
-  'updated_at': '2021-12-03T08:12:33.544Z',
-  'size': 8277983},
- {'version': (97, 0, 4692, 71),
-  'name': 'chromedriver_mac64.zip',
-  'updated_at': '2022-01-05T05:45:13.182Z',
-  'size': 8277283}]
+[{&#39;version&#39;: (97, 0, 4692, 20),
+  &#39;name&#39;: &#39;chromedriver_mac64.zip&#39;,
+  &#39;updated_at&#39;: &#39;2021-11-19T10:02:37.708Z&#39;,
+  &#39;size&#39;: 8258658},
+ {&#39;version&#39;: (97, 0, 4692, 36),
+  &#39;name&#39;: &#39;chromedriver_mac64.zip&#39;,
+  &#39;updated_at&#39;: &#39;2021-12-03T08:12:33.544Z&#39;,
+  &#39;size&#39;: 8277983},
+ {&#39;version&#39;: (97, 0, 4692, 71),
+  &#39;name&#39;: &#39;chromedriver_mac64.zip&#39;,
+  &#39;updated_at&#39;: &#39;2022-01-05T05:45:13.182Z&#39;,
+  &#39;size&#39;: 8277283}]
 </pre></div></div>
 </div>
 <p>You can also use the method <code class="docutils literal notranslate"><span class="pre">latest_release</span></code> to get the version number of the last chromedriver available. If Google Chrome is fully updated, you will be able to use this version to control the browser.</p>
@@ -600,7 +621,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A function to hide the path that is specific to each environment</span>
 <span class="kn">import</span> <span class="nn">re</span>
-<span class="n">obfuscate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">path</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">'/Users/.*?/manen/'</span><span class="p">,</span> <span class="s1">'/***/'</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+<span class="n">obfuscate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">path</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;/Users/.*?/manen/&#39;</span><span class="p">,</span> <span class="s1">&#39;/***/&#39;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -619,7 +640,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-'/***/manen/assets/drivers/darwin/chrome/98.0.4758.102/chromedriver'
+&#39;/***/manen/assets/drivers/darwin/chrome/98.0.4758.102/chromedriver&#39;
 </pre></div></div>
 </div>
 <p>The download will always retrieve the file online; if the driver has already been downloaded, you can instead use the method <code class="docutils literal notranslate"><span class="pre">get</span></code>. This method will first check that the driver is not available locally and, if not, download it.</p>
@@ -628,7 +649,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chromedriver_path</span> <span class="o">=</span> <span class="n">chrome</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s1">'97'</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chromedriver_path</span> <span class="o">=</span> <span class="n">chrome</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s1">&#39;97&#39;</span><span class="p">)</span>
 <span class="n">obfuscate</span><span class="p">(</span><span class="n">chromedriver_path</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -639,7 +660,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-'/***/manen/assets/drivers/darwin/chrome/97.0.4692.71/chromedriver'
+&#39;/***/manen/assets/drivers/darwin/chrome/97.0.4692.71/chromedriver&#39;
 </pre></div></div>
 </div>
 <p>Once downloaded, you can retrieved all the installed files using <code class="docutils literal notranslate"><span class="pre">manen.resource.local.LocalAsset</span></code>.</p>
@@ -655,7 +676,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obfuscate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="p">{</span><span class="o">**</span><span class="n">item</span><span class="p">,</span> <span class="s1">'path'</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">'/Users/.*?/manen/'</span><span class="p">,</span> <span class="s1">'/***/'</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="s1">'path'</span><span class="p">])}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obfuscate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="p">{</span><span class="o">**</span><span class="n">item</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;/Users/.*?/manen/&#39;</span><span class="p">,</span> <span class="s1">&#39;/***/&#39;</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">])}</span>
 </pre></div>
 </div>
 </div>
@@ -663,7 +684,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">obfuscate</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">local</span><span class="o">.</span><span class="n">list_drivers</span><span class="p">(</span><span class="n">browser</span><span class="o">=</span><span class="s1">'chrome'</span><span class="p">)]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">obfuscate</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">local</span><span class="o">.</span><span class="n">list_drivers</span><span class="p">(</span><span class="n">browser</span><span class="o">=</span><span class="s1">&#39;chrome&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -673,14 +694,14 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[{'path': '/***/manen/assets/drivers/darwin/chrome/98.0.4758.102/chromedriver',
-  'version': '98.0.4758',
-  'browser': 'chrome',
-  'os': 'darwin'},
- {'path': '/***/manen/assets/drivers/darwin/chrome/97.0.4692.71/chromedriver',
-  'version': '97.0.4692',
-  'browser': 'chrome',
-  'os': 'darwin'}]
+[{&#39;path&#39;: &#39;/***/manen/assets/drivers/darwin/chrome/98.0.4758.102/chromedriver&#39;,
+  &#39;version&#39;: &#39;98.0.4758&#39;,
+  &#39;browser&#39;: &#39;chrome&#39;,
+  &#39;os&#39;: &#39;darwin&#39;},
+ {&#39;path&#39;: &#39;/***/manen/assets/drivers/darwin/chrome/97.0.4692.71/chromedriver&#39;,
+  &#39;version&#39;: &#39;97.0.4692&#39;,
+  &#39;browser&#39;: &#39;chrome&#39;,
+  &#39;os&#39;: &#39;darwin&#39;}]
 </pre></div></div>
 </div>
 </section>
@@ -692,7 +713,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-bash notranslate"><div class="highlight"><pre><span></span>%%bash
-manen driver download -h
+manen<span class="w"> </span>driver<span class="w"> </span>download<span class="w"> </span>-h
 </pre></div>
 </div>
 </div>
@@ -718,28 +739,28 @@ specifications:
                         application.
   -p {Darwin,Linux}, --platform {Darwin,Linux}
                         Platform (OS) on which the driver binary will run.
-                        Note that 'Darwin' is for MacOS and you can use the
-                        alias 'Mac' for this OS.
+                        Note that &#39;Darwin&#39; is for MacOS and you can use the
+                        alias &#39;Mac&#39; for this OS.
   -v VERSION [VERSION ...], --version VERSION [VERSION ...]
                         List of driver versions to be downloaded
 </pre></div></div>
 </div>
 <p>Let’s download all the drivers we need with the CLI. At the end, the drivers will be available at the same location as it was downloaded through the API.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ manen driver download -i
-» Starting interactive CLI to download webdrivers...
-? What is your OS? Mac OS
-? For which browser <span class="k">do</span> you want to download the drivers? Chrome / Brave
-? Choose the version you want to download. <span class="o">(</span>Use arrow keys to move, &lt;space&gt; to <span class="k">select</span>, &lt;a&gt; to toggle, &lt;i&gt; to invert<span class="o">)</span>
-   ○ <span class="m">95</span>.0.4638.17
-   ○ <span class="m">95</span>.0.4638.54
-   ○ <span class="m">95</span>.0.4638.69
-   ○ <span class="m">96</span>.0.4664.18
-   ○ <span class="m">96</span>.0.4664.35
-   ○ <span class="m">96</span>.0.4664.45
-   ● <span class="m">97</span>.0.4692.20 <span class="o">(</span>compatible with Chrome<span class="o">)</span>
-   ● <span class="m">97</span>.0.4692.36 <span class="o">(</span>compatible with Chrome<span class="o">)</span>
- » ● <span class="m">97</span>.0.4692.71 <span class="o">(</span>compatible with Chrome<span class="o">)</span>
-   ○ <span class="m">98</span>.0.4758.48
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>manen<span class="w"> </span>driver<span class="w"> </span>download<span class="w"> </span>-i
+»<span class="w"> </span>Starting<span class="w"> </span>interactive<span class="w"> </span>CLI<span class="w"> </span>to<span class="w"> </span>download<span class="w"> </span>webdrivers...
+?<span class="w"> </span>What<span class="w"> </span>is<span class="w"> </span>your<span class="w"> </span>OS?<span class="w"> </span>Mac<span class="w"> </span>OS
+?<span class="w"> </span>For<span class="w"> </span>which<span class="w"> </span>browser<span class="w"> </span><span class="k">do</span><span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>download<span class="w"> </span>the<span class="w"> </span>drivers?<span class="w"> </span>Chrome<span class="w"> </span>/<span class="w"> </span>Brave
+?<span class="w"> </span>Choose<span class="w"> </span>the<span class="w"> </span>version<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>download.<span class="w"> </span><span class="o">(</span>Use<span class="w"> </span>arrow<span class="w"> </span>keys<span class="w"> </span>to<span class="w"> </span>move,<span class="w"> </span>&lt;space&gt;<span class="w"> </span>to<span class="w"> </span><span class="k">select</span>,<span class="w"> </span>&lt;a&gt;<span class="w"> </span>to<span class="w"> </span>toggle,<span class="w"> </span>&lt;i&gt;<span class="w"> </span>to<span class="w"> </span>invert<span class="o">)</span>
+<span class="w">   </span>○<span class="w"> </span><span class="m">95</span>.0.4638.17
+<span class="w">   </span>○<span class="w"> </span><span class="m">95</span>.0.4638.54
+<span class="w">   </span>○<span class="w"> </span><span class="m">95</span>.0.4638.69
+<span class="w">   </span>○<span class="w"> </span><span class="m">96</span>.0.4664.18
+<span class="w">   </span>○<span class="w"> </span><span class="m">96</span>.0.4664.35
+<span class="w">   </span>○<span class="w"> </span><span class="m">96</span>.0.4664.45
+<span class="w">   </span>●<span class="w"> </span><span class="m">97</span>.0.4692.20<span class="w"> </span><span class="o">(</span>compatible<span class="w"> </span>with<span class="w"> </span>Chrome<span class="o">)</span>
+<span class="w">   </span>●<span class="w"> </span><span class="m">97</span>.0.4692.36<span class="w"> </span><span class="o">(</span>compatible<span class="w"> </span>with<span class="w"> </span>Chrome<span class="o">)</span>
+<span class="w"> </span>»<span class="w"> </span>●<span class="w"> </span><span class="m">97</span>.0.4692.71<span class="w"> </span><span class="o">(</span>compatible<span class="w"> </span>with<span class="w"> </span>Chrome<span class="o">)</span>
+<span class="w">   </span>○<span class="w"> </span><span class="m">98</span>.0.4758.48
 </pre></div>
 </div>
 </section>
@@ -757,10 +778,10 @@ specifications:
                 </div>
                 <div class="title">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></div>
               </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
           <a class="prev-page" href="../user_guide.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
@@ -801,7 +822,7 @@ specifications:
       <div class="toc-sticky toc-scroll">
         <div class="toc-title-container">
           <span class="toc-title">
-            Contents
+            On this page
           </span>
         </div>
         <div class="toc-tree-container">

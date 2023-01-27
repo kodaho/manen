@@ -5,13 +5,13 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Changelog" href="changelog.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
+    <link rel="shortcut icon" href="_static/favicon.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
         <title>Contributing - manen</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -22,24 +22,28 @@
   --color-code-foreground: black;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #263238;
-  --color-code-foreground: #EEFFFF;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #263238;
   --color-code-foreground: #EEFFFF;
   
     }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+      }
+    }
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -193,7 +197,15 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -219,12 +231,12 @@ issue (if one isn’t opened yet about the same bug) or/and open a pull request.
 environment. If you want to help in the development of <code class="docutils literal notranslate"><span class="pre">manen</span></code>, reproducing a dev
 environment similar to the original one will be needed. To do so, you can whether
 use Pipenv to recreate the environment with the command</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pipenv sync
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pipenv<span class="w"> </span>sync
 </pre></div>
 </div>
 <p>Note that using Pipenv is not required. You can reproduce the development environment
 by re-installing the same package specified in the setup file of the package</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install -e <span class="s2">".[doc,test,lint]"</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[doc,test,lint]&quot;</span>
 </pre></div>
 </div>
 <p>This will install <code class="docutils literal notranslate"><span class="pre">manen</span></code> with extra dependencies for development workflows, described
@@ -244,15 +256,15 @@ with <code class="docutils literal notranslate"><span class="pre">pip</span></co
 <div class="seealso admonition">
 <p class="admonition-title">Command</p>
 <p><strong>Build the documentation</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> docs <span class="o">&amp;&amp;</span> make html
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>docs<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>html
 </pre></div>
 </div>
 <p><strong>Trigger a build of the documentation for any changes in the source</strong></p>
 <p><a class="reference external" href="https://pypi.org/project/sphinx-autobuild/">sphinx-autobuild</a> can be used to launch
 a process that will watch any modification in the source files of the package or
 documentation and re-build the HTML pages at each event.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install sphinx-autobuild
-$ sphinx-autobuild docs/source docs/build/html --watch manen/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>sphinx-autobuild
+$<span class="w"> </span>sphinx-autobuild<span class="w"> </span>docs/source<span class="w"> </span>docs/build/html<span class="w"> </span>--watch<span class="w"> </span>manen/
 </pre></div>
 </div>
 </div>
@@ -262,7 +274,7 @@ $ sphinx-autobuild docs/source docs/build/html --watch manen/
 <div class="seealso admonition">
 <p class="admonition-title">Command</p>
 <p><strong>Launching all the tests</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pytest
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pytest
 </pre></div>
 </div>
 </div>
@@ -272,11 +284,11 @@ $ sphinx-autobuild docs/source docs/build/html --watch manen/
 <div class="seealso admonition">
 <p class="admonition-title">Command</p>
 <p><strong>Checking tha the imports are well sorted</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ isort --check-only manen/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>isort<span class="w"> </span>--check-only<span class="w"> </span>manen/
 </pre></div>
 </div>
 <p><strong>Linting all the files</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pylint -E --rcfile<span class="o">=</span>./.pylintrc ./manen/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pylint<span class="w"> </span>-E<span class="w"> </span>--rcfile<span class="o">=</span>./.pylintrc<span class="w"> </span>./manen/
 </pre></div>
 </div>
 </div>
@@ -292,7 +304,7 @@ $ sphinx-autobuild docs/source docs/build/html --watch manen/
         <div class="related-pages">
           
           <a class="prev-page" href="changelog.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
@@ -333,7 +345,7 @@ $ sphinx-autobuild docs/source docs/build/html --watch manen/
       <div class="toc-sticky toc-scroll">
         <div class="toc-title-container">
           <span class="toc-title">
-            Contents
+            On this page
           </span>
         </div>
         <div class="toc-tree-container">

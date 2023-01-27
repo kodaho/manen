@@ -4,13 +4,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
         <title>manen.resource.chrome - manen</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -21,24 +21,28 @@
   --color-code-foreground: black;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #263238;
-  --color-code-foreground: #EEFFFF;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #263238;
   --color-code-foreground: #EEFFFF;
   
     }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+      }
+    }
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -192,7 +196,14 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -207,10 +218,10 @@
         </div>
         <article role="main">
           <h1>Source code for manen.resource.chrome</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">manen.resource.chrome</span>
 <span class="sd">=====================</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
@@ -234,62 +245,62 @@
     <span class="c1"># https://cloud.google.com/storage/docs/xml-api/get-bucket-list</span>
 
     <span class="n">BINARIES</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">"Darwin"</span><span class="p">:</span> <span class="s2">"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"</span><span class="p">,</span>
-        <span class="s2">"Linux"</span><span class="p">:</span> <span class="s2">"google-chrome"</span><span class="p">,</span>
+        <span class="s2">&quot;Darwin&quot;</span><span class="p">:</span> <span class="s2">&quot;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Linux&quot;</span><span class="p">:</span> <span class="s2">&quot;google-chrome&quot;</span><span class="p">,</span>
     <span class="p">}</span>
 
 <div class="viewcode-block" id="application.installed_version"><a class="viewcode-back" href="../../../manen/manen.resource.chrome.html#manen.resource.chrome.application.installed_version">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">installed_version</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Version"</span><span class="p">:</span>
-        <span class="sd">"""Get the version of the installed application, as a tuple.</span>
+    <span class="k">def</span> <span class="nf">installed_version</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Version&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the version of the installed application, as a tuple.</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            ManenException: raised in 4 possible cases:</span>
 <span class="sd">                - the browser is not installed</span>
-<span class="sd">                - `manen` doesn't know the shell command to find the version of Chrome</span>
+<span class="sd">                - `manen` doesn&#39;t know the shell command to find the version of Chrome</span>
 <span class="sd">                - an error is returned by the shell command used to get the version</span>
 <span class="sd">                - a version could not be inferred from the output of the shell command</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Tuple[int]: Version of the browser installed, as a tuple</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">is_installed</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="n">ManenException</span><span class="p">(</span><span class="s2">"Chrome is not installed."</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ManenException</span><span class="p">(</span><span class="s2">&quot;Chrome is not installed.&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">PLATFORM</span><span class="o">.</span><span class="n">system</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">BINARIES</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ManenException</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">"Unable to find the Google Chrome command for the platform `</span><span class="si">{</span><span class="n">PLATFORM</span><span class="o">.</span><span class="n">system</span><span class="si">}</span><span class="s2">`"</span>
+                <span class="sa">f</span><span class="s2">&quot;Unable to find the Google Chrome command for the platform `</span><span class="si">{</span><span class="n">PLATFORM</span><span class="o">.</span><span class="n">system</span><span class="si">}</span><span class="s2">`&quot;</span>
             <span class="p">)</span>
 
         <span class="n">version_command</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span>
-            <span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">BINARIES</span><span class="p">[</span><span class="n">PLATFORM</span><span class="o">.</span><span class="n">system</span><span class="p">],</span> <span class="s2">"--version"</span><span class="p">],</span>
+            <span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">BINARIES</span><span class="p">[</span><span class="n">PLATFORM</span><span class="o">.</span><span class="n">system</span><span class="p">],</span> <span class="s2">&quot;--version&quot;</span><span class="p">],</span>
             <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span>
             <span class="n">stderr</span><span class="o">=</span><span class="n">STDOUT</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">ans</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">version_command</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">stderr</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ManenException</span><span class="p">(</span>
-                <span class="s2">"The following exception was raised while finding the installed "</span>
-                <span class="sa">f</span><span class="s2">"version: </span><span class="si">{</span><span class="n">stderr</span><span class="si">!r}</span><span class="s2">"</span>
+                <span class="s2">&quot;The following exception was raised while finding the installed &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;version: </span><span class="si">{</span><span class="n">stderr</span><span class="si">!r}</span><span class="s2">&quot;</span>
             <span class="p">)</span>
 
-        <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"(?P&lt;version&gt;[\d.]+)"</span><span class="p">)</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?P&lt;version&gt;[\d.]+)&quot;</span><span class="p">)</span>
         <span class="n">match</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ManenException</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No version inferred from the string </span><span class="si">{</span><span class="n">ans</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">parse_version</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">"version"</span><span class="p">))</span></div>
+            <span class="k">raise</span> <span class="n">ManenException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No version inferred from the string </span><span class="si">{</span><span class="n">ans</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">parse_version</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="application.is_installed"><a class="viewcode-back" href="../../../manen/manen.resource.chrome.html#manen.resource.chrome.application.is_installed">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">is_installed</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">"""Check if the application is installed locally.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if the application is installed locally.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: Whether or not the browser is installed.</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">BINARIES</span><span class="p">[</span><span class="n">PLATFORM</span><span class="o">.</span><span class="n">system</span><span class="p">]))</span></div>
 
 <div class="viewcode-block" id="application.list_versions"><a class="viewcode-back" href="../../../manen/manen.resource.chrome.html#manen.resource.chrome.application.list_versions">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">list_versions</span><span class="p">(</span><span class="n">os</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PLATFORM</span><span class="o">.</span><span class="n">system</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s2">"InstalledVersionInfo"</span><span class="p">]:</span>
-        <span class="sd">"""List all the versions available online for the browser.</span>
+    <span class="k">def</span> <span class="nf">list_versions</span><span class="p">(</span><span class="n">os</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PLATFORM</span><span class="o">.</span><span class="n">system</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;InstalledVersionInfo&quot;</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List all the versions available online for the browser.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            os (str, optional): OS to check by. Defaults to ``PLATFORM.system``.</span>
@@ -299,45 +310,45 @@
 <span class="sd">                - `release_date`</span>
 <span class="sd">                - `os`</span>
 <span class="sd">                - `channel`</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">extractor</span><span class="p">(</span><span class="n">prefix</span><span class="p">):</span>
             <span class="k">return</span> <span class="k">lambda</span> <span class="n">data</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">"version"</span><span class="p">:</span> <span class="n">parse_version</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">_version"</span><span class="p">]),</span>
-                <span class="s2">"release_date"</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span>
-                    <span class="n">data</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">_reldate"</span><span class="p">],</span> <span class="s2">"%m/</span><span class="si">%d</span><span class="s2">/%y"</span>
+                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">parse_version</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">_version&quot;</span><span class="p">]),</span>
+                <span class="s2">&quot;release_date&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span>
+                    <span class="n">data</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">_reldate&quot;</span><span class="p">],</span> <span class="s2">&quot;%m/</span><span class="si">%d</span><span class="s2">/%y&quot;</span>
                 <span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span>
-                <span class="s2">"os"</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">"os"</span><span class="p">],</span>
-                <span class="s2">"channel"</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">"channel"</span><span class="p">],</span>
+                <span class="s2">&quot;os&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;os&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;channel&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;channel&quot;</span><span class="p">],</span>
             <span class="p">}</span>
 
-        <span class="n">mapping_os</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Windows"</span><span class="p">:</span> <span class="s2">"win"</span><span class="p">,</span> <span class="s2">"Darwin"</span><span class="p">:</span> <span class="s2">"mac"</span><span class="p">}</span>
-        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"os"</span><span class="p">:</span> <span class="n">mapping_os</span><span class="p">[</span><span class="n">os</span><span class="p">]</span> <span class="k">if</span> <span class="n">os</span> <span class="k">else</span> <span class="n">os</span><span class="p">}</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"http://omahaproxy.appspot.com/all.json"</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
-        <span class="n">versions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">"InstalledVersionInfo"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">mapping_os</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Windows&quot;</span><span class="p">:</span> <span class="s2">&quot;win&quot;</span><span class="p">,</span> <span class="s2">&quot;Darwin&quot;</span><span class="p">:</span> <span class="s2">&quot;mac&quot;</span><span class="p">}</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;os&quot;</span><span class="p">:</span> <span class="n">mapping_os</span><span class="p">[</span><span class="n">os</span><span class="p">]</span> <span class="k">if</span> <span class="n">os</span> <span class="k">else</span> <span class="n">os</span><span class="p">}</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://omahaproxy.appspot.com/all.json&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">versions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;InstalledVersionInfo&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">():</span>
-            <span class="n">versions</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">extractor</span><span class="p">(</span><span class="s2">"current"</span><span class="p">),</span> <span class="n">data</span><span class="p">[</span><span class="s2">"versions"</span><span class="p">]))</span>  <span class="c1"># type: ignore</span>
-            <span class="n">versions</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">extractor</span><span class="p">(</span><span class="s2">"previous"</span><span class="p">),</span> <span class="n">data</span><span class="p">[</span><span class="s2">"versions"</span><span class="p">]))</span>  <span class="c1"># type: ignore</span>
-        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">versions</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s2">"version"</span><span class="p">])</span></div></div>
+            <span class="n">versions</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">extractor</span><span class="p">(</span><span class="s2">&quot;current&quot;</span><span class="p">),</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;versions&quot;</span><span class="p">]))</span>  <span class="c1"># type: ignore</span>
+            <span class="n">versions</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">extractor</span><span class="p">(</span><span class="s2">&quot;previous&quot;</span><span class="p">),</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;versions&quot;</span><span class="p">]))</span>  <span class="c1"># type: ignore</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">versions</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">])</span></div></div>
 
 
 <div class="viewcode-block" id="driver"><a class="viewcode-back" href="../../../manen/manen.resource.chrome.html#manen.resource.chrome.driver">[docs]</a><span class="k">class</span> <span class="nc">driver</span><span class="p">:</span>
-    <span class="sd">"""A set of functions used to manage the Chrome drivers. It can be used, for</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A set of functions used to manage the Chrome drivers. It can be used, for</span>
 <span class="sd">    instance, to list all existing versions of Chromedriver and then download one of</span>
 <span class="sd">    the available versions.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">CHROMEDRIVER_API</span> <span class="o">=</span> <span class="s2">"https://chromedriver.storage.googleapis.com/"</span>
+    <span class="n">CHROMEDRIVER_API</span> <span class="o">=</span> <span class="s2">&quot;https://chromedriver.storage.googleapis.com/&quot;</span>
 
 <div class="viewcode-block" id="driver.download"><a class="viewcode-back" href="../../../manen/manen.resource.chrome.html#manen.resource.chrome.driver.download">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">download</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">version</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"Version"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"installed"</span><span class="p">,</span>
+        <span class="n">version</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;installed&quot;</span><span class="p">,</span>
         <span class="n">platform_system</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PLATFORM</span><span class="o">.</span><span class="n">system</span><span class="p">,</span>
         <span class="n">unzip</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">remove_archive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">"""Given a specific Chrome version, download the matching driver from</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Given a specific Chrome version, download the matching driver from</span>
 <span class="sd">        the official Chrome driver storage.</span>
 
 <span class="sd">        Args:</span>
@@ -347,13 +358,13 @@
 <span class="sd">            remove_archive (bool): Default to ``True``.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            str: Path of the downloaded driver</span>
-<span class="sd">        """</span>
-        <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s2">"latest"</span><span class="p">:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;latest&quot;</span><span class="p">:</span>
             <span class="n">target_version</span> <span class="o">=</span> <span class="n">version_as_str</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">latest_release</span><span class="p">())</span>
-        <span class="k">elif</span> <span class="n">version</span> <span class="o">==</span> <span class="s2">"installed"</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;installed&quot;</span><span class="p">:</span>
             <span class="n">installed_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">version_as_str</span><span class="p">(</span><span class="n">application</span><span class="o">.</span><span class="n">installed_version</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)</span>
             <span class="n">target_version</span> <span class="o">=</span> <span class="n">version_as_str</span><span class="p">(</span>
-                <span class="bp">cls</span><span class="o">.</span><span class="n">list_versions</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">installed_version</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">"version"</span><span class="p">]</span>
+                <span class="bp">cls</span><span class="o">.</span><span class="n">list_versions</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">installed_version</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
             <span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">version</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">target_version</span> <span class="o">=</span> <span class="n">version_as_str</span><span class="p">(</span><span class="n">version</span><span class="p">)</span>
@@ -361,15 +372,15 @@
             <span class="n">target_version</span> <span class="o">=</span> <span class="n">version</span>
 
         <span class="n">mapping_platform_code</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">"Darwin"</span><span class="p">:</span> <span class="s2">"mac64"</span><span class="p">,</span>
-            <span class="s2">"Windows"</span><span class="p">:</span> <span class="s2">"win32"</span><span class="p">,</span>
-            <span class="s2">"Linux"</span><span class="p">:</span> <span class="s2">"linux64"</span><span class="p">,</span>
+            <span class="s2">&quot;Darwin&quot;</span><span class="p">:</span> <span class="s2">&quot;mac64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Windows&quot;</span><span class="p">:</span> <span class="s2">&quot;win32&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Linux&quot;</span><span class="p">:</span> <span class="s2">&quot;linux64&quot;</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="n">platform_code</span> <span class="o">=</span> <span class="n">mapping_platform_code</span><span class="p">[</span><span class="n">platform_system</span><span class="p">]</span>
         <span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
             <span class="bp">cls</span><span class="o">.</span><span class="n">CHROMEDRIVER_API</span>
             <span class="o">+</span> <span class="n">target_version</span>
-            <span class="o">+</span> <span class="s2">"/chromedriver_</span><span class="si">{}</span><span class="s2">.zip"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">platform_code</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;/chromedriver_</span><span class="si">{}</span><span class="s2">.zip&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">platform_code</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
@@ -377,12 +388,12 @@
         <span class="n">driver</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">LocalAsset</span><span class="o">.</span><span class="n">PATH</span>
             <span class="o">/</span> <span class="n">platform_system</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-            <span class="o">/</span> <span class="s2">"chrome"</span>
+            <span class="o">/</span> <span class="s2">&quot;chrome&quot;</span>
             <span class="o">/</span> <span class="n">target_version</span>
-            <span class="o">/</span> <span class="s2">"chromedriver.zip"</span>
+            <span class="o">/</span> <span class="s2">&quot;chromedriver.zip&quot;</span>
         <span class="p">)</span>
         <span class="n">driver</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_file</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_file</span><span class="p">:</span>
             <span class="n">zip_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
         <span class="n">filename</span> <span class="o">=</span> <span class="n">extract</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">driver</span><span class="p">))</span> <span class="k">if</span> <span class="n">unzip</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
@@ -393,46 +404,46 @@
         <span class="k">return</span> <span class="n">filename</span></div>
 
 <div class="viewcode-block" id="driver.list_versions"><a class="viewcode-back" href="../../../manen/manen.resource.chrome.html#manen.resource.chrome.driver.list_versions">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">list_versions</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span> <span class="n">platform_system</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PLATFORM</span><span class="o">.</span><span class="n">system</span><span class="p">):</span>
-        <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"marker"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"prefix"</span><span class="p">:</span> <span class="n">query</span><span class="p">}</span>
+    <span class="k">def</span> <span class="nf">list_versions</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">platform_system</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PLATFORM</span><span class="o">.</span><span class="n">system</span><span class="p">):</span>
+        <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;marker&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="n">query</span><span class="p">}</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">CHROMEDRIVER_API</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
         <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
 
         <span class="n">root</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-        <span class="n">ns</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s2">"}"</span><span class="p">)[:</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># pylint: disable=invalid-name</span>
+        <span class="n">ns</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s2">&quot;}&quot;</span><span class="p">)[:</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># pylint: disable=invalid-name</span>
         <span class="n">chromedrivers</span> <span class="o">=</span> <span class="p">(</span>
             <span class="p">{</span>
-                <span class="s2">"version"</span><span class="p">:</span> <span class="n">parse_version</span><span class="p">(</span>
-                    <span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">Key"</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">parse_version</span><span class="p">(</span>
+                    <span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">Key&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="p">),</span>
-                <span class="s2">"name"</span><span class="p">:</span> <span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">Key"</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span>
-                <span class="s2">"updated_at"</span><span class="p">:</span> <span class="n">content</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">LastModified"</span><span class="p">),</span>
-                <span class="s2">"size"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">Size"</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">),</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">Key&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="n">content</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">LastModified&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">Size&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">),</span>
             <span class="p">}</span>
-            <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">Contents"</span><span class="p">)</span>
-            <span class="k">if</span> <span class="s2">"chromedriver"</span> <span class="ow">in</span> <span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">Key"</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">Contents&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;chromedriver&quot;</span> <span class="ow">in</span> <span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">Key&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">platform_system</span><span class="p">:</span>
             <span class="n">name_by_platform</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s2">"Darwin"</span><span class="p">:</span> <span class="s2">"chromedriver_mac64.zip"</span><span class="p">,</span>
-                <span class="s2">"Windows"</span><span class="p">:</span> <span class="s2">"chromedriver_win32.zip"</span><span class="p">,</span>
-                <span class="s2">"Linux"</span><span class="p">:</span> <span class="s2">"chromedriver_linux64.zip"</span><span class="p">,</span>
+                <span class="s2">&quot;Darwin&quot;</span><span class="p">:</span> <span class="s2">&quot;chromedriver_mac64.zip&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Windows&quot;</span><span class="p">:</span> <span class="s2">&quot;chromedriver_win32.zip&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Linux&quot;</span><span class="p">:</span> <span class="s2">&quot;chromedriver_linux64.zip&quot;</span><span class="p">,</span>
             <span class="p">}</span>
             <span class="n">chromedrivers</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="n">chromedriver</span>
                 <span class="k">for</span> <span class="n">chromedriver</span> <span class="ow">in</span> <span class="n">chromedrivers</span>
-                <span class="k">if</span> <span class="n">name_by_platform</span><span class="p">[</span><span class="n">platform_system</span><span class="p">]</span> <span class="o">==</span> <span class="n">chromedriver</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">name_by_platform</span><span class="p">[</span><span class="n">platform_system</span><span class="p">]</span> <span class="o">==</span> <span class="n">chromedriver</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
             <span class="p">)</span>
 
-        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">chromedrivers</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">"version"</span><span class="p">])</span></div>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">chromedrivers</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="driver.latest_release"><a class="viewcode-back" href="../../../manen/manen.resource.chrome.html#manen.resource.chrome.driver.latest_release">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">latest_release</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">"installed"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Version"</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s2">"installed"</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">latest_release</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;installed&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Version&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;installed&quot;</span><span class="p">:</span>
             <span class="n">version</span> <span class="o">=</span> <span class="n">version_as_str</span><span class="p">(</span><span class="n">application</span><span class="o">.</span><span class="n">installed_version</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)</span>
 
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="n">CHROMEDRIVER_API</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span><span class="si">}</span><span class="s2">/LATEST_RELEASE"</span>
-        <span class="n">url</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"_</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">version</span> <span class="k">else</span> <span class="s2">""</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="n">CHROMEDRIVER_API</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">/LATEST_RELEASE&quot;</span>
+        <span class="n">url</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">version</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
 
         <span class="n">remote_version</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">parse_version</span><span class="p">(</span><span class="n">remote_version</span><span class="p">)</span></div>
@@ -440,13 +451,13 @@
 <div class="viewcode-block" id="driver.get"><a class="viewcode-back" href="../../../manen/manen.resource.chrome.html#manen.resource.chrome.driver.get">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">query</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"installed"</span><span class="p">,</span>
+        <span class="n">query</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;installed&quot;</span><span class="p">,</span>
         <span class="n">platform_system</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PLATFORM</span><span class="o">.</span><span class="n">system</span><span class="p">,</span>
         <span class="n">download_if_missing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">version_as_str</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">latest_release</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="n">query</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">LocalAsset</span><span class="o">.</span><span class="n">list_drivers</span><span class="p">(</span><span class="n">browser</span><span class="o">=</span><span class="s2">"chrome"</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">query</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">"path"</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">LocalAsset</span><span class="o">.</span><span class="n">list_drivers</span><span class="p">(</span><span class="n">browser</span><span class="o">=</span><span class="s2">&quot;chrome&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">query</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;path&quot;</span><span class="p">]</span>
         <span class="k">except</span> <span class="n">DriverNotFound</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">download_if_missing</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">platform_system</span><span class="o">=</span><span class="n">platform_system</span><span class="p">)</span>

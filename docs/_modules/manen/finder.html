@@ -4,13 +4,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
-    <link rel="shortcut icon" href="../../_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
+    <link rel="shortcut icon" href="../../_static/favicon.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
         <title>manen.finder - manen</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -21,24 +21,28 @@
   --color-code-foreground: black;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #263238;
-  --color-code-foreground: #EEFFFF;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #263238;
   --color-code-foreground: #EEFFFF;
   
     }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+      }
+    }
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -192,7 +196,14 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -207,13 +218,13 @@
         </div>
         <article role="main">
           <h1>Source code for manen.finder</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">manen.finder</span>
 <span class="sd">============</span>
 
 <span class="sd">Flexible and highly customizable function to find one or several elements</span>
 <span class="sd">inside one or several Selenium elements.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
@@ -230,25 +241,25 @@
 
 
 <span class="n">METHODS_MAPPER</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"class_name"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">,</span>
-    <span class="s2">"class"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">,</span>
-    <span class="s2">"cls"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">,</span>
-    <span class="s2">"css"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">CSS_SELECTOR</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span>
-    <span class="s2">"link_text"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">LINK_TEXT</span><span class="p">,</span>
-    <span class="s2">"link"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">LINK_TEXT</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span>
-    <span class="s2">"partial_link_text"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">PARTIAL_LINK_TEXT</span><span class="p">,</span>
-    <span class="s2">"plink"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">PARTIAL_LINK_TEXT</span><span class="p">,</span>
-    <span class="s2">"tag_name"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span>
-    <span class="s2">"tag"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span>
-    <span class="s2">"xp"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">XPATH</span><span class="p">,</span>
-    <span class="s2">"xpath"</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">XPATH</span><span class="p">,</span>
+    <span class="s2">&quot;class_name&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">,</span>
+    <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">,</span>
+    <span class="s2">&quot;cls&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">,</span>
+    <span class="s2">&quot;css&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">CSS_SELECTOR</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span>
+    <span class="s2">&quot;link_text&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">LINK_TEXT</span><span class="p">,</span>
+    <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">LINK_TEXT</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span>
+    <span class="s2">&quot;partial_link_text&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">PARTIAL_LINK_TEXT</span><span class="p">,</span>
+    <span class="s2">&quot;plink&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">PARTIAL_LINK_TEXT</span><span class="p">,</span>
+    <span class="s2">&quot;tag_name&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span>
+    <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span>
+    <span class="s2">&quot;xp&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">XPATH</span><span class="p">,</span>
+    <span class="s2">&quot;xpath&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">XPATH</span><span class="p">,</span>
 <span class="p">}</span>
 
 
 <div class="viewcode-block" id="parse_selector"><a class="viewcode-back" href="../../manen/manen.finder.html#manen.finder.parse_selector">[docs]</a><span class="k">def</span> <span class="nf">parse_selector</span><span class="p">(</span><span class="n">selector</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-    <span class="sd">"""Parse a selector string in the format</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse a selector string in the format</span>
 <span class="sd">    ``{selection_method}:{selector}``. If no selection method is specified,</span>
 <span class="sd">    it will be inferred from the selector itself, by using the following rule:</span>
 <span class="sd">    if ``selector`` starts with ``/`` or ``./`` then it is a XPath selector,</span>
@@ -259,14 +270,14 @@
 
 <span class="sd">    Example::</span>
 
-<span class="sd">        &gt;&gt;&gt; parse_selector('css:h1.title')</span>
-<span class="sd">        ('css selector', 'h1.title')</span>
-<span class="sd">        &gt;&gt;&gt; parse_selector('a')</span>
-<span class="sd">        ('css selector', 'a')</span>
-<span class="sd">        &gt;&gt;&gt; parse_selector('tag:span')</span>
-<span class="sd">        ('tag name', 'span')</span>
-<span class="sd">        &gt;&gt;&gt; parse_selector('/div/p/span[@class="r"]')</span>
-<span class="sd">        ('xpath', '/div/p/span[@class="r"]')</span>
+<span class="sd">        &gt;&gt;&gt; parse_selector(&#39;css:h1.title&#39;)</span>
+<span class="sd">        (&#39;css selector&#39;, &#39;h1.title&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; parse_selector(&#39;a&#39;)</span>
+<span class="sd">        (&#39;css selector&#39;, &#39;a&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; parse_selector(&#39;tag:span&#39;)</span>
+<span class="sd">        (&#39;tag name&#39;, &#39;span&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; parse_selector(&#39;/div/p/span[@class=&quot;r&quot;]&#39;)</span>
+<span class="sd">        (&#39;xpath&#39;, &#39;/div/p/span[@class=&quot;r&quot;]&#39;)</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        selector (str): selector in the format ``{selection_method}:{selector}``</span>
@@ -274,11 +285,11 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        Tuple[str, str]: Selenium selector in the format</span>
 <span class="sd">        ``(selection_method, selector)``</span>
-<span class="sd">    """</span>
-    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">selector</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">:"</span><span class="p">)</span> <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">METHODS_MAPPER</span><span class="p">):</span>
-        <span class="n">selection_method</span><span class="p">,</span> <span class="n">sel</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">selector</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">METHODS_MAPPER</span><span class="p">):</span>
+        <span class="n">selection_method</span><span class="p">,</span> <span class="n">sel</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">METHODS_MAPPER</span><span class="p">[</span><span class="n">selection_method</span><span class="p">],</span> <span class="n">sel</span>
-    <span class="k">if</span> <span class="n">selector</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">selector</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"./"</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">selector</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">selector</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;./&quot;</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">By</span><span class="o">.</span><span class="n">XPATH</span><span class="p">,</span> <span class="n">selector</span>
     <span class="k">return</span> <span class="n">By</span><span class="o">.</span><span class="n">CSS_SELECTOR</span><span class="p">,</span> <span class="n">selector</span></div>
 
@@ -288,10 +299,10 @@
     <span class="o">*</span><span class="p">,</span>
     <span class="n">wait</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">NotImplemented</span><span class="p">,</span>
-    <span class="n">inside</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s2">"SeleniumElement"</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="s2">"SeleniumElement"</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inside</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s2">&quot;SeleniumElement&quot;</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;SeleniumElement&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">many</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-    <span class="sd">"""Retrieve DOM elements from Selenium WebElements matching selector.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve DOM elements from Selenium WebElements matching selector.</span>
 <span class="sd">    The function is highly customizable in order to match the different</span>
 <span class="sd">    scenarios you may have when retriving elements from HTML source code.</span>
 <span class="sd">    For example, you can:</span>
@@ -338,20 +349,20 @@
 
 <span class="sd">    Example::</span>
 
-<span class="sd">        &gt;&gt;&gt; divs = find(['div.tryClass1', 'div.tryClass2'], many=True, wait=3, inside=driver)</span>
-<span class="sd">        [&lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "a1")&gt;,</span>
-<span class="sd">         &lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "a3")&gt;,</span>
-<span class="sd">         &lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "a3")&gt;]</span>
-<span class="sd">        &gt;&gt;&gt; links = find('a', many=False, default=None, inside=divs)</span>
-<span class="sd">        [&lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "b1")&gt;,</span>
+<span class="sd">        &gt;&gt;&gt; divs = find([&#39;div.tryClass1&#39;, &#39;div.tryClass2&#39;], many=True, wait=3, inside=driver)</span>
+<span class="sd">        [&lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;a1&quot;)&gt;,</span>
+<span class="sd">         &lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;a3&quot;)&gt;,</span>
+<span class="sd">         &lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;a3&quot;)&gt;]</span>
+<span class="sd">        &gt;&gt;&gt; links = find(&#39;a&#39;, many=False, default=None, inside=divs)</span>
+<span class="sd">        [&lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;b1&quot;)&gt;,</span>
 <span class="sd">         None,</span>
-<span class="sd">         &lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "b2")&gt;]</span>
+<span class="sd">         &lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;b2&quot;)&gt;]</span>
 <span class="sd">        &gt;&gt;&gt; lookup = find(inside=driver, default=None, many=True)</span>
-<span class="sd">        &gt;&gt;&gt; lookup(['p.tryMe', 'p.orTryMe'])</span>
-<span class="sd">        [&lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "b1")&gt;,</span>
-<span class="sd">         &lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "b2")&gt;,</span>
-<span class="sd">         &lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "b3")&gt;,</span>
-<span class="sd">         &lt;selenium.webdriver.remote.webelement.WebElement (session: "1", element: "b4")&gt;]</span>
+<span class="sd">        &gt;&gt;&gt; lookup([&#39;p.tryMe&#39;, &#39;p.orTryMe&#39;])</span>
+<span class="sd">        [&lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;b1&quot;)&gt;,</span>
+<span class="sd">         &lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;b2&quot;)&gt;,</span>
+<span class="sd">         &lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;b3&quot;)&gt;,</span>
+<span class="sd">         &lt;selenium.webdriver.remote.webelement.WebElement (session: &quot;1&quot;, element: &quot;b4&quot;)&gt;]</span>
 
 
 <span class="sd">    Args:</span>
@@ -370,7 +381,7 @@
 <span class="sd">            Defaults to ``NotImplemented``.</span>
 <span class="sd">        inside (SeleniumElement, optional): where to find the element(s).</span>
 <span class="sd">            Specifying this argument will restrict the search area. If</span>
-<span class="sd">            ``None``, it will search the whole page. If it's a list, the</span>
+<span class="sd">            ``None``, it will search the whole page. If it&#39;s a list, the</span>
 <span class="sd">            function will map over each element of that list. Defaults to</span>
 <span class="sd">            ``None``.</span>
 <span class="sd">        many (bool, optional): Whether to return a single element or all the</span>
@@ -399,12 +410,12 @@
 <span class="sd">        +--------------------+---------------------+-----------+------------------------------------------------+</span>
 <span class="sd">        | ``[]``             | ``[el1, el2, el3]`` | ``True``  | ``[[ans_elt11, ans_elt12], [], [ans_elt_31]]`` |</span>
 <span class="sd">        +--------------------+---------------------+-----------+------------------------------------------------+</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">selector</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">find</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="n">wait</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">,</span> <span class="n">inside</span><span class="o">=</span><span class="n">inside</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">inside</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"You must specify a value to the parameter `inside`."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You must specify a value to the parameter `inside`.&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inside</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[</span>

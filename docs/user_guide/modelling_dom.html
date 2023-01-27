@@ -5,13 +5,13 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Going deeper into manen" href="../manen/manen.html" /><link rel="prev" title="An enhanced WebDriver: manen’s Browser" href="browser.html" />
 
-    <link rel="shortcut icon" href="../_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
+    <link rel="shortcut icon" href="../_static/favicon.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
         <title>Modelling DOM elements with Python class - manen</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -22,24 +22,28 @@
   --color-code-foreground: black;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #263238;
-  --color-code-foreground: #EEFFFF;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #263238;
   --color-code-foreground: #EEFFFF;
   
     }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+      }
+    }
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -193,7 +197,15 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -317,10 +329,11 @@ div.nboutput.container div.prompt > div {
     }
 }
 
-/* disable scrollbars on prompts */
+/* disable scrollbars and line breaks on prompts */
 div.nbinput.container div.prompt pre,
 div.nboutput.container div.prompt pre {
     overflow: hidden;
+    white-space: pre;
 }
 
 /* input/output area */
@@ -422,6 +435,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -430,10 +444,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -445,12 +463,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -486,7 +507,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span> <span class="o">=</span> <span class="n">ChromeBrowser</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">proxy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headless</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1152</span><span class="p">,</span> <span class="mi">864</span><span class="p">))</span>
-<span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://pypi.org"</span><span class="p">)</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://pypi.org&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -494,9 +515,9 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">highlight</span><span class="p">(</span><span class="s2">"input[id='search']"</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">highlight</span><span class="p">(</span><span class="s2">&quot;input[id=&#39;search&#39;]&quot;</span><span class="p">)</span>
 
-<span class="k">with</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">'.png'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.png&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">browser</span><span class="o">.</span><span class="n">save_screenshot</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="n">screenshot</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 <span class="n">screenshot</span>
@@ -508,7 +529,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/user_guide_modelling_dom_6_0.png" src="../_images/user_guide_modelling_dom_6_0.png"/>
+<img alt="../_images/user_guide_modelling_dom_6_0.png" src="../_images/user_guide_modelling_dom_6_0.png" />
 </div>
 </div>
 <p>What we want to do here is to be able to interact with the input search bar to fill it with the query <code class="docutils literal notranslate"><span class="pre">manen</span></code>. To do so, we will start by creating a <code class="docutils literal notranslate"><span class="pre">PyPIHomePage</span></code> class, inheriting from <code class="docutils literal notranslate"><span class="pre">HomePage</span></code>; all the attributes of this class will represent one element of the UI.</p>
@@ -519,20 +540,20 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PyPIHomePage</span><span class="p">(</span><span class="n">pom</span><span class="o">.</span><span class="n">Page</span><span class="p">):</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">InputElement</span><span class="p">(</span><span class="s2">"input[id='search']"</span><span class="p">)</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">InputElement</span><span class="p">(</span><span class="s2">&quot;input[id=&#39;search&#39;]&quot;</span><span class="p">)</span>
 
 <span class="n">page</span> <span class="o">=</span> <span class="n">PyPIHomePage</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <p>We can now interact directly with the search by simply setting a value to <code class="docutils literal notranslate"><span class="pre">page.query</span></code>; this is the goal of <code class="docutils literal notranslate"><span class="pre">manen</span></code>: having very Pythonic way to retrieve and interact with a HTML page.</p>
-<p>In order to press <em>Enter</em>, you can use an <code class="docutils literal notranslate"><span class="pre">Action</span></code> that will trigger an event in the HTML page. Here by using <code class="docutils literal notranslate"><span class="pre">Action("submit")</span></code>, we submit the form and so launching a search inside PyPI.</p>
+<p>In order to press <em>Enter</em>, you can use an <code class="docutils literal notranslate"><span class="pre">Action</span></code> that will trigger an event in the HTML page. Here by using <code class="docutils literal notranslate"><span class="pre">Action(&quot;submit&quot;)</span></code>, we submit the form and so launching a search inside PyPI.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">page</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="s2">"manen selenium"</span>
-<span class="n">page</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">Action</span><span class="p">(</span><span class="s2">"submit"</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">page</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;manen selenium&quot;</span>
+<span class="n">page</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">Action</span><span class="p">(</span><span class="s2">&quot;submit&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -541,9 +562,9 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">highlight</span><span class="p">(</span><span class="s2">"ul[aria-label='Search results'] li"</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">highlight</span><span class="p">(</span><span class="s2">&quot;ul[aria-label=&#39;Search results&#39;] li&quot;</span><span class="p">)</span>
 
-<span class="k">with</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">'.png'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.png&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">browser</span><span class="o">.</span><span class="n">save_screenshot</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="n">screenshot</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 <span class="n">screenshot</span>
@@ -555,7 +576,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/user_guide_modelling_dom_12_0.png" src="../_images/user_guide_modelling_dom_12_0.png"/>
+<img alt="../_images/user_guide_modelling_dom_12_0.png" src="../_images/user_guide_modelling_dom_12_0.png" />
 </div>
 </div>
 <p>This page can contain unique elements (like the number of results matching our query), but also some elements that can be repeated; this is for example the case for the result frames. Each frame has the same structure: in <code class="docutils literal notranslate"><span class="pre">manen</span></code>, this is called a region, represented with a <code class="docutils literal notranslate"><span class="pre">Region</span></code>. A region will itself contain several elements.</p>
@@ -572,19 +593,19 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SearchResultPage</span><span class="p">(</span><span class="n">pom</span><span class="o">.</span><span class="n">Page</span><span class="p">):</span>
     <span class="k">class</span> <span class="nc">ResultRegions</span><span class="p">(</span><span class="n">pom</span><span class="o">.</span><span class="n">Regions</span><span class="p">):</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">"h3 span.package-snippet__name"</span><span class="p">)</span>
-        <span class="n">version</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">"h3 span.package-snippet__version"</span><span class="p">)</span>
-        <span class="n">link</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">LinkElement</span><span class="p">(</span><span class="s2">"a.package-snippet"</span><span class="p">)</span>
-        <span class="n">description</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">"p.package-snippet__description"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">"(no description provided)"</span><span class="p">)</span>
-        <span class="n">release_date</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">DateTimeElement</span><span class="p">(</span><span class="s2">"span.package-snippet__released"</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">&quot;h3 span.package-snippet__name&quot;</span><span class="p">)</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">&quot;h3 span.package-snippet__version&quot;</span><span class="p">)</span>
+        <span class="n">link</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">LinkElement</span><span class="p">(</span><span class="s2">&quot;a.package-snippet&quot;</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">&quot;p.package-snippet__description&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;(no description provided)&quot;</span><span class="p">)</span>
+        <span class="n">release_date</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">DateTimeElement</span><span class="p">(</span><span class="s2">&quot;span.package-snippet__released&quot;</span><span class="p">)</span>
 
-    <span class="n">n_results</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">IntegerElement</span><span class="p">(</span><span class="s2">"//*[@id='content']//form/div[1]/div[1]/p/strong"</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">order_by</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">SelectElement</span><span class="p">(</span><span class="s1">'select#order'</span><span class="p">)</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">ResultRegions</span><span class="p">(</span><span class="s2">"ul[aria-label='Search results'] li"</span><span class="p">)</span>
+    <span class="n">n_results</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">IntegerElement</span><span class="p">(</span><span class="s2">&quot;//*[@id=&#39;content&#39;]//form/div[1]/div[1]/p/strong&quot;</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">order_by</span> <span class="o">=</span> <span class="n">pom</span><span class="o">.</span><span class="n">SelectElement</span><span class="p">(</span><span class="s1">&#39;select#order&#39;</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">ResultRegions</span><span class="p">(</span><span class="s2">&quot;ul[aria-label=&#39;Search results&#39;] li&quot;</span><span class="p">)</span>
 
 <span class="n">page</span> <span class="o">=</span> <span class="n">SearchResultPage</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Number of results:"</span><span class="p">,</span> <span class="n">page</span><span class="o">.</span><span class="n">n_results</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of results:&quot;</span><span class="p">,</span> <span class="n">page</span><span class="o">.</span><span class="n">n_results</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -619,10 +640,10 @@ Number of results: 1445
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'Name:'</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>                 <span class="c1"># type: ignore</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'Version:'</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>           <span class="c1"># type: ignore</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'Release date:'</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">release_date</span><span class="p">)</span> <span class="c1"># type: ignore</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'URL:'</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">link</span><span class="p">)</span>                  <span class="c1"># type: ignore</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Name:&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>                 <span class="c1"># type: ignore</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Version:&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>           <span class="c1"># type: ignore</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Release date:&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">release_date</span><span class="p">)</span> <span class="c1"># type: ignore</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;URL:&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">link</span><span class="p">)</span>                  <span class="c1"># type: ignore</span>
 </pre></div>
 </div>
 </div>
@@ -665,7 +686,7 @@ URL: https://pypi.org/project/manen/
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manen.page_object_model</span> <span class="kn">import</span> <span class="n">__all__</span>
-<span class="p">[</span><span class="n">elt</span> <span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="n">__all__</span> <span class="k">if</span> <span class="s1">'Element'</span> <span class="ow">in</span> <span class="n">elt</span><span class="p">]</span>
+<span class="p">[</span><span class="n">elt</span> <span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="n">__all__</span> <span class="k">if</span> <span class="s1">&#39;Element&#39;</span> <span class="ow">in</span> <span class="n">elt</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -675,34 +696,35 @@ URL: https://pypi.org/project/manen/
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-['CheckboxElement',
- 'DateTimeElement',
- 'DateTimeElements',
- 'Element',
- 'Elements',
- 'ImageSourceElement',
- 'ImageSourceElements',
- 'InnerHtmlElement',
- 'InnerHtmlElements',
- 'InputElement',
- 'IntegerElement',
- 'IntegerElements',
- 'LinkElement',
- 'LinkElements',
- 'OuterHtmlElement',
- 'OuterHtmlElements',
- 'RadioButtonElement',
- 'SelectElement',
- 'TextElement',
- 'TextElements']
+[&#39;CheckboxElement&#39;,
+ &#39;DateTimeElement&#39;,
+ &#39;DateTimeElements&#39;,
+ &#39;Element&#39;,
+ &#39;Elements&#39;,
+ &#39;ImageSourceElement&#39;,
+ &#39;ImageSourceElements&#39;,
+ &#39;InnerHtmlElement&#39;,
+ &#39;InnerHtmlElements&#39;,
+ &#39;InputElement&#39;,
+ &#39;IntegerElement&#39;,
+ &#39;IntegerElements&#39;,
+ &#39;LinkElement&#39;,
+ &#39;LinkElements&#39;,
+ &#39;OuterHtmlElement&#39;,
+ &#39;OuterHtmlElements&#39;,
+ &#39;RadioButtonElement&#39;,
+ &#39;SelectElement&#39;,
+ &#39;TextElement&#39;,
+ &#39;TextElements&#39;]
 </pre></div></div>
 </div>
 <p>Note that most of the elements come in pair: the only difference between <code class="docutils literal notranslate"><span class="pre">...Element</span></code> and <code class="docutils literal notranslate"><span class="pre">...Elements</span></code> is that an <code class="docutils literal notranslate"><span class="pre">Element</span></code> will return only one result whereas an <code class="docutils literal notranslate"><span class="pre">Elements</span></code> will return a list of all the hits matching the selectors.</p>
 <p>Here is a quick explanation of each elements:</p>
-<div class="table-wrapper"><table class="docutils align-default">
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
 <colgroup>
-<col style="width: 22%"/>
-<col style="width: 78%"/>
+<col style="width: 22%" />
+<col style="width: 78%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -738,7 +760,8 @@ URL: https://pypi.org/project/manen/
 <td><p>Return a Selenium <code class="docutils literal notranslate"><span class="pre">Select</span></code> object.</p></td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
 <p>Please refer to the code documentation for more information.</p>
 </section>
 </section>
@@ -755,10 +778,10 @@ URL: https://pypi.org/project/manen/
                 </div>
                 <div class="title">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></div>
               </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
           <a class="prev-page" href="browser.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
@@ -799,7 +822,7 @@ URL: https://pypi.org/project/manen/
       <div class="toc-sticky toc-scroll">
         <div class="toc-title-container">
           <span class="toc-title">
-            Contents
+            On this page
           </span>
         </div>
         <div class="toc-tree-container">

@@ -4,13 +4,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.png"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
         <title>manen.resource.local - manen</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -21,24 +21,28 @@
   --color-code-foreground: black;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #263238;
-  --color-code-foreground: #EEFFFF;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #263238;
   --color-code-foreground: #EEFFFF;
   
     }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #263238;
+  --color-code-foreground: #EEFFFF;
+  
+      }
+    }
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -192,7 +196,14 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -207,10 +218,10 @@
         </div>
         <article role="main">
           <h1>Source code for manen.resource.local</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">manen.resource.local</span>
 <span class="sd">====================</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
@@ -220,7 +231,7 @@
 
 
 <div class="viewcode-block" id="LocalAsset"><a class="viewcode-back" href="../../../manen/manen.resource.local.html#manen.resource.local.LocalAsset">[docs]</a><span class="k">class</span> <span class="nc">LocalAsset</span><span class="p">:</span>
-    <span class="n">PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"assets/drivers"</span>
+    <span class="n">PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="s2">&quot;assets/drivers&quot;</span>
 
 <div class="viewcode-block" id="LocalAsset.list_drivers"><a class="viewcode-back" href="../../../manen/manen.resource.local.html#manen.resource.local.LocalAsset.list_drivers">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">list_drivers</span><span class="p">(</span>
@@ -230,24 +241,24 @@
         <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="n">platform_system</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">platform_system</span> <span class="o">=</span> <span class="s2">"*"</span>
-        <span class="n">version</span> <span class="o">=</span> <span class="s2">"*"</span> <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">*"</span>
+            <span class="n">platform_system</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span> <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">*&quot;</span>
         <span class="n">drivers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
-            <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">PATH</span> <span class="o">/</span> <span class="n">platform_system</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">/</span> <span class="n">browser</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">/*"</span><span class="p">)</span>
+            <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">PATH</span> <span class="o">/</span> <span class="n">platform_system</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">/</span> <span class="n">browser</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">/*&quot;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">drivers</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span>
                 <span class="p">{</span>
-                    <span class="s2">"path"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">),</span>
-                    <span class="s2">"version"</span><span class="p">:</span> <span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">stem</span><span class="p">,</span>
-                    <span class="s2">"browser"</span><span class="p">:</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">,</span>
-                    <span class="s2">"os"</span><span class="p">:</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">,</span>
+                    <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">),</span>
+                    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">stem</span><span class="p">,</span>
+                    <span class="s2">&quot;browser&quot;</span><span class="p">:</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">,</span>
+                    <span class="s2">&quot;os&quot;</span><span class="p">:</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">,</span>
                 <span class="p">}</span>
                 <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">drivers</span>
             <span class="p">]</span>
         <span class="k">raise</span> <span class="n">DriverNotFound</span><span class="p">(</span>
-            <span class="s1">'No driver found matching the query browser="</span><span class="si">{}</span><span class="s1">", '</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
-            <span class="o">+</span> <span class="s1">'platform="</span><span class="si">{}</span><span class="s1">" and version="</span><span class="si">{}</span><span class="s1">".'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">platform_system</span><span class="p">,</span> <span class="n">version</span><span class="p">)</span>
+            <span class="s1">&#39;No driver found matching the query browser=&quot;</span><span class="si">{}</span><span class="s1">&quot;, &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s1">&#39;platform=&quot;</span><span class="si">{}</span><span class="s1">&quot; and version=&quot;</span><span class="si">{}</span><span class="s1">&quot;.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">platform_system</span><span class="p">,</span> <span class="n">version</span><span class="p">)</span>
         <span class="p">)</span></div></div>
 </pre></div>
         </article>

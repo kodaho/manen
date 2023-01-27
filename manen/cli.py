@@ -11,8 +11,6 @@ from typing import List
 
 from questionary import Choice, prompt
 
-from manen.helpers import version_as_str
-
 from . import __version__
 from .helpers import version_as_str
 from .resource.brave import application as brave_app
@@ -108,14 +106,14 @@ def download_workflow():
         List[Dict]: list with metadata about the successive questions to be asked by
             `questionary.`
     """
-    chrome_version = chrome_app.installed_version()
-    brave_version = brave_app.installed_version()
+    chrome_version = chrome_app.installed_version() if chrome_app.is_installed() else None
+    brave_version = brave_app.installed_version() if brave_app.is_installed() else None
 
     def is_compatible(version):
         browsers = []
-        if version[:3] == chrome_version[:3]:
+        if chrome_version and version[:3] == chrome_version[:3]:
             browsers.append("Chrome")
-        if version[:3] == brave_version[:3]:
+        if brave_version and version[:3] == brave_version[:3]:
             browsers.append("Brave")
         if browsers:
             return f" (compatible with {', '.join(browsers)})"

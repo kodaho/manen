@@ -7,7 +7,7 @@ import shutil
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from subprocess import PIPE, STDOUT, Popen
-from typing import TYPE_CHECKING, Dict, List, Union
+from typing import TYPE_CHECKING, Dict, List, Optional, Union
 
 import requests
 
@@ -184,20 +184,21 @@ class driver:
         return filename
 
     @classmethod
-    def list_versions(cls, query: str = "", platform_system: str = PLATFORM.system):
-        params: Dict[str, Union[str, int]] = {"marker": 3, "prefix": query}
+    def list_versions(cls, query: Optional[str] = None, platform_system: str = PLATFORM.system):
+        params: Dict[str, Union[str, int]] = {"prefix": query or ""}
         response = requests.get(cls.CHROMEDRIVER_API, params=params)
         response.raise_for_status()
+
+        def parse_isoformat(s):
+            return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ")
 
         root = ET.fromstring(response.content)
         ns = "".join(root.tag.partition("}")[:2])  # pylint: disable=invalid-name
         chromedrivers = (
             {
-                "version": parse_version(
-                    (content.findtext(f"{ns}Key") or "").split("/")[0]
-                ),
+                "version": parse_version((content.findtext(f"{ns}Key") or "").split("/")[0]),
                 "name": (content.findtext(f"{ns}Key") or "").split("/")[1],
-                "updated_at": content.findtext(f"{ns}LastModified"),
+                "updated_at": parse_isoformat(content.findtext(f"{ns}LastModified")),
                 "size": int(content.findtext(f"{ns}Size") or 0),
             }
             for content in root.iterfind(f"{ns}Contents")
@@ -215,7 +216,7 @@ class driver:
                 if name_by_platform[platform_system] == chromedriver["name"]
             )
 
-        return sorted(chromedrivers, key=lambda x: x["version"])
+        return sorted(chromedrivers, key=lambda x: x["version"], reverse=True)
 
     @classmethod
     def latest_release(cls, version="installed") -> "Version":

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "manen"
-version = "0.2.0"
+version = "0.2.1.dev0"
 description = "A package around Selenium with an implementation of the page object model, an enhanced WebDriver and a CLI."
 authors = ["kodaho <23268819+kodaho@users.noreply.github.com>"]
 license = "GPLv3"

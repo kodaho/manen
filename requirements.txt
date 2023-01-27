@@ -1,3 +1,0 @@
-questionary~=1.5.1
-requests~=2.23.0
-selenium~=3.141.0

@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.1] - (unreleased)
+
+### Changed
+- `download` CLI command no longer raises an error if a browser is not installed.
+- Allow browser version to have only major and minor components.
+
+### Fixed
+- Fix listing of available Chromedriver versions to return most recent ones.
+
+
 ## [0.2.0] - 2022-02-19
 
 ### Changed

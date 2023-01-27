@@ -65,7 +65,7 @@ def test_create_version_w_3_parts(version_str, version_tuple):
 
 @pytest.mark.parametrize(
     "invalid_version",
-    ["version", "1,2,3", "1.2", "1.2.3.4.5", "1.0.a.1", "1..0.1"],
+    ["version", "1,2,3", "1.2.3.4.5", "1.0.a.1", "1..0.1"],
 )
 def test_invalid_version(invalid_version):
     with pytest.raises(ValueError):

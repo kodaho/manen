@@ -55,7 +55,7 @@ def version(version_str: str) -> "Version":
     Returns:
         Tuple[int, int, Optional[int], int]: parsed version
     """
-    if not re.match(r"^[\d]+.[\d]+.[\d]+(.[\d]+)?$", version_str):
+    if not re.match(r"^[\d]+.[\d]+(.[\d]+)?(.[\d]+)?$", version_str):
         raise ValueError(
             f"The version `{version_str}` is not compatible with the pattern"
             " MAJOR.MINOR(.BRANCH)?.PATH."
@@ -65,7 +65,7 @@ def version(version_str: str) -> "Version":
         splitted_version[0],
         splitted_version[1],
         splitted_version[2] if len(splitted_version) == 4 else None,
-        splitted_version[-1],
+        splitted_version[-1] if len(splitted_version) >= 3 else None,
     )
 
 

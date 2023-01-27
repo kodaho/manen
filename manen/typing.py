@@ -17,7 +17,7 @@ if TYPE_CHECKING:
     from typing_extensions import Protocol
 
     SeleniumElement = Union[WebDriver, WebElement]
-    Version = Tuple[int, int, Optional[int], int]
+    Version = Tuple[int, int, Optional[int], Optional[int]]
 
     class CookieProtocol(Protocol):
         def get_cookies(self):

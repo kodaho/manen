@@ -149,7 +149,7 @@ def download_workflow():
                     ),
                     version_as_str(item["version"]),
                 )
-                for item in chromedriver.list_versions()[-10:]
+                for item in chromedriver.list_versions()[:10]
             ],
         },
     ]

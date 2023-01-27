@@ -5,6 +5,34 @@ description = "A package around Selenium with an implementation of the page obje
 authors = ["kodaho <23268819+kodaho@users.noreply.github.com>"]
 license = "GPLv3"
 readme = "README.md"
+homepage = "https://kodaho.github.io/manen/"
+repository = "https://github.com/kodaho/manen/"
+keywords = [
+    "automation",
+    "DOM",
+    "page object model",
+    "scraping",
+    "selenium",
+    "test",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+include = [
+    { path = "manen" },
+]
+
+[tool.poetry.scripts]
+manen = "manen.cli:cli"
+
+[tool.poetry.urls]
+"Changes" = "https://kodaho.github.io/manen/changelog.html"
+"Documentation" = "https://kodaho.github.io/manen/"
+"Issue Tracker" = "https://github.com/kodaho/manen/issues/"
+"Source Code" = "https://github.com/kodaho/manen/"
 
 [tool.poetry.dependencies]
 python = "^3.10"

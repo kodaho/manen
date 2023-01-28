@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install poetry
         run: pipx install poetry
       - name: Set up Python 3.10
@@ -22,7 +22,7 @@ jobs:
       - name: Build package
         run: poetry build
       - name: Upload distributions artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: distributions
           path: dist
@@ -45,7 +45,7 @@ jobs:
           python-version: "3.10"
           cache: poetry
       - name: Download distributions
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: distributions
           path: dist/

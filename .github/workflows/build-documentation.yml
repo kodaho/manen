@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install poetry
         run: pipx install poetry
       - name: Set up Python 3.10
@@ -30,12 +30,12 @@ jobs:
         run: |
           mkdir version/ && python -c "import manen;print(manen.__version__)" > version/manen_version.txt
       - name: Upload package version info
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: version
           path: version
       - name: Upload distributions artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: documentation_html
           path: docs/build/html/
@@ -45,16 +45,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: gh-pages
       - name: Download built documentation
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: documentation_html
           path: docs/
       - name: Download package version
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: version
           path: version

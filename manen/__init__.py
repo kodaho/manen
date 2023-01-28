@@ -18,13 +18,4 @@ use the module :py:mod:`~manen.finder` without :py:mod:`~manen.browser` or
 :py:mod:`~manen.page_object_model` without :py:mod:`~manen.browser`.
 """
 
-import sys
-
-if sys.version_info[:2] >= (3, 8):
-    from importlib import metadata
-else:
-    import importlib_metadata as metadata
-
-__version__ = metadata.version(__package__)
-
-del metadata, sys
+__version__ = "0.2.1.dev0"

@@ -27,10 +27,10 @@ jobs:
         run: poetry install --with "dev-tools"
       - name: Run linter to detect errors
         run: |
-          pylint -E --rcfile=./.pylintrc ./manen/
+          poetry run pylint -E --rcfile=./.pylintrc ./manen/
       - name: Run isort to detect incorrectly sorted imports
         run: |
-          isort --check-only manen/
+          poetry run isort --check-only manen/
 
   test:
     needs: lint
@@ -59,4 +59,4 @@ jobs:
         run: poetry install --with test
       - name: Test with pytest
         run: |
-          pytest
+          poetry run pytest

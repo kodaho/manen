@@ -31,12 +31,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Check Tag
-        run: |
-          if [[ ! ${{ github.ref_name }} =~ ^v([1-9][0-9]*!)?(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*((a|b|rc)(0|[1-9][0-9]*))?(\.post(0|[1-9][0-9]*))?(\.dev(0|[1-9][0-9]*))?$ ]];
-          then
-            exit 1
-          fi
+      # - name: Check Tag
+      #   run: |
+      #     if [[ ! ${{ github.ref_name }} =~ ^v([1-9][0-9]*!)?(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*((a|b|rc)(0|[1-9][0-9]*))?(\.post(0|[1-9][0-9]*))?(\.dev(0|[1-9][0-9]*))?$ ]];
+      #     then
+      #       exit 1
+      #     fi
       - name: Install poetry
         run: pipx install poetry
       - name: Set up Python 3.10

@@ -9,22 +9,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v1
+      - uses: actions/checkout@v2
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.8
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install ".[deploy]"
+          python-version: "3.10"
+          cache: poetry
       - name: Build package
-        run: |
-          python setup.py dists
-      - name: Check with twine that distributions are OK
-        run: |
-          twine check --strict dist/*
+        run: poetry build
       - name: Upload distributions artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -41,14 +35,13 @@ jobs:
           then
             exit 1
           fi
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v1
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.8
-      - name: Install twine
-        run: |
-          python -m pip install --upgrade pip
-          pip install twine
+          python-version: "3.10"
+          cache: poetry
       - name: Download distributions
         uses: actions/download-artifact@v2
         with:
@@ -56,8 +49,8 @@ jobs:
           path: dist/
       - name: Upload package to Pypi
         env:
-          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
-          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+          PYPI_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          PYPI_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
         run: |
           echo "Uploading to Pypi"
-          twine upload dist/* --verbose
+          poetry publish -u $PYPI_USERNAME -p PYPI_PASSWORD --dry-run --no-interaction --verbose

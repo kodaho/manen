@@ -1,14 +1,14 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Modelling DOM elements with Python class" href="modelling_dom.html" /><link rel="prev" title="Managing resources" href="managing_resources.html" />
 
-    <link rel="shortcut icon" href="../_static/favicon.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
+    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
         <title>An enhanced WebDriver: manen’s Browser - manen</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -145,7 +145,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="../_static/manen_logo.png" alt="Logo"/>
@@ -154,7 +154,7 @@
   <span class="sidebar-brand-text">manen</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
-  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
@@ -170,15 +170,68 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../manen/manen.cli.html">manen.cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.cli.html#manen.cli.cli"><code class="docutils literal notranslate"><span class="pre">cli()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.cli.html#manen.cli.download"><code class="docutils literal notranslate"><span class="pre">download()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.cli.html#manen.cli.download_workflow"><code class="docutils literal notranslate"><span class="pre">download_workflow()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.cli.html#manen.cli.get_args"><code class="docutils literal notranslate"><span class="pre">get_args()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.cli.html#manen.cli.with_browser_parser"><code class="docutils literal notranslate"><span class="pre">with_browser_parser()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.cli.html#manen.cli.with_driver_download_parser"><code class="docutils literal notranslate"><span class="pre">with_driver_download_parser()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.cli.html#manen.cli.with_driver_parser"><code class="docutils literal notranslate"><span class="pre">with_driver_parser()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manen/manen.exceptions.html">manen.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.exceptions.html#manen.exceptions.DriverNotFound"><code class="docutils literal notranslate"><span class="pre">DriverNotFound</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.exceptions.html#manen.exceptions.ElementNotFound"><code class="docutils literal notranslate"><span class="pre">ElementNotFound</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.exceptions.html#manen.exceptions.ManenException"><code class="docutils literal notranslate"><span class="pre">ManenException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.exceptions.html#manen.exceptions.PlatformNotRecognized"><code class="docutils literal notranslate"><span class="pre">PlatformNotRecognized</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.exceptions.html#manen.exceptions.UnsettableElement"><code class="docutils literal notranslate"><span class="pre">UnsettableElement</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manen/manen.finder.html">manen.finder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.finder.html#manen.finder.find"><code class="docutils literal notranslate"><span class="pre">find()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.finder.html#manen.finder.parse_selector"><code class="docutils literal notranslate"><span class="pre">parse_selector()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manen/manen.helpers.html">manen.helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.helpers.html#manen.helpers.batch"><code class="docutils literal notranslate"><span class="pre">batch()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.helpers.html#manen.helpers.extract"><code class="docutils literal notranslate"><span class="pre">extract()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.helpers.html#manen.helpers.extract_integer"><code class="docutils literal notranslate"><span class="pre">extract_integer()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.helpers.html#manen.helpers.version"><code class="docutils literal notranslate"><span class="pre">version()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.helpers.html#manen.helpers.version_as_str"><code class="docutils literal notranslate"><span class="pre">version_as_str()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manen/manen.browser.html">manen.browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.browser.html#manen.browser.BraveBrowser"><code class="docutils literal notranslate"><span class="pre">BraveBrowser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.browser.html#manen.browser.BrowserMixin"><code class="docutils literal notranslate"><span class="pre">BrowserMixin</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.browser.html#manen.browser.ChromeBrowser"><code class="docutils literal notranslate"><span class="pre">ChromeBrowser</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html">manen.page_object_model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.Action"><code class="docutils literal notranslate"><span class="pre">Action</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.CheckboxElement"><code class="docutils literal notranslate"><span class="pre">CheckboxElement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.DOMAccessor"><code class="docutils literal notranslate"><span class="pre">DOMAccessor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.DateTimeElement"><code class="docutils literal notranslate"><span class="pre">DateTimeElement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.DateTimeElements"><code class="docutils literal notranslate"><span class="pre">DateTimeElements</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.Element"><code class="docutils literal notranslate"><span class="pre">Element</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.Elements"><code class="docutils literal notranslate"><span class="pre">Elements</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.Frame"><code class="docutils literal notranslate"><span class="pre">Frame</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.IgnorePageObjectLoader"><code class="docutils literal notranslate"><span class="pre">IgnorePageObjectLoader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.ImageSourceElement"><code class="docutils literal notranslate"><span class="pre">ImageSourceElement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.ImageSourceElements"><code class="docutils literal notranslate"><span class="pre">ImageSourceElements</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.InnerHtmlElement"><code class="docutils literal notranslate"><span class="pre">InnerHtmlElement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.InnerHtmlElements"><code class="docutils literal notranslate"><span class="pre">InnerHtmlElements</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.InputElement"><code class="docutils literal notranslate"><span class="pre">InputElement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.IntegerElement"><code class="docutils literal notranslate"><span class="pre">IntegerElement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.IntegerElements"><code class="docutils literal notranslate"><span class="pre">IntegerElements</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.LinkElement"><code class="docutils literal notranslate"><span class="pre">LinkElement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.LinkElements"><code class="docutils literal notranslate"><span class="pre">LinkElements</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.OuterHtmlElement"><code class="docutils literal notranslate"><span class="pre">OuterHtmlElement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.OuterHtmlElements"><code class="docutils literal notranslate"><span class="pre">OuterHtmlElements</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.Page"><code class="docutils literal notranslate"><span class="pre">Page</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.PageObjectLoader"><code class="docutils literal notranslate"><span class="pre">PageObjectLoader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.RadioButtonElement"><code class="docutils literal notranslate"><span class="pre">RadioButtonElement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.Region"><code class="docutils literal notranslate"><span class="pre">Region</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.Regions"><code class="docutils literal notranslate"><span class="pre">Regions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.SelectElement"><code class="docutils literal notranslate"><span class="pre">SelectElement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.TextElement"><code class="docutils literal notranslate"><span class="pre">TextElement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.TextElements"><code class="docutils literal notranslate"><span class="pre">TextElements</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.WebArea"><code class="docutils literal notranslate"><span class="pre">WebArea</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manen/manen.page_object_model.html#manen.page_object_model.load_selector_config"><code class="docutils literal notranslate"><span class="pre">load_selector_config()</span></code></a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../manen/manen.resource.html">manen.resource package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.resource.brave.html">manen.resource.brave</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.resource.chrome.html">manen.resource.chrome</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.resource.local.html">manen.resource.local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manen/manen.resource.local.html#manen.resource.local.LocalAsset"><code class="docutils literal notranslate"><span class="pre">LocalAsset</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -477,7 +530,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="An-enhanced-WebDriver:-manen’s-Browser">
-<h1>An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code><a class="headerlink" href="#An-enhanced-WebDriver:-manen’s-Browser" title="Permalink to this headline">#</a></h1>
+<h1>An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code><a class="headerlink" href="#An-enhanced-WebDriver:-manen’s-Browser" title="Permalink to this heading">#</a></h1>
 <p>The module <code class="docutils literal notranslate"><span class="pre">manen.browser</span></code> defines several <code class="docutils literal notranslate"><span class="pre">Browser</span></code> classes such as <code class="docutils literal notranslate"><span class="pre">ChromeBrowser</span></code>. These classes inherits from <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> and are designed to only completes the original classes and not overwrite the base methods. These new methods are used for instanciation, DOMs exploration and some utils methods. This guide completes the documentation of these methods (that can be getting the help on the class <code class="docutils literal notranslate"><span class="pre">manen.browser.BrowserMixin</span></code>).</p>
 <p>Note that all the browsers are not currently supported. To see the list of browser classes, you can use the values returned by <code class="docutils literal notranslate"><span class="pre">manen.browser.__all__</span></code>.</p>
 <div class="nbinput docutils container">
@@ -499,7 +552,7 @@ div.rendered_html tbody tr:hover {
 </pre></div></div>
 </div>
 <section id="Instanciating-a-browser">
-<h2>Instanciating a browser<a class="headerlink" href="#Instanciating-a-browser" title="Permalink to this headline">#</a></h2>
+<h2>Instanciating a browser<a class="headerlink" href="#Instanciating-a-browser" title="Permalink to this heading">#</a></h2>
 <p>Each browser class implemented in <code class="docutils literal notranslate"><span class="pre">manen</span></code> provides the same additional methods compared to a WebDriver. One of the method is <code class="docutils literal notranslate"><span class="pre">initialize</span></code> which allows to instanciate a new browser with some common options:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">proxy</span></code> that will be the proxies used in the browser for each request.</p></li>
@@ -550,7 +603,7 @@ Contributing              -&gt; https://kodaho.github.io/manen/contributing.html
 </div>
 </section>
 <section id="Exploring-the-DOM">
-<h2>Exploring the DOM<a class="headerlink" href="#Exploring-the-DOM" title="Permalink to this headline">#</a></h2>
+<h2>Exploring the DOM<a class="headerlink" href="#Exploring-the-DOM" title="Permalink to this heading">#</a></h2>
 <p>Retrieving web elements is usually done with the methods <code class="docutils literal notranslate"><span class="pre">find_element</span></code> or <code class="docutils literal notranslate"><span class="pre">find_elements</span></code>. Even if these methods fulfil several use cases, the retrieval of web elements sometimes requires to handle more cases; the function <code class="docutils literal notranslate"><span class="pre">manen.finder.find()</span></code> has been designed to answer this problematic and has been integrated to the browser class. Please refer to the documentation of this function to get the exhaustive list of what can be done with this function. The <code class="docutils literal notranslate"><span class="pre">find</span></code> method of a browser and
 the function in <code class="docutils literal notranslate"><span class="pre">manen.finder</span></code> have approximately the same signature: the only differences is that it will retrieve by default all the elements matching the given selectors.</p>
 <p>Let’s dig into the <code class="docutils literal notranslate"><span class="pre">find()</span></code> method, with an example by exploring the results matching the query “selenium” on PyPI.</p>
@@ -779,7 +832,7 @@ Wall time: 3.08 s
 </div>
 </section>
 <section id="Cookies-management">
-<h2>Cookies management<a class="headerlink" href="#Cookies-management" title="Permalink to this headline">#</a></h2>
+<h2>Cookies management<a class="headerlink" href="#Cookies-management" title="Permalink to this heading">#</a></h2>
 <p>One of the feature offered by <code class="docutils literal notranslate"><span class="pre">manen</span></code>’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code> is an interface for cookies. With a <code class="docutils literal notranslate"><span class="pre">selenium.WebDriver</span></code>, you will have to use the methods <code class="docutils literal notranslate"><span class="pre">get_cookies</span></code>, <code class="docutils literal notranslate"><span class="pre">add_cookie</span></code> and <code class="docutils literal notranslate"><span class="pre">delete_all_cookies</span></code>. With a <code class="docutils literal notranslate"><span class="pre">Browser</span></code>, you can interact with cookies through the properties <code class="docutils literal notranslate"><span class="pre">cookies</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
@@ -910,9 +963,8 @@ Wall time: 3.08 s
     </aside>
   </div>
 </div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/scripts/furo.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>

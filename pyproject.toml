@@ -1,12 +1,16 @@
-[tool.poetry]
+[project]
 name = "manen"
-version = "0.2.1.dev0"
+dynamic = ["version"]
 description = "A package around Selenium with an implementation of the page object model, an enhanced WebDriver and a CLI."
-authors = ["kodaho <23268819+kodaho@users.noreply.github.com>"]
-license = "GPLv3"
-readme = "README.md"
-homepage = "https://kodaho.github.io/manen/"
-repository = "https://github.com/kodaho/manen/"
+authors = [
+    { name = "kodaho", email = "23268819+kodaho@users.noreply.github.com" },
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 keywords = [
     "automation",
     "DOM",
@@ -15,63 +19,64 @@ keywords = [
     "selenium",
     "test",
 ]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Topic :: Software Development :: Libraries :: Python Modules",
+dependencies = [
+    "dateparser>=1.0.0, <2",
+    "polling2~=0.4.6",
+    "pyyaml>=5.4",
+    "questionary>=1.8.1, <2",
+    "requests>=2.27.1, <3",
+    "selenium>=3.141.0, <5",
 ]
-include = [
-    { path = "manen" },
-]
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "GPLv3" }
 
-[tool.poetry.scripts]
-manen = "manen.cli:cli"
-
-[tool.poetry.urls]
+[project.urls]
 "Changes" = "https://kodaho.github.io/manen/changelog.html"
 "Documentation" = "https://kodaho.github.io/manen/"
 "Issue Tracker" = "https://github.com/kodaho/manen/issues/"
 "Source Code" = "https://github.com/kodaho/manen/"
 
-[tool.poetry.dependencies]
-python = "^3.10"
-selenium = "^4.8.0"
-requests = "^2.28.2"
-questionary = "^1.10.0"
-dateparser = "^1.1.6"
-polling2 = "^0.5.0"
-pyyaml = "^6.0"
+[project.scripts]
+manen = "manen.cli:cli"
 
-[tool.poetry.group.test.dependencies]
-jinja2 = "^3.1.2"
-pytest = "^7.2.1"
-
-[tool.poetry.group.docs.dependencies]
-furo = "^2022.12.7"
-sphinx-autobuild = "^2021.3.14"
-sphinx-copybutton = "^0.5.1"
-sphinx-inline-tabs = "^2022.1.2b11"
-sphinx = "^6.1.3"
-nbsphinx = "^0.8.12"
-ipython = "^8.9.0"
-
-[tool.poetry.group.dev-tools.dependencies]
-black = "^22.12.0"
-isort = "^5.11.4"
-mypy = "^0.991"
-pylint = "^2.15.10"
-rstcheck = "^6.1.1"
-
+[project.optional-dependencies]
+test = ["jinja2==3.1.2", "pytest==7.2.1"]
+docs = [
+    "furo==2022.12.7",
+    "sphinx-autobuild==2021.3.14",
+    "sphinx-copybutton==0.5.1",
+    "sphinx-inline-tabs==2022.1.2b11",
+    "sphinx==6.1.3",
+    "nbsphinx==0.8.12",
+    "ipython==8.9.0",
+]
+dev-tools = [
+    "black==22.12.0",
+    "isort==5.11.4",
+    "mypy==0.991",
+    "pylint==2.15.10",
+    "rstcheck==6.1.1",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 
-[tool.black]
-line-length = 98
+[tool.rye]
+managed = true
+dev-dependencies = []
+universal = true
 
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["manen"]
+
+[tool.hatch.version]
+path = "manen/__init__.py"
 
 [tool.ruff]
 line-length = 98

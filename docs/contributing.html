@@ -280,20 +280,13 @@ directly in Github through issues. If you found any bug, don’t hesitate to ope
 issue (if one isn’t opened yet about the same bug) or/and open a pull request.</p>
 <section id="reproducing-a-development-environment">
 <h2>Reproducing a development environment<a class="headerlink" href="#reproducing-a-development-environment" title="Permalink to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">manen</span></code> has been developed with Python 3.8, using Pipenv to manage the development
-environment. If you want to help in the development of <code class="docutils literal notranslate"><span class="pre">manen</span></code>, reproducing a dev
-environment similar to the original one will be needed. To do so, you can whether
-use Pipenv to recreate the environment with the command</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pipenv<span class="w"> </span>sync
+<p><code class="docutils literal notranslate"><span class="pre">manen</span></code> has been developed with Python 3.10, using rye as project manager. If you
+want to contribute to <code class="docutils literal notranslate"><span class="pre">manen</span></code>, you can reproduce a development environment with the
+following command (make sure you have <a class="reference external" href="https://rye.astral.sh/guide/installation/">rye installed</a>
+first):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rye<span class="w"> </span>sync<span class="w"> </span>--all-features
 </pre></div>
 </div>
-<p>Note that using Pipenv is not required. You can reproduce the development environment
-by re-installing the same package specified in the setup file of the package</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[doc,test,lint]&quot;</span>
-</pre></div>
-</div>
-<p>This will install <code class="docutils literal notranslate"><span class="pre">manen</span></code> with extra dependencies for development workflows, described
-in the next section.</p>
 <p>Note that building the documentation will require to install <a class="reference external" href="https://pandoc.org/">Pandoc</a>,
 a universal document converter. All the instructions to do so can be found
 <a class="reference external" href="https://pandoc.org/installing.html">here</a>.</p>

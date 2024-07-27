@@ -9,24 +9,14 @@ issue (if one isn't opened yet about the same bug) or/and open a pull request.
 Reproducing a development environment
 -------------------------------------
 
-``manen`` has been developed with Python 3.8, using Pipenv to manage the development
-environment. If you want to help in the development of ``manen``, reproducing a dev
-environment similar to the original one will be needed. To do so, you can whether
-use Pipenv to recreate the environment with the command
+``manen`` has been developed with Python 3.10, using rye as project manager. If you
+want to contribute to ``manen``, you can reproduce a development environment with the
+following command (make sure you have `rye installed <https://rye.astral.sh/guide/installation/>`_
+first):
 
 .. code-block:: bash
 
-    $ pipenv sync
-
-Note that using Pipenv is not required. You can reproduce the development environment
-by re-installing the same package specified in the setup file of the package
-
-.. code-block:: bash
-
-    $ pip install -e ".[doc,test,lint]"
-
-This will install ``manen`` with extra dependencies for development workflows, described
-in the next section.
+    $ rye sync --all-features
 
 Note that building the documentation will require to install `Pandoc <https://pandoc.org/>`_,
 a universal document converter. All the instructions to do so can be found

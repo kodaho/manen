@@ -1,8 +1,7 @@
 """
 :py:mod:`manen` is a module to ease the interaction with Selenium. Its features
-are splitted into four (almost) independant modules:
+are splitted into four (almost) independent modules:
 
-- :py:mod:`~manen.resource` : set of helpers to get the drivers needed by Selenium to work
 - :py:mod:`~manen.finder`: define a function :py:func:`~manen.finder.find` in order to
   avoid calling the methods ``find_element_by_*`` or ``find_elements_by_*`` of a Selenium
   :py:class:`~selenium.webdriver.remote.webelement.WebElement`
@@ -13,7 +12,7 @@ are splitted into four (almost) independant modules:
   `Page Object Models <https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/>`_
   in order to easily interact with the DOM of a webpage.
 
-Each module is built to be quite independant from each other. For example, you can
+Each module is built to be quite independent from each other. For example, you can
 use the module :py:mod:`~manen.finder` without :py:mod:`~manen.browser` or
 :py:mod:`~manen.page_object_model` without :py:mod:`~manen.browser`.
 """

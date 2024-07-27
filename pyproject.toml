@@ -1,7 +1,7 @@
 [project]
 name = "manen"
 dynamic = ["version"]
-description = "A package around Selenium with an implementation of the page object model, an enhanced WebDriver and a CLI."
+description = "A package around Selenium with an implementation of the page object model &an enhanced WebDriver."
 authors = [
     { name = "kodaho", email = "23268819+kodaho@users.noreply.github.com" },
 ]
@@ -37,8 +37,6 @@ license = { text = "GPLv3" }
 "Issue Tracker" = "https://github.com/kodaho/manen/issues/"
 "Source Code" = "https://github.com/kodaho/manen/"
 
-[project.scripts]
-manen = "manen.cli:cli"
 
 [build-system]
 requires = ["hatchling"]

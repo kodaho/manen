@@ -21,7 +21,6 @@ Among the core features, you can find:
 - an implementation of the `page object model <https://www.selenium.dev/documentation/en/
   guidelines_and_recommendations/page_object_models/>`_ design pattern
 - a class which completes :py:class:`~selenium.webdriver.remote.webdriver.WebDriver`
-- some helpers to manage resources usually required by Selenium
 - a function to easily find and isolate DOM elements inside a page
 
 This package allows you to write more concise, flexible and powerful code compared to

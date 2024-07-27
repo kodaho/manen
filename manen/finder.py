@@ -7,18 +7,17 @@ inside one or several Selenium elements.
 """
 
 from functools import partial
-from typing import TYPE_CHECKING, Any, List, Tuple, Union
+from typing import TYPE_CHECKING, Any, Literal, overload
 
 import polling2
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
-from .exceptions import ElementNotFound
+from manen.exceptions import ElementNotFound
 
 if TYPE_CHECKING:
-    from .typing import SeleniumElement
-
+    from manen.typing import DriverOrElement, WebElement
 
 METHODS_MAPPER = {
     "class_name": By.CLASS_NAME,
@@ -38,7 +37,7 @@ METHODS_MAPPER = {
 }
 
 
-def parse_selector(selector: str) -> Tuple[str, str]:
+def parse_selector(selector: str) -> tuple[str, str]:
     """Parse a selector string in the format
     ``{selection_method}:{selector}``. If no selection method is specified,
     it will be inferred from the selector itself, by using the following rule:
@@ -74,17 +73,72 @@ def parse_selector(selector: str) -> Tuple[str, str]:
     return By.CSS_SELECTOR, selector
 
 
+@overload
 def find(
-    selector: Union[str, List[str]] = None,
+    selector: None = None,
     *,
-    wait: int = 0,
-    default: Any = NotImplemented,
-    inside: Union["SeleniumElement", List["SeleniumElement"]] = None,
+    inside: "DriverOrElement | list['DriverOrElement'] | None",
+    many: bool,
+    default: Any,
+    wait: int,
+) -> partial: ...
+
+
+@overload
+def find(
+    selector: str | list[str],
+    *,
+    inside: "DriverOrElement",
+    many: Literal[False],
+    default: Any,
+    wait: int,
+) -> "WebElement": ...
+
+
+@overload
+def find(
+    selector: str | list[str],
+    *,
+    inside: "DriverOrElement",
+    many: Literal[True],
+    default: Any,
+    wait: int,
+) -> list["WebElement"]: ...
+
+
+@overload
+def find(
+    selector: str | list[str],
+    *,
+    inside: list["DriverOrElement"],
+    many: Literal[False],
+    default: Any,
+    wait: int,
+) -> list["WebElement"]: ...
+
+
+@overload
+def find(
+    selector: str | list[str],
+    *,
+    inside: list["DriverOrElement"],
+    many: Literal[True],
+    default: Any,
+    wait: int,
+) -> list[list["WebElement"]]: ...
+
+
+def find(
+    selector: str | list[str] | None = None,
+    *,
+    inside: "DriverOrElement | list['DriverOrElement'] | None" = None,
     many: bool = False,
-) -> Any:
+    default: Any = NotImplemented,
+    wait: int = 0,
+):
     """Retrieve DOM elements from Selenium WebElements matching selector.
     The function is highly customizable in order to match the different
-    scenarios you may have when retriving elements from HTML source code.
+    scenarios you may have when retrieving elements from HTML source code.
     For example, you can:
 
     - try with one or multiple selectors, with several selection methods (XPath,
@@ -195,11 +249,11 @@ def find(
         return partial(find, wait=wait, default=default, inside=inside, many=many)
 
     if inside is None:
-        raise ValueError("You must specify a value to the parameter `inside`.")
+        raise ValueError("You must specify `inside` if you specify `selector`")
 
     if isinstance(inside, list):
         return [
-            find(selector, inside=element, default=default, wait=wait, many=many)
+            find(selector, inside=element, default=default, wait=wait, many=many)  # type: ignore
             for element in inside
         ]
 

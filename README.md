@@ -84,21 +84,22 @@ using a manen `Page`. It will essentially use the package
 stores all the classes used to do the interface with each web element.
 
 ```python
-import manen.page_object_model as pom
+from manen.page_object_model.webarea import Page, WebArea
+from manen.page_object_model import dom
 
-class HomePage(pom.Page):
-    query = pom.InputElement("input[id='search']")
+class HomePage(Page):
+    query: Annotated[Input, dom.CSS("input[id='search']")]
 
 
-class SearchResultPage(pom.Page):
-    class ResultRegions(pom.Regions):
-        name = pom.TextElement("h3 span.package-snippet__name")
-        version = pom.TextElement("h3 span.package-snippet__version")
-        link = pom.LinkElement("a.package-snippet")
-        description = pom.TextElement("p.package-snippet__description")
+class SearchResultPage(Page):
+    class Result(WebArea):
+        name: Annotated[str, dom.CSS("h3 span.package-snippet__name")]
+        version: Annotated[str, dom.CSS("h3 span.package-snippet__version")]
+        link: Annotated[dom.HRef, dom.CSS("a.package-snippet")]
+        description: Annotated[str, dom.CSS("p.package-snippet__description")]
 
-    n_results = pom.IntegerElement("//*[@id='content']//form/div[1]/div[1]/p/strong")
-    results = ResultRegions("ul[aria-label='Search results'] li")
+    nb_results: Annotated[int, dom.XPath("//*[@id='content']//form/div[1]/div[1]/p/strong")]
+    results: Annotated[list[Result], dom.CSS("ul[aria-label='Search results'] li")]
 ```
 
 The `Page` class is used to modelize a whole WebDriver page; all elements defined inside the class
@@ -131,23 +132,13 @@ Submitting the form will refer to a page with the results of our query. Let's us
 ```python
 page = SearchResultPage(browser)
 
-print(page.n_results)
+print(page.nb_results)
 # 1
 
 print(page.results)
 # [<__main__.SearchResultPage.ResultRegions at 0x1058e97c0>]
 
-print(
-    f"Name: {page.results[0].name}",
-    f"Description: {page.results[0].description[:80]}...",
-    f"Version: {page.results[0].version}",
-    f"Link: {page.results[0].link}",
-    sep="\n",
-)
-# Name: manen
-# Description: A package around `selenium` offering, among other features, an implementation of...
-# Version: 0.1.0
-# Link: https://pypi.org/project/manen/
+print(page.results[0].model_dump())
 ```
 
 Last step is to close the browser to avoid any remaining running application once we close Python.

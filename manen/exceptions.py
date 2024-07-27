@@ -49,16 +49,3 @@ class PlatformNotRecognized(ManenException):
 
     def __str__(self):
         return 'The platform "{}" is not recognized.'.format(self.platform)
-
-
-class UnsettableElement(ManenException):
-    """Cannot set a value to an instance of
-    :py:class:`manen.page_object_model.Element`.
-    """
-
-    def __init__(self, class_name):
-        super().__init__()
-        self.class_name = class_name
-
-    def __str__(self):
-        return "{} is a web element which cannot be set.".format(self.class_name)

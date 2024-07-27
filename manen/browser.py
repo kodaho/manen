@@ -19,7 +19,7 @@ from .resource.chrome import driver as chromedriver
 from .typing import WebDriverProtocol
 
 if TYPE_CHECKING:
-    from .typing import SeleniumElement, Version
+    from .typing import DriverOrElement, Version
 
 
 __all__ = (
@@ -55,7 +55,7 @@ class BrowserMixin(WebDriverProtocol):  # type: ignore
         """Easily delete current cookies inside the driver."""
         self.delete_all_cookies()
 
-    def click_with_js(self, element: "SeleniumElement"):
+    def click_with_js(self, element: "DriverOrElement"):
         """Click on an element using a JavaScript script. Can be useful if you
         want to click on an element outside the current frame.
         """
@@ -98,7 +98,7 @@ class BrowserMixin(WebDriverProtocol):  # type: ignore
                 "-" if direction.lower() == "up" else ""
             )
         else:
-            body: "SeleniumElement" = self.find_element_by_tag_name("body")
+            body: "DriverOrElement" = self.find_element_by_tag_name("body")
             arg = Keys.PAGE_DOWN if direction.lower() == "down" else Keys.PAGE_UP
             func = body.send_keys
 

@@ -16,10 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Debug
-        run: |
-          echo $HOME
-          echo $PATH
       - name: Install rye
         run: |
           curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash

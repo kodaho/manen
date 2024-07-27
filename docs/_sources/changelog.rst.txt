@@ -10,19 +10,14 @@ Changelog
   </span>
 
 
-0.2.1
+0.3.0
 -----
 
 |s| (unreleased) |e|
 
 Changed
 ^^^^^^^
-- ``download`` CLI command no longer raises an error if a browser is not installed.
-- Allow browser version to have only major and minor components.
-
-Fixed
-^^^^^
-- Fix listing of available Chromedriver versions to return most recent ones.
+- :py:mod:`~manen.page_object_model` has been entirely rewritten to use type annotation instead of `..Element` objects.
 
 
 0.2.0

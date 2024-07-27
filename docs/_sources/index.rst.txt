@@ -19,35 +19,51 @@ Welcome to manen's documentation!
 Among the core features, you can find:
 
 - an implementation of the `page object model <https://www.selenium.dev/documentation/en/
-  guidelines_and_recommendations/page_object_models/>`_
+  guidelines_and_recommendations/page_object_models/>`_ design pattern
 - a class which completes :py:class:`~selenium.webdriver.remote.webdriver.WebDriver`
 - some helpers to manage resources usually required by Selenium
 - a function to easily find and isolate DOM elements inside a page
 
-This package will allow you to write more concise, flexible and powerful code compared to
-what you could do by using only Selenium. For example, here is a comparison of the same
-code with and without ``manen``:
+This package allows you to write more concise, flexible and powerful code compared to
+what you would do by using only Selenium. Here is a comparison of the same code written
+with and without ``manen``:
 
 .. tab:: With manen
 
    .. code-block:: ipython
 
-      from manen import page_object_model as pom
+      from datetime import datetime
+      from typing import Annotated
 
-      class BlogPage(pom.Page):
-          class Article(pom.Regions):
-              title = pom.TextElement("h1")
-              n_likes = pom.IntegerElement("span.n_likes")
-              tags = pom.TextElements("span.tag", default=[])
-              updated_at = pom.DateElement("p.date")
+      from selenium.webdriver.chrome.webdriver import WebDriver
 
-           articles = Article("article", wait=3)
+      from manen.page_object_model import dom
+      from manen.page_object_model.webarea import Page, WebArea
 
-       page = BlogPage(driver)
-       article = page.articles[0]
 
-      print(article.title, article.n_likes, article.tags, article.updated_at)
-      # ('manen, a new tool around Selenium', 100, [], datetime.date(2021, 1, 1))
+      class BlogPage(Page):
+         class Article(WebArea):
+            title: Annotated[str, dom.XPath("//h1")]
+            n_likes: Annotated[int, dom.CSS("span.n_likes")]
+            tags: Annotated[list[str], dom.CSS("span.tag"), dom.Default([])]
+            updated_at: Annotated[datetime, dom.CSS("span.updated_at")]
+
+         articles: Annotated[list[Article], dom.css('div.article'), dom.Wait(3)]
+
+
+      driver = WebDriver()
+
+      page = BlogPage(driver)
+      article = page.articles[0]
+
+      print(article.model_dump())
+      # {
+      #   'title': 'Hello, Manen!',
+      #   'n_likes': 42,
+      #   'tags': ['python', 'selenium'],
+      #   'updated_at': datetime.datetime(2021, 1, 1, 0, 0)
+      # }
+
 
 .. tab:: Without manen
 
@@ -59,19 +75,27 @@ code with and without ``manen``:
       from selenium.webdriver.support import expected_conditions as EC
       from selenium.webdriver.support.ui import WebDriverWait
 
+      driver = WebDriver()
+
       articles = WebDriverWait(driver, 3).until(
           EC.presence_of_elements_located((By.CSS, "article"))
       )
-      title = articles[0].find_element_by_css("h1").text
-      n_likes = int(articles[0].find_element_by_css("span.n_likes").text)
+      title = articles[0].find_element(By.CSS_SELECTOR, "h1").text
+      n_likes = int(articles[0].find_element(By.CSS_SELECTOR, "span.n_likes").text)
       try:
-          tags = articles[0].find_elements_by_css("span.tags")
+          tags = articles[0].find_element(By.CSS_SELECTOR, "span.tags")
       except NoSuchElementException:
           tags = []
-      updated_at = dateparser(articles[0].find_element_by_css("p.date").text)
+      updated_at = dateparser(articles[0].find_element(By.CSS_SELECTOR, "p.date").text)
 
-      print(title, n_likes, tags, updated_at)
-      # ('manen, a new tool around Selenium', 100, [], datetime.date(2021, 1, 1))
+      print({'title': title, 'n_likes': n_likes, 'tags': tags, 'updated': updated_at})
+      # {
+      #   'title': 'Hello, Manen!',
+      #   'n_likes': 42,
+      #   'tags': ['python', 'selenium'],
+      #   'updated_at': datetime.datetime(2021, 1, 1, 0, 0)
+      # }
+
 
 Besides being more concise, the version using ``manen`` is also more verbose, meaning
 that it can ease the comprehension of your source code.

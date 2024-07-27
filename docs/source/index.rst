@@ -32,22 +32,38 @@ code with and without ``manen``:
 
    .. code-block:: ipython
 
-      from manen import page_object_model as pom
+      from datetime import datetime
+      from typing import Annotated
 
-      class BlogPage(pom.Page):
-          class Article(pom.Regions):
-              title = pom.TextElement("h1")
-              n_likes = pom.IntegerElement("span.n_likes")
-              tags = pom.TextElements("span.tag", default=[])
-              updated_at = pom.DateElement("p.date")
+      from selenium.webdriver.chrome.webdriver import WebDriver
 
-           articles = Article("article", wait=3)
+      from manen.page_object_model import dom
+      from manen.page_object_model.webarea import Page, WebArea
 
-       page = BlogPage(driver)
-       article = page.articles[0]
 
-      print(article.title, article.n_likes, article.tags, article.updated_at)
-      # ('manen, a new tool around Selenium', 100, [], datetime.date(2021, 1, 1))
+      class BlogPage(Page):
+         class Article(WebArea):
+            title: Annotated[str, dom.XPath("//h1")]
+            n_likes: Annotated[int, dom.CSS("span.n_likes")]
+            tags: Annotated[list[str], dom.CSS("span.tag"), dom.Default([])]
+            updated_at: Annotated[datetime, dom.CSS("span.updated_at")]
+
+         articles: Annotated[list[Article], dom.css('div.article'), dom.Wait(3)]
+
+
+      driver = WebDriver()
+
+      page = BlogPage(driver)
+      article = page.articles[0]
+
+      print(article.model_dump())
+      # {
+      #   'title': 'Hello, Manen!',
+      #   'n_likes': 42,
+      #   'tags': ['python', 'selenium'],
+      #   'updated_at': datetime.datetime(2021, 1, 1, 0, 0)
+      # }
+
 
 .. tab:: Without manen
 
@@ -58,6 +74,8 @@ code with and without ``manen``:
       from selenium.webdriver.common.by import By
       from selenium.webdriver.support import expected_conditions as EC
       from selenium.webdriver.support.ui import WebDriverWait
+
+      driver = WebDriver()
 
       articles = WebDriverWait(driver, 3).until(
           EC.presence_of_elements_located((By.CSS, "article"))
@@ -70,8 +88,14 @@ code with and without ``manen``:
           tags = []
       updated_at = dateparser(articles[0].find_element_by_css("p.date").text)
 
-      print(title, n_likes, tags, updated_at)
-      # ('manen, a new tool around Selenium', 100, [], datetime.date(2021, 1, 1))
+      print({'title': title, 'n_likes': n_likes, 'tags': tags, 'updated': updated_at})
+      # {
+      #   'title': 'Hello, Manen!',
+      #   'n_likes': 42,
+      #   'tags': ['python', 'selenium'],
+      #   'updated_at': datetime.datetime(2021, 1, 1, 0, 0)
+      # }
+
 
 Besides being more concise, the version using ``manen`` is also more verbose, meaning
 that it can ease the comprehension of your source code.

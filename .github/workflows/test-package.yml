@@ -53,6 +53,6 @@ jobs:
           curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash
           echo "$HOME/.rye/shims" >> $GITHUB_PATH
       - name: Install dependencies
-        run: rye sync --with test
+        run: rye sync --features test
       - name: Test with pytest
         run: rye run pytest

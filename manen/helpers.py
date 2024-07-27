@@ -7,9 +7,6 @@ Helpers functions used by :py:mod:`manen`.
 
 import platform
 import re
-import zipfile
-from os import chmod
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -83,31 +80,6 @@ def version_as_str(version_tuple: "Version", limit: int = 4) -> str:
         str: formatted version
     """
     return ".".join(map(str, version_tuple[:limit]))
-
-
-def extract(archive_path: str):
-    """Uncompress a file in an archive.
-
-    Args:
-        archive_path (str): path where to find the archive
-
-    Returns:
-        str: path of the uncrompressed file
-    """
-    path = Path(archive_path)
-    final_path = path.with_name(path.stem)
-
-    with zipfile.ZipFile(archive_path, "r") as zip_file:
-        member = zip_file.getinfo("chromedriver")
-        member.filename = final_path.stem
-        extracted_path = zip_file.extract(member, str(final_path.parent))
-        # Add the right permissions to the extracted file
-        if member.create_system == ZIP_UNIX_SYSTEM:
-            unix_attributes = member.external_attr >> 16
-            if unix_attributes:
-                chmod(extracted_path, unix_attributes)
-
-    return extracted_path
 
 
 def batch(iterable, size: int = 1):

@@ -22,9 +22,6 @@ package have its own set of features:
 
 - :py:mod:`~manen.finder` defines a helper function allowing to easily find one or
   several elements in a page.
-- :py:mod:`~manen.resource` allows to download drivers needed by Selenium; no longer
-  need to find the right drivers compatible with the installed browser, ``manen``
-  will do it for you!
 - :py:mod:`~manen.page_object_model` implements a quite complete list of classes
   you can use to easily interact with the DOM structure; it is basically an
   implementation of the `page object model <https://www.selenium.dev/documentation/en/

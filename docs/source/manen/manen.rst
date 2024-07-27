@@ -16,10 +16,8 @@ Explore directly the code to discover all features proposed by :py:mod:`manen`.
    :maxdepth: 4
    :titlesonly:
 
-   manen.cli
    manen.exceptions
    manen.finder
    manen.helpers
    manen.browser
    manen.page_object_model
-   manen.resource

@@ -12,7 +12,6 @@
 
 <p align="center">
   <i><b>A package around <a href="https://pypi.org/project/selenium/"><code>selenium</code></a> to easily construct Python objects which reflect the DOM of any webpages.</b></i>
-  <i>Delivered with other features like an enhanced WebDriver and a resource manager.</i>
 </p>
 
 ---
@@ -30,7 +29,6 @@ Among the core features, you can find:
 
 - an implementation of the [page object model](https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/)
 - a class which completes `selenium.webdriver.remote.webdriver.WebDriver`
-- some helpers to manage resources usually required by Selenium
 - a function to easily find and isolate DOM elements inside a page
 
 This package will allow you to write more concise, flexible and powerful code compared to
@@ -44,21 +42,15 @@ The package can be installed using the official package manager `pip`.
 pip install manen
 ```
 
-It will install the package as well as the associated CLI.
-
 ## ✨ Features
 
 - `manen.finder.find` allows to easily get element(s) in a HTML page. This function support
   several very different use cases, to help reduce your code complexity when fecthing for
   elements.
-- `manen.resource` is a module to easily interact with all the assets needed by Selenium.
-  It allows for example to download all the drivers required to interact with web browsers.
 - `manen.browser` defined `Browser` objects, an enhanced Selenium's `WebDriver`.
 - `manen.page_object_model` is the implementation of page object model described in Selenium
   documentation. Thanks to that, you can wrap a HTML page inside Python class and so provides
   readability and stability to your code.
-- a CLI is shipped with the initial release in order to perform operations such as downloading
-  driver executables.
 
 ## 🚀 Getting started
 

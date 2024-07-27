@@ -6,26 +6,20 @@ Classes which enrich :py:class:`selenium.webdriver.remote.webdriver.WebDriver`.
 """
 
 import time
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Union
 
 from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.common.keys import Keys
 
-from .finder import find
-from .helpers import PLATFORM, version
-from .resource.brave import application as brave_app
-from .resource.chrome import application as chrome_app
-from .resource.chrome import driver as chromedriver
-from .typing import WebDriverProtocol
+from manen.finder import find
+from manen.helpers import PLATFORM, version
+from manen.typing import WebDriverProtocol
 
 if TYPE_CHECKING:
     from .typing import DriverOrElement, Version
 
 
-__all__ = (
-    "BraveBrowser",
-    "ChromeBrowser",
-)
+__all__ = ("ChromeBrowser",)
 
 
 class BrowserMixin(WebDriverProtocol):  # type: ignore
@@ -173,13 +167,13 @@ class BrowserMixin(WebDriverProtocol):  # type: ignore
 
     def lookup(self, *args, **kwargs) -> Any:
         """This method is exactly as the method ``find`` but it will always
-        return a default value if an element cannot be found (this defaul
+        return a default value if an element cannot be found (this default
         value is by default `None`.
         To keep it simple, this is the ``find`` method which never raises
         an exception if a selection method returns nothing!
 
         Args:
-            *args: postional arguments sent directly as arguments of the method
+            *args: positional arguments sent directly as arguments of the method
                 ``find``
             **kwargs: keyword arguments sent directly as arguments of the method
                 ``find``
@@ -199,53 +193,20 @@ class ChromeBrowser(BrowserMixin, Chrome):
     :py:class:`~manen.browser.BrowserMixin` for further information.
     """
 
-    BINARIES = chrome_app.BINARIES
-
     @classmethod
     def initialize(
         cls,
-        proxy: Optional[str] = None,
-        headless: bool = False,
-        driver_path: Optional[str] = None,
-        window_size: Optional[Tuple[int, int]] = None,
+        options: ChromeOptions | None = None,
     ):
         """Class method to easily launch an enhanced new driver based on the
         browser Chrome. Here you can specify directly if the browser should run
         headless or not, if a proxy should be used and many more options.
 
         Args:
-            proxy (str, optional): proxy to use. Defaults to ``None``.
-            headless (bool, optional): whether the browser should be launched
-                headless. Defaults to ``False``.
-            driver_path (str, optional): path of the driver program to use. If
-                `None`, `manen` will use functions defined in the package
-                :py:mod:`~manen.resources` to find one (and download one if
-                needed). Defaults to ``None``.
-            window_size (Tuple[int, int], optional): size of the browser window
-                to be launched. Defaults to ``None``.
+            options (ChromeOptions, optional): Options to configure the driver.
+                Defaults to None.
 
         Returns:
             WebDriver: An enhanced Chrome driver
         """
-        driver_path = driver_path or chromedriver.get()
-
-        chrome_options = ChromeOptions()
-        chrome_options.binary_location = cls.BINARIES[PLATFORM.system]
-        if window_size:
-            chrome_options.add_argument("--window-size=%s,%s" % window_size)
-
-        if headless:
-            chrome_options.add_argument("--headless")
-
-        if proxy:
-            chrome_options.add_argument("--proxy-server=%s" % proxy)
-
-        return cls(driver_path, options=chrome_options)
-
-
-class BraveBrowser(ChromeBrowser):
-    """Enhanced ChromeWebDriver that will launch a Brave browser instead of
-    Google Chrome.
-    """
-
-    BINARIES = brave_app.BINARIES
+        return cls(options=options or ChromeOptions())

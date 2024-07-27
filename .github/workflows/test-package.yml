@@ -23,9 +23,7 @@ jobs:
       - name: Install rye
         run: |
           curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash
-          export PATH=$HOME/.rye/shims:$PATH
-          ls $HOME/.rye/shims
-          echo $PATH
+          echo "$HOME/.rye/shims" >> $GITHUB_PATH
       - name: Install package and linter
         run: rye sync --features 'dev-tools'
       - name: Run linter to detect errors
@@ -53,7 +51,7 @@ jobs:
       - name: Install rye
         run: |
           curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash
-          export PATH=$HOME/.rye/shims:$PATH
+          echo "$HOME/.rye/shims" >> $GITHUB_PATH
       - name: Install dependencies
         run: rye sync --with test
       - name: Test with pytest

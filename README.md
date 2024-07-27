@@ -2,7 +2,7 @@
   <h1 align="center"> 🌔  manen</h1>
 </p>
 
-----
+---
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-%3E=3.6-informational?style=for-the-badge&logo=python">
@@ -15,7 +15,7 @@
   <i>Delivered with other features like an enhanced WebDriver and a resource manager.</i>
 </p>
 
-----
+---
 
 <p align="center">
   <a href="https://pypi.org/project/manen">PyPI package</a>
@@ -36,7 +36,7 @@ Among the core features, you can find:
 This package will allow you to write more concise, flexible and powerful code compared to
 what you could do by using only Selenium.
 
-## 📥  Installation
+## 📥 Installation
 
 The package can be installed using the official package manager `pip`.
 
@@ -45,7 +45,6 @@ pip install manen
 ```
 
 It will install the package as well as the associated CLI.
-
 
 ## ✨ Features
 
@@ -61,7 +60,6 @@ It will install the package as well as the associated CLI.
 - a CLI is shipped with the initial release in order to perform operations such as downloading
   driver executables.
 
-
 ## 🚀 Getting started
 
 `manen` offers several features described in the [User Guide](https://kodaho.github.io/manen/user_guide.html)
@@ -72,11 +70,10 @@ The first step is to create an instance of a Selenium `WebDriver` or Manen `WebB
 used to browse the Internet.
 
 ```python
-In [1]: from manen.browser import ChromeBrowser
+from manen.browser import ChromeBrowser
 
-In [2]: browser = ChromeBrowser.initialize(proxy=None, headless=True)
-
-In [3]: browser.get("https://pypi.org")
+browser = ChromeBrowser.initialize(proxy=None, headless=True)
+browser.get("https://pypi.org")
 ```
 
 ![PyPI home page](./docs/assets/screenshot_pypi_home.png)
@@ -87,22 +84,21 @@ using a manen `Page`. It will essentially use the package
 stores all the classes used to do the interface with each web element.
 
 ```python
-In [4]: import manen.page_object_model as pom
-   ...:
-   ...:
-   ...: class HomePage(pom.Page):
-   ...:     query = pom.InputElement("input[id='search']")
-   ...:
-   ...:
-   ...: class SearchResultPage(pom.Page):
-   ...:     class ResultRegions(pom.Regions):
-   ...:         name = pom.TextElement("h3 span.package-snippet__name")
-   ...:         version = pom.TextElement("h3 span.package-snippet__version")
-   ...:         link = pom.LinkElement("a.package-snippet")
-   ...:         description = pom.TextElement("p.package-snippet__description")
-   ...:
-   ...:     n_results = pom.IntegerElement("//*[@id='content']//form/div[1]/div[1]/p/strong")
-   ...:     results = ResultRegions("ul[aria-label='Search results'] li")
+import manen.page_object_model as pom
+
+class HomePage(pom.Page):
+    query = pom.InputElement("input[id='search']")
+
+
+class SearchResultPage(pom.Page):
+    class ResultRegions(pom.Regions):
+        name = pom.TextElement("h3 span.package-snippet__name")
+        version = pom.TextElement("h3 span.package-snippet__version")
+        link = pom.LinkElement("a.package-snippet")
+        description = pom.TextElement("p.package-snippet__description")
+
+    n_results = pom.IntegerElement("//*[@id='content']//form/div[1]/div[1]/p/strong")
+    results = ResultRegions("ul[aria-label='Search results'] li")
 ```
 
 The `Page` class is used to modelize a whole WebDriver page; all elements defined inside the class
@@ -120,13 +116,11 @@ To fill a value in this search bar, you can simply assign a value to the attribu
 the instance of an `HomePage`, initialized with `browser` as argument.
 
 ```python
-In [5]: page = HomePage(browser)
+from manen.page_object_model import Action
 
-In [6]: page.query = "manen"
-
-In [7]: from manen.page_object_model import Action
-
-In [8]: page.query = Action("submit")
+page = HomePage(browser)
+page.query = "manen"
+page.query = Action("submit")
 ```
 
 Submitting the form will refer to a page with the results of our query. Let's use the class
@@ -135,32 +129,32 @@ Submitting the form will refer to a page with the results of our query. Let's us
 ![PyPI home page](./docs/assets/screenshot_pypi_search_results.png)
 
 ```python
-In [9]: page = SearchResultPage(browser)
+page = SearchResultPage(browser)
 
-In [10]: page.n_results
-Out[10]: 1
+print(page.n_results)
+# 1
 
-In [11]: page.results
-Out[11]: [<__main__.SearchResultPage.ResultRegions at 0x1058e97c0>]
+print(page.results)
+# [<__main__.SearchResultPage.ResultRegions at 0x1058e97c0>]
 
-In [12]: print(
-    ...:     f"Name: {page.results[0].name}",
-    ...:     f"Description: {page.results[0].description[:80]}...",
-    ...:     f"Version: {page.results[0].version}",
-    ...:     f"Link: {page.results[0].link}",
-    ...:     sep="\n",
-    ...: )
-Name: manen
-Description: A package around `selenium` offering, among other features, an implementation of...
-Version: 0.1.0
-Link: https://pypi.org/project/manen/
+print(
+    f"Name: {page.results[0].name}",
+    f"Description: {page.results[0].description[:80]}...",
+    f"Version: {page.results[0].version}",
+    f"Link: {page.results[0].link}",
+    sep="\n",
+)
+# Name: manen
+# Description: A package around `selenium` offering, among other features, an implementation of...
+# Version: 0.1.0
+# Link: https://pypi.org/project/manen/
 ```
 
 Last step is to close the browser to avoid any remaining running application once we close Python.
-```python
-In [13]: browser.quit()
-```
 
+```python
+browser.quit()
+```
 
 ## 🦾 Going further
 

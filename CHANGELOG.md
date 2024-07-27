@@ -1,14 +1,10 @@
 # Changelog
 
-## [0.2.1] - (unreleased)
+## [0.3.0] - (unreleased)
 
 ### Changed
-- `download` CLI command no longer raises an error if a browser is not installed.
-- Allow browser version to have only major and minor components.
 
-### Fixed
-- Fix listing of available Chromedriver versions to return most recent ones.
-
+- `manen.page_object_model` has been entirely rewritten to use type annotations
 
 ## [0.2.0] - 2022-02-19
 
@@ -38,7 +34,6 @@
 
 - Fix a `TypeError` in the download workflow (variable wrongly named)
 
-
 ## [0.1.1] - 2022-02-12
 
 **Mainly documentation improvements**
@@ -46,12 +41,11 @@
 ### Changed
 
 - Make documentation publicly available under
-  [kodaho.github.io/manen](<https://kodaho.github.io/manen/>).
+  [kodaho.github.io/manen](https://kodaho.github.io/manen/).
 - Complete `README.md` page.
 - Add the section `About the project` in the documentation (moved from home page).
 - Complete user guides.
 - Rewording and reformatting of several sections.
-
 
 ## [0.1.0] - 2022-01-31
 

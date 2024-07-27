@@ -9,32 +9,29 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Install poetry
-        run: pipx install poetry
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-          cache: poetry
+      - uses: actions/checkout@v4
+      - name: Install rye
+        run: |
+          curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash
+          echo "$HOME/.rye/shims" >> $GITHUB_PATH
       - name: Install dependencies for doc
         run: |
           sudo apt install pandoc
-          poetry install --with docs
+          rye sync --features docs
       - name: Build documentation
         run: |
           cd ./docs
-          poetry run make html
+          rye run make-docs
       - name: Get version
         run: |
           mkdir version/ && python -c "import manen;print(manen.__version__)" > version/manen_version.txt
       - name: Upload package version info
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: version
           path: version
       - name: Upload distributions artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: documentation_html
           path: docs/build/html/
@@ -44,16 +41,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: gh-pages
       - name: Download built documentation
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: documentation_html
           path: docs/
       - name: Download package version
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: version
           path: version

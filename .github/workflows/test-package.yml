@@ -21,11 +21,9 @@ jobs:
           curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash
           echo "$HOME/.rye/shims" >> $GITHUB_PATH
       - name: Install package and linter
-        run: rye sync --features 'dev-tools'
+        run: rye sync
       - name: Run linter to detect errors
-        run: rye run pylint -E --rcfile=./.pylintrc ./manen/
-      - name: Run isort to detect incorrectly sorted imports
-        run: rye run isort --check-only manen/
+        run: rye run ruff check --output-format=concise manen/
 
   test:
     needs: lint
@@ -45,6 +43,6 @@ jobs:
           curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash
           echo "$HOME/.rye/shims" >> $GITHUB_PATH
       - name: Install dependencies
-        run: rye sync --features test
+        run: rye sync
       - name: Test with pytest
         run: rye run pytest

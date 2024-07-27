@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies for doc
         run: |
           sudo apt install pandoc
-          rye sync --features docs
+          rye sync
       - name: Build documentation
         run: |
           cd ./docs

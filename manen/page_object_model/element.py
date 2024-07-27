@@ -11,11 +11,11 @@ from manen.page_object_model import dom as dom
 if TYPE_CHECKING:
     from manen.page_object_model.webarea import WebArea
 
-I = TypeVar("I")
-T = dict[type[I], Callable[[WebElement], I]]
+T = TypeVar("T")
+TTransformers = dict[type[T], Callable[[WebElement], T]]
 
 
-GET_TRANSFORMERS: T = {
+GET_TRANSFORMERS: TTransformers = {
     dom.Checkbox: lambda element: element.get_attribute("checked") == "true",
     datetime: lambda element: dateparser.parse(element.text),
     dom.HRef: lambda element: element.get_attribute("href"),

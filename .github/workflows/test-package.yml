@@ -23,7 +23,7 @@ jobs:
       - name: Install package and linter
         run: rye sync
       - name: Run linter to detect errors
-        run: ruff check --output-format=concise manen/
+        run: rye run ruff check --output-format=concise manen/
 
   test:
     needs: lint

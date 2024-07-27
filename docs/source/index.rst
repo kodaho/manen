@@ -19,14 +19,14 @@ Welcome to manen's documentation!
 Among the core features, you can find:
 
 - an implementation of the `page object model <https://www.selenium.dev/documentation/en/
-  guidelines_and_recommendations/page_object_models/>`_
+  guidelines_and_recommendations/page_object_models/>`_ design pattern
 - a class which completes :py:class:`~selenium.webdriver.remote.webdriver.WebDriver`
 - some helpers to manage resources usually required by Selenium
 - a function to easily find and isolate DOM elements inside a page
 
-This package will allow you to write more concise, flexible and powerful code compared to
-what you could do by using only Selenium. For example, here is a comparison of the same
-code with and without ``manen``:
+This package allows you to write more concise, flexible and powerful code compared to
+what you would do by using only Selenium. Here is a comparison of the same code written
+with and without ``manen``:
 
 .. tab:: With manen
 
@@ -80,13 +80,13 @@ code with and without ``manen``:
       articles = WebDriverWait(driver, 3).until(
           EC.presence_of_elements_located((By.CSS, "article"))
       )
-      title = articles[0].find_element_by_css("h1").text
-      n_likes = int(articles[0].find_element_by_css("span.n_likes").text)
+      title = articles[0].find_element(By.CSS_SELECTOR, "h1").text
+      n_likes = int(articles[0].find_element(By.CSS_SELECTOR, "span.n_likes").text)
       try:
-          tags = articles[0].find_elements_by_css("span.tags")
+          tags = articles[0].find_element(By.CSS_SELECTOR, "span.tags")
       except NoSuchElementException:
           tags = []
-      updated_at = dateparser(articles[0].find_element_by_css("p.date").text)
+      updated_at = dateparser(articles[0].find_element(By.CSS_SELECTOR, "p.date").text)
 
       print({'title': title, 'n_likes': n_likes, 'tags': tags, 'updated': updated_at})
       # {

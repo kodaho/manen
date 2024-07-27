@@ -3,8 +3,8 @@ from typing import cast
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 
-from manen.page_object_model.dom import Config
-from manen.page_object_model.element import Element, Elements, Region, Regions
+from manen.page_object_model import element
+from manen.page_object_model.dom import Config, Input
 
 
 class WebArea:
@@ -18,9 +18,11 @@ class WebArea:
             self._config[field] = config
 
             if self.is_web_area(config.element_type):
-                fn = Regions if config.many else Region
+                fn = element.Regions if config.many else element.Region
+            elif config.element_type is Input:
+                fn = element.InputElement
             else:
-                fn = Elements if config.many else Element
+                fn = element.Elements if config.many else element.Element
             setattr(
                 self.__class__,
                 field,

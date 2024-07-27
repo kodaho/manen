@@ -27,6 +27,10 @@ classes in an external file called ``pypi_pom.py``.
     from manen.page_object_model.webarea import Page, WebArea
 
 
+    class HomePage(Page):
+        query: Annotated[dom.Input, dom.CSS("input[name='q']")]
+
+
     class SearchResultPage(Page):
         class Result(WebArea):
             name: Annotated[str, dom.CSS("h3 span.package-snippet__name")]
@@ -50,28 +54,33 @@ interacting by instantiating the :py:class:`~manen.page_object_model.Page` subcl
 with an instance of :py:class:`~selenium.webdriver.remote.webdriver.WebDriver`. Here
 we will suppose that you have an instance of
 :py:class:`~selenium.webdriver.remote.webdriver.WebDriver` stored in the variable
-``browser``.
+``driver``.
 
 .. code-block:: python
 
     >>> from pypi_pom import HomePage, SearchResultPage
-    >>> home_page = HomePage(browser)
+    >>> from manen.page_object_model.element import Action
+    >>> home_page = HomePage(driver)
     >>> home_page.query = "selenium"
     >>> home_page.query = Action("submit")
-    # This will direct you to a search result page of PyPi.
-    >>> page = SearchResultPage(browser)
+    # This will direct you to a search result page of PyPI.
+    >>> page = SearchResultPage(driver)
     >>> page.nb_results
-    1600
+    2571
     >>> len(page.results)
     20
-    >>> page.results[0]
+    >>> result = page.results[0]
     <pypi_pom.SearchResultPage.Result>
-    >>> page.results[0].name
-    "selenium"
-    >>> page.results[0].version
-    "3.141.0"
-    >>> page.results[0].link
-    "https://pypi.org/project/selenium/"
+    >>> result.name
+    'selenium'
+    >>> result.release_date
+    datetime.datetime(2024, 7, 24, 0, 0)}
+    >>> result.model_dump()
+    {'name': 'selenium',
+     'version': '4.23.1',
+     'link': 'https://pypi.org/project/selenium/',
+     'description': 'Official Python bindings for Selenium WebDriver',
+     'release_date': datetime.datetime(2024, 7, 24, 0, 0)}
 
 This is a preview of what you can do with :py:mod:`manen.page_object_model`. See the
 documentation of each objects to check all the features provided by the module.

@@ -21,7 +21,6 @@ GET_TRANSFORMERS: T = {
     dom.HRef: lambda element: element.get_attribute("href"),
     dom.ImageSrc: lambda element: element.get_attribute("src"),
     dom.InnerHTML: lambda element: element.get_attribute("innerHTML"),
-    dom.Input: lambda element: element.get_attribute("value"),
     int: lambda element: extract_integer(element.text),
     dom.OuterHTML: lambda element: element.get_attribute("outerHTML"),
     str: lambda element: element.text,
@@ -68,6 +67,44 @@ class Elements(ImmutableDomComponent):
         return [
             GET_TRANSFORMERS[self.config.element_type](element) for element in elements
         ]
+
+
+class Action:
+    def __init__(self, method: str, *args, **kwargs):
+        self.method = method
+        self.args = args
+        self.kwargs = kwargs
+
+
+class InputElement:
+    def __init__(self, config: dom.Config):
+        if config.many:
+            raise ValueError("Cannot use InputElement with many=True")
+        self.config = config
+
+    def __get__(self, webarea: "WebArea", unused_cls_webarea: type["WebArea"]):
+        element = find(
+            selector=self.config.selectors,
+            inside=webarea._parent,
+            many=False,
+            default=self.config.default,
+            wait=self.config.wait,
+        )
+        return element.get_attribute("value")
+
+    def __set__(self, webarea: "WebArea", value):
+        element = find(
+            selector=self.config.selectors,
+            inside=webarea._parent,
+            many=False,
+            default=NotImplemented,
+            wait=self.config.wait,
+        )
+        if isinstance(value, Action):
+            getattr(element, value.method)(*value.args, **value.kwargs)
+        else:
+            element.clear()
+            element.send_keys(value)
 
 
 class Region(ImmutableDomComponent):

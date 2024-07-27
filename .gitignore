@@ -146,3 +146,6 @@ manen/assets/*
 
 # Mac files
 .DS_Store
+
+# Project
+playground/

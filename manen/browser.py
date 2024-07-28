@@ -1,14 +1,17 @@
 """
 manen.browser
-===============
+=============
 
-Classes which enrich :py:class:`selenium.webdriver.remote.webdriver.WebDriver`.
+Classes which inherits from :py:class:`selenium.webdriver.remote.webdriver.WebDriver`, and add
+useful methods for driver interactions.
 """
 
 import time
-from typing import TYPE_CHECKING, Any, Dict, List, Union
+from enum import Enum
+from typing import TYPE_CHECKING, Any, cast
 
-from selenium.webdriver import Chrome, ChromeOptions
+from selenium.webdriver import Chrome, ChromeOptions, ChromeService
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 from manen.finder import find
@@ -16,147 +19,148 @@ from manen.helpers import PLATFORM, version
 from manen.typing import WebDriverProtocol
 
 if TYPE_CHECKING:
-    from .typing import DriverOrElement, Version
+    from .typing import DriverOrElement, Version, WebElement
 
 
 __all__ = ("ChromeBrowser",)
 
 
-class BrowserMixin(WebDriverProtocol):  # type: ignore
-    """Mixin to enrich :py:class:`selenium.webdriver.remote.webdriver.WebDriver`
-    with a set of features intended to ease the way to work with such an
-    instance.
+class ScrollDirection(str, Enum):
+    UP = "UP"
+    DOWN = "DOWN"
+
+
+class HeadlessMode(str, Enum):
+    NEW = "new"
+    OLD = "old"
+
+
+class BrowserMixin(WebDriverProtocol):
+    """
+    Mixin to enhance :py:class:`selenium.webdriver.remote.webdriver.WebDriver` with a set of
+    features intended to ease the way to work with a WebDriver instance.
     """
 
     @property
     def cookies(self):
-        """Cookies associated to the current domain."""
+        """Cookies associated to the current domain"""
         return self.get_cookies()
 
     @cookies.setter
-    def cookies(self, cookies: List[Dict["str", Any]]):
-        """Install some cookies in the current driver, just by assigning the
-        list in the right format.
+    def cookies(self, cookies: list[dict["str", Any]]):
+        """
+        Inject some cookies in the current driver.
 
         Args:
-            cookies (List[Dict["str", Any]): cookies as a list of dictionaries
+            cookies (list[dict["str", Any]): cookies as a list of dictionaries
         """
         for cookie in cookies:
             self.add_cookie(cookie)
 
     @cookies.deleter
     def cookies(self):
-        """Easily delete current cookies inside the driver."""
+        """Delete current cookies inside the driver."""
         self.delete_all_cookies()
 
-    def click_with_js(self, element: "DriverOrElement"):
-        """Click on an element using a JavaScript script. Can be useful if you
-        want to click on an element outside the current frame.
+    def click_with_js(self, element: "WebElement"):
+        """
+        Click on an element using JavaScript (useful to click on an element outside the current
+        frame).
         """
         js_script = """arguments[0].click()"""
         return self.execute_script(js_script, element)
 
     def scroll(
         self,
-        n_repeat: int = 3,
-        wait: int = 1,
-        direction: str = "DOWN",
+        n: int = 1,
+        wait: int = 0,
+        direction: ScrollDirection = ScrollDirection.DOWN,
         with_js: bool = False,
     ):
-        """Perform a scroll action on the page.
+        """Scroll the page, in a given direction.
 
         Args:
-            n_repeat (int, optional): Number of scroll to perform.
-                Defaults to 3.
-            wait (int, optional): Number of seconds to wait between each
-                scroll. Defaults to 1.
-            direction (str, optional): scroll up or down (can only be ``UP`` or
-                ``DOWN``, case insensitive). Defaults to "DOWN".
-            with_js (bool, optional): perform the action with a JavaScript
-                script instead of scrolling by pressing the Key DOWN or UP.
-                Defaults to False.
+            n (int, optional): Number of scroll to perform. Defaults to 1.
+            wait (int, optional): Number of seconds to wait between each scroll. Defaults to 0.
+            direction (str, optional): scroll up or down (can only be ``UP`` or ``DOWN``).
+                Defaults to ``DOWN``.
+            with_js (bool, optional): perform the action with a JavaScript script instead of
+                scrolling by pressing the keys down or up. Defaults to False.
 
         Raises:
-            ValueError: Raised if `direction` (once lowercased) is not
-                `UP` or `DOWN`
+            ValueError: Raised if `direction` is not `UP` or `DOWN`
         """
-        if direction.lower() not in ("down", "up"):
+        if direction not in list(ScrollDirection):
             raise ValueError(
                 f"`{direction}` is not supported as a scroll direction. "
-                "Please choose between `UP` and `DOWN` (case insensitive)."
+                "Please choose between `UP` and `DOWN`."
             )
 
         if with_js:
             func = self.execute_script
             arg = "window.scrollBy({top: %s1000, left: 0, behavior: 'smooth'});" % (
-                "-" if direction.lower() == "up" else ""
+                "-" if direction == ScrollDirection.UP else "+"
             )
         else:
-            body: "DriverOrElement" = self.find_element_by_tag_name("body")
-            arg = Keys.PAGE_DOWN if direction.lower() == "down" else Keys.PAGE_UP
+            body: "DriverOrElement" = self.find_element(By.TAG_NAME, "body")
+            arg = Keys.PAGE_DOWN if direction == ScrollDirection.DOWN else Keys.PAGE_UP
             func = body.send_keys
 
-        for _ in range(n_repeat):
+        for _ in range(n):
             func(arg)
             time.sleep(wait)
 
-    def highlight(self, selector: Union[str, List[str]], **kwargs):
-        """Highlight an element in the current webpage by drawing a black frame
-        around this element. The element will be retrieved using the ``find``
-        method and then framed by updating the CSS properties of the retrieved
-        element.
+    def highlight(self, selector: str | list[str], **kwargs):
+        """
+        Highlight an element in the current page by drawing a black frame around it.
 
         Args:
-            selector (Union[str, List[str]]): selector(s) used to find the element.
+            selector (str | list[str]): selector(s) used to find the element.
             **kwargs: Keyword arguments sent to ``find`` method
-
-        Returns:
-            Any: Value returned by the JS script updating the CSS properties
         """
         elements = self.find(selector, **kwargs)
         if not isinstance(elements, list):
             elements = [elements]
-        highlight_script = "arguments[%d].style.border = '3px solid black';"
-        script = "".join([highlight_script % i for i in range(len(elements))])
-        return self.execute_script(script, *elements)
+        script = "\n".join(
+            [
+                f"arguments[{i}].style.border = '3px solid black';"
+                for i in range(len(elements))
+            ]
+        )
+        self.execute_script(script, *elements)
 
     @property
     def current_platform(self):
-        """Platform (OS information) on which the driver runs."""
+        """Current platform of the webdriver"""
         return PLATFORM
 
     @property
     def browser_version(self) -> "Version":
-        """Version of the browser in used."""
+        """Version of the browser"""
         return version(self.capabilities["browserVersion"])
 
     @property
     def driver_version(self) -> "Version":
-        """Version of the driver in used."""
+        """Version of the driver"""
         return version(self.capabilities["chrome"]["chromedriverVersion"].split(" ")[0])
 
     @property
-    def are_versions_compatible(self):
-        """Property telling you if the version of the used driver is compatible
-        with the one of the browser.
-        """
+    def is_browser_compatible_with_driver(self):
+        """Is the browser version compatible with the driver version?"""
         return self.browser_version[:3] == self.driver_version[:3]
 
-    def find(self, selector: Union[str, List[str]], **kwargs):
-        """This method is basically the same as :py:func:`~manen.finder.find`
-        but with the driver instance as default value for the argument
-        ``inside`` and True as default value for ``many`` argument.
-        See the documentation of :py:func:`~manen.finder.find` for more
-        information of what we can do with this method.
+    def find(self, selector: str | list[str], **kwargs):
+        """
+        Find elements matching selectors using :py:func:`~manen.finder.find`, with the driver
+        instance as scope for the search. Returns all elements by default.
 
         Args:
-            selector (Union[str, List[str]]): selector(s) passed to
-                :py:func:`~manen.finder.find`
+            selector (str | list[str]): selector(s) passed to :py:func:`~manen.finder.find`
             **kwargs: keyword arguments sent to :py:func:`~manen.finder.find`
 
         Raises:
-            ElementNotFound: Raised if no default value is specified and no
-                element matching the selector(s) has been found.
+            ElementNotFound: Raised if no default value is specified and no element matching the
+                selector(s) has been found.
 
         Returns:
             Any: Outputs of :py:func:`~manen.finder.find`
@@ -166,47 +170,63 @@ class BrowserMixin(WebDriverProtocol):  # type: ignore
         return find(selector, **kwargs)
 
     def lookup(self, *args, **kwargs) -> Any:
-        """This method is exactly as the method ``find`` but it will always
-        return a default value if an element cannot be found (this default
-        value is by default `None`.
-        To keep it simple, this is the ``find`` method which never raises
-        an exception if a selection method returns nothing!
+        """
+        Same as the method :py:`~manen.browser.BrowserMixin.find` with the difference that this
+        method never raises error. If the element is not found, it returns a default value
+        (``None`` by default).
 
         Args:
-            *args: positional arguments sent directly as arguments of the method
-                ``find``
-            **kwargs: keyword arguments sent directly as arguments of the method
-                ``find``
+            *args: positional arguments passed to :py:func:`~manen.finder.find`
+            *kwargs: keyword arguments passed to :py:func:`~manen.finder.find`
 
         Returns:
             Any: Outputs of :py:func:`~manen.finder.find`
         """
-        return find(inside=self, default=None)(*args, **kwargs)  # type: ignore
+        return find(inside=cast("DriverOrElement", self), default=None)(*args, **kwargs)
 
 
 class ChromeBrowser(BrowserMixin, Chrome):
-    """Wrapper around Selenium ChromeWebDriver providing additional methods in
-    order to give more abilities and flexibilities when controlling the browser.
-    For example, it defines a method ``find`` to easily retrieve elements,
-    ``highlight`` to put an emphasis on elements or cookies property. Go check
-    the documentation of methods inherited from
-    :py:class:`~manen.browser.BrowserMixin` for further information.
-    """
+    """Wrapper around Selenium ChromeWebDriver providing methods to improve its operability."""
 
     @classmethod
     def initialize(
         cls,
         options: ChromeOptions | None = None,
+        service: ChromeService | None = None,
+        driver_path: str | None = None,
+        headless_mode: HeadlessMode | None = None,
+        proxy: str | None = None,
+        window_size: tuple[int, int] | None = None,
     ):
-        """Class method to easily launch an enhanced new driver based on the
-        browser Chrome. Here you can specify directly if the browser should run
-        headless or not, if a proxy should be used and many more options.
+        """
+        Launch an enhanced web driver for the browser Chrome.
 
         Args:
-            options (ChromeOptions, optional): Options to configure the driver.
-                Defaults to None.
+            options (ChromeOptions, optional): Options to configure the driver. Defaults to None.
+            service (ChromeService, optional): Service to configure the driver. Defaults to None.
 
         Returns:
             WebDriver: An enhanced Chrome driver
         """
-        return cls(options=options or ChromeOptions())
+        if driver_path and service:
+            raise ValueError(
+                "You cannot specify both `driver_path` and `service`. "
+                "Set `driver_path` in the Service with `Service(executable_path=driver_path)`."
+            )
+
+        options = options or ChromeOptions()
+        service = service or ChromeService()
+
+        if driver_path:
+            service = ChromeService(executable_path=driver_path)
+
+        if headless_mode:
+            options.add_argument(f"--headless={headless_mode}")
+
+        if proxy:
+            options.add_argument(f"--proxy-server={proxy}")
+
+        if window_size:
+            options.add_argument(f"--window-size={window_size[0]},{window_size[1]}")
+
+        return cls(options=options, service=service)

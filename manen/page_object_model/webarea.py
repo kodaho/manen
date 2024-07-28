@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 
 from manen.page_object_model import element
-from manen.page_object_model.dom import Config, Input
+from manen.page_object_model.dom import Config
 
 
 class WebArea:
@@ -19,7 +19,7 @@ class WebArea:
 
             if self.is_web_area(config.element_type):
                 fn = element.Regions if config.many else element.Region
-            elif config.element_type is Input:
+            elif config.is_input:
                 fn = element.InputElement
             else:
                 fn = element.Elements if config.many else element.Element

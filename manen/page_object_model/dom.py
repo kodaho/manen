@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from typing import Any, NewType, get_origin
+from enum import Enum
+from typing import Annotated, Any, NewType, get_origin
 
 
 @dataclass
@@ -22,6 +23,10 @@ class Default:
     value: Any
 
 
+class Flag(str, Enum):
+    INPUT = "INPUT"
+
+
 @dataclass
 class Config:
     name: str
@@ -30,12 +35,14 @@ class Config:
     wait: int
     default: Any = NotImplemented
     many: bool = False
+    is_input: bool = False
 
     @classmethod
     def merge(cls, configs, **kwargs):
         selectors = []
         wait = None
         default = NotImplemented
+        is_input = False
         for config in configs:
             if isinstance(config, cls):
                 selectors.extend(config.selectors)
@@ -47,9 +54,17 @@ class Config:
                 wait = config.seconds
             elif isinstance(config, Default):
                 default = config.value
+            elif config == Flag.INPUT:
+                is_input = True
             else:
                 raise ValueError(f"Unknown config type: {config}")
-        return cls(selectors=selectors, wait=wait or 0, default=default, **kwargs)
+        return cls(
+            selectors=selectors,
+            wait=wait or 0,
+            default=default,
+            is_input=is_input,
+            **kwargs,
+        )
 
     @classmethod
     def from_annotation_item(cls, field, annotation):
@@ -62,9 +77,9 @@ class Config:
         return cls.merge(annotation.__metadata__, **kwargs)
 
 
-InnerHTML = NewType("InnerHTML", str)
-OuterHTML = NewType("OuterHTML", str)
+Checkbox = NewType("Checkbox", str)
 HRef = NewType("HRef", str)
 ImageSrc = NewType("ImageSrc", str)
-Input = str
-Checkbox = NewType("Checkbox", str)
+InnerHTML = NewType("InnerHTML", str)
+OuterHTML = NewType("OuterHTML", str)
+Input = Annotated[str, Flag.INPUT]

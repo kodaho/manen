@@ -5,3 +5,4 @@
    :ignore-module-all:
    :special-members:
    :private-members:
+   :noindex:

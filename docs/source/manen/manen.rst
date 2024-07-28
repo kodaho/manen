@@ -13,11 +13,11 @@ API Documentation
 Explore directly the code to discover all features proposed by :py:mod:`manen`.
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
    :titlesonly:
 
+   manen.browser
    manen.exceptions
    manen.finder
    manen.helpers
-   manen.browser
    manen.page_object_model

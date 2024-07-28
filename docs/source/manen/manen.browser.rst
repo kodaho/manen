@@ -3,3 +3,4 @@
    :undoc-members:
    :show-inheritance:
    :ignore-module-all:
+   :noindex:

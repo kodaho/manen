@@ -59,10 +59,8 @@ class Form(WebArea):
 class Page(WebArea):
     @property
     def title(self) -> str:
-        """Title of the page."""
         return self._driver.title
 
     @property
     def source_code(self) -> str:
-        """Source code of the page."""
         return self._driver.page_source

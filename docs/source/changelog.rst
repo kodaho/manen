@@ -19,6 +19,7 @@ Changed
 ^^^^^^^
 - :py:mod:`~manen.page_object_model` has been entirely rewritten to use type annotation instead of `..Element` objects.
 
+|
 
 0.2.0
 -----
@@ -26,6 +27,14 @@ Changed
 |s| 2022-02-19 |e|
 
 **Rename some classes in** :py:mod:`~manen.page_object_model` **and improve CLI**
+
+Added
+^^^^^
+- Specify link to changelog in documentation in package metadata.
+- Introduce new options in ``manen driver download`` to set the specifications of the drivers
+  to be downloaded directly from the command line.
+- Add exhaustibility in documentation of :py:mod:`~manen.page_object_model` to describe
+  private/special methods and classes other than the ones in ``__all__``.
 
 Changed
 ^^^^^^^
@@ -37,14 +46,6 @@ Changed
 Fixed
 ^^^^^
 - Fix link to notebooks in the info section of :ref:`User Guide`
-
-Added
-^^^^^
-- Specify link to changelog in documentation in package metadata.
-- Introduce new options in ``manen driver download`` to set the specifications of the drivers
-  to be downloaded directly from the command line.
-- Add exhaustivity in documentation of :py:mod:`~manen.page_object_model` to describe
-  private/special methods and classes other than the ones in ``__all__``.
 
 |
 
@@ -74,7 +75,7 @@ Changed
 
 - Make documentation publicly available under
   `kodaho.github.io/manen <https://kodaho.github.io/manen/>`_.
-- Complete `README.md` page.
+- Complete README page.
 - Add the section `About the project` in the documentation (moved from home page).
 - Complete user guides.
 - Rewording and reformatting of several sections.

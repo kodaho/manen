@@ -1,6 +1,6 @@
 """
-manen.browser
-=============
+:py:mod:`~manen.browser`
+========================
 
 Classes which inherits from :py:class:`selenium.webdriver.remote.webdriver.WebDriver`, and add
 useful methods for driver interactions.
@@ -171,7 +171,7 @@ class BrowserMixin(WebDriverProtocol):
 
     def lookup(self, *args, **kwargs) -> Any:
         """
-        Same as the method :py:`~manen.browser.BrowserMixin.find` with the difference that this
+        Same as the method :py:func:`~manen.browser.BrowserMixin.find` with the difference that this
         method never raises error. If the element is not found, it returns a default value
         (``None`` by default).
 

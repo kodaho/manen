@@ -1,6 +1,6 @@
 """
-manen.helpers
-=============
+:py:mod:`~manen.helpers`
+========================
 
 Helpers functions used by :py:mod:`manen`.
 """
@@ -17,20 +17,21 @@ PLATFORM = platform.uname()
 
 
 def extract_integer(string: str) -> int:
-    """Extract an integer from a string.
+    """
+    Extract an integer from a string.
 
     Args:
         string (str): text to process
     Raises:
-        ValueError: exception raised if no integer were fonnd in the string.
+        ValueError: Raised if no integer is found in the string.
     Returns:
-        int: integer extracted from the string
+        int: Integer extracted from the string
     """
     string = re.sub(r"[\s,]", "", string)
-    match = re.compile(r"(?P<figure>[\d]+)").search(string)
+    match = re.compile(r"(?P<integer>[\d]+)").search(string)
     if match:
-        return int(match.group("figure"))
-    raise ValueError("No figure detected in %s" % string)
+        return int(match.group("integer"))
+    raise ValueError(f"No integer detected in {string}")
 
 
 def version(version_str: str) -> "Version":
@@ -45,11 +46,13 @@ def version(version_str: str) -> "Version":
         This versioning system is not compliant with semantic versioning rules.
 
     Args:
-        version_str: string to be converted to a tuple
+        version_str (str): string to be converted to a tuple
+
     Raises:
         ValueError: raised if the input doesn't match the pattern
+
     Returns:
-        Tuple[int, int, Optional[int], int]: parsed version
+        Version: parsed version
     """
     if not re.match(r"^[\d]+.[\d]+(.[\d]+)?(.[\d]+)?$", version_str):
         raise ValueError(
@@ -66,14 +69,12 @@ def version(version_str: str) -> "Version":
 
 
 def version_as_str(version_tuple: "Version", limit: int = 4) -> str:
-    """Format a version tuple as a string in the format:
-        {major}.{minor}.{build}.{patch}
-
+    """
+    Format a version tuple as a string in the format: {major}.{minor}.{build}.{patch}
 
     Args:
         version_tuple (Version): version info as a tuple
-        limit (int, optional): Limit on the length of the tuple to format.
-            Defaults to 4.
+        limit (int, optional): Limit on the length of the tuple to format. Defaults to 4.
 
     Returns:
         str: formatted version

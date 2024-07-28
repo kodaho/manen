@@ -1,6 +1,6 @@
 """
-manen.finder
-============
+:py:mod:`~manen.finder`
+=======================
 
 Flexible and highly customizable function to find one or several elements
 inside one or several Selenium elements.

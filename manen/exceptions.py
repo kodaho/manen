@@ -1,6 +1,6 @@
 """
-manen.exceptions
-================
+:py:mod:`~manen.exceptions`
+===========================
 
 Exceptions raised by :py:mod:`manen`.
 """

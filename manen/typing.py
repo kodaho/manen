@@ -1,7 +1,6 @@
-# pylint: disable-all
 """
-manen.typing
-============
+:py:mod:`~manen.typing`
+=======================
 
 Describe some common types used by :py:mod:`manen`.
 """

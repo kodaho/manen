@@ -1,6 +1,6 @@
 """
-manen.page_object_model
-=======================
+:py:mod:`~manen.page_object_model`
+==================================
 
 This module provides an implementation of the `Page Object design pattern
 <https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/>`_

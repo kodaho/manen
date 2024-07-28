@@ -212,15 +212,12 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../manen/manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Going deeper into manen</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.exceptions.html">manen.exceptions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../manen/manen.exceptions.html#manen.exceptions.DriverNotFound"><code class="docutils literal notranslate"><span class="pre">DriverNotFound</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.exceptions.html#manen.exceptions.ElementNotFound"><code class="docutils literal notranslate"><span class="pre">ElementNotFound</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.exceptions.html#manen.exceptions.ManenException"><code class="docutils literal notranslate"><span class="pre">ManenException</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../manen/manen.exceptions.html#manen.exceptions.PlatformNotRecognized"><code class="docutils literal notranslate"><span class="pre">PlatformNotRecognized</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.finder.html">manen.finder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.finder.html#manen.finder.find"><code class="docutils literal notranslate"><span class="pre">find()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.finder.html#manen.finder.parse_selector"><code class="docutils literal notranslate"><span class="pre">parse_selector()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.helpers.html">manen.helpers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../manen/manen.helpers.html#manen.helpers.batch"><code class="docutils literal notranslate"><span class="pre">batch()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.helpers.html#manen.helpers.extract_integer"><code class="docutils literal notranslate"><span class="pre">extract_integer()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.helpers.html#manen.helpers.version"><code class="docutils literal notranslate"><span class="pre">version()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.helpers.html#manen.helpers.version_as_str"><code class="docutils literal notranslate"><span class="pre">version_as_str()</span></code></a></li>
@@ -282,13 +279,6 @@
 
 
 
-<div class="viewcode-block" id="DriverNotFound">
-<a class="viewcode-back" href="../../manen/manen.exceptions.html#manen.exceptions.DriverNotFound">[docs]</a>
-<span class="k">class</span> <span class="nc">DriverNotFound</span><span class="p">(</span><span class="n">ManenException</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Can not find a driver executable used by the web drivers.&quot;&quot;&quot;</span></div>
-
-
-
 <div class="viewcode-block" id="ElementNotFound">
 <a class="viewcode-back" href="../../manen/manen.exceptions.html#manen.exceptions.ElementNotFound">[docs]</a>
 <span class="k">class</span> <span class="nc">ElementNotFound</span><span class="p">(</span><span class="n">ManenException</span><span class="p">):</span>
@@ -303,32 +293,17 @@
         <span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">selectors_as_list</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="p">[</span><span class="s2">&quot;&gt; </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span> <span class="k">for</span> <span class="n">selector</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectors</span><span class="p">]</span>
-        <span class="p">)</span>
+        <span class="n">selectors_as_list</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;&gt; </span><span class="si">{</span><span class="n">selector</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">selector</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectors</span><span class="p">])</span>
         <span class="n">context_string</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Context of the exception:</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="o">+</span> <span class="s2">&quot;- Title page: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">])</span>
-            <span class="o">+</span> <span class="s2">&quot;- URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s2">&quot;current_url&quot;</span><span class="p">])</span>
+            <span class="s2">&quot;Context of the exception:</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;- Title page: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;- URL: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;current_url&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="s2">&quot;Unable to find inside document an element matching the &quot;</span>
-            <span class="s2">&quot;selectors :</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selectors_as_list</span><span class="p">)</span>
-        <span class="p">)</span> <span class="o">+</span> <span class="n">context_string</span></div>
-
-
-
-<div class="viewcode-block" id="PlatformNotRecognized">
-<a class="viewcode-back" href="../../manen/manen.exceptions.html#manen.exceptions.PlatformNotRecognized">[docs]</a>
-<span class="k">class</span> <span class="nc">PlatformNotRecognized</span><span class="p">(</span><span class="n">ManenException</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Can not clearly identify the platform running the code.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">platform</span> <span class="o">=</span> <span class="n">platform</span>
-
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;The platform &quot;</span><span class="si">{}</span><span class="s1">&quot; is not recognized.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">platform</span><span class="p">)</span></div>
+            <span class="sa">f</span><span class="s2">&quot;Unable to find an element matching the selectors:</span><span class="se">\n</span><span class="si">{</span><span class="n">selectors_as_list</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;</span><span class="se">\n\n\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">context_string</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span></div>
 
 </pre></div>
         </article>

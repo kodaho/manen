@@ -28,7 +28,10 @@ classes in an external file called ``pypi_pom.py``.
 
 
     class HomePage(Page):
-        query: Annotated[dom.Input, dom.CSS("input[name='q']")]
+        class SearchForm(Form):
+            query: Annotated[dom.Input, dom.CSS("input[name='q']")]
+
+        search: Annotated[SearchForm, dom.CSS("form.search-form")]
 
 
     class SearchResultPage(Page):
@@ -59,10 +62,9 @@ we will suppose that you have an instance of
 .. code-block:: python
 
     >>> from pypi_pom import HomePage, SearchResultPage
-    >>> from manen.page_object_model.element import Action
     >>> home_page = HomePage(driver)
-    >>> home_page.query = "selenium"
-    >>> home_page.query = Action("submit")
+    >>> home_page.search.query = "selenium"
+    >>> home_page.search.submit()
     # This will direct you to a search result page of PyPI.
     >>> page = SearchResultPage(driver)
     >>> page.nb_results

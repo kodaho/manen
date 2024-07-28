@@ -69,13 +69,6 @@ class Elements(ImmutableDomComponent):
         ]
 
 
-class Action:
-    def __init__(self, method: str, *args, **kwargs):
-        self.method = method
-        self.args = args
-        self.kwargs = kwargs
-
-
 class InputElement:
     def __init__(self, config: dom.Config):
         if config.many:
@@ -100,16 +93,13 @@ class InputElement:
             default=NotImplemented,
             wait=self.config.wait,
         )
-        if isinstance(value, Action):
-            getattr(element, value.method)(*value.args, **value.kwargs)
-        else:
-            element.clear()
-            element.send_keys(value)
+        element.clear()
+        element.send_keys(value)
 
 
 class Region(ImmutableDomComponent):
-    def __get__(self, webarea: "WebArea", cls_webarea: type["WebArea"]):
-        from manen.page_object_model.webarea import WebArea
+    def __get__(self, webarea: "WebArea", cls_webarea: type["WebArea"]) -> "WebArea":
+        from manen.page_object_model.webarea import Form, WebArea
 
         element = find(
             selector=self.config.selectors,
@@ -119,7 +109,8 @@ class Region(ImmutableDomComponent):
             wait=self.config.wait,
         )
         name = self.config.element_type.__qualname__
-        cls = type(name, (WebArea,), {**self.config.element_type.__dict__})
+        base = (Form,) if Form.is_form(self.config.element_type) else (WebArea,)
+        cls = type(name, base, {**self.config.element_type.__dict__})
         return cls(element)
 
 

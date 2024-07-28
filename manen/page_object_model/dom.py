@@ -66,5 +66,5 @@ InnerHTML = NewType("InnerHTML", str)
 OuterHTML = NewType("OuterHTML", str)
 HRef = NewType("HRef", str)
 ImageSrc = NewType("ImageSrc", str)
-Input = NewType("Input", str)
+Input = str
 Checkbox = NewType("Checkbox", str)

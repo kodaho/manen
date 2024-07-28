@@ -29,8 +29,8 @@ class WebArea:
                 fn(config),
             )
 
-    @classmethod
-    def is_web_area(cls, element_type):
+    @staticmethod
+    def is_web_area(element_type):
         return type(element_type) is type and issubclass(element_type, WebArea)
 
     def model_dump(self):
@@ -44,6 +44,16 @@ class WebArea:
             else:
                 dump[field] = item
         return dump
+
+
+class Form(WebArea):
+    def submit(self):
+        assert isinstance(self._parent, WebElement)
+        self._parent.submit()
+
+    @staticmethod
+    def is_form(element_type):
+        return type(element_type) is type and issubclass(element_type, Form)
 
 
 class Page(WebArea):

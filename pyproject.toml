@@ -55,6 +55,7 @@ universal = true
 
 [tool.rye.scripts]
 make-docs = { cmd = "make html" }
+watch-docs = { cmd = "sphinx-autobuild docs/source docs/build/html --watch manen/" }
 
 [tool.hatch.metadata]
 allow-direct-references = true

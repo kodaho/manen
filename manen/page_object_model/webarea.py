@@ -8,9 +8,9 @@ from manen.page_object_model.dom import Config, Input
 
 
 class WebArea:
-    def __init__(self, /, parent: WebDriver | WebElement):
-        self._parent = parent
-        self._driver = parent.parent if isinstance(parent, WebElement) else parent
+    def __init__(self, /, scope: WebDriver | WebElement):
+        self._scope = scope
+        self._driver = scope.parent if isinstance(scope, WebElement) else scope
         self._config: dict[str, Config] = {}
 
         for field in self.__annotations__:
@@ -48,8 +48,8 @@ class WebArea:
 
 class Form(WebArea):
     def submit(self):
-        assert isinstance(self._parent, WebElement)
-        self._parent.submit()
+        assert isinstance(self._scope, WebElement)
+        self._scope.submit()
 
     @staticmethod
     def is_form(element_type):

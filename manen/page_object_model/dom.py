@@ -14,6 +14,16 @@ class CSS:
 
 
 @dataclass
+class LinkText:
+    selector: str
+
+
+@dataclass
+class PartialLinkText:
+    selector: str
+
+
+@dataclass
 class Wait:
     seconds: int
 
@@ -48,8 +58,14 @@ class Config:
                 selectors.extend(config.selectors)
                 wait = config.wait
                 default = config.default
-            elif isinstance(config, (XPath, CSS)):
-                selectors.append(config.selector)
+            elif isinstance(config, XPath):
+                selectors.append(f"xpath:{config.selector}")
+            elif isinstance(config, CSS):
+                selectors.append(f"css:{config.selector}")
+            elif isinstance(config, LinkText):
+                selectors.append(f"link_text:{config.selector}")
+            elif isinstance(config, PartialLinkText):
+                selectors.append(f"partial_link_text:{config.selector}")
             elif isinstance(config, Wait):
                 wait = config.seconds
             elif isinstance(config, Default):

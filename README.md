@@ -5,13 +5,16 @@
 ---
 
 <p align="center">
-  <img src="https://img.shields.io/badge/python-%3E=3.6-informational?style=for-the-badge&logo=python">
+  <img src="https://img.shields.io/badge/python-%3E=3.10-informational?style=for-the-badge&logo=python">
   <img alt="PyPI" src="https://img.shields.io/pypi/v/manen?logo=pypi&style=for-the-badge">
-  <img src="https://img.shields.io/badge/status-in%20development-yellow?style=for-the-badge">
+  <img src="https://img.shields.io/badge/status-beta-yellow?style=for-the-badge">
 </p>
 
 <p align="center">
-  <i><b>A package around <a href="https://pypi.org/project/selenium/"><code>selenium</code></a> to easily construct Python objects which reflect the DOM of any webpages.</b></i>
+  <i>
+    An implementation of the Page Object Model design pattern, and other utilities for web
+    scraping and automation.
+  </i>
 </p>
 
 ---
@@ -24,19 +27,24 @@
   <a href="https://github.com/kodaho/manen/issues">Issue tracking</a>
 </p>
 
-`manen` is a package built to extend Selenium user experience.
-Among the core features, you can find:
+`manen` is a package built to enhance developer experience when using Selenium. Among the core
+features, you can find:
 
-- an implementation of the [page object model](https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/)
-- a class which completes `selenium.webdriver.remote.webdriver.WebDriver`
-- a function to easily find and isolate DOM elements inside a page
+- an implementation of the [Page Object Model](https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/)
+  design pattern
+- a class which improves the operability of a Selenium's Webdriver
+- a function to easily find and isolate DOM elements inside a Selenium page
 
-This package will allow you to write more concise, flexible and powerful code compared to
-what you could do by using only Selenium.
+This package aims to provide you the tools to write more concise, flexible and powerful code
+compared to what you would do by using only Selenium.
+
+> [!NOTE]
+> For now, only Selenium's Chrome WebDriver is supported. Other browsers will be supported in the
+> future, as well as other automation tools such as Playwright or Scrapy.
 
 ## 📥 Installation
 
-The package can be installed using the official package manager `pip`.
+The package can be installed using the official Python package manager `pip`.
 
 ```bash
 pip install manen
@@ -45,42 +53,45 @@ pip install manen
 ## ✨ Features
 
 - `manen.finder.find` allows to easily get element(s) in a HTML page. This function support
-  several very different use cases, to help reduce your code complexity when fecthing for
-  elements.
-- `manen.browser` defined `Browser` objects, an enhanced Selenium's `WebDriver`.
-- `manen.page_object_model` is the implementation of page object model described in Selenium
-  documentation. Thanks to that, you can wrap a HTML page inside Python class and so provides
-  readability and stability to your code.
+  several very different use cases, to help reduce your code complexity when fetching for
+  elements (example: using default values, trying different selectors, iterating over several
+  elements).
+- `manen.browser` defines an enhanced Selenium's `WebDriver` called `Browser`
+- `manen.page_object_model` is an implementation of the Page Object Model design pattern. It
+  will wrap a HTML page, region and elements inside Python classes and objects, providing a
+  better way to interact with a web page.
 
 ## 🚀 Getting started
 
-`manen` offers several features described in the [User Guide](https://kodaho.github.io/manen/user_guide.html)
-of the documentation. We will give here a minimal example of what can be done with it; the goal will be to use
-Selenium to explore the PyPI page of `manen` and extract some information from it.
+Manen's features will be explored by a simple example: going to the PyPI page, searching for a
+specific package and extracting some information from the search results.
 
-The first step is to create an instance of a Selenium `WebDriver` or Manen `WebBrowser` that will be
-used to browse the Internet.
+First thing to do is to initialize a WebDriver instance. It can be done using the usual way
+provided by Selenium, but an alternative is to use the `Browser` class provided by `manen`. Note
+that both ways are equivalent, but `Browser` provides some additional features, that won't be
+explored here.
 
 ```python
 from manen.browser import ChromeBrowser
 
-browser = ChromeBrowser.initialize(proxy=None, headless=True)
+browser = ChromeBrowser.initialize()
 browser.get("https://pypi.org")
 ```
 
 ![PyPI home page](./docs/assets/screenshot_pypi_home.png)
 
-We are now on the home page of PyPI. What we are going to do now is interact with the webpage
-using a manen `Page`. It will essentially use the package
-[`manen.page_object_model`](https://kodaho.github.io/manen/manen/manen.page_object_model.html), that
-stores all the classes used to do the interface with each web element.
+We are now on the home page of PyPI. What we are going to do now is building a class that will
+inherit from `Page` from the `manen.page_object_model.webarea` module. This Python class will be
+a reflect of the HTML page, allowing us to access DOM elements in the same way we access
+attributes. Note the whole page object model design pattern is implemented with type hints (a bit
+like in `Pydantic` model).
 
 ```python
 from manen.page_object_model.webarea import Page, WebArea
 from manen.page_object_model import dom
 
 class HomePage(Page):
-    query: Annotated[Input, dom.CSS("input[id='search']")]
+    query: Annotated[dom.Input, dom.CSS("input[name='q']")]
 
 
 class SearchResultPage(Page):
@@ -89,51 +100,76 @@ class SearchResultPage(Page):
         version: Annotated[str, dom.CSS("h3 span.package-snippet__version")]
         link: Annotated[dom.HRef, dom.CSS("a.package-snippet")]
         description: Annotated[str, dom.CSS("p.package-snippet__description")]
+        release_date: Annotated[datetime, dom.CSS("span.package-snippet__created")]
 
-    nb_results: Annotated[int, dom.XPath("//*[@id='content']//form/div[1]/div[1]/p/strong")]
-    results: Annotated[list[Result], dom.CSS("ul[aria-label='Search results'] li")]
+    nb_results: Annotated[
+        int,
+        dom.XPath("//*[@id='content']//form/div[1]/div[1]/p/strong"),
+    ]
+    results: Annotated[
+        list[Result],
+        dom.CSS("ul[aria-label='Search results'] li"),
+    ]
 ```
 
-The `Page` class is used to modelize a whole WebDriver page; all elements defined inside the class
-should modelize a given element on the page, identified with the selectors (XPath, CSS or else).
-For example, the class `TextElement` will extract the text from a HTML element, `LinkElement` will
-extract the `href` attribute from an `a` tag. A lot of different classes exist, all of them in charge
-of a special extraction; they are defined and documented in the module
-[`manen.page_object_model`](https://kodaho.github.io/manen/manen/manen.page_object_model.html).
+The `Page` class encapsulates the whole current HTML page available through the driver. Each
+element is then represented by a class attribute, with a type and a selector (how to find the
+element in the HTML DOM). Depending on the type of the element, Manen will automatically execute
+the appropriate DOM content extraction on the element (for example, for a `str` type, the text
+content of the element will be extracted, for a `HRef` it will extract the HTML `href` a `a`
+tag).
 
-The class `Region` is used to modelize a sub-part of a webpage. Each region can have its own inner
-elements. You can have as many imbricated levels as wanted.
+A `WebArea` captures a sub-part of an HTML page. All the elements defined under this will be
+fetched inside the HTML element represented by the `WebArea` class.
 
-For example, the class `HomePage` defines an `InputElement` that do the link with the search bar.
-To fill a value in this search bar, you can simply assign a value to the attribute `query` of
-the instance of an `HomePage`, initialized with `browser` as argument.
+Here the class `HomePage` defines an `Input` element, that will be linked to the search bar.
+Filling the search bar is done by assigning a value to the attribute `query`.
 
 ```python
-from manen.page_object_model import Action
+from selenium.webdriver.common.keys import Keys
 
-page = HomePage(browser)
+page = HomePage(browser) # A Page object is initialized only with a WebDriver instance
+
 page.query = "manen"
-page.query = Action("submit")
+page.query += Keys.ENTER
 ```
 
-Submitting the form will refer to a page with the results of our query. Let's use the class
-`SearchResultPage` to retrieve the results.
+After submitting the form, we are redirected to the search results page.
 
 ![PyPI home page](./docs/assets/screenshot_pypi_search_results.png)
+
+The `SearchResultPage` will then be used to extract the results.
 
 ```python
 page = SearchResultPage(browser)
 
 print(page.nb_results)
-# 1
+# 3
 
-print(page.results)
-# [<__main__.SearchResultPage.ResultRegions at 0x1058e97c0>]
-
-print(page.results[0].model_dump())
+print(page.results[0])
+# <__main__.SearchResultPage.Result at 0x1058e97c0>
 ```
 
-Last step is to close the browser to avoid any remaining running application once we close Python.
+Manen provides a `model_dump` method, quite similar to the one in Pydantic to easily get all the
+attributes of a webarea or a page.
+
+```python
+print(page.results[0].model_dump())
+# {'name': 'manen',
+#  'version': '0.2.0',
+#  'link': 'https://pypi.org/project/manen/',
+#  'description': 'A package around Selenium with an implementation of the page object model, an enhanced WebDriver and a CLI.',
+#  'release_date': datetime.datetime(2022, 2, 19, 0, 0)}
+```
+
+> [!TIP]
+> Other DOM elements are also implemented, such as `ImageSrc`, `Input`, `Checkbox`... Each one of
+> them is used to target a specific attribute from a DOM element and enable interaction with it,
+> in a flawless Pythonic way. Check the [documentation](https://kodaho.github.io/manen/) for the
+> full list of available elements.
+
+Let's finally close the Selenium WebDriver to avoid any remaining running applications once we
+exit the Python program.
 
 ```python
 browser.quit()
@@ -141,12 +177,12 @@ browser.quit()
 
 ## 🦾 Going further
 
-The best way to have full knowledge of the package is to read
-[the documentation of the project](https://kodaho.github.io/manen/)!
+[The documentation](https://kodaho.github.io/manen/) provides an extensive overview of the
+possibilities offered by the package. It also contains several user guides to help you get
+started with the package.
 
-If you want to have the exhaustive list of improvements of the package, check the
-[Changelog](https://kodaho.github.io/manen/changelog.html) page.
+Don't hesitate to open an issue if you have any question or concern about this project!
 
 Looking to contribute to fix or add new features? Just read
 [this page](https://kodaho.github.io/manen/contributing.html),
-fork the official repository and start doing the modifications you want.
+fork the repository and start doing the modifications you want.

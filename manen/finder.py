@@ -78,9 +78,9 @@ def find(
     selector: None = None,
     *,
     inside: "DriverOrElement | list['DriverOrElement'] | None",
-    many: bool,
-    default: Any,
-    wait: int,
+    many: bool = False,
+    default: Any = NotImplemented,
+    wait: int = 0,
 ) -> partial: ...
 
 
@@ -89,9 +89,9 @@ def find(
     selector: str | list[str],
     *,
     inside: "DriverOrElement",
-    many: Literal[False],
-    default: Any,
-    wait: int,
+    many: Literal[False] = False,
+    default: Any = NotImplemented,
+    wait: int = 0,
 ) -> "WebElement": ...
 
 
@@ -100,9 +100,9 @@ def find(
     selector: str | list[str],
     *,
     inside: "DriverOrElement",
-    many: Literal[True],
-    default: Any,
-    wait: int,
+    many: Literal[True] = True,
+    default: Any = NotImplemented,
+    wait: int = 0,
 ) -> list["WebElement"]: ...
 
 
@@ -111,9 +111,9 @@ def find(
     selector: str | list[str],
     *,
     inside: list["DriverOrElement"],
-    many: Literal[False],
-    default: Any,
-    wait: int,
+    many: Literal[False] = False,
+    default: Any = NotImplemented,
+    wait: int = 0,
 ) -> list["WebElement"]: ...
 
 
@@ -122,9 +122,9 @@ def find(
     selector: str | list[str],
     *,
     inside: list["DriverOrElement"],
-    many: Literal[True],
-    default: Any,
-    wait: int,
+    many: Literal[True] = True,
+    default: Any = NotImplemented,
+    wait: int = 0,
 ) -> list[list["WebElement"]]: ...
 
 

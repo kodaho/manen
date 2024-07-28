@@ -1,10 +1,3 @@
-"""
-:py:mod:`~manen.typing`
-=======================
-
-Describe some common types used by :py:mod:`manen`.
-"""
-
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:

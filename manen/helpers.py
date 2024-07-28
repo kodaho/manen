@@ -1,10 +1,3 @@
-"""
-:py:mod:`~manen.helpers`
-========================
-
-Helpers functions used by :py:mod:`manen`.
-"""
-
 import platform
 import re
 from typing import TYPE_CHECKING

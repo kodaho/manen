@@ -96,7 +96,6 @@ section :ref:`Why such package?`.
 
 .. toctree::
    :hidden:
-   :maxdepth: 3
 
    ./about.rst
    ./installation.rst

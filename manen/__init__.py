@@ -3,7 +3,7 @@
 and scraping project. Its features are splitted into (almost) independent modules:
 
 - :py:mod:`~manen.finder`: define a function :py:func:`~manen.finder.find` in order to
-  avoid calling the methods ``find_element_by_*`` or ``find_elements_by_*`` of a Selenium
+  avoid calling the methods ``find_element`` or ``find_elements`` of a Selenium
   :py:class:`~selenium.webdriver.remote.webelement.WebElement`
 - :py:mod:`~manen.browser`: a wrapper around
   :py:class:`~selenium.webdriver.remote.webdriver.WebDriver` to create more easily

@@ -47,12 +47,12 @@ class BrowserMixin(WebDriverProtocol):
         return self.get_cookies()
 
     @cookies.setter
-    def cookies(self, cookies: list[dict["str", Any]]):
+    def cookies(self, cookies: list[dict[str, Any]]):
         """
         Inject some cookies in the current driver.
 
         Args:
-            cookies (list[dict["str", Any]): cookies as a list of dictionaries
+            cookies (list[dict[str, Any]): cookies as a list of dictionaries
         """
         for cookie in cookies:
             self.add_cookie(cookie)

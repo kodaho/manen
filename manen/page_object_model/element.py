@@ -43,7 +43,7 @@ class Element(ImmutableDomComponent):
     def __get__(self, webarea: "WebArea", unused_cls_webarea: type["WebArea"]):
         element = find(
             selector=self.config.selectors,
-            inside=webarea._parent,
+            inside=webarea._scope,
             many=False,
             default=self.config.default,
             wait=self.config.wait,
@@ -57,7 +57,7 @@ class Elements(ImmutableDomComponent):
     def __get__(self, webarea: "WebArea", unused_cls_webarea: type["WebArea"]):
         elements = find(
             selector=self.config.selectors,
-            inside=webarea._parent,
+            inside=webarea._scope,
             many=True,
             default=self.config.default,
             wait=self.config.wait,
@@ -78,7 +78,7 @@ class InputElement:
     def __get__(self, webarea: "WebArea", unused_cls_webarea: type["WebArea"]):
         element = find(
             selector=self.config.selectors,
-            inside=webarea._parent,
+            inside=webarea._scope,
             many=False,
             default=self.config.default,
             wait=self.config.wait,
@@ -88,7 +88,7 @@ class InputElement:
     def __set__(self, webarea: "WebArea", value):
         element = find(
             selector=self.config.selectors,
-            inside=webarea._parent,
+            inside=webarea._scope,
             many=False,
             default=NotImplemented,
             wait=self.config.wait,
@@ -103,7 +103,7 @@ class Region(ImmutableDomComponent):
 
         element = find(
             selector=self.config.selectors,
-            inside=webarea._parent,
+            inside=webarea._scope,
             many=False,
             default=NotImplemented,
             wait=self.config.wait,
@@ -120,7 +120,7 @@ class Regions(ImmutableDomComponent):
 
         elements = find(
             selector=self.config.selectors,
-            inside=webarea._parent,
+            inside=webarea._scope,
             many=True,
             default=NotImplemented,
             wait=self.config.wait,

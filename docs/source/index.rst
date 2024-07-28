@@ -102,9 +102,9 @@ that it can ease the comprehension of your source code.
 You can find a deeper explanation that motivated the development of ``manen`` in the
 section :ref:`Why such package?`.
 
-Table of contents
-=================
+
 .. toctree::
+   :hidden:
    :maxdepth: 3
 
    ./about.rst
@@ -113,10 +113,3 @@ Table of contents
    ./manen/manen.rst
    ./changelog.rst
    ./contributing.rst
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`

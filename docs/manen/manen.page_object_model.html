@@ -296,7 +296,10 @@ classes in an external file called <code class="docutils literal notranslate"><s
 
 
 <span class="k">class</span> <span class="nc">HomePage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
-    <span class="n">query</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">dom</span><span class="o">.</span><span class="n">Input</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;input[name=&#39;q&#39;]&quot;</span><span class="p">)]</span>
+    <span class="k">class</span> <span class="nc">SearchForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+        <span class="n">query</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">dom</span><span class="o">.</span><span class="n">Input</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;input[name=&#39;q&#39;]&quot;</span><span class="p">)]</span>
+
+    <span class="n">search</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">SearchForm</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;form.search-form&quot;</span><span class="p">)]</span>
 
 
 <span class="k">class</span> <span class="nc">SearchResultPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
@@ -324,10 +327,9 @@ we will suppose that you have an instance of
 <a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebDriver</span></code></a> stored in the variable
 <code class="docutils literal notranslate"><span class="pre">driver</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pypi_pom</span> <span class="kn">import</span> <span class="n">HomePage</span><span class="p">,</span> <span class="n">SearchResultPage</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">manen.page_object_model.element</span> <span class="kn">import</span> <span class="n">Action</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">home_page</span> <span class="o">=</span> <span class="n">HomePage</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">home_page</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;selenium&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">home_page</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">Action</span><span class="p">(</span><span class="s2">&quot;submit&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">home_page</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;selenium&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">home_page</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
 <span class="go"># This will direct you to a search result page of PyPI.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">page</span> <span class="o">=</span> <span class="n">SearchResultPage</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">page</span><span class="o">.</span><span class="n">nb_results</span>

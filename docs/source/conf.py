@@ -96,3 +96,5 @@ intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "selenium": ("https://selenium-python.readthedocs.io/", None),
 }
+
+autosectionlabel_maxdepth = 2

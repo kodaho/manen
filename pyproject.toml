@@ -1,7 +1,7 @@
 [project]
 name = "manen"
 dynamic = ["version"]
-description = "A package around Selenium with an implementation of the page object model &an enhanced WebDriver."
+description = "An implementation of the Page Object Model design pattern, and other utilities for web scraping and automation."
 authors = [
     { name = "kodaho", email = "23268819+kodaho@users.noreply.github.com" },
 ]
@@ -11,14 +11,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-keywords = [
-    "automation",
-    "DOM",
-    "page object model",
-    "scraping",
-    "selenium",
-    "test",
-]
+keywords = ["automation", "DOM", "page object model", "scraping", "selenium"]
 dependencies = [
     "dateparser>=1.0.0, <2",
     "polling2~=0.4.6",

@@ -30,6 +30,6 @@ class ElementNotFound(ManenException):
         )
         return (
             f"Unable to find an element matching the selectors:\n{selectors_as_list}"
-            "\n\n\n"
+            "\n"
             f"{context_string}"
         )

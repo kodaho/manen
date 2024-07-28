@@ -224,6 +224,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.browser.html">manen.browser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.browser.html#manen.browser.BrowserMixin"><code class="docutils literal notranslate"><span class="pre">BrowserMixin</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.browser.html#manen.browser.ChromeBrowser"><code class="docutils literal notranslate"><span class="pre">ChromeBrowser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../manen/manen.browser.html#manen.browser.HeadlessMode"><code class="docutils literal notranslate"><span class="pre">HeadlessMode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../manen/manen.browser.html#manen.browser.ScrollDirection"><code class="docutils literal notranslate"><span class="pre">ScrollDirection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../manen/manen.page_object_model.html">manen.page_object_model</a></li>
 </ul>
 </li>
@@ -266,15 +268,18 @@
           <h1>Source code for manen.browser</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">manen.browser</span>
-<span class="sd">===============</span>
+<span class="sd">=============</span>
 
-<span class="sd">Classes which enrich :py:class:`selenium.webdriver.remote.webdriver.WebDriver`.</span>
+<span class="sd">Classes which inherits from :py:class:`selenium.webdriver.remote.webdriver.WebDriver`, and add</span>
+<span class="sd">useful methods for driver interactions.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">cast</span>
 
-<span class="kn">from</span> <span class="nn">selenium.webdriver</span> <span class="kn">import</span> <span class="n">Chrome</span><span class="p">,</span> <span class="n">ChromeOptions</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver</span> <span class="kn">import</span> <span class="n">Chrome</span><span class="p">,</span> <span class="n">ChromeOptions</span><span class="p">,</span> <span class="n">ChromeService</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
 <span class="kn">from</span> <span class="nn">selenium.webdriver.common.keys</span> <span class="kn">import</span> <span class="n">Keys</span>
 
 <span class="kn">from</span> <span class="nn">manen.finder</span> <span class="kn">import</span> <span class="n">find</span>
@@ -282,46 +287,63 @@
 <span class="kn">from</span> <span class="nn">manen.typing</span> <span class="kn">import</span> <span class="n">WebDriverProtocol</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">.typing</span> <span class="kn">import</span> <span class="n">DriverOrElement</span><span class="p">,</span> <span class="n">Version</span>
+    <span class="kn">from</span> <span class="nn">.typing</span> <span class="kn">import</span> <span class="n">DriverOrElement</span><span class="p">,</span> <span class="n">Version</span><span class="p">,</span> <span class="n">WebElement</span>
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;ChromeBrowser&quot;</span><span class="p">,)</span>
 
 
+<div class="viewcode-block" id="ScrollDirection">
+<a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.ScrollDirection">[docs]</a>
+<span class="k">class</span> <span class="nc">ScrollDirection</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">UP</span> <span class="o">=</span> <span class="s2">&quot;UP&quot;</span>
+    <span class="n">DOWN</span> <span class="o">=</span> <span class="s2">&quot;DOWN&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="HeadlessMode">
+<a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.HeadlessMode">[docs]</a>
+<span class="k">class</span> <span class="nc">HeadlessMode</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">NEW</span> <span class="o">=</span> <span class="s2">&quot;new&quot;</span>
+    <span class="n">OLD</span> <span class="o">=</span> <span class="s2">&quot;old&quot;</span></div>
+
+
+
 <div class="viewcode-block" id="BrowserMixin">
 <a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.BrowserMixin">[docs]</a>
-<span class="k">class</span> <span class="nc">BrowserMixin</span><span class="p">(</span><span class="n">WebDriverProtocol</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mixin to enrich :py:class:`selenium.webdriver.remote.webdriver.WebDriver`</span>
-<span class="sd">    with a set of features intended to ease the way to work with such an</span>
-<span class="sd">    instance.</span>
+<span class="k">class</span> <span class="nc">BrowserMixin</span><span class="p">(</span><span class="n">WebDriverProtocol</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Mixin to enhance :py:class:`selenium.webdriver.remote.webdriver.WebDriver` with a set of</span>
+<span class="sd">    features intended to ease the way to work with a WebDriver instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Cookies associated to the current domain.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Cookies associated to the current domain&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cookies</span><span class="p">()</span>
 
     <span class="nd">@cookies</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cookies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Install some cookies in the current driver, just by assigning the</span>
-<span class="sd">        list in the right format.</span>
+    <span class="k">def</span> <span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cookies</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inject some cookies in the current driver.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            cookies (List[Dict[&quot;str&quot;, Any]): cookies as a list of dictionaries</span>
+<span class="sd">            cookies (list[dict[str, Any]): cookies as a list of dictionaries</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">cookie</span> <span class="ow">in</span> <span class="n">cookies</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_cookie</span><span class="p">(</span><span class="n">cookie</span><span class="p">)</span>
 
     <span class="nd">@cookies</span><span class="o">.</span><span class="n">deleter</span>
     <span class="k">def</span> <span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Easily delete current cookies inside the driver.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete current cookies inside the driver.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">delete_all_cookies</span><span class="p">()</span>
 
 <div class="viewcode-block" id="BrowserMixin.click_with_js">
 <a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.BrowserMixin.click_with_js">[docs]</a>
-    <span class="k">def</span> <span class="nf">click_with_js</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">:</span> <span class="s2">&quot;DriverOrElement&quot;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Click on an element using a JavaScript script. Can be useful if you</span>
-<span class="sd">        want to click on an element outside the current frame.</span>
+    <span class="k">def</span> <span class="nf">click_with_js</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">:</span> <span class="s2">&quot;WebElement&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Click on an element using JavaScript (useful to click on an element outside the current</span>
+<span class="sd">        frame).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">js_script</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;arguments[0].click()&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="n">js_script</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span></div>
@@ -331,111 +353,101 @@
 <a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.BrowserMixin.scroll">[docs]</a>
     <span class="k">def</span> <span class="nf">scroll</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">n_repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="n">wait</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="n">direction</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;DOWN&quot;</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">wait</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">direction</span><span class="p">:</span> <span class="n">ScrollDirection</span> <span class="o">=</span> <span class="n">ScrollDirection</span><span class="o">.</span><span class="n">DOWN</span><span class="p">,</span>
         <span class="n">with_js</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform a scroll action on the page.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Scroll the page, in a given direction.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            n_repeat (int, optional): Number of scroll to perform.</span>
-<span class="sd">                Defaults to 3.</span>
-<span class="sd">            wait (int, optional): Number of seconds to wait between each</span>
-<span class="sd">                scroll. Defaults to 1.</span>
-<span class="sd">            direction (str, optional): scroll up or down (can only be ``UP`` or</span>
-<span class="sd">                ``DOWN``, case insensitive). Defaults to &quot;DOWN&quot;.</span>
-<span class="sd">            with_js (bool, optional): perform the action with a JavaScript</span>
-<span class="sd">                script instead of scrolling by pressing the Key DOWN or UP.</span>
-<span class="sd">                Defaults to False.</span>
+<span class="sd">            n (int, optional): Number of scroll to perform. Defaults to 1.</span>
+<span class="sd">            wait (int, optional): Number of seconds to wait between each scroll. Defaults to 0.</span>
+<span class="sd">            direction (str, optional): scroll up or down (can only be ``UP`` or ``DOWN``).</span>
+<span class="sd">                Defaults to ``DOWN``.</span>
+<span class="sd">            with_js (bool, optional): perform the action with a JavaScript script instead of</span>
+<span class="sd">                scrolling by pressing the keys down or up. Defaults to False.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            ValueError: Raised if `direction` (once lowercased) is not</span>
-<span class="sd">                `UP` or `DOWN`</span>
+<span class="sd">            ValueError: Raised if `direction` is not `UP` or `DOWN`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;down&quot;</span><span class="p">,</span> <span class="s2">&quot;up&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">ScrollDirection</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;`</span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2">` is not supported as a scroll direction. &quot;</span>
-                <span class="s2">&quot;Please choose between `UP` and `DOWN` (case insensitive).&quot;</span>
+                <span class="s2">&quot;Please choose between `UP` and `DOWN`.&quot;</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">with_js</span><span class="p">:</span>
             <span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_script</span>
             <span class="n">arg</span> <span class="o">=</span> <span class="s2">&quot;window.scrollBy({top: </span><span class="si">%s</span><span class="s2">1000, left: 0, behavior: &#39;smooth&#39;});&quot;</span> <span class="o">%</span> <span class="p">(</span>
-                <span class="s2">&quot;-&quot;</span> <span class="k">if</span> <span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;up&quot;</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+                <span class="s2">&quot;-&quot;</span> <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="n">ScrollDirection</span><span class="o">.</span><span class="n">UP</span> <span class="k">else</span> <span class="s2">&quot;+&quot;</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">body</span><span class="p">:</span> <span class="s2">&quot;DriverOrElement&quot;</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_element_by_tag_name</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">)</span>
-            <span class="n">arg</span> <span class="o">=</span> <span class="n">Keys</span><span class="o">.</span><span class="n">PAGE_DOWN</span> <span class="k">if</span> <span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;down&quot;</span> <span class="k">else</span> <span class="n">Keys</span><span class="o">.</span><span class="n">PAGE_UP</span>
+            <span class="n">body</span><span class="p">:</span> <span class="s2">&quot;DriverOrElement&quot;</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">)</span>
+            <span class="n">arg</span> <span class="o">=</span> <span class="n">Keys</span><span class="o">.</span><span class="n">PAGE_DOWN</span> <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="n">ScrollDirection</span><span class="o">.</span><span class="n">DOWN</span> <span class="k">else</span> <span class="n">Keys</span><span class="o">.</span><span class="n">PAGE_UP</span>
             <span class="n">func</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">send_keys</span>
 
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_repeat</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="n">func</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="BrowserMixin.highlight">
 <a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.BrowserMixin.highlight">[docs]</a>
-    <span class="k">def</span> <span class="nf">highlight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Highlight an element in the current webpage by drawing a black frame</span>
-<span class="sd">        around this element. The element will be retrieved using the ``find``</span>
-<span class="sd">        method and then framed by updating the CSS properties of the retrieved</span>
-<span class="sd">        element.</span>
+    <span class="k">def</span> <span class="nf">highlight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Highlight an element in the current page by drawing a black frame around it.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            selector (Union[str, List[str]]): selector(s) used to find the element.</span>
+<span class="sd">            selector (str | list[str]): selector(s) used to find the element.</span>
 <span class="sd">            **kwargs: Keyword arguments sent to ``find`` method</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Any: Value returned by the JS script updating the CSS properties</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">elements</span><span class="p">]</span>
-        <span class="n">highlight_script</span> <span class="o">=</span> <span class="s2">&quot;arguments[</span><span class="si">%d</span><span class="s2">].style.border = &#39;3px solid black&#39;;&quot;</span>
-        <span class="n">script</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">highlight_script</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">))])</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="o">*</span><span class="n">elements</span><span class="p">)</span></div>
+        <span class="n">script</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="sa">f</span><span class="s2">&quot;arguments[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">].style.border = &#39;3px solid black&#39;;&quot;</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">))</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="o">*</span><span class="n">elements</span><span class="p">)</span></div>
 
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">current_platform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Platform (OS information) on which the driver runs.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Current platform of the webdriver&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">PLATFORM</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">browser_version</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Version&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Version of the browser in used.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Version of the browser&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">version</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capabilities</span><span class="p">[</span><span class="s2">&quot;browserVersion&quot;</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">driver_version</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Version&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Version of the driver in used.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Version of the driver&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">version</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capabilities</span><span class="p">[</span><span class="s2">&quot;chrome&quot;</span><span class="p">][</span><span class="s2">&quot;chromedriverVersion&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">are_versions_compatible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Property telling you if the version of the used driver is compatible</span>
-<span class="sd">        with the one of the browser.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">is_browser_compatible_with_driver</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Is the browser version compatible with the driver version?&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">browser_version</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver_version</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
 
 <div class="viewcode-block" id="BrowserMixin.find">
 <a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.BrowserMixin.find">[docs]</a>
-    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;This method is basically the same as :py:func:`~manen.finder.find`</span>
-<span class="sd">        but with the driver instance as default value for the argument</span>
-<span class="sd">        ``inside`` and True as default value for ``many`` argument.</span>
-<span class="sd">        See the documentation of :py:func:`~manen.finder.find` for more</span>
-<span class="sd">        information of what we can do with this method.</span>
+    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find elements matching selectors using :py:func:`~manen.finder.find`, with the driver</span>
+<span class="sd">        instance as scope for the search. Returns all elements by default.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            selector (Union[str, List[str]]): selector(s) passed to</span>
-<span class="sd">                :py:func:`~manen.finder.find`</span>
+<span class="sd">            selector (str | list[str]): selector(s) passed to :py:func:`~manen.finder.find`</span>
 <span class="sd">            **kwargs: keyword arguments sent to :py:func:`~manen.finder.find`</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            ElementNotFound: Raised if no default value is specified and no</span>
-<span class="sd">                element matching the selector(s) has been found.</span>
+<span class="sd">            ElementNotFound: Raised if no default value is specified and no element matching the</span>
+<span class="sd">                selector(s) has been found.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Any: Outputs of :py:func:`~manen.finder.find`</span>
@@ -448,22 +460,19 @@
 <div class="viewcode-block" id="BrowserMixin.lookup">
 <a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.BrowserMixin.lookup">[docs]</a>
     <span class="k">def</span> <span class="nf">lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;This method is exactly as the method ``find`` but it will always</span>
-<span class="sd">        return a default value if an element cannot be found (this default</span>
-<span class="sd">        value is by default `None`.</span>
-<span class="sd">        To keep it simple, this is the ``find`` method which never raises</span>
-<span class="sd">        an exception if a selection method returns nothing!</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Same as the method :py:`~manen.browser.BrowserMixin.find` with the difference that this</span>
+<span class="sd">        method never raises error. If the element is not found, it returns a default value</span>
+<span class="sd">        (``None`` by default).</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            *args: positional arguments sent directly as arguments of the method</span>
-<span class="sd">                ``find``</span>
-<span class="sd">            **kwargs: keyword arguments sent directly as arguments of the method</span>
-<span class="sd">                ``find``</span>
+<span class="sd">            *args: positional arguments passed to :py:func:`~manen.finder.find`</span>
+<span class="sd">            *kwargs: keyword arguments passed to :py:func:`~manen.finder.find`</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Any: Outputs of :py:func:`~manen.finder.find`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">inside</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore</span></div>
+        <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">inside</span><span class="o">=</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;DriverOrElement&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 </div>
 
 
@@ -471,13 +480,7 @@
 <div class="viewcode-block" id="ChromeBrowser">
 <a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.ChromeBrowser">[docs]</a>
 <span class="k">class</span> <span class="nc">ChromeBrowser</span><span class="p">(</span><span class="n">BrowserMixin</span><span class="p">,</span> <span class="n">Chrome</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper around Selenium ChromeWebDriver providing additional methods in</span>
-<span class="sd">    order to give more abilities and flexibilities when controlling the browser.</span>
-<span class="sd">    For example, it defines a method ``find`` to easily retrieve elements,</span>
-<span class="sd">    ``highlight`` to put an emphasis on elements or cookies property. Go check</span>
-<span class="sd">    the documentation of methods inherited from</span>
-<span class="sd">    :py:class:`~manen.browser.BrowserMixin` for further information.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper around Selenium ChromeWebDriver providing methods to improve its operability.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ChromeBrowser.initialize">
 <a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.ChromeBrowser.initialize">[docs]</a>
@@ -485,19 +488,44 @@
     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">options</span><span class="p">:</span> <span class="n">ChromeOptions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">service</span><span class="p">:</span> <span class="n">ChromeService</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">driver_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">headless_mode</span><span class="p">:</span> <span class="n">HeadlessMode</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">proxy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">window_size</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Class method to easily launch an enhanced new driver based on the</span>
-<span class="sd">        browser Chrome. Here you can specify directly if the browser should run</span>
-<span class="sd">        headless or not, if a proxy should be used and many more options.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Launch an enhanced web driver for the browser Chrome.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            options (ChromeOptions, optional): Options to configure the driver.</span>
-<span class="sd">                Defaults to None.</span>
+<span class="sd">            options (ChromeOptions, optional): Options to configure the driver. Defaults to None.</span>
+<span class="sd">            service (ChromeService, optional): Service to configure the driver. Defaults to None.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            WebDriver: An enhanced Chrome driver</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">options</span> <span class="ow">or</span> <span class="n">ChromeOptions</span><span class="p">())</span></div>
+        <span class="k">if</span> <span class="n">driver_path</span> <span class="ow">and</span> <span class="n">service</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;You cannot specify both `driver_path` and `service`. &quot;</span>
+                <span class="s2">&quot;Set `driver_path` in the Service with `Service(executable_path=driver_path)`.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">options</span> <span class="o">=</span> <span class="n">options</span> <span class="ow">or</span> <span class="n">ChromeOptions</span><span class="p">()</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="n">service</span> <span class="ow">or</span> <span class="n">ChromeService</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">driver_path</span><span class="p">:</span>
+            <span class="n">service</span> <span class="o">=</span> <span class="n">ChromeService</span><span class="p">(</span><span class="n">executable_path</span><span class="o">=</span><span class="n">driver_path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">headless_mode</span><span class="p">:</span>
+            <span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--headless=</span><span class="si">{</span><span class="n">headless_mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">proxy</span><span class="p">:</span>
+            <span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--proxy-server=</span><span class="si">{</span><span class="n">proxy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">window_size</span><span class="p">:</span>
+            <span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--window-size=</span><span class="si">{</span><span class="n">window_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">window_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">service</span><span class="o">=</span><span class="n">service</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

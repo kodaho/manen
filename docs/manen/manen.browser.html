@@ -225,6 +225,8 @@
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">manen.browser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#manen.browser.BrowserMixin"><code class="docutils literal notranslate"><span class="pre">BrowserMixin</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#manen.browser.ChromeBrowser"><code class="docutils literal notranslate"><span class="pre">ChromeBrowser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manen.browser.HeadlessMode"><code class="docutils literal notranslate"><span class="pre">HeadlessMode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manen.browser.ScrollDirection"><code class="docutils literal notranslate"><span class="pre">ScrollDirection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="manen.page_object_model.html">manen.page_object_model</a></li>
 </ul>
 </li>
@@ -272,72 +274,61 @@
         <article role="main" id="furo-main-content">
           <section id="manen-browser">
 <span id="module-manen.browser"></span><h1>manen.browser<a class="headerlink" href="#manen-browser" title="Link to this heading">¶</a></h1>
-<p>Classes which enrich <a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">selenium.webdriver.remote.webdriver.WebDriver</span></code></a>.</p>
+<p>Classes which inherits from <a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">selenium.webdriver.remote.webdriver.WebDriver</span></code></a>, and add
+useful methods for driver interactions.</p>
 </section>
 <dl class="py class">
 <dt class="sig sig-object py" id="manen.browser.BrowserMixin">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.browser.</span></span><span class="sig-name descname"><span class="pre">BrowserMixin</span></span><a class="reference internal" href="../_modules/manen/browser.html#BrowserMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.BrowserMixin" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">WebDriverProtocol</span></code></p>
-<p>Mixin to enrich <a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">selenium.webdriver.remote.webdriver.WebDriver</span></code></a>
-with a set of features intended to ease the way to work with such an
-instance.</p>
-<dl class="py property">
-<dt class="sig sig-object py" id="manen.browser.BrowserMixin.are_versions_compatible">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">are_versions_compatible</span></span><a class="headerlink" href="#manen.browser.BrowserMixin.are_versions_compatible" title="Link to this definition">¶</a></dt>
-<dd><p>Property telling you if the version of the used driver is compatible
-with the one of the browser.</p>
-</dd></dl>
-
+<p>Mixin to enhance <a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">selenium.webdriver.remote.webdriver.WebDriver</span></code></a> with a set of
+features intended to ease the way to work with a WebDriver instance.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="manen.browser.BrowserMixin.browser_version">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">browser_version</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Version</span></em><a class="headerlink" href="#manen.browser.BrowserMixin.browser_version" title="Link to this definition">¶</a></dt>
-<dd><p>Version of the browser in used.</p>
+<dd><p>Version of the browser</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manen.browser.BrowserMixin.click_with_js">
-<span class="sig-name descname"><span class="pre">click_with_js</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DriverOrElement</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#BrowserMixin.click_with_js"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.BrowserMixin.click_with_js" title="Link to this definition">¶</a></dt>
-<dd><p>Click on an element using a JavaScript script. Can be useful if you
-want to click on an element outside the current frame.</p>
+<span class="sig-name descname"><span class="pre">click_with_js</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">WebElement</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#BrowserMixin.click_with_js"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.BrowserMixin.click_with_js" title="Link to this definition">¶</a></dt>
+<dd><p>Click on an element using JavaScript (useful to click on an element outside the current
+frame).</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="manen.browser.BrowserMixin.cookies">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cookies</span></span><a class="headerlink" href="#manen.browser.BrowserMixin.cookies" title="Link to this definition">¶</a></dt>
-<dd><p>Cookies associated to the current domain.</p>
+<dd><p>Cookies associated to the current domain</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="manen.browser.BrowserMixin.current_platform">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_platform</span></span><a class="headerlink" href="#manen.browser.BrowserMixin.current_platform" title="Link to this definition">¶</a></dt>
-<dd><p>Platform (OS information) on which the driver runs.</p>
+<dd><p>Current platform of the webdriver</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="manen.browser.BrowserMixin.driver_version">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">driver_version</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Version</span></em><a class="headerlink" href="#manen.browser.BrowserMixin.driver_version" title="Link to this definition">¶</a></dt>
-<dd><p>Version of the driver in used.</p>
+<dd><p>Version of the driver</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manen.browser.BrowserMixin.find">
-<span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#BrowserMixin.find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.BrowserMixin.find" title="Link to this definition">¶</a></dt>
-<dd><p>This method is basically the same as <a class="reference internal" href="manen.finder.html#manen.finder.find" title="manen.finder.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">find()</span></code></a>
-but with the driver instance as default value for the argument
-<code class="docutils literal notranslate"><span class="pre">inside</span></code> and True as default value for <code class="docutils literal notranslate"><span class="pre">many</span></code> argument.
-See the documentation of <a class="reference internal" href="manen.finder.html#manen.finder.find" title="manen.finder.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">find()</span></code></a> for more
-information of what we can do with this method.</p>
+<span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#BrowserMixin.find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.BrowserMixin.find" title="Link to this definition">¶</a></dt>
+<dd><p>Find elements matching selectors using <a class="reference internal" href="manen.finder.html#manen.finder.find" title="manen.finder.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">find()</span></code></a>, with the driver
+instance as scope for the search. Returns all elements by default.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>selector</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>]</em>) – selector(s) passed to
-<a class="reference internal" href="manen.finder.html#manen.finder.find" title="manen.finder.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">find()</span></code></a></p></li>
+<li><p><strong>selector</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – selector(s) passed to <a class="reference internal" href="manen.finder.html#manen.finder.find" title="manen.finder.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">find()</span></code></a></p></li>
 <li><p><strong>**kwargs</strong> – keyword arguments sent to <a class="reference internal" href="manen.finder.html#manen.finder.find" title="manen.finder.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">find()</span></code></a></p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="manen.exceptions.html#manen.exceptions.ElementNotFound" title="manen.exceptions.ElementNotFound"><strong>ElementNotFound</strong></a> – Raised if no default value is specified and no
-    element matching the selector(s) has been found.</p>
+<dd class="field-even"><p><a class="reference internal" href="manen.exceptions.html#manen.exceptions.ElementNotFound" title="manen.exceptions.ElementNotFound"><strong>ElementNotFound</strong></a> – Raised if no default value is specified and no element matching the
+    selector(s) has been found.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Outputs of <a class="reference internal" href="manen.finder.html#manen.finder.find" title="manen.finder.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">find()</span></code></a></p>
@@ -350,42 +341,35 @@ information of what we can do with this method.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manen.browser.BrowserMixin.highlight">
-<span class="sig-name descname"><span class="pre">highlight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#BrowserMixin.highlight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.BrowserMixin.highlight" title="Link to this definition">¶</a></dt>
-<dd><p>Highlight an element in the current webpage by drawing a black frame
-around this element. The element will be retrieved using the <code class="docutils literal notranslate"><span class="pre">find</span></code>
-method and then framed by updating the CSS properties of the retrieved
-element.</p>
+<span class="sig-name descname"><span class="pre">highlight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#BrowserMixin.highlight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.BrowserMixin.highlight" title="Link to this definition">¶</a></dt>
+<dd><p>Highlight an element in the current page by drawing a black frame around it.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>selector</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>]</em>) – selector(s) used to find the element.</p></li>
+<li><p><strong>selector</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – selector(s) used to find the element.</p></li>
 <li><p><strong>**kwargs</strong> – Keyword arguments sent to <code class="docutils literal notranslate"><span class="pre">find</span></code> method</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Value returned by the JS script updating the CSS properties</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Any</p>
-</dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="manen.browser.BrowserMixin.is_browser_compatible_with_driver">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_browser_compatible_with_driver</span></span><a class="headerlink" href="#manen.browser.BrowserMixin.is_browser_compatible_with_driver" title="Link to this definition">¶</a></dt>
+<dd><p>Is the browser version compatible with the driver version?</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manen.browser.BrowserMixin.lookup">
 <span class="sig-name descname"><span class="pre">lookup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="../_modules/manen/browser.html#BrowserMixin.lookup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.BrowserMixin.lookup" title="Link to this definition">¶</a></dt>
-<dd><p>This method is exactly as the method <code class="docutils literal notranslate"><span class="pre">find</span></code> but it will always
-return a default value if an element cannot be found (this default
-value is by default <cite>None</cite>.
-To keep it simple, this is the <code class="docutils literal notranslate"><span class="pre">find</span></code> method which never raises
-an exception if a selection method returns nothing!</p>
+<dd><p>Same as the method <a href="#id1"><span class="problematic" id="id2">:py:`~manen.browser.BrowserMixin.find`</span></a> with the difference that this
+method never raises error. If the element is not found, it returns a default value
+(<code class="docutils literal notranslate"><span class="pre">None</span></code> by default).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>*args</strong> – positional arguments sent directly as arguments of the method
-<code class="docutils literal notranslate"><span class="pre">find</span></code></p></li>
-<li><p><strong>**kwargs</strong> – keyword arguments sent directly as arguments of the method
-<code class="docutils literal notranslate"><span class="pre">find</span></code></p></li>
+<li><p><strong>*args</strong> – positional arguments passed to <a class="reference internal" href="manen.finder.html#manen.finder.find" title="manen.finder.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">find()</span></code></a></p></li>
+<li><p><strong>*kwargs</strong> – keyword arguments passed to <a class="reference internal" href="manen.finder.html#manen.finder.find" title="manen.finder.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">find()</span></code></a></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -399,25 +383,21 @@ an exception if a selection method returns nothing!</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manen.browser.BrowserMixin.scroll">
-<span class="sig-name descname"><span class="pre">scroll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_repeat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'DOWN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_js</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#BrowserMixin.scroll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.BrowserMixin.scroll" title="Link to this definition">¶</a></dt>
-<dd><p>Perform a scroll action on the page.</p>
+<span class="sig-name descname"><span class="pre">scroll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#manen.browser.ScrollDirection" title="manen.browser.ScrollDirection"><span class="pre">ScrollDirection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ScrollDirection.DOWN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_js</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#BrowserMixin.scroll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.BrowserMixin.scroll" title="Link to this definition">¶</a></dt>
+<dd><p>Scroll the page, in a given direction.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_repeat</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of scroll to perform.
-Defaults to 3.</p></li>
-<li><p><strong>wait</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of seconds to wait between each
-scroll. Defaults to 1.</p></li>
-<li><p><strong>direction</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – scroll up or down (can only be <code class="docutils literal notranslate"><span class="pre">UP</span></code> or
-<code class="docutils literal notranslate"><span class="pre">DOWN</span></code>, case insensitive). Defaults to “DOWN”.</p></li>
-<li><p><strong>with_js</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – perform the action with a JavaScript
-script instead of scrolling by pressing the Key DOWN or UP.
-Defaults to False.</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of scroll to perform. Defaults to 1.</p></li>
+<li><p><strong>wait</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of seconds to wait between each scroll. Defaults to 0.</p></li>
+<li><p><strong>direction</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – scroll up or down (can only be <code class="docutils literal notranslate"><span class="pre">UP</span></code> or <code class="docutils literal notranslate"><span class="pre">DOWN</span></code>).
+Defaults to <code class="docutils literal notranslate"><span class="pre">DOWN</span></code>.</p></li>
+<li><p><strong>with_js</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – perform the action with a JavaScript script instead of
+scrolling by pressing the keys down or up. Defaults to False.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – Raised if <cite>direction</cite> (once lowercased) is not
-    <cite>UP</cite> or <cite>DOWN</cite></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – Raised if <cite>direction</cite> is not <cite>UP</cite> or <cite>DOWN</cite></p>
 </dd>
 </dl>
 </dd></dl>
@@ -428,22 +408,17 @@ Defaults to False.</p></li>
 <dt class="sig sig-object py" id="manen.browser.ChromeBrowser">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.browser.</span></span><span class="sig-name descname"><span class="pre">ChromeBrowser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.chrome.options.Options" title="(in Selenium Python Bindings v2)"><span class="pre">Options</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">service</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.chrome.service.Service" title="(in Selenium Python Bindings v2)"><span class="pre">Service</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_alive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#ChromeBrowser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.ChromeBrowser" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#manen.browser.BrowserMixin" title="manen.browser.BrowserMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">BrowserMixin</span></code></a>, <a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.chrome.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebDriver</span></code></a></p>
-<p>Wrapper around Selenium ChromeWebDriver providing additional methods in
-order to give more abilities and flexibilities when controlling the browser.
-For example, it defines a method <code class="docutils literal notranslate"><span class="pre">find</span></code> to easily retrieve elements,
-<code class="docutils literal notranslate"><span class="pre">highlight</span></code> to put an emphasis on elements or cookies property. Go check
-the documentation of methods inherited from
-<a class="reference internal" href="#manen.browser.BrowserMixin" title="manen.browser.BrowserMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">BrowserMixin</span></code></a> for further information.</p>
+<p>Wrapper around Selenium ChromeWebDriver providing methods to improve its operability.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="manen.browser.ChromeBrowser.initialize">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.chrome.options.Options" title="(in Selenium Python Bindings v2)"><span class="pre">Options</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#ChromeBrowser.initialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.ChromeBrowser.initialize" title="Link to this definition">¶</a></dt>
-<dd><p>Class method to easily launch an enhanced new driver based on the
-browser Chrome. Here you can specify directly if the browser should run
-headless or not, if a proxy should be used and many more options.</p>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.chrome.options.Options" title="(in Selenium Python Bindings v2)"><span class="pre">Options</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">service</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.chrome.service.Service" title="(in Selenium Python Bindings v2)"><span class="pre">Service</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">driver_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headless_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#manen.browser.HeadlessMode" title="manen.browser.HeadlessMode"><span class="pre">HeadlessMode</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#ChromeBrowser.initialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.ChromeBrowser.initialize" title="Link to this definition">¶</a></dt>
+<dd><p>Launch an enhanced web driver for the browser Chrome.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>options</strong> (<em>ChromeOptions</em><em>, </em><em>optional</em>) – Options to configure the driver.
-Defaults to None.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>options</strong> (<em>ChromeOptions</em><em>, </em><em>optional</em>) – Options to configure the driver. Defaults to None.</p></li>
+<li><p><strong>service</strong> (<em>ChromeService</em><em>, </em><em>optional</em>) – Service to configure the driver. Defaults to None.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>An enhanced Chrome driver</p>
@@ -453,6 +428,40 @@ Defaults to None.</p>
 </dd>
 </dl>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="manen.browser.HeadlessMode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.browser.</span></span><span class="sig-name descname"><span class="pre">HeadlessMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#HeadlessMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.HeadlessMode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manen.browser.HeadlessMode.NEW">
+<span class="sig-name descname"><span class="pre">NEW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'new'</span></em><a class="headerlink" href="#manen.browser.HeadlessMode.NEW" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manen.browser.HeadlessMode.OLD">
+<span class="sig-name descname"><span class="pre">OLD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'old'</span></em><a class="headerlink" href="#manen.browser.HeadlessMode.OLD" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="manen.browser.ScrollDirection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.browser.</span></span><span class="sig-name descname"><span class="pre">ScrollDirection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#ScrollDirection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.ScrollDirection" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manen.browser.ScrollDirection.DOWN">
+<span class="sig-name descname"><span class="pre">DOWN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DOWN'</span></em><a class="headerlink" href="#manen.browser.ScrollDirection.DOWN" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manen.browser.ScrollDirection.UP">
+<span class="sig-name descname"><span class="pre">UP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UP'</span></em><a class="headerlink" href="#manen.browser.ScrollDirection.UP" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

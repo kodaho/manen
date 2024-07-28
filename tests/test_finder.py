@@ -1,4 +1,3 @@
-# pylint: disable=missing-module-docstring, missing-function-docstring, missing-class-docstring
 import pytest
 from selenium.webdriver.common.by import By
 

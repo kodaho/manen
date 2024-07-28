@@ -1,24 +1,21 @@
 """Testing that Python can effectively read all the source code and that the
 structure of the package is correct.
 """
+
 from importlib import import_module
 from pkgutil import iter_modules
-from typing import TYPE_CHECKING
 
 import pytest
 
-if TYPE_CHECKING:
-    from typing import List
 
-
-def get_all_modules(package_name: str) -> "List[str]":
+def get_all_modules(package_name: str) -> list[str]:
     """Retrieve all the modules and packages from a given package. This is a
     recursive function meaning that the sub-packages will also be inspected.
 
     Args:
         package_name (str): the name of the parent package to inspect
     Returns:
-        List[str]: list of all sub-packages/modules.
+        list[str]: list of all sub-packages/modules.
     """
     output = [package_name]
     package = import_module(package_name)

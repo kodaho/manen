@@ -1,4 +1,3 @@
-# pylint: disable=missing-module-docstring, missing-function-docstring, missing-class-docstring
 import pytest
 
 from manen.helpers import extract_integer, version

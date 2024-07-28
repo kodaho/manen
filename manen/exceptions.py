@@ -10,10 +10,6 @@ class ManenException(Exception):
     """Basic exception."""
 
 
-class DriverNotFound(ManenException):
-    """Can not find a driver executable used by the web drivers."""
-
-
 class ElementNotFound(ManenException):
     """Can not find inside a specific container an element matching the selectors."""
 
@@ -26,26 +22,14 @@ class ElementNotFound(ManenException):
         }
 
     def __str__(self):
-        selectors_as_list = "\n".join(
-            ["> {}".format(selector) for selector in self.selectors]
-        )
+        selectors_as_list = "\n".join([f"> {selector}" for selector in self.selectors])
         context_string = (
-            "\n\nContext of the exception:\n"
-            + "- Title page: {}\n".format(self.context["title"])
-            + "- URL: {}".format(self.context["current_url"])
+            "Context of the exception:\n"
+            + f"- Title page: {self.context['title']}\n"
+            + f"- URL: {self.context['current_url']}"
         )
         return (
-            "Unable to find inside document an element matching the "
-            "selectors :\n{}".format(selectors_as_list)
-        ) + context_string
-
-
-class PlatformNotRecognized(ManenException):
-    """Can not clearly identify the platform running the code."""
-
-    def __init__(self, platform):
-        super().__init__()
-        self.platform = platform
-
-    def __str__(self):
-        return 'The platform "{}" is not recognized.'.format(self.platform)
+            f"Unable to find an element matching the selectors:\n{selectors_as_list}"
+            "\n\n\n"
+            f"{context_string}"
+        )

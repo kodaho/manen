@@ -14,7 +14,6 @@ if TYPE_CHECKING:
 
 
 PLATFORM = platform.uname()
-ZIP_UNIX_SYSTEM = 3
 
 
 def extract_integer(string: str) -> int:
@@ -80,17 +79,3 @@ def version_as_str(version_tuple: "Version", limit: int = 4) -> str:
         str: formatted version
     """
     return ".".join(map(str, version_tuple[:limit]))
-
-
-def batch(iterable, size: int = 1):
-    """Slice an iterable into batches of given size.
-
-    Args:
-        iterable (Iterable): iterable to slice into batches
-        n (int, optional): size of each batch. Default to 1.
-    Returns:
-        Iterable:
-    """
-    length = len(iterable)
-    for ndx in range(0, length, size):
-        yield iterable[ndx : min(ndx + size, length)]

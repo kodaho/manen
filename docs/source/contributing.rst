@@ -1,23 +1,26 @@
 Contributing
 ============
 
-Manen is an open-source package meaning that you can contribute to the source
-in order to add new features, fix bugs. The progress of the project will be tracked
-directly in Github through issues. If you found any bug, don't hesitate to open an
-issue (if one isn't opened yet about the same bug) or/and open a pull request.
+Manen is an open-source package meaning that you can contribute to the source code in order to
+add new features, fix bugs.
 
 Reproducing a development environment
 -------------------------------------
 
-Manen has been developed with Python 3.10, using rye as project manager. If you
-want to contribute to Manen, you can reproduce a development environment with the
-following command (make sure you have `rye installed <https://rye.astral.sh/guide/installation/>`_
+Manen has been developed with Python 3.10, using rye as project manager. If you want to
+contribute, you can fork the GitHub repository, and then spawn a development environment with the
+following command (make sure that `rye is installed <https://rye.astral.sh/guide/installation/>`_
 first):
 
 .. code-block:: bash
 
-    $ rye sync --all-features
+    $ rye sync
 
-Note that building the documentation will require to install `Pandoc <https://pandoc.org/>`_,
-a universal document converter. All the instructions to do so can be found
-`here <https://pandoc.org/installing.html>`_.
+.. note::
+
+   Building the documentation requires `Pandoc <https://pandoc.org/>`_, a universal document
+   converter. The instructions to install it are `here <https://pandoc.org/installing.html>`_.
+
+
+If you want to include your modifications in the main repository, you can then open a pull
+request.

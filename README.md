@@ -78,7 +78,7 @@ browser = ChromeBrowser.initialize()
 browser.get("https://pypi.org")
 ```
 
-![PyPI home page](./docs/assets/screenshot_pypi_home.png)
+![PyPI home page](https://raw.githubusercontent.com/kodaho/manen/main/docs/assets/screenshot_pypi_home.png)
 
 We are now on the home page of PyPI. What we are going to do now is building a class that will
 inherit from `Page` from the `manen.page_object_model.webarea` module. This Python class will be
@@ -136,7 +136,7 @@ page.query += Keys.ENTER
 
 After submitting the form, we are redirected to the search results page.
 
-![PyPI home page](./docs/assets/screenshot_pypi_search_results.png)
+![PyPI home page](https://raw.githubusercontent.com/kodaho/manen/main/docs/assets/screenshot_pypi_search_results.png)
 
 The `SearchResultPage` will then be used to extract the results.
 

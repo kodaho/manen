@@ -1,11 +1,8 @@
 """
-manen.page_object_model
-=======================
-
 This module provides an implementation of the `Page Object design pattern
 <https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/>`_
 described in Selenium documentation. By combining the classes
-:py:class:`~manen.page_object_model.webarea.Page` and :py:class:`~manen.page_object_model.webarea.Region`,
+:py:class:`~manen.page_object_model.webarea.Page` and :py:class:`~manen.page_object_model.webarea.WebArea`,
 you can easily describe any web pages and access all the DOM elements in a simple
 way through a Python class.
 
@@ -84,6 +81,6 @@ we will suppose that you have an instance of
      'description': 'Official Python bindings for Selenium WebDriver',
      'release_date': datetime.datetime(2024, 7, 24, 0, 0)}
 
-This is a preview of what you can do with :py:mod:`manen.page_object_model`. See the
+This is a preview of what you can do with :py:mod:`~manen.page_object_model`. See the
 documentation of each objects to check all the features provided by the module.
 """

@@ -1,11 +1,3 @@
-# pylint: disable-all
-"""
-manen.typing
-============
-
-Describe some common types used by :py:mod:`manen`.
-"""
-
 from datetime import date
 from typing import Any, TypedDict, Union
 

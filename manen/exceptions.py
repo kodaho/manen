@@ -1,13 +1,5 @@
-"""
-manen.exceptions
-================
-
-Exceptions raised by :py:mod:`manen`.
-"""
-
-
 class ManenException(Exception):
-    """Basic exception."""
+    pass
 
 
 class ElementNotFound(ManenException):

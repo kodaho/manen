@@ -1,9 +1,6 @@
 """
-manen.finder
-============
-
-Flexible and highly customizable function to find one or several elements
-inside one or several Selenium elements.
+Flexible and highly customizable function to find one or several elements inside one or several
+Selenium elements.
 """
 
 from functools import partial

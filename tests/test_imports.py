@@ -29,5 +29,5 @@ def get_all_modules(package_name: str) -> list[str]:
 
 @pytest.mark.parametrize("module_name", get_all_modules("manen"))
 def test_able_to_import(module_name):
-    """Test that a module in `manen` can be correctly loaded."""
+    """Test that a Manen module can be correctly imported."""
     assert import_module(module_name)

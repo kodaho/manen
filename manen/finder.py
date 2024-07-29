@@ -7,7 +7,7 @@ inside one or several Selenium elements.
 """
 
 from functools import partial
-from typing import TYPE_CHECKING, Any, Literal, overload
+from typing import Any, Literal, overload
 
 import polling2
 from selenium.common.exceptions import NoSuchElementException
@@ -15,9 +15,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from manen.exceptions import ElementNotFound
-
-if TYPE_CHECKING:
-    from manen.typing import DriverOrElement, WebElement
+from manen.typing import DriverOrElement, WebElement
 
 METHODS_MAPPER = {
     "class_name": By.CLASS_NAME,
@@ -77,7 +75,7 @@ def parse_selector(selector: str) -> tuple[str, str]:
 def find(
     selector: None = None,
     *,
-    inside: "DriverOrElement | list['DriverOrElement'] | None",
+    inside: DriverOrElement | list[DriverOrElement] | None,
     many: bool = False,
     default: Any = NotImplemented,
     wait: int = 0,
@@ -88,50 +86,50 @@ def find(
 def find(
     selector: str | list[str],
     *,
-    inside: "DriverOrElement",
+    inside: DriverOrElement,
     many: Literal[False] = False,
     default: Any = NotImplemented,
     wait: int = 0,
-) -> "WebElement": ...
+) -> WebElement: ...
 
 
 @overload
 def find(
     selector: str | list[str],
     *,
-    inside: "DriverOrElement",
+    inside: DriverOrElement,
     many: Literal[True] = True,
     default: Any = NotImplemented,
     wait: int = 0,
-) -> list["WebElement"]: ...
+) -> list[WebElement]: ...
 
 
 @overload
 def find(
     selector: str | list[str],
     *,
-    inside: list["DriverOrElement"],
+    inside: list[DriverOrElement],
     many: Literal[False] = False,
     default: Any = NotImplemented,
     wait: int = 0,
-) -> list["WebElement"]: ...
+) -> list[WebElement]: ...
 
 
 @overload
 def find(
     selector: str | list[str],
     *,
-    inside: list["DriverOrElement"],
+    inside: list[DriverOrElement],
     many: Literal[True] = True,
     default: Any = NotImplemented,
     wait: int = 0,
-) -> list[list["WebElement"]]: ...
+) -> list[list[WebElement]]: ...
 
 
 def find(
     selector: str | list[str] | None = None,
     *,
-    inside: "DriverOrElement | list['DriverOrElement'] | None" = None,
+    inside: DriverOrElement | list["DriverOrElement"] | None = None,
     many: bool = False,
     default: Any = NotImplemented,
     wait: int = 0,
@@ -274,7 +272,9 @@ def find(
     if wait:
         try:
             found_elements = polling2.poll(
-                try_several_selectors, step=0.5, timeout=wait
+                try_several_selectors,
+                step=0.5,
+                timeout=wait,
             )
         except polling2.TimeoutException:
             found_elements = None

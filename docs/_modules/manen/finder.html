@@ -275,7 +275,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">overload</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">overload</span>
 
 <span class="kn">import</span> <span class="nn">polling2</span>
 <span class="kn">from</span> <span class="nn">selenium.common.exceptions</span> <span class="kn">import</span> <span class="n">NoSuchElementException</span>
@@ -283,9 +283,7 @@
 <span class="kn">from</span> <span class="nn">selenium.webdriver.remote.webdriver</span> <span class="kn">import</span> <span class="n">WebDriver</span>
 
 <span class="kn">from</span> <span class="nn">manen.exceptions</span> <span class="kn">import</span> <span class="n">ElementNotFound</span>
-
-<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">manen.typing</span> <span class="kn">import</span> <span class="n">DriverOrElement</span><span class="p">,</span> <span class="n">WebElement</span>
+<span class="kn">from</span> <span class="nn">manen.typing</span> <span class="kn">import</span> <span class="n">DriverOrElement</span><span class="p">,</span> <span class="n">WebElement</span>
 
 <span class="n">METHODS_MAPPER</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;class_name&quot;</span><span class="p">:</span> <span class="n">By</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">,</span>
@@ -348,7 +346,7 @@
 <span class="k">def</span> <span class="nf">find</span><span class="p">(</span>
     <span class="n">selector</span><span class="p">:</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">inside</span><span class="p">:</span> <span class="s2">&quot;DriverOrElement | list[&#39;DriverOrElement&#39;] | None&quot;</span><span class="p">,</span>
+    <span class="n">inside</span><span class="p">:</span> <span class="n">DriverOrElement</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">DriverOrElement</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">many</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">NotImplemented</span><span class="p">,</span>
     <span class="n">wait</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
@@ -359,44 +357,44 @@
 <span class="k">def</span> <span class="nf">find</span><span class="p">(</span>
     <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">inside</span><span class="p">:</span> <span class="s2">&quot;DriverOrElement&quot;</span><span class="p">,</span>
+    <span class="n">inside</span><span class="p">:</span> <span class="n">DriverOrElement</span><span class="p">,</span>
     <span class="n">many</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">NotImplemented</span><span class="p">,</span>
     <span class="n">wait</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;WebElement&quot;</span><span class="p">:</span> <span class="o">...</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WebElement</span><span class="p">:</span> <span class="o">...</span>
 
 
 <span class="nd">@overload</span>
 <span class="k">def</span> <span class="nf">find</span><span class="p">(</span>
     <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">inside</span><span class="p">:</span> <span class="s2">&quot;DriverOrElement&quot;</span><span class="p">,</span>
+    <span class="n">inside</span><span class="p">:</span> <span class="n">DriverOrElement</span><span class="p">,</span>
     <span class="n">many</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">NotImplemented</span><span class="p">,</span>
     <span class="n">wait</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="s2">&quot;WebElement&quot;</span><span class="p">]:</span> <span class="o">...</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">WebElement</span><span class="p">]:</span> <span class="o">...</span>
 
 
 <span class="nd">@overload</span>
 <span class="k">def</span> <span class="nf">find</span><span class="p">(</span>
     <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">inside</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="s2">&quot;DriverOrElement&quot;</span><span class="p">],</span>
+    <span class="n">inside</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">DriverOrElement</span><span class="p">],</span>
     <span class="n">many</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">NotImplemented</span><span class="p">,</span>
     <span class="n">wait</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="s2">&quot;WebElement&quot;</span><span class="p">]:</span> <span class="o">...</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">WebElement</span><span class="p">]:</span> <span class="o">...</span>
 
 
 <span class="nd">@overload</span>
 <span class="k">def</span> <span class="nf">find</span><span class="p">(</span>
     <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">inside</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="s2">&quot;DriverOrElement&quot;</span><span class="p">],</span>
+    <span class="n">inside</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">DriverOrElement</span><span class="p">],</span>
     <span class="n">many</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">NotImplemented</span><span class="p">,</span>
     <span class="n">wait</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="s2">&quot;WebElement&quot;</span><span class="p">]]:</span> <span class="o">...</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">WebElement</span><span class="p">]]:</span> <span class="o">...</span>
 
 
 <div class="viewcode-block" id="find">
@@ -404,7 +402,7 @@
 <span class="k">def</span> <span class="nf">find</span><span class="p">(</span>
     <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">inside</span><span class="p">:</span> <span class="s2">&quot;DriverOrElement | list[&#39;DriverOrElement&#39;] | None&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inside</span><span class="p">:</span> <span class="n">DriverOrElement</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="s2">&quot;DriverOrElement&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">many</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">NotImplemented</span><span class="p">,</span>
     <span class="n">wait</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
@@ -547,7 +545,9 @@
     <span class="k">if</span> <span class="n">wait</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">found_elements</span> <span class="o">=</span> <span class="n">polling2</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span>
-                <span class="n">try_several_selectors</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">wait</span>
+                <span class="n">try_several_selectors</span><span class="p">,</span>
+                <span class="n">step</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                <span class="n">timeout</span><span class="o">=</span><span class="n">wait</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="n">polling2</span><span class="o">.</span><span class="n">TimeoutException</span><span class="p">:</span>
             <span class="n">found_elements</span> <span class="o">=</span> <span class="kc">None</span>

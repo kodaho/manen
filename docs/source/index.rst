@@ -101,5 +101,5 @@ section :ref:`Why such package?`.
    ./installation.rst
    ./user_guide.rst
    ./manen/manen.rst
-   ./changelog.rst
    ./contributing.rst
+   ./changelog.rst

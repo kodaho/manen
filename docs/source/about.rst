@@ -39,9 +39,10 @@ Current status and roadmap
 --------------------------
 
 Manen is still in beta version, but it is already usable for some use cases. The solution Manen
-aims to provide is implemented, but some elements can be missing before being fully usable. Some
-improvements and features are already tracked (add more DOM elements into Manen, compatibility
-with other browser automation tools, etc.).
+aims to provide are implemented, but some elements can be missing before being fully usable. Some
+improvements and features are already on the way (implement more DOM elements, compatibility with
+other browser automation tools, etc.), all of them targeting the same objective: provide simple
+yet powerful tools for browser automation.
 
 If you are interested in the project, you can already use it and are more than welcome to provide
 any feedbacks! You can use `GitHub issues <https://github.com/kodaho/manen/issues/>`_ to describe

@@ -1,8 +1,8 @@
 Installation
 ============
 
-Regular installation with ``pip``
----------------------------------
+Installing with ``pip``
+-----------------------
 
 The package can be installed from the official Python package index using ``pip``.
 
@@ -13,21 +13,25 @@ The package can be installed from the official Python package index using ``pip`
 This command will install the `latest version <https://pypi.org/project/manen/>`_
 available on PyPI.
 
-Cloning the source code
------------------------
+Installing from the Git repository
+----------------------------------
 
-An alternative is to retrieve the source code from the `official repository
-<https://github.com/kodaho/manen>`_ by cloning it:
-
-.. code-block:: bash
-
-    $ git clone git@github.com:kodaho/manen.git
-
-The package can then be installed from the local folder:
+You can also install the package directly from the Git repository:
 
 .. code-block:: bash
 
-    $ pip install manen/
+    $ pip install git+https://github.com/kodaho/manen.git@main
 
-If you want to install the package for development purpose, you can check the
-:ref:`Contributing` page for further instructions.
+This command will install the package from the latest commit on the ``main`` branch.
+
+To install the package from a specific branch or tag (e.g. ``latest`` which is the latest version
+published on PyPI), you can use:
+
+.. code-block:: bash
+
+    $ pip install git+https://github.com/kodaho/manen.git@latest
+
+.. warning::
+
+    The ``main`` branch is a development branch and may contain unstable code. If you want to
+    install the package for development purposes, you can check the :ref:`Contributing` page.

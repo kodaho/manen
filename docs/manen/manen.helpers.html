@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="manen.browser" href="manen.browser.html" /><link rel="prev" title="manen.finder" href="manen.finder.html" />
+<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="manen.page_object_model" href="manen.page_object_model.html" /><link rel="prev" title="manen.finder" href="manen.finder.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.07.18 -->
         <title>manen.helpers - manen</title>
@@ -180,7 +180,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -207,31 +207,26 @@
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About the project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/dom_exploration.html">Easily explore the DOM with <code class="docutils literal notranslate"><span class="pre">find</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/browser.html">Supercharge Selenium’s <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/page_object_model.html">Page Object Model for operability</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Going deeper into manen</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="manen.exceptions.html">manen.exceptions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.exceptions.html#manen.exceptions.ElementNotFound"><code class="docutils literal notranslate"><span class="pre">ElementNotFound</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.exceptions.html#manen.exceptions.ManenException"><code class="docutils literal notranslate"><span class="pre">ManenException</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.finder.html">manen.finder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.finder.html#manen.finder.find"><code class="docutils literal notranslate"><span class="pre">find()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.finder.html#manen.finder.parse_selector"><code class="docutils literal notranslate"><span class="pre">parse_selector()</span></code></a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">manen.helpers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#manen.helpers.extract_integer"><code class="docutils literal notranslate"><span class="pre">extract_integer()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#manen.helpers.version"><code class="docutils literal notranslate"><span class="pre">version()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#manen.helpers.version_as_str"><code class="docutils literal notranslate"><span class="pre">version_as_str()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.browser.html">manen.browser</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.browser.html#manen.browser.BrowserMixin"><code class="docutils literal notranslate"><span class="pre">BrowserMixin</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.browser.html#manen.browser.ChromeBrowser"><code class="docutils literal notranslate"><span class="pre">ChromeBrowser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.browser.html#manen.browser.HeadlessMode"><code class="docutils literal notranslate"><span class="pre">HeadlessMode</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.browser.html#manen.browser.ScrollDirection"><code class="docutils literal notranslate"><span class="pre">ScrollDirection</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.page_object_model.html">manen.page_object_model</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="manen.html">Going deeper into Manen</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Going deeper into Manen</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="manen.browser.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.browser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="manen.exceptions.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.exceptions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="manen.finder.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.finder</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.helpers</span></code></a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="manen.page_object_model.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.page_object_model</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of manen.page_object_model</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.dom.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dom</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.element.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">element</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.webarea.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">webarea</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
 
 </div>
@@ -266,16 +261,14 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="manen-helpers">
-<span id="module-manen.helpers"></span><h1>manen.helpers<a class="headerlink" href="#manen-helpers" title="Link to this heading">¶</a></h1>
-<p>Helpers functions used by <a class="reference internal" href="manen.html#module-manen" title="manen"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen</span></code></a>.</p>
-</section>
+          <section id="module-manen.helpers">
+<span id="manen-helpers"></span><h1><a class="reference internal" href="#module-manen.helpers" title="manen.helpers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.helpers</span></code></a><a class="headerlink" href="#module-manen.helpers" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="manen.helpers.extract_integer">
 <span class="sig-prename descclassname"><span class="pre">manen.helpers.</span></span><span class="sig-name descname"><span class="pre">extract_integer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></span><a class="reference internal" href="../_modules/manen/helpers.html#extract_integer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.helpers.extract_integer" title="Link to this definition">¶</a></dt>
@@ -285,10 +278,10 @@
 <dd class="field-odd"><p><strong>string</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – text to process</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – exception raised if no integer were fonnd in the string.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – Raised if no integer is found in the string.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>integer extracted from the string</p>
+<dd class="field-odd"><p>Integer extracted from the string</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a></p>
@@ -309,7 +302,7 @@ The input will be validated with the regular expression
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>version_str</strong> – string to be converted to a tuple</p>
+<dd class="field-odd"><p><strong>version_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – string to be converted to a tuple</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – raised if the input doesn’t match the pattern</p>
@@ -318,7 +311,7 @@ The input will be validated with the regular expression
 <dd class="field-odd"><p>parsed version</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Tuple[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a>, Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a>], <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a>]</p>
+<dd class="field-even"><p>Version</p>
 </dd>
 </dl>
 </dd></dl>
@@ -326,16 +319,12 @@ The input will be validated with the regular expression
 <dl class="py function">
 <dt class="sig sig-object py" id="manen.helpers.version_as_str">
 <span class="sig-prename descclassname"><span class="pre">manen.helpers.</span></span><span class="sig-name descname"><span class="pre">version_as_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version_tuple</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/manen/helpers.html#version_as_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.helpers.version_as_str" title="Link to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>Format a version tuple as a string in the format:</dt><dd><p>{major}.{minor}.{build}.{patch}</p>
-</dd>
-</dl>
+<dd><p>Format a version tuple as a string in the format: {major}.{minor}.{build}.{patch}</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>version_tuple</strong> (<em>Version</em>) – version info as a tuple</p></li>
-<li><p><strong>limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Limit on the length of the tuple to format.
-Defaults to 4.</p></li>
+<li><p><strong>limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Limit on the length of the tuple to format. Defaults to 4.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -347,18 +336,19 @@ Defaults to 4.</p></li>
 </dl>
 </dd></dl>
 
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="manen.browser.html">
+          <a class="next-page" href="manen.page_object_model.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">manen.browser</div>
+                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.page_object_model</span></code></div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -369,7 +359,7 @@ Defaults to 4.</p></li>
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">manen.finder</div>
+                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.finder</span></code></div>
                 
               </div>
             </a>
@@ -398,8 +388,29 @@ Defaults to 4.</p></li>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.helpers</span></code></a><ul>
+<li><a class="reference internal" href="#manen.helpers.extract_integer"><code class="docutils literal notranslate"><span class="pre">extract_integer()</span></code></a></li>
+<li><a class="reference internal" href="#manen.helpers.version"><code class="docutils literal notranslate"><span class="pre">version()</span></code></a></li>
+<li><a class="reference internal" href="#manen.helpers.version_as_str"><code class="docutils literal notranslate"><span class="pre">version_as_str()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

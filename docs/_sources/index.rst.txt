@@ -3,17 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to manen's documentation!
+Welcome to Manen's documentation!
 ---------------------------------
-
-.. image:: https://img.shields.io/badge/python-%3E=3.6-informational?style=for-the-badge&logo=python
-   :alt: Python Version
-.. image:: https://img.shields.io/pypi/v/manen?logo=pypi&style=for-the-badge
-   :alt: Package Version
-   :target: https://pypi.org/project/manen
-.. image:: https://img.shields.io/badge/status-in%20development-yellow?style=for-the-badge
-   :alt: Status
-
 
 :py:mod:`manen` is a package built to extend Selenium user experience.
 Among the core features, you can find:
@@ -25,9 +16,9 @@ Among the core features, you can find:
 
 This package allows you to write more concise, flexible and powerful code compared to
 what you would do by using only Selenium. Here is a comparison of the same code written
-with and without ``manen``:
+with and without Manen:
 
-.. tab:: With manen
+.. tab:: With Manen
 
    .. code-block:: ipython
 
@@ -47,7 +38,7 @@ with and without ``manen``:
             tags: Annotated[list[str], dom.CSS("span.tag"), dom.Default([])]
             updated_at: Annotated[datetime, dom.CSS("span.updated_at")]
 
-         articles: Annotated[list[Article], dom.css('div.article'), dom.Wait(3)]
+         articles: Annotated[list[Article], dom.CSS('div.article'), dom.Wait(3)]
 
 
       driver = WebDriver()
@@ -64,7 +55,7 @@ with and without ``manen``:
       # }
 
 
-.. tab:: Without manen
+.. tab:: Without Manen
 
    .. code-block:: ipython
 
@@ -96,27 +87,19 @@ with and without ``manen``:
       # }
 
 
-Besides being more concise, the version using ``manen`` is also more verbose, meaning
+Besides being more concise, the version using Manen is also more verbose, meaning
 that it can ease the comprehension of your source code.
 
-You can find a deeper explanation that motivated the development of ``manen`` in the
+You can find a deeper explanation that motivated the development of Manen in the
 section :ref:`Why such package?`.
 
-Table of contents
-=================
+
 .. toctree::
-   :maxdepth: 3
+   :hidden:
 
    ./about.rst
    ./installation.rst
    ./user_guide.rst
    ./manen/manen.rst
-   ./changelog.rst
    ./contributing.rst
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
+   ./changelog.rst

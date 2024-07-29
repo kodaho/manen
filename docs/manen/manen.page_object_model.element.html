@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="manen.finder" href="manen.finder.html" /><link rel="prev" title="manen.browser" href="manen.browser.html" />
+<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="webarea" href="manen.page_object_model.webarea.html" /><link rel="prev" title="dom" href="manen.page_object_model.dom.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.07.18 -->
-        <title>manen.exceptions - manen</title>
+        <title>element - manen</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=613ab9ff" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -214,12 +214,12 @@
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="manen.html">Going deeper into Manen</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Going deeper into Manen</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="manen.browser.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.browser</span></code></a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.exceptions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="manen.exceptions.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.exceptions</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="manen.finder.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.finder</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="manen.helpers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.helpers</span></code></a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="manen.page_object_model.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.page_object_model</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of manen.page_object_model</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="manen.page_object_model.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.page_object_model</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of manen.page_object_model</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.dom.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dom</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.element.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">element</span></code></a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">element</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.webarea.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">webarea</span></code></a></li>
 </ul>
 </li>
@@ -247,7 +247,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="../_sources/manen/manen.exceptions.rst.txt" title="View this page">
+  <a class="muted-link" href="../_sources/manen/manen.page_object_model.element.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -267,19 +267,42 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="module-manen.exceptions">
-<span id="manen-exceptions"></span><h1><a class="reference internal" href="#module-manen.exceptions" title="manen.exceptions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.exceptions</span></code></a><a class="headerlink" href="#module-manen.exceptions" title="Link to this heading">¶</a></h1>
-<dl class="py exception">
-<dt class="sig sig-object py" id="manen.exceptions.ElementNotFound">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.exceptions.</span></span><span class="sig-name descname"><span class="pre">ElementNotFound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">driver</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/exceptions.html#ElementNotFound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.exceptions.ElementNotFound" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#manen.exceptions.ManenException" title="manen.exceptions.ManenException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ManenException</span></code></a></p>
-<p>Can not find inside a specific container an element matching the selectors.</p>
+          <section id="module-manen.page_object_model.element">
+<span id="element"></span><h1><a class="reference internal" href="#module-manen.page_object_model.element" title="manen.page_object_model.element"><code class="xref py py-mod docutils literal notranslate"><span class="pre">element</span></code></a><a class="headerlink" href="#module-manen.page_object_model.element" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="manen.page_object_model.element.Element">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.element.</span></span><span class="sig-name descname"><span class="pre">Element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="manen.page_object_model.dom.html#manen.page_object_model.dom.Config" title="manen.page_object_model.dom.Config"><span class="pre">Config</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/element.html#Element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.element.Element" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#manen.page_object_model.element.ImmutableDomComponent" title="manen.page_object_model.element.ImmutableDomComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImmutableDomComponent</span></code></a></p>
 </dd></dl>
 
-<dl class="py exception">
-<dt class="sig sig-object py" id="manen.exceptions.ManenException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.exceptions.</span></span><span class="sig-name descname"><span class="pre">ManenException</span></span><a class="reference internal" href="../_modules/manen/exceptions.html#ManenException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.exceptions.ManenException" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="manen.page_object_model.element.Elements">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.element.</span></span><span class="sig-name descname"><span class="pre">Elements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="manen.page_object_model.dom.html#manen.page_object_model.dom.Config" title="manen.page_object_model.dom.Config"><span class="pre">Config</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/element.html#Elements"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.element.Elements" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#manen.page_object_model.element.ImmutableDomComponent" title="manen.page_object_model.element.ImmutableDomComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImmutableDomComponent</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="manen.page_object_model.element.ImmutableDomComponent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.element.</span></span><span class="sig-name descname"><span class="pre">ImmutableDomComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="manen.page_object_model.dom.html#manen.page_object_model.dom.Config" title="manen.page_object_model.dom.Config"><span class="pre">Config</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/element.html#ImmutableDomComponent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.element.ImmutableDomComponent" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="manen.page_object_model.element.InputElement">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.element.</span></span><span class="sig-name descname"><span class="pre">InputElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="manen.page_object_model.dom.html#manen.page_object_model.dom.Config" title="manen.page_object_model.dom.Config"><span class="pre">Config</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/element.html#InputElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.element.InputElement" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="manen.page_object_model.element.Region">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.element.</span></span><span class="sig-name descname"><span class="pre">Region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="manen.page_object_model.dom.html#manen.page_object_model.dom.Config" title="manen.page_object_model.dom.Config"><span class="pre">Config</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/element.html#Region"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.element.Region" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#manen.page_object_model.element.ImmutableDomComponent" title="manen.page_object_model.element.ImmutableDomComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImmutableDomComponent</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="manen.page_object_model.element.Regions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.element.</span></span><span class="sig-name descname"><span class="pre">Regions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="manen.page_object_model.dom.html#manen.page_object_model.dom.Config" title="manen.page_object_model.dom.Config"><span class="pre">Config</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/element.html#Regions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.element.Regions" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#manen.page_object_model.element.ImmutableDomComponent" title="manen.page_object_model.element.ImmutableDomComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImmutableDomComponent</span></code></a></p>
 </dd></dl>
 
 </section>
@@ -289,23 +312,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="manen.finder.html">
+          <a class="next-page" href="manen.page_object_model.webarea.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.finder</span></code></div>
+                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">webarea</span></code></div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="manen.browser.html">
+          <a class="prev-page" href="manen.page_object_model.dom.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.browser</span></code></div>
+                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dom</span></code></div>
                 
               </div>
             </a>
@@ -346,9 +369,13 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.exceptions</span></code></a><ul>
-<li><a class="reference internal" href="#manen.exceptions.ElementNotFound"><code class="docutils literal notranslate"><span class="pre">ElementNotFound</span></code></a></li>
-<li><a class="reference internal" href="#manen.exceptions.ManenException"><code class="docutils literal notranslate"><span class="pre">ManenException</span></code></a></li>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">element</span></code></a><ul>
+<li><a class="reference internal" href="#manen.page_object_model.element.Element"><code class="docutils literal notranslate"><span class="pre">Element</span></code></a></li>
+<li><a class="reference internal" href="#manen.page_object_model.element.Elements"><code class="docutils literal notranslate"><span class="pre">Elements</span></code></a></li>
+<li><a class="reference internal" href="#manen.page_object_model.element.ImmutableDomComponent"><code class="docutils literal notranslate"><span class="pre">ImmutableDomComponent</span></code></a></li>
+<li><a class="reference internal" href="#manen.page_object_model.element.InputElement"><code class="docutils literal notranslate"><span class="pre">InputElement</span></code></a></li>
+<li><a class="reference internal" href="#manen.page_object_model.element.Region"><code class="docutils literal notranslate"><span class="pre">Region</span></code></a></li>
+<li><a class="reference internal" href="#manen.page_object_model.element.Regions"><code class="docutils literal notranslate"><span class="pre">Regions</span></code></a></li>
 </ul>
 </li>
 </ul>

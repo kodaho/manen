@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="manen.page_object_model" href="manen.page_object_model.html" /><link rel="prev" title="manen.helpers" href="manen.helpers.html" />
+<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="manen.exceptions" href="manen.exceptions.html" /><link rel="prev" title="Going deeper into Manen" href="manen.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.07.18 -->
         <title>manen.browser - manen</title>
@@ -180,7 +180,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -207,31 +207,26 @@
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About the project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../user_guide/browser.html">An enhanced WebDriver: manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user_guide/modelling_dom.html">Modelling DOM elements with Python class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/dom_exploration.html">Easily explore the DOM with <code class="docutils literal notranslate"><span class="pre">find</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/browser.html">Supercharge Selenium’s <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/page_object_model.html">Page Object Model for operability</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="manen.html">Going deeper into <code class="docutils literal notranslate"><span class="pre">manen</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Going deeper into manen</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="manen.exceptions.html">manen.exceptions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.exceptions.html#manen.exceptions.ElementNotFound"><code class="docutils literal notranslate"><span class="pre">ElementNotFound</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.exceptions.html#manen.exceptions.ManenException"><code class="docutils literal notranslate"><span class="pre">ManenException</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.finder.html">manen.finder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.finder.html#manen.finder.find"><code class="docutils literal notranslate"><span class="pre">find()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.finder.html#manen.finder.parse_selector"><code class="docutils literal notranslate"><span class="pre">parse_selector()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.helpers.html">manen.helpers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.helpers.html#manen.helpers.extract_integer"><code class="docutils literal notranslate"><span class="pre">extract_integer()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.helpers.html#manen.helpers.version"><code class="docutils literal notranslate"><span class="pre">version()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.helpers.html#manen.helpers.version_as_str"><code class="docutils literal notranslate"><span class="pre">version_as_str()</span></code></a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">manen.browser</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#manen.browser.BrowserMixin"><code class="docutils literal notranslate"><span class="pre">BrowserMixin</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#manen.browser.ChromeBrowser"><code class="docutils literal notranslate"><span class="pre">ChromeBrowser</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#manen.browser.HeadlessMode"><code class="docutils literal notranslate"><span class="pre">HeadlessMode</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#manen.browser.ScrollDirection"><code class="docutils literal notranslate"><span class="pre">ScrollDirection</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="manen.page_object_model.html">manen.page_object_model</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="manen.html">Going deeper into Manen</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Going deeper into Manen</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.browser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="manen.exceptions.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.exceptions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="manen.finder.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.finder</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="manen.helpers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.helpers</span></code></a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="manen.page_object_model.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.page_object_model</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of manen.page_object_model</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.dom.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dom</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.element.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">element</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.webarea.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">webarea</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
 
 </div>
@@ -266,22 +261,21 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="manen-browser">
-<span id="module-manen.browser"></span><h1>manen.browser<a class="headerlink" href="#manen-browser" title="Link to this heading">¶</a></h1>
-<p>Classes which inherits from <a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">selenium.webdriver.remote.webdriver.WebDriver</span></code></a>, and add
+          <section id="module-manen.browser">
+<span id="manen-browser"></span><h1><a class="reference internal" href="#module-manen.browser" title="manen.browser"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.browser</span></code></a><a class="headerlink" href="#module-manen.browser" title="Link to this heading">¶</a></h1>
+<p>Classes which inherits from <a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebDriver</span></code></a>, and add
 useful methods for driver interactions.</p>
-</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="manen.browser.BrowserMixin">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.browser.</span></span><span class="sig-name descname"><span class="pre">BrowserMixin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/browser.html#BrowserMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.BrowserMixin" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">WebDriverProtocol</span></code></p>
-<p>Mixin to enhance <a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">selenium.webdriver.remote.webdriver.WebDriver</span></code></a> with a set of
+<p>Mixin to enhance <a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebDriver</span></code></a> with a set of
 features intended to ease the way to work with a WebDriver instance.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="manen.browser.BrowserMixin.browser_version">
@@ -362,7 +356,7 @@ instance as scope for the search. Returns all elements by default.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="manen.browser.BrowserMixin.lookup">
 <span class="sig-name descname"><span class="pre">lookup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="../_modules/manen/browser.html#BrowserMixin.lookup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.browser.BrowserMixin.lookup" title="Link to this definition">¶</a></dt>
-<dd><p>Same as the method <a href="#id1"><span class="problematic" id="id2">:py:`~manen.browser.BrowserMixin.find`</span></a> with the difference that this
+<dd><p>Same as the method <a class="reference internal" href="#manen.browser.BrowserMixin.find" title="manen.browser.BrowserMixin.find"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find()</span></code></a> with the difference that this
 method never raises error. If the element is not found, it returns a default value
 (<code class="docutils literal notranslate"><span class="pre">None</span></code> by default).</p>
 <dl class="field-list simple">
@@ -465,29 +459,30 @@ scrolling by pressing the keys down or up. Defaults to False.</p></li>
 
 </dd></dl>
 
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="manen.page_object_model.html">
+          <a class="next-page" href="manen.exceptions.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">manen.page_object_model</div>
+                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.exceptions</span></code></div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="manen.helpers.html">
+          <a class="prev-page" href="manen.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">manen.helpers</div>
+                <div class="title">Going deeper into Manen</div>
                 
               </div>
             </a>
@@ -516,8 +511,53 @@ scrolling by pressing the keys down or up. Defaults to False.</p></li>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.browser</span></code></a><ul>
+<li><a class="reference internal" href="#manen.browser.BrowserMixin"><code class="docutils literal notranslate"><span class="pre">BrowserMixin</span></code></a><ul>
+<li><a class="reference internal" href="#manen.browser.BrowserMixin.browser_version"><code class="docutils literal notranslate"><span class="pre">BrowserMixin.browser_version</span></code></a></li>
+<li><a class="reference internal" href="#manen.browser.BrowserMixin.click_with_js"><code class="docutils literal notranslate"><span class="pre">BrowserMixin.click_with_js()</span></code></a></li>
+<li><a class="reference internal" href="#manen.browser.BrowserMixin.cookies"><code class="docutils literal notranslate"><span class="pre">BrowserMixin.cookies</span></code></a></li>
+<li><a class="reference internal" href="#manen.browser.BrowserMixin.current_platform"><code class="docutils literal notranslate"><span class="pre">BrowserMixin.current_platform</span></code></a></li>
+<li><a class="reference internal" href="#manen.browser.BrowserMixin.driver_version"><code class="docutils literal notranslate"><span class="pre">BrowserMixin.driver_version</span></code></a></li>
+<li><a class="reference internal" href="#manen.browser.BrowserMixin.find"><code class="docutils literal notranslate"><span class="pre">BrowserMixin.find()</span></code></a></li>
+<li><a class="reference internal" href="#manen.browser.BrowserMixin.highlight"><code class="docutils literal notranslate"><span class="pre">BrowserMixin.highlight()</span></code></a></li>
+<li><a class="reference internal" href="#manen.browser.BrowserMixin.is_browser_compatible_with_driver"><code class="docutils literal notranslate"><span class="pre">BrowserMixin.is_browser_compatible_with_driver</span></code></a></li>
+<li><a class="reference internal" href="#manen.browser.BrowserMixin.lookup"><code class="docutils literal notranslate"><span class="pre">BrowserMixin.lookup()</span></code></a></li>
+<li><a class="reference internal" href="#manen.browser.BrowserMixin.scroll"><code class="docutils literal notranslate"><span class="pre">BrowserMixin.scroll()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#manen.browser.ChromeBrowser"><code class="docutils literal notranslate"><span class="pre">ChromeBrowser</span></code></a><ul>
+<li><a class="reference internal" href="#manen.browser.ChromeBrowser.initialize"><code class="docutils literal notranslate"><span class="pre">ChromeBrowser.initialize()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#manen.browser.HeadlessMode"><code class="docutils literal notranslate"><span class="pre">HeadlessMode</span></code></a><ul>
+<li><a class="reference internal" href="#manen.browser.HeadlessMode.NEW"><code class="docutils literal notranslate"><span class="pre">HeadlessMode.NEW</span></code></a></li>
+<li><a class="reference internal" href="#manen.browser.HeadlessMode.OLD"><code class="docutils literal notranslate"><span class="pre">HeadlessMode.OLD</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#manen.browser.ScrollDirection"><code class="docutils literal notranslate"><span class="pre">ScrollDirection</span></code></a><ul>
+<li><a class="reference internal" href="#manen.browser.ScrollDirection.DOWN"><code class="docutils literal notranslate"><span class="pre">ScrollDirection.DOWN</span></code></a></li>
+<li><a class="reference internal" href="#manen.browser.ScrollDirection.UP"><code class="docutils literal notranslate"><span class="pre">ScrollDirection.UP</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

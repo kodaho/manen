@@ -1,10 +1,7 @@
-Going deeper into ``manen``
-===========================
+Going deeper into Manen
+=======================
 
 .. automodule:: manen
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 
 API Documentation
@@ -13,11 +10,11 @@ API Documentation
 Explore directly the code to discover all features proposed by :py:mod:`manen`.
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
    :titlesonly:
 
-   manen.exceptions
-   manen.finder
-   manen.helpers
-   manen.browser
-   manen.page_object_model
+   ./manen.browser.rst
+   ./manen.exceptions.rst
+   ./manen.finder.rst
+   ./manen.helpers.rst
+   ./manen.page_object_model.rst

@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to manen's documentation!
+Welcome to Manen's documentation!
 ---------------------------------
 
 :py:mod:`manen` is a package built to extend Selenium user experience.
@@ -16,9 +16,9 @@ Among the core features, you can find:
 
 This package allows you to write more concise, flexible and powerful code compared to
 what you would do by using only Selenium. Here is a comparison of the same code written
-with and without ``manen``:
+with and without Manen:
 
-.. tab:: With manen
+.. tab:: With Manen
 
    .. code-block:: ipython
 
@@ -55,7 +55,7 @@ with and without ``manen``:
       # }
 
 
-.. tab:: Without manen
+.. tab:: Without Manen
 
    .. code-block:: ipython
 
@@ -87,10 +87,10 @@ with and without ``manen``:
       # }
 
 
-Besides being more concise, the version using ``manen`` is also more verbose, meaning
+Besides being more concise, the version using Manen is also more verbose, meaning
 that it can ease the comprehension of your source code.
 
-You can find a deeper explanation that motivated the development of ``manen`` in the
+You can find a deeper explanation that motivated the development of Manen in the
 section :ref:`Why such package?`.
 
 

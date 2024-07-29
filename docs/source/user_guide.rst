@@ -1,12 +1,12 @@
 User Guide
 ==========
 
-This part of the section helps you to get the most of ``manen``. By following the different
+This part of the section helps you to get the most of Manen. By following the different
 guides, you will get familiar with main features of the package.
 
 The first user guide explains the advantages of using a ``Browser`` compared to a
 :py:class:`~selenium.webdriver.remote.webdriver.WebDriver`. The second one details how to
-implement the page object model using ``manen``.
+implement the page object model using Manen.
 
 .. admonition:: Associated notebooks
    :class: seealso

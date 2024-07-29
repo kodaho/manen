@@ -4,7 +4,7 @@ About the project
 Why such package?
 -----------------
 
-``manen`` has been designed to keep every project using Selenium simple and to
+Manen has been designed to keep every project using Selenium simple and to
 speed up the development of these projects. Working with :py:mod:`selenium` can quickly
 lead to non beautiful code because Selenium project often merge two functionalities:
 
@@ -17,7 +17,7 @@ lead to non beautiful code because Selenium project often merge two functionalit
    value displayed: the logic here will implement the different pipelines to solve your
    specific use cases.
 
-``manen`` helps for the first functionality, the browser interactions. Each
+Manen helps for the first functionality, the browser interactions. Each
 package have its own set of features:
 
 - :py:mod:`~manen.finder` defines a helper function allowing to easily find one or
@@ -31,15 +31,15 @@ package have its own set of features:
   :py:class:`~selenium.webdriver.remote.webdriver.WebDriver` with a
   :py:mod:`~manen.browser.BrowserMixin`.
 
-At the end, ``manen`` can be used for various use cases: testing, heavy process
-automation or scraping. Note that the goal behind ``manen`` is to have a
+At the end, Manen can be used for various use cases: testing, heavy process
+automation or scraping. Note that the goal behind Manen is to have a
 production-ready tool.
 
 
 Current status and roadmap
 --------------------------
 
-``manen`` is still under active development but has been used on some private projects
+Manen is still under active development but has been used on some private projects
 for quite a time.
 
 Feebacks are more than welcome so don't hesitate to open a Github issue if you

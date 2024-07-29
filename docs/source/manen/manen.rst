@@ -1,5 +1,5 @@
-Going deeper into ``manen``
-===========================
+Going deeper into Manen
+=======================
 
 .. automodule:: manen
 

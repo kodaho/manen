@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center"> 🌔  manen</h1>
+  <h1 align="center"> 🌔  Manen</h1>
 </p>
 
 ---
@@ -27,7 +27,7 @@
   <a href="https://github.com/kodaho/manen/issues">Issue tracking</a>
 </p>
 
-`manen` is a package built to enhance developer experience when using Selenium. Among the core
+Manen is a package built to enhance developer experience when using Selenium. Among the core
 features, you can find:
 
 - an implementation of the [Page Object Model](https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/)
@@ -67,7 +67,7 @@ Manen's features will be explored by a simple example: going to the PyPI page, s
 specific package and extracting some information from the search results.
 
 First thing to do is to initialize a WebDriver instance. It can be done using the usual way
-provided by Selenium, but an alternative is to use the `Browser` class provided by `manen`. Note
+provided by Selenium, but an alternative is to use the `Browser` class provided by Manen. Note
 that both ways are equivalent, but `Browser` provides some additional features, that won't be
 explored here.
 

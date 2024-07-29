@@ -4,13 +4,13 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 
 from manen.page_object_model import element
-from manen.page_object_model.dom import Config, Input
+from manen.page_object_model.dom import Config
 
 
 class WebArea:
-    def __init__(self, /, parent: WebDriver | WebElement):
-        self._parent = parent
-        self._driver = parent.parent if isinstance(parent, WebElement) else parent
+    def __init__(self, /, scope: WebDriver | WebElement):
+        self._scope = scope
+        self._driver = scope.parent if isinstance(scope, WebElement) else scope
         self._config: dict[str, Config] = {}
 
         for field in self.__annotations__:
@@ -19,7 +19,7 @@ class WebArea:
 
             if self.is_web_area(config.element_type):
                 fn = element.Regions if config.many else element.Region
-            elif config.element_type is Input:
+            elif config.is_input:
                 fn = element.InputElement
             else:
                 fn = element.Elements if config.many else element.Element
@@ -48,8 +48,8 @@ class WebArea:
 
 class Form(WebArea):
     def submit(self):
-        assert isinstance(self._parent, WebElement)
-        self._parent.submit()
+        assert isinstance(self._scope, WebElement)
+        self._scope.submit()
 
     @staticmethod
     def is_form(element_type):

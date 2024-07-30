@@ -3,11 +3,11 @@ Changelog
 
 .. |topic| raw:: html
 
-  <span style="border-bottom: 1px dashed grey;padding-bottom: 2px; font-size:85%; margin-right:59px">Topic</span> <span style="font-size:85%">
+  <span style="display: inline-block; width: 110px; font-size:85%; font-weight: 600;">Topic</span> <span style="font-size:85%">
 
 .. |released_on| raw:: html
 
-  <span style="border-bottom: 1px dashed grey;padding-bottom: 2px; font-size:85%; margin-right:8px">Release date</span> <span style="font-size:85%">
+  <span style="display: inline-block; width: 110px; font-size:85%; font-weight: 600;">Release date</span> <span style="font-size:85%">
 
 .. |end| raw:: html
 

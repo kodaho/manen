@@ -1,11 +1,15 @@
 Changelog
 =========
 
-.. |s| raw:: html
+.. |topic| raw:: html
 
-  ⇲ <span style="border-bottom: 1px dashed grey;padding-bottom: 2px; font-size:85%; margin-right:8px">Release date</span> <span style="font-size:90%">
+  <span style="border-bottom: 1px dashed grey;padding-bottom: 2px; font-size:85%; margin-right:59px">Topic</span> <span style="font-size:85%">
 
-.. |e| raw:: html
+.. |released_on| raw:: html
+
+  <span style="border-bottom: 1px dashed grey;padding-bottom: 2px; font-size:85%; margin-right:8px">Release date</span> <span style="font-size:85%">
+
+.. |end| raw:: html
 
   </span>
 
@@ -13,11 +17,11 @@ Changelog
 0.3.0
 -----
 
-|s| (unreleased) |e|
+|topic| Refacto & major changes |end|
 
+|released_on| 2022-03-06 |end|
 
-.. admonition:: **Major changes**
-  :class: warning
+.. warning::
 
   Even if it's a minor release, this version represents a major change for the project; the
   package has been mostly rewritten in order to implement page object model design pattern in a
@@ -55,9 +59,9 @@ Removed
 0.2.0
 -----
 
-|s| 2022-02-19 |e|
+|topic| Rename some classes in :py:mod:`~manen.page_object_model` and improve CLI |end|
 
-**Rename some classes in** :py:mod:`~manen.page_object_model` **and improve CLI**
+|released_on| 2022-02-19 |end|
 
 Added
 ^^^^^
@@ -83,9 +87,9 @@ Fixed
 0.1.2
 -----
 
-|s| 2022-02-19 |e|
+|topic|  Fix bug in the download workflow of the CLI |end|
 
-**Fix bug in the download workflow of the CLI**
+|released_on| 2022-02-19 |end|
 
 Fixed
 ^^^^^
@@ -97,9 +101,9 @@ Fixed
 0.1.1
 -----
 
-|s| 2022-02-12 |e|
+|topic| Mainly documentation improvements |end|
 
-**Mainly documentation improvements**
+|released_on| 2022-02-12 |end|
 
 Changed
 ^^^^^^^
@@ -116,9 +120,9 @@ Changed
 0.1.0
 -----
 
-|s| 2022-01-31 |e|
+|topic| First release of the package |end|
 
-**First release of the package**
+|released_on| 2022-01-31 |end|
 
 Added
 ^^^^^
@@ -135,5 +139,5 @@ Added
   model <https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/>`_
   described in Selenium documentation. Thanks to that, you can describe and
   interact with the DOM structure through Python classes.
-- a :py:mod:`~manen.cli` is shipped with the initial release in order to download
+- A :py:mod:`~manen.cli` is shipped with the initial release in order to download
   drivers files.

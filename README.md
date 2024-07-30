@@ -165,8 +165,8 @@ print(page.results[0].model_dump())
 > [!TIP]
 > Other DOM elements are also implemented, such as `ImageSrc`, `Input`, `Checkbox`... Each one of
 > them is used to target a specific attribute from a DOM element and enable interaction with it,
-> in a flawless Pythonic way. Check the [documentation](https://kodaho.github.io/manen/) for the
-> full list of available elements.
+> in a flawless Pythonic way. Check the [documentation](https://kodaho.github.io/manen/user_guide/page_object_model.html#List-of-available-elements)
+> for the list of available elements.
 
 Let's finally close the Selenium WebDriver to avoid any remaining running applications once we
 exit the Python program.

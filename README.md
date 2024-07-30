@@ -20,11 +20,13 @@
 ---
 
 <p align="center">
-  <a href="https://pypi.org/project/manen">PyPI package</a>
+  <a href="https://pypi.org/project/manen">PyPI</a>
   ・
   <a href="https://kodaho.github.io/manen/">Documentation</a>
   ・
-  <a href="https://github.com/kodaho/manen/issues">Issue tracking</a>
+  <a href="https://kodaho.github.io/manen/changelog.html">Changelog</a>
+  ・
+  <a href="https://github.com/kodaho/manen/issues">Issue tracker</a>
 </p>
 
 Manen is a package built to enhance developer experience when using Selenium. Among the core
@@ -165,8 +167,8 @@ print(page.results[0].model_dump())
 > [!TIP]
 > Other DOM elements are also implemented, such as `ImageSrc`, `Input`, `Checkbox`... Each one of
 > them is used to target a specific attribute from a DOM element and enable interaction with it,
-> in a flawless Pythonic way. Check the [documentation](https://kodaho.github.io/manen/) for the
-> full list of available elements.
+> in a flawless Pythonic way. Check the [documentation](https://kodaho.github.io/manen/user_guide/page_object_model.html#List-of-available-elements)
+> for the list of available elements.
 
 Let's finally close the Selenium WebDriver to avoid any remaining running applications once we
 exit the Python program.

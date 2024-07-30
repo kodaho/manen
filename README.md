@@ -34,7 +34,7 @@ features, you can find:
 
 - an implementation of the [Page Object Model](https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/)
   design pattern
-- a class which improves the operability of a Selenium's Webdriver
+- a class which improves the operability of a Selenium's WebDriver
 - a function to easily find and isolate DOM elements inside a Selenium page
 
 This package aims to provide you the tools to write more concise, flexible and powerful code

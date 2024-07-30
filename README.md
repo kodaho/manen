@@ -20,11 +20,13 @@
 ---
 
 <p align="center">
-  <a href="https://pypi.org/project/manen">PyPI package</a>
+  <a href="https://pypi.org/project/manen">PyPI</a>
   ・
   <a href="https://kodaho.github.io/manen/">Documentation</a>
   ・
-  <a href="https://github.com/kodaho/manen/issues">Issue tracking</a>
+  <a href="https://kodaho.github.io/manen/changelog.html">Changelog</a>
+  ・
+  <a href="https://github.com/kodaho/manen/issues">Issue tracker</a>
 </p>
 
 Manen is a package built to enhance developer experience when using Selenium. Among the core

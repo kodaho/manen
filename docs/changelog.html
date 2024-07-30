@@ -272,10 +272,38 @@
 <section id="id1">
 <h2>0.3.0<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>⇲ <span style="border-bottom: 1px dashed grey;padding-bottom: 2px; font-size:85%; margin-right:8px">Release date</span> <span style="font-size:90%"> (unreleased) </span></p>
+<div class="warning admonition">
+<p class="admonition-title"><strong>Major changes</strong></p>
+<p>Even if it’s a minor release, this version represents a major change for the project; the
+package has been mostly rewritten in order to implement page object model design pattern in a
+more efficient way (using type annotation).</p>
+<p>Besides, some functionalities have been removed with a view to limit the number of features
+during the beta phase.</p>
+<p>All previous versions should be considered as deprecated.</p>
+</div>
 <section id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><a class="reference internal" href="manen/manen.page_object_model.html#module-manen.page_object_model" title="manen.page_object_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">page_object_model</span></code></a> has been entirely rewritten to use type annotation instead of <cite>..Element</cite> objects.</p></li>
+<li><p><a class="reference internal" href="manen/manen.page_object_model.html#module-manen.page_object_model" title="manen.page_object_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">page_object_model</span></code></a> has been entirely rewritten to use type annotation instead
+of <code class="docutils literal notranslate"><span class="pre">Element</span></code>. Note that some elements like select or radio button haven’t been implemented in
+this new version yet (but will be in the future).</p></li>
+<li><p>Most of the documentation pages have been rewritten and improved.</p></li>
+<li><p>Most modules have better typing annotations and documentation. Besides, the code has been
+improved to be more syntactically correct.</p></li>
+<li><p>Manen no longer has optional dependencies (they were in fact development dependencies).</p></li>
+<li><p>The minimal version of Python required is now 3.10.</p></li>
+<li><p>Internally, rye is now used a project manager, and the linting and formatting relies on ruff.</p></li>
+</ul>
+</section>
+<section id="removed">
+<h3>Removed<a class="headerlink" href="#removed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>The module <code class="docutils literal notranslate"><span class="pre">manen.resource</span></code> and everything related (like the CLI) have been removed. Indeed,
+the official Selenium manager provides the same functionalities, and is available in recent
+versions of Selenium.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">manen.browser.BraveBrowser</span></code> has been removed because it had a dependency on the module
+<code class="docutils literal notranslate"><span class="pre">manen.resource</span></code>. Besides, it was considered as not enough tested internally to make it
+available publicly.</p></li>
 </ul>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -430,6 +458,7 @@ drivers files.</p></li>
 <li><a class="reference internal" href="#">Changelog</a><ul>
 <li><a class="reference internal" href="#id1">0.3.0</a><ul>
 <li><a class="reference internal" href="#changed">Changed</a></li>
+<li><a class="reference internal" href="#removed">Removed</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#id2">0.2.0</a><ul>

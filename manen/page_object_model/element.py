@@ -7,6 +7,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from manen.finder import find
 from manen.helpers import extract_integer
 from manen.page_object_model import dom as dom
+from manen.page_object_model.config import Config
 
 if TYPE_CHECKING:
     from manen.page_object_model.webarea import WebArea
@@ -29,7 +30,7 @@ GET_TRANSFORMERS: TTransformers = {
 
 
 class ImmutableDomComponent:
-    def __init__(self, config: dom.Config):
+    def __init__(self, config: Config):
         self.config = config
 
     def __set__(self, webarea: "WebArea", value):
@@ -70,7 +71,7 @@ class Elements(ImmutableDomComponent):
 
 
 class InputElement:
-    def __init__(self, config: dom.Config):
+    def __init__(self, config: Config):
         if config.many:
             raise ValueError("Cannot use InputElement with many=True")
         self.config = config

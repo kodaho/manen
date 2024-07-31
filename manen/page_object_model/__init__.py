@@ -26,26 +26,26 @@ classes in an external file called ``pypi_pom.py``.
 
     class HomePage(Page):
         class SearchForm(Form):
-            query: Annotated[dom.Input, dom.CSS("input[name='q']")]
+            query: Annotated[dom.Input, CSS("input[name='q']")]
 
-        search: Annotated[SearchForm, dom.CSS("form.search-form")]
+        search: Annotated[SearchForm, CSS("form.search-form")]
 
 
     class SearchResultPage(Page):
         class Result(WebArea):
-            name: Annotated[str, dom.CSS("h3 span.package-snippet__name")]
-            version: Annotated[str, dom.CSS("h3 span.package-snippet__version")]
-            link: Annotated[dom.HRef, dom.CSS("a.package-snippet")]
-            description: Annotated[str, dom.CSS("p.package-snippet__description")]
-            release_date: Annotated[datetime, dom.CSS("span.package-snippet__created")]
+            name: Annotated[str, CSS("h3 span.package-snippet__name")]
+            version: Annotated[str, CSS("h3 span.package-snippet__version")]
+            link: Annotated[dom.HRef, CSS("a.package-snippet")]
+            description: Annotated[str, CSS("p.package-snippet__description")]
+            release_date: Annotated[datetime, CSS("span.package-snippet__created")]
 
         nb_results: Annotated[
             int,
-            dom.XPath("//*[@id='content']//form/div[1]/div[1]/p/strong"),
+            XPath("//*[@id='content']//form/div[1]/div[1]/p/strong"),
         ]
         results: Annotated[
             list[Result],
-            dom.CSS("ul[aria-label='Résultats de recherche'] li"),
+            CSS("ul[aria-label='Résultats de recherche'] li"),
         ]
 
 

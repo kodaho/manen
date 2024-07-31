@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 
 from manen.page_object_model import element
-from manen.page_object_model.dom import Config
+from manen.page_object_model.config import Config
 
 
 class WebArea:

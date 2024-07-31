@@ -676,7 +676,7 @@ auto-selenium (v1.0.1) has been released on 2021-11-07
         <span class="n">Wait</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
     <span class="p">]</span>
 
-    <span class="n">dont_exist</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s1">&#39;i-dont-exist&#39;</span><span class="p">),</span> <span class="n">Default</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+    <span class="n">dont_exist</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s1">&#39;i-dont-exist&#39;</span><span class="p">),</span> <span class="n">Default</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
 
 <span class="n">page</span> <span class="o">=</span> <span class="n">SearchResultPage</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
 </pre></div>
@@ -690,6 +690,7 @@ auto-selenium (v1.0.1) has been released on 2021-11-07
 </pre></div>
 </div>
 </div>
+<p>Note that when using a default value, the type specified in the annotation should be coherent with the default value, with the restriction that only not-None type is allowed. For example, you can’t have something like <code class="docutils literal notranslate"><span class="pre">Annotated[int</span> <span class="pre">|</span> <span class="pre">str,</span> <span class="pre">CSS('i-dont-exist'),</span> <span class="pre">Default('not</span> <span class="pre">here')]</span></code>.</p>
 <hr class="docutils" />
 <p>You are now familiar with the page object model implementation of Manen! Don’t hesitate to <a class="reference external" href="https://github.com/kodaho/manen/issues">open an issue</a> if you have any remarks, concerns, or feature request!</p>
 <div class="nbinput nblast docutils container">
@@ -780,7 +781,7 @@ auto-selenium (v1.0.1) has been released on 2021-11-07
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=ae9958b4"></script>
+</div><script src="../_static/documentation_options.js?v=07d92cd2"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>

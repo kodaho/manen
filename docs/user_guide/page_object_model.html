@@ -219,6 +219,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manen/manen.finder.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.finder</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manen/manen.helpers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.helpers</span></code></a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../manen/manen.page_object_model.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.page_object_model</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of manen.page_object_model</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.dom.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dom</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.element.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">element</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.webarea.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">webarea</span></code></a></li>
@@ -344,24 +345,26 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span>
 
-<span class="kn">from</span> <span class="nn">manen.page_object_model.webarea</span> <span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">Page</span><span class="p">,</span> <span class="n">WebArea</span>
 <span class="kn">from</span> <span class="nn">manen.page_object_model</span> <span class="kn">import</span> <span class="n">dom</span>
+<span class="kn">from</span> <span class="nn">manen.page_object_model.config</span> <span class="kn">import</span> <span class="n">CSS</span><span class="p">,</span> <span class="n">XPath</span>
+<span class="kn">from</span> <span class="nn">manen.page_object_model.webarea</span> <span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">Page</span><span class="p">,</span> <span class="n">WebArea</span>
+
 
 <span class="k">class</span> <span class="nc">NavigationBar</span><span class="p">(</span><span class="n">WebArea</span><span class="p">):</span>
     <span class="k">class</span> <span class="nc">NavigationMenuItem</span><span class="p">(</span><span class="n">WebArea</span><span class="p">):</span>
-        <span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;a.horizontal-menu__link&quot;</span><span class="p">)]</span>
-        <span class="n">link</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">dom</span><span class="o">.</span><span class="n">HRef</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;a.horizontal-menu__link&quot;</span><span class="p">)]</span>
+        <span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;a.horizontal-menu__link&quot;</span><span class="p">)]</span>
+        <span class="n">link</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">dom</span><span class="o">.</span><span class="n">HRef</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;a.horizontal-menu__link&quot;</span><span class="p">)]</span>
 
-    <span class="n">logo</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">dom</span><span class="o">.</span><span class="n">ImageSrc</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;a.site-header__logo img&quot;</span><span class="p">)]</span>
-    <span class="n">items</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">NavigationMenuItem</span><span class="p">],</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;ul li.horizontal-menu__item&quot;</span><span class="p">)]</span>
+    <span class="n">logo</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">dom</span><span class="o">.</span><span class="n">ImageSrc</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;a.site-header__logo img&quot;</span><span class="p">)]</span>
+    <span class="n">items</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">NavigationMenuItem</span><span class="p">],</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;ul li.horizontal-menu__item&quot;</span><span class="p">)]</span>
 
 
 <span class="k">class</span> <span class="nc">PyPIHomePage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
     <span class="k">class</span> <span class="nc">SearchForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
-        <span class="n">query</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">dom</span><span class="o">.</span><span class="n">Input</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;input[name=&#39;q&#39;]&quot;</span><span class="p">)]</span>
+        <span class="n">query</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">dom</span><span class="o">.</span><span class="n">Input</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;input[name=&#39;q&#39;]&quot;</span><span class="p">)]</span>
 
-    <span class="n">navbar</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">NavigationBar</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;header.site-header&quot;</span><span class="p">)]</span>
-    <span class="n">search</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">SearchForm</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;form.search-form&quot;</span><span class="p">)]</span>
+    <span class="n">navbar</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">NavigationBar</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;header.site-header&quot;</span><span class="p">)]</span>
+    <span class="n">search</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">SearchForm</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;form.search-form&quot;</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -486,11 +489,11 @@ Current URL: https://pypi.org/search/?q=selenium
 
 <span class="k">class</span> <span class="nc">SearchResultPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
     <span class="k">class</span> <span class="nc">Result</span><span class="p">(</span><span class="n">WebArea</span><span class="p">):</span>
-        <span class="n">name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;h3 span.package-snippet__name&quot;</span><span class="p">)]</span>
-        <span class="n">version</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;h3 span.package-snippet__version&quot;</span><span class="p">)]</span>
-        <span class="n">link</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">dom</span><span class="o">.</span><span class="n">HRef</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;a.package-snippet&quot;</span><span class="p">)]</span>
-        <span class="n">description</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;p.package-snippet__description&quot;</span><span class="p">)]</span>
-        <span class="n">release_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;span.package-snippet__created&quot;</span><span class="p">)]</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;h3 span.package-snippet__name&quot;</span><span class="p">)]</span>
+        <span class="n">version</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;h3 span.package-snippet__version&quot;</span><span class="p">)]</span>
+        <span class="n">link</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">dom</span><span class="o">.</span><span class="n">HRef</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;a.package-snippet&quot;</span><span class="p">)]</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;p.package-snippet__description&quot;</span><span class="p">)]</span>
+        <span class="n">release_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;span.package-snippet__created&quot;</span><span class="p">)]</span>
 
         <span class="nd">@property</span>
         <span class="k">def</span> <span class="nf">is_recent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -502,15 +505,15 @@ Current URL: https://pypi.org/search/?q=selenium
                 <span class="n">summary</span> <span class="o">+=</span> <span class="s2">&quot;, less than 180 days ago&quot;</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
 
-    <span class="n">navbar</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">NavigationBar</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;header.site-header&quot;</span><span class="p">)]</span>
+    <span class="n">navbar</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">NavigationBar</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;header.site-header&quot;</span><span class="p">)]</span>
 
     <span class="n">nb_results</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">int</span><span class="p">,</span>
-        <span class="n">dom</span><span class="o">.</span><span class="n">XPath</span><span class="p">(</span><span class="s2">&quot;//*[@id=&#39;content&#39;]//form/div[1]/div[1]/p/strong&quot;</span><span class="p">),</span>
+        <span class="n">XPath</span><span class="p">(</span><span class="s2">&quot;//*[@id=&#39;content&#39;]//form/div[1]/div[1]/p/strong&quot;</span><span class="p">),</span>
     <span class="p">]</span>
     <span class="n">results</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">list</span><span class="p">[</span><span class="n">Result</span><span class="p">],</span>
-        <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;ul[aria-label=&#39;Search results&#39;] li&quot;</span><span class="p">),</span>
+        <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;ul[aria-label=&#39;Search results&#39;] li&quot;</span><span class="p">),</span>
     <span class="p">]</span>
 </pre></div>
 </div>
@@ -664,14 +667,16 @@ auto-selenium (v1.0.1) has been released on 2021-11-07
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SearchResultPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manen.page_object_model.config</span> <span class="kn">import</span> <span class="n">Default</span><span class="p">,</span> <span class="n">Wait</span>
+
+<span class="k">class</span> <span class="nc">SearchResultPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
     <span class="n">nb_results</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">int</span><span class="p">,</span>
-        <span class="n">dom</span><span class="o">.</span><span class="n">XPath</span><span class="p">(</span><span class="s2">&quot;//*[@id=&#39;content&#39;]//form/div[1]/div[1]/p/strong&quot;</span><span class="p">),</span>
-        <span class="n">dom</span><span class="o">.</span><span class="n">Wait</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+        <span class="n">XPath</span><span class="p">(</span><span class="s2">&quot;//*[@id=&#39;content&#39;]//form/div[1]/div[1]/p/strong&quot;</span><span class="p">),</span>
+        <span class="n">Wait</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
     <span class="p">]</span>
 
-    <span class="n">dont_exist</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="s1">&#39;i-dont-exist&#39;</span><span class="p">),</span> <span class="n">dom</span><span class="o">.</span><span class="n">Default</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+    <span class="n">dont_exist</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s1">&#39;i-dont-exist&#39;</span><span class="p">),</span> <span class="n">Default</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
 
 <span class="n">page</span> <span class="o">=</span> <span class="n">SearchResultPage</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
 </pre></div>
@@ -775,7 +780,7 @@ auto-selenium (v1.0.1) has been released on 2021-11-07
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=46ba1904"></script>
+</div><script src="../_static/documentation_options.js?v=ae9958b4"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>

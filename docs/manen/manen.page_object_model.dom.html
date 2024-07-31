@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="element" href="manen.page_object_model.element.html" /><link rel="prev" title="manen.page_object_model" href="manen.page_object_model.html" />
+<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="element" href="manen.page_object_model.element.html" /><link rel="prev" title="config" href="manen.page_object_model.config.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.07.18 -->
         <title>dom - manen</title>
@@ -218,6 +218,7 @@
 <li class="toctree-l2"><a class="reference internal" href="manen.finder.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.finder</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="manen.helpers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.helpers</span></code></a></li>
 <li class="toctree-l2 current has-children"><a class="reference internal" href="manen.page_object_model.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.page_object_model</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of manen.page_object_model</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dom</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.element.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">element</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.webarea.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">webarea</span></code></a></li>
@@ -270,79 +271,6 @@
           <section id="module-manen.page_object_model.dom">
 <span id="dom"></span><h1><a class="reference internal" href="#module-manen.page_object_model.dom" title="manen.page_object_model.dom"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dom</span></code></a><a class="headerlink" href="#module-manen.page_object_model.dom" title="Link to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.CSS">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.dom.</span></span><span class="sig-name descname"><span class="pre">CSS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/dom.html#CSS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.dom.CSS" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.CSS.selector">
-<span class="sig-name descname"><span class="pre">selector</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#manen.page_object_model.dom.CSS.selector" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Config">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.dom.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.12)"><span class="pre">type</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">selectors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NotImplemented</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">many</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/dom.html#Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.dom.Config" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Config.default">
-<span class="sig-name descname"><span class="pre">default</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">NotImplemented</span></em><a class="headerlink" href="#manen.page_object_model.dom.Config.default" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Config.element_type">
-<span class="sig-name descname"><span class="pre">element_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.12)"><span class="pre">type</span></a></em><a class="headerlink" href="#manen.page_object_model.dom.Config.element_type" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Config.from_annotation_item">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_annotation_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/dom.html#Config.from_annotation_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.dom.Config.from_annotation_item" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Config.is_input">
-<span class="sig-name descname"><span class="pre">is_input</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#manen.page_object_model.dom.Config.is_input" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Config.many">
-<span class="sig-name descname"><span class="pre">many</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#manen.page_object_model.dom.Config.many" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Config.merge">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configs</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/dom.html#Config.merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.dom.Config.merge" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Config.name">
-<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#manen.page_object_model.dom.Config.name" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Config.selectors">
-<span class="sig-name descname"><span class="pre">selectors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#manen.page_object_model.dom.Config.selectors" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Config.wait">
-<span class="sig-name descname"><span class="pre">wait</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#manen.page_object_model.dom.Config.wait" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Default">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.dom.</span></span><span class="sig-name descname"><span class="pre">Default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/dom.html#Default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.dom.Default" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Default.value">
-<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a></em><a class="headerlink" href="#manen.page_object_model.dom.Default.value" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="manen.page_object_model.dom.Flag">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.dom.</span></span><span class="sig-name descname"><span class="pre">Flag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/dom.html#Flag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.dom.Flag" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
@@ -350,50 +278,6 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="manen.page_object_model.dom.Flag.INPUT">
 <span class="sig-name descname"><span class="pre">INPUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'INPUT'</span></em><a class="headerlink" href="#manen.page_object_model.dom.Flag.INPUT" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.LinkText">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.dom.</span></span><span class="sig-name descname"><span class="pre">LinkText</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/dom.html#LinkText"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.dom.LinkText" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.LinkText.selector">
-<span class="sig-name descname"><span class="pre">selector</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#manen.page_object_model.dom.LinkText.selector" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.PartialLinkText">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.dom.</span></span><span class="sig-name descname"><span class="pre">PartialLinkText</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/dom.html#PartialLinkText"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.dom.PartialLinkText" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.PartialLinkText.selector">
-<span class="sig-name descname"><span class="pre">selector</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#manen.page_object_model.dom.PartialLinkText.selector" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Wait">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.dom.</span></span><span class="sig-name descname"><span class="pre">Wait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/dom.html#Wait"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.dom.Wait" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.Wait.seconds">
-<span class="sig-name descname"><span class="pre">seconds</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#manen.page_object_model.dom.Wait.seconds" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.XPath">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.dom.</span></span><span class="sig-name descname"><span class="pre">XPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/dom.html#XPath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.dom.XPath" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="manen.page_object_model.dom.XPath.selector">
-<span class="sig-name descname"><span class="pre">selector</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#manen.page_object_model.dom.XPath.selector" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -414,14 +298,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="manen.page_object_model.html">
+          <a class="prev-page" href="manen.page_object_model.config.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.page_object_model</span></code></div>
+                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></div>
                 
               </div>
             </a>
@@ -463,44 +347,8 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dom</span></code></a><ul>
-<li><a class="reference internal" href="#manen.page_object_model.dom.CSS"><code class="docutils literal notranslate"><span class="pre">CSS</span></code></a><ul>
-<li><a class="reference internal" href="#manen.page_object_model.dom.CSS.selector"><code class="docutils literal notranslate"><span class="pre">CSS.selector</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Config"><code class="docutils literal notranslate"><span class="pre">Config</span></code></a><ul>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Config.default"><code class="docutils literal notranslate"><span class="pre">Config.default</span></code></a></li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Config.element_type"><code class="docutils literal notranslate"><span class="pre">Config.element_type</span></code></a></li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Config.from_annotation_item"><code class="docutils literal notranslate"><span class="pre">Config.from_annotation_item()</span></code></a></li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Config.is_input"><code class="docutils literal notranslate"><span class="pre">Config.is_input</span></code></a></li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Config.many"><code class="docutils literal notranslate"><span class="pre">Config.many</span></code></a></li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Config.merge"><code class="docutils literal notranslate"><span class="pre">Config.merge()</span></code></a></li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Config.name"><code class="docutils literal notranslate"><span class="pre">Config.name</span></code></a></li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Config.selectors"><code class="docutils literal notranslate"><span class="pre">Config.selectors</span></code></a></li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Config.wait"><code class="docutils literal notranslate"><span class="pre">Config.wait</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Default"><code class="docutils literal notranslate"><span class="pre">Default</span></code></a><ul>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Default.value"><code class="docutils literal notranslate"><span class="pre">Default.value</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#manen.page_object_model.dom.Flag"><code class="docutils literal notranslate"><span class="pre">Flag</span></code></a><ul>
 <li><a class="reference internal" href="#manen.page_object_model.dom.Flag.INPUT"><code class="docutils literal notranslate"><span class="pre">Flag.INPUT</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.LinkText"><code class="docutils literal notranslate"><span class="pre">LinkText</span></code></a><ul>
-<li><a class="reference internal" href="#manen.page_object_model.dom.LinkText.selector"><code class="docutils literal notranslate"><span class="pre">LinkText.selector</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.PartialLinkText"><code class="docutils literal notranslate"><span class="pre">PartialLinkText</span></code></a><ul>
-<li><a class="reference internal" href="#manen.page_object_model.dom.PartialLinkText.selector"><code class="docutils literal notranslate"><span class="pre">PartialLinkText.selector</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Wait"><code class="docutils literal notranslate"><span class="pre">Wait</span></code></a><ul>
-<li><a class="reference internal" href="#manen.page_object_model.dom.Wait.seconds"><code class="docutils literal notranslate"><span class="pre">Wait.seconds</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#manen.page_object_model.dom.XPath"><code class="docutils literal notranslate"><span class="pre">XPath</span></code></a><ul>
-<li><a class="reference internal" href="#manen.page_object_model.dom.XPath.selector"><code class="docutils literal notranslate"><span class="pre">XPath.selector</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -514,7 +362,7 @@
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=46ba1904"></script>
+</div><script src="../_static/documentation_options.js?v=ae9958b4"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>

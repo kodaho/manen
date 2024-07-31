@@ -14,6 +14,7 @@
    :maxdepth: 1
    :titlesonly:
 
+   manen.page_object_model.config
    manen.page_object_model.dom
    manen.page_object_model.element
    manen.page_object_model.webarea

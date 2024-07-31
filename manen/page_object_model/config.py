@@ -1,7 +1,9 @@
 from dataclasses import dataclass
-from typing import Any, get_origin
+from types import NoneType, UnionType
+from typing import Any, get_args, get_origin
 
 from manen.page_object_model.dom import Flag
+from manen.page_object_model.exceptions import SelectorConfigError, TypeConfigError
 
 __all__ = ("CSS", "Default", "LinkText", "PartialLinkText", "Wait", "XPath")
 
@@ -85,8 +87,22 @@ class Config:
     def from_annotation_item(cls, field, annotation):
         origin = get_origin(type_ := annotation.__origin__)
         kwargs = {"name": field}
+
         if origin is list:
-            kwargs.update({"element_type": type_.__args__[0], "many": True})
+            kwargs.update({"element_type": get_args(type_)[0], "many": True})
+
+        elif origin is UnionType:
+            args = [arg for arg in get_args(type_) if arg is not NoneType]
+            if len(args) != 1:
+                raise TypeConfigError(field, args)
+            kwargs.update({"element_type": args[0], "many": False})
+
         else:
             kwargs.update({"element_type": type_, "many": False})
-        return cls.merge(annotation.__metadata__, **kwargs)
+
+        config = cls.merge(annotation.__metadata__, **kwargs)
+
+        if len(config.selectors) == 0:
+            raise SelectorConfigError(field)
+
+        return config

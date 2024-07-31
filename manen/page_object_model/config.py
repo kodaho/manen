@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from typing import Any, get_origin
+from types import UnionType
+from typing import Any, get_args, get_origin
 
 from manen.page_object_model.dom import Flag
 
@@ -86,7 +87,9 @@ class Config:
         origin = get_origin(type_ := annotation.__origin__)
         kwargs = {"name": field}
         if origin is list:
-            kwargs.update({"element_type": type_.__args__[0], "many": True})
+            kwargs.update({"element_type": get_args(type_)[0], "many": True})
+        elif origin is UnionType:
+            kwargs.update({"element_type": get_args(type_)[0], "many": False})
         else:
             kwargs.update({"element_type": type_, "many": False})
         return cls.merge(annotation.__metadata__, **kwargs)

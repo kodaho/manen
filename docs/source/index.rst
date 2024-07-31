@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Manen's documentation!
----------------------------------
+Welcome to Manen documentation!
+-------------------------------
 
 :py:mod:`manen` is a package built to extend Selenium user experience.
 Among the core features, you can find:

@@ -17,9 +17,9 @@ Changelog
 0.3.0
 -----
 
-|topic| Refacto & major changes |end|
+|topic| Page object model implementation revamp & other major changes |end|
 
-|released_on| 2022-03-06 |end|
+|released_on| (unreleased) |end|
 
 .. warning::
 

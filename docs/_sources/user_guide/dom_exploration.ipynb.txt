@@ -1,452 +1,452 @@
 {
- "cells": [
-  {
-   "cell_type": "markdown",
-   "id": "b6801fd3-4f26-49ce-bfa1-46d9d0990582",
-   "metadata": {},
-   "source": [
-    "# Easily explore the DOM with `find`"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "205189ed",
-   "metadata": {},
-   "source": [
-    "In Selenium, retrieving web elements is usually done with the methods `find_element` or `find_elements`. Even if these methods are great for most basic tasks, complex use cases are not properly handled by Selenium. For example, waiting for an element to appear in the DOM requires additional non trivial code. Handling all these complex use cases without code factorization can lead to a not maintainable project, with poor readability.\n",
-    "\n",
-    "The function `find` in `manen.finder` aims to help you handle these use cases. With a set of arguments, you can easily adapt the function to what you need: wait for an element, retrieve one or several elements, trying different selectors for the same element, etc.\n",
-    "\n",
-    "This guide will show you all you can do with `find` function.\n",
-    "\n",
-    "---\n",
-    "\n",
-    "First, we need to an instance of Selenium's WebDriver used for Chrome automation (but it could be any other browser)."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 1,
-   "id": "04a8f8d6",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "from selenium.webdriver.chrome.service import Service\n",
-    "from selenium.webdriver.chrome.webdriver import WebDriver\n",
-    "from selenium.webdriver.common.selenium_manager import SeleniumManager\n",
-    "\n",
-    "selenium_manager = SeleniumManager()\n",
-    "paths = selenium_manager.binary_paths([\"--browser\", \"chrome\"])\n",
-    "\n",
-    "service = Service(executable_path=paths[\"driver_path\"])\n",
-    "driver = WebDriver(service=service)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "0232d727",
-   "metadata": {},
-   "source": [
-    "We will use the search results for \"selenium\" in PyPI as playground."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 2,
-   "id": "8c16763e",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "driver.get(\"https://pypi.org/search/?q=selenium\")"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "cb6c24f2",
-   "metadata": {},
-   "source": [
-    "Let's import the function from `manen.finder`."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 3,
-   "id": "7f04de4b",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "from manen.finder import find"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "b466fa30",
-   "metadata": {},
-   "source": [
-    "The signature of the function is a good start to understand what you can do with it:\n",
-    "\n",
-    "```python\n",
-    "def find(\n",
-    "    selector: str | list[str] | None = None,\n",
-    "    *,\n",
-    "    inside: DriverOrElement | list[DriverOrElement] | None = None,\n",
-    "    many: bool = False,\n",
-    "    default: Any = NotImplemented,\n",
-    "    wait: int = 0,\n",
-    "):\n",
-    "    ...\n",
-    "```\n",
-    "\n",
-    "(knowing that `DriverOrElement` is a type alias for `Union[WebDriver, WebElement]`)\n",
-    "\n",
-    "## Finding one or several elements\n",
-    "\n",
-    "The first argument, and the most important one, is `selector`. With that you can specify the selection method and selector to be used to locate an element. The format for each selector is `{selection_method}:{selector}`, with `selection_method` being one of the following: `xpath`, `css`, `partial_link_text`, `link_text`, `name:`, `tag:`. If the selection method is not specified, it will be `xpath` if the selector starts with `./` or `/`, `css` otherwise.\n",
-    "\n",
-    "The second argument, `inside`, is used to specify the context in which the element should be found."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 4,
-   "id": "36aea210",
-   "metadata": {},
-   "outputs": [
+  "cells": [
     {
-     "data": {
-      "text/plain": [
-       "<selenium.webdriver.remote.webelement.WebElement (session=\"a37ebeec7abf4b3cf24be6c79e91cb7d\", element=\"f.30ADACDA37A16B3E8957AE3039372A63.d.9CE3BB95715AC5219032D59CA79A6887.e.1618\")>"
+      "cell_type": "markdown",
+      "id": "b6801fd3-4f26-49ce-bfa1-46d9d0990582",
+      "metadata": {},
+      "source": [
+        "# Easily explore the DOM with `find`"
       ]
-     },
-     "execution_count": 4,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "# Find the element with the information about the number of results\n",
-    "element = find(\"xpath://*[@id='content']//form/div[1]/div[1]/p\", inside=driver)\n",
-    "element"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "62194713",
-   "metadata": {},
-   "source": [
-    "Using only these 2 parameters is the equivalent of doing `driver.find_element(By.{selection_method}, {selector})`, so it returns a Selenium WebElement."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 5,
-   "id": "6d70f9dd",
-   "metadata": {},
-   "outputs": [
+    },
     {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "2,574 projects for \"selenium\"\n"
-     ]
-    }
-   ],
-   "source": [
-    "print(element.text)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "8b9ef7af",
-   "metadata": {},
-   "source": [
-    "If you want to use `find_elements` instead of `find_element`, you can set the `many` parameter to `True`."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 6,
-   "id": "84b8e02c",
-   "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/plain": [
-       "20"
+      "cell_type": "markdown",
+      "id": "205189ed",
+      "metadata": {},
+      "source": [
+        "In Selenium, retrieving web elements is usually done with the methods `find_element` or `find_elements`. Even if these methods are great for most basic tasks, complex use cases are not properly handled by Selenium. For example, waiting for an element to appear in the DOM requires additional non trivial code. Handling all these complex use cases without code factorization can lead to a not maintainable project, with poor readability.\n",
+        "\n",
+        "The function `find` in `manen.finder` aims to help you handle these use cases. With a set of arguments, you can easily adapt the function to what you need: wait for an element, retrieve one or several elements, trying different selectors for the same element, etc.\n",
+        "\n",
+        "This guide will show you all you can do with `find` function.\n",
+        "\n",
+        "---\n",
+        "\n",
+        "First, we need to an instance of Selenium WebDriver used for Chrome automation (but it could be any other browser)."
       ]
-     },
-     "execution_count": 6,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "results = find(\"ul[aria-label='Search results'] li\", inside=driver, many=True)\n",
-    "len(results)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "92288385",
-   "metadata": {},
-   "source": [
-    "By default, Manen will raise a `ElementNotFound` exception if the specified selectors match no elements in the area to inspect."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 7,
-   "id": "8c6aad35",
-   "metadata": {},
-   "outputs": [
+    },
     {
-     "ename": "ElementNotFound",
-     "evalue": "Unable to find an element matching the selectors:\n> css:i-dont-exist\nContext of the exception:\n- Title page: Search results · PyPI\n- URL: https://pypi.org/search/?q=selenium",
-     "output_type": "error",
-     "traceback": [
-      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
-      "\u001b[0;31mElementNotFound\u001b[0m                           Traceback (most recent call last)",
-      "Cell \u001b[0;32mIn[7], line 1\u001b[0m\n\u001b[0;32m----> 1\u001b[0m \u001b[43mfind\u001b[49m\u001b[43m(\u001b[49m\u001b[38;5;124;43m\"\u001b[39;49m\u001b[38;5;124;43mcss:i-dont-exist\u001b[39;49m\u001b[38;5;124;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43minside\u001b[49m\u001b[38;5;241;43m=\u001b[39;49m\u001b[43mdriver\u001b[49m\u001b[43m)\u001b[49m\n",
-      "File \u001b[0;32m~/Documents/Projects/kodaho/manen/manen/finder.py:288\u001b[0m, in \u001b[0;36mfind\u001b[0;34m(selector, inside, many, default, wait)\u001b[0m\n\u001b[1;32m    285\u001b[0m     \u001b[38;5;28;01mreturn\u001b[39;00m default\n\u001b[1;32m    287\u001b[0m driver \u001b[38;5;241m=\u001b[39m inside \u001b[38;5;28;01mif\u001b[39;00m \u001b[38;5;28misinstance\u001b[39m(inside, WebDriver) \u001b[38;5;28;01melse\u001b[39;00m inside\u001b[38;5;241m.\u001b[39mparent\n\u001b[0;32m--> 288\u001b[0m \u001b[38;5;28;01mraise\u001b[39;00m ElementNotFound(selectors\u001b[38;5;241m=\u001b[39mselectors, driver\u001b[38;5;241m=\u001b[39mdriver)\n",
-      "\u001b[0;31mElementNotFound\u001b[0m: Unable to find an element matching the selectors:\n> css:i-dont-exist\nContext of the exception:\n- Title page: Search results · PyPI\n- URL: https://pypi.org/search/?q=selenium"
-     ]
-    }
-   ],
-   "source": [
-    "find(\"css:i-dont-exist\", inside=driver)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "8beb496b",
-   "metadata": {},
-   "source": [
-    "To avoid raising an error, you can specify a default value to be returned if any element is found; this is done with the `default` parameter."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 8,
-   "id": "0caf56a2",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "find(\"i-dont-exist\", inside=driver, default=None)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "2fa5eeb4",
-   "metadata": {},
-   "source": [
-    "## Attempting to locate an element with different selectors\n",
-    "\n",
-    "Another use case supported by the function is trying several different selectors to locate an element. It will try all the selectors by order and return an element as soon as a selector hits a result."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 9,
-   "id": "60497456",
-   "metadata": {},
-   "outputs": [
+      "cell_type": "code",
+      "execution_count": 1,
+      "id": "04a8f8d6",
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "from selenium.webdriver.chrome.service import Service\n",
+        "from selenium.webdriver.chrome.webdriver import WebDriver\n",
+        "from selenium.webdriver.common.selenium_manager import SeleniumManager\n",
+        "\n",
+        "selenium_manager = SeleniumManager()\n",
+        "paths = selenium_manager.binary_paths([\"--browser\", \"chrome\"])\n",
+        "\n",
+        "service = Service(executable_path=paths[\"driver_path\"])\n",
+        "driver = WebDriver(service=service)"
+      ]
+    },
     {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "https://pypi.org/search/?q=selenium#content\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Find a link in the page. The first selector won't match but the second will\n",
-    "a_element = find(['fake-link-selector', 'a'], inside=driver)\n",
-    "print(a_element.get_property('href'))"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "be2819a6",
-   "metadata": {},
-   "source": [
-    "## Changing the scope of the search"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "c02f5d00",
-   "metadata": {},
-   "source": [
-    "Same as in Selenium, instead of searching inside the whole page, you can restrict the scope to a specific element, by specifying an element in the `inside` parameter."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 10,
-   "id": "8aee9976",
-   "metadata": {},
-   "outputs": [
+      "cell_type": "markdown",
+      "id": "0232d727",
+      "metadata": {},
+      "source": [
+        "We will use the search results for \"selenium\" in PyPI as playground."
+      ]
+    },
     {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "selenium\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Get the name of the package in the first search result\n",
-    "element_name = find(\"h3 span.package-snippet__name\", inside=results[0])\n",
-    "print(element_name.text)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "8bf58a56",
-   "metadata": {},
-   "source": [
-    "If the `inside` keyword argument is a list instead of a single element, it will return one result for each element in the list."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 11,
-   "id": "8d09bb8c",
-   "metadata": {},
-   "outputs": [
+      "cell_type": "code",
+      "execution_count": 2,
+      "id": "8c16763e",
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "driver.get(\"https://pypi.org/search/?q=selenium\")"
+      ]
+    },
     {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "First 3 package names from the results ['selenium', 'selenium2', 'ak_selenium']\n"
-     ]
-    }
-   ],
-   "source": [
-    "elements = find(\"h3 span.package-snippet__name\", inside=results)\n",
-    "assert isinstance(elements, list)\n",
-    "print(\"First 3 package names from the results\", [element.text for element in elements][:3])"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "be2cb976",
-   "metadata": {},
-   "source": [
-    "## Waiting for an element to appear in the DOM\n",
-    "\n",
-    "By specifying the `wait` keyword argument, you can specify the number of seconds to wait before raising an error if the error is not found. If you add a default value, it will be returned if the element is not found."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 12,
-   "id": "ea6a4b13",
-   "metadata": {},
-   "outputs": [
+      "cell_type": "markdown",
+      "id": "cb6c24f2",
+      "metadata": {},
+      "source": [
+        "Let's import the function from `manen.finder`."
+      ]
+    },
     {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "CPU times: user 19.1 ms, sys: 2.79 ms, total: 21.9 ms\n",
-      "Wall time: 3.1 s\n"
-     ]
-    }
-   ],
-   "source": [
-    "%%time\n",
-    "# Try to find an element that should be within 3 seconds, and return None if not found\n",
-    "find('css:i-dont-exist', inside=driver, wait=3, default=None)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "4db73fab",
-   "metadata": {},
-   "source": [
-    "## Re-using the function\n",
-    "\n",
-    "Some use cases might require to re-use the `find` function, with the same arguments. By not specifying the `selector` argument, you can create a new function that will use the same arguments as the original one, but with your values as default value.\n",
-    "\n",
-    "For example, you can create an equivalent of the `find` function, with a restriction on the scope of the search, and with a default value."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 13,
-   "id": "956e0695",
-   "metadata": {},
-   "outputs": [
+      "cell_type": "code",
+      "execution_count": 3,
+      "id": "7f04de4b",
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "from manen.finder import find"
+      ]
+    },
     {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "20 <li> elements found\n",
-      "63 <span> elements found\n"
-     ]
+      "cell_type": "markdown",
+      "id": "b466fa30",
+      "metadata": {},
+      "source": [
+        "The signature of the function is a good start to understand what you can do with it:\n",
+        "\n",
+        "```python\n",
+        "def find(\n",
+        "    selector: str | list[str] | None = None,\n",
+        "    *,\n",
+        "    inside: DriverOrElement | list[DriverOrElement] | None = None,\n",
+        "    many: bool = False,\n",
+        "    default: Any = NotImplemented,\n",
+        "    wait: int = 0,\n",
+        "):\n",
+        "    ...\n",
+        "```\n",
+        "\n",
+        "(knowing that `DriverOrElement` is a type alias for `Union[WebDriver, WebElement]`)\n",
+        "\n",
+        "## Finding one or several elements\n",
+        "\n",
+        "The first argument, and the most important one, is `selector`. With that you can specify the selection method and selector to be used to locate an element. The format for each selector is `{selection_method}:{selector}`, with `selection_method` being one of the following: `xpath`, `css`, `partial_link_text`, `link_text`, `name:`, `tag:`. If the selection method is not specified, it will be `xpath` if the selector starts with `./` or `/`, `css` otherwise.\n",
+        "\n",
+        "The second argument, `inside`, is used to specify the context in which the element should be found."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 4,
+      "id": "36aea210",
+      "metadata": {},
+      "outputs": [
+        {
+          "data": {
+            "text/plain": [
+              "<selenium.webdriver.remote.webelement.WebElement (session=\"a37ebeec7abf4b3cf24be6c79e91cb7d\", element=\"f.30ADACDA37A16B3E8957AE3039372A63.d.9CE3BB95715AC5219032D59CA79A6887.e.1618\")>"
+            ]
+          },
+          "execution_count": 4,
+          "metadata": {},
+          "output_type": "execute_result"
+        }
+      ],
+      "source": [
+        "# Find the element with the information about the number of results\n",
+        "element = find(\"xpath://*[@id='content']//form/div[1]/div[1]/p\", inside=driver)\n",
+        "element"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "62194713",
+      "metadata": {},
+      "source": [
+        "Using only these 2 parameters is the equivalent of doing `driver.find_element(By.{selection_method}, {selector})`, so it returns a Selenium WebElement."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 5,
+      "id": "6d70f9dd",
+      "metadata": {},
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "2,574 projects for \"selenium\"\n"
+          ]
+        }
+      ],
+      "source": [
+        "print(element.text)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "8b9ef7af",
+      "metadata": {},
+      "source": [
+        "If you want to use `find_elements` instead of `find_element`, you can set the `many` parameter to `True`."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 6,
+      "id": "84b8e02c",
+      "metadata": {},
+      "outputs": [
+        {
+          "data": {
+            "text/plain": [
+              "20"
+            ]
+          },
+          "execution_count": 6,
+          "metadata": {},
+          "output_type": "execute_result"
+        }
+      ],
+      "source": [
+        "results = find(\"ul[aria-label='Search results'] li\", inside=driver, many=True)\n",
+        "len(results)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "92288385",
+      "metadata": {},
+      "source": [
+        "By default, Manen will raise a `ElementNotFound` exception if the specified selectors match no elements in the area to inspect."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 7,
+      "id": "8c6aad35",
+      "metadata": {},
+      "outputs": [
+        {
+          "ename": "ElementNotFound",
+          "evalue": "Unable to find an element matching the selectors:\n> css:i-dont-exist\nContext of the exception:\n- Title page: Search results · PyPI\n- URL: https://pypi.org/search/?q=selenium",
+          "output_type": "error",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mElementNotFound\u001b[0m                           Traceback (most recent call last)",
+            "Cell \u001b[0;32mIn[7], line 1\u001b[0m\n\u001b[0;32m----> 1\u001b[0m \u001b[43mfind\u001b[49m\u001b[43m(\u001b[49m\u001b[38;5;124;43m\"\u001b[39;49m\u001b[38;5;124;43mcss:i-dont-exist\u001b[39;49m\u001b[38;5;124;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43minside\u001b[49m\u001b[38;5;241;43m=\u001b[39;49m\u001b[43mdriver\u001b[49m\u001b[43m)\u001b[49m\n",
+            "File \u001b[0;32m~/Documents/Projects/kodaho/manen/manen/finder.py:288\u001b[0m, in \u001b[0;36mfind\u001b[0;34m(selector, inside, many, default, wait)\u001b[0m\n\u001b[1;32m    285\u001b[0m     \u001b[38;5;28;01mreturn\u001b[39;00m default\n\u001b[1;32m    287\u001b[0m driver \u001b[38;5;241m=\u001b[39m inside \u001b[38;5;28;01mif\u001b[39;00m \u001b[38;5;28misinstance\u001b[39m(inside, WebDriver) \u001b[38;5;28;01melse\u001b[39;00m inside\u001b[38;5;241m.\u001b[39mparent\n\u001b[0;32m--> 288\u001b[0m \u001b[38;5;28;01mraise\u001b[39;00m ElementNotFound(selectors\u001b[38;5;241m=\u001b[39mselectors, driver\u001b[38;5;241m=\u001b[39mdriver)\n",
+            "\u001b[0;31mElementNotFound\u001b[0m: Unable to find an element matching the selectors:\n> css:i-dont-exist\nContext of the exception:\n- Title page: Search results · PyPI\n- URL: https://pypi.org/search/?q=selenium"
+          ]
+        }
+      ],
+      "source": [
+        "find(\"css:i-dont-exist\", inside=driver)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "8beb496b",
+      "metadata": {},
+      "source": [
+        "To avoid raising an error, you can specify a default value to be returned if any element is found; this is done with the `default` parameter."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 8,
+      "id": "0caf56a2",
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "find(\"i-dont-exist\", inside=driver, default=None)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "2fa5eeb4",
+      "metadata": {},
+      "source": [
+        "## Attempting to locate an element with different selectors\n",
+        "\n",
+        "Another use case supported by the function is trying several different selectors to locate an element. It will try all the selectors by order and return an element as soon as a selector hits a result."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 9,
+      "id": "60497456",
+      "metadata": {},
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "https://pypi.org/search/?q=selenium#content\n"
+          ]
+        }
+      ],
+      "source": [
+        "# Find a link in the page. The first selector won't match but the second will\n",
+        "a_element = find(['fake-link-selector', 'a'], inside=driver)\n",
+        "print(a_element.get_property('href'))"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "be2819a6",
+      "metadata": {},
+      "source": [
+        "## Changing the scope of the search"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "c02f5d00",
+      "metadata": {},
+      "source": [
+        "Same as in Selenium, instead of searching inside the whole page, you can restrict the scope to a specific element, by specifying an element in the `inside` parameter."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 10,
+      "id": "8aee9976",
+      "metadata": {},
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "selenium\n"
+          ]
+        }
+      ],
+      "source": [
+        "# Get the name of the package in the first search result\n",
+        "element_name = find(\"h3 span.package-snippet__name\", inside=results[0])\n",
+        "print(element_name.text)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "8bf58a56",
+      "metadata": {},
+      "source": [
+        "If the `inside` keyword argument is a list instead of a single element, it will return one result for each element in the list."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 11,
+      "id": "8d09bb8c",
+      "metadata": {},
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "First 3 package names from the results ['selenium', 'selenium2', 'ak_selenium']\n"
+          ]
+        }
+      ],
+      "source": [
+        "elements = find(\"h3 span.package-snippet__name\", inside=results)\n",
+        "assert isinstance(elements, list)\n",
+        "print(\"First 3 package names from the results\", [element.text for element in elements][:3])"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "be2cb976",
+      "metadata": {},
+      "source": [
+        "## Waiting for an element to appear in the DOM\n",
+        "\n",
+        "By specifying the `wait` keyword argument, you can specify the number of seconds to wait before raising an error if the error is not found. If you add a default value, it will be returned if the element is not found."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 12,
+      "id": "ea6a4b13",
+      "metadata": {},
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "CPU times: user 19.1 ms, sys: 2.79 ms, total: 21.9 ms\n",
+            "Wall time: 3.1 s\n"
+          ]
+        }
+      ],
+      "source": [
+        "%%time\n",
+        "# Try to find an element that should be within 3 seconds, and return None if not found\n",
+        "find('css:i-dont-exist', inside=driver, wait=3, default=None)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "4db73fab",
+      "metadata": {},
+      "source": [
+        "## Re-using the function\n",
+        "\n",
+        "Some use cases might require to re-use the `find` function, with the same arguments. By not specifying the `selector` argument, you can create a new function that will use the same arguments as the original one, but with your values as default value.\n",
+        "\n",
+        "For example, you can create an equivalent of the `find` function, with a restriction on the scope of the search, and with a default value."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 13,
+      "id": "956e0695",
+      "metadata": {},
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "20 <li> elements found\n",
+            "63 <span> elements found\n"
+          ]
+        }
+      ],
+      "source": [
+        "a_div = find(\"div.left-layout__main\", inside=driver)\n",
+        "\n",
+        "# Definition of our partial function\n",
+        "lookup = find(inside=a_div, many=True, default=[])\n",
+        "\n",
+        "# Call the partial function with different selectors\n",
+        "li_elements = lookup(\"li\")\n",
+        "print(f\"{len(li_elements)} <li> elements found\")\n",
+        "\n",
+        "span_elements = lookup(\"span\")\n",
+        "print(f\"{len(span_elements)} <span> elements found\")\n",
+        "\n",
+        "no_element = lookup(\"i-dont-exist\")\n",
+        "assert len(no_element) == 0"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "dc359cd0",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "\n",
+        "That's it for the `find` function! Next we will check Manen browser, an enhanced version of Selenium WebDriver, with additional features."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 14,
+      "id": "2ac65964",
+      "metadata": {
+        "vscode": {
+          "languageId": "plaintext"
+        }
+      },
+      "outputs": [],
+      "source": [
+        "driver.quit()"
+      ]
     }
-   ],
-   "source": [
-    "a_div = find(\"div.left-layout__main\", inside=driver)\n",
-    "\n",
-    "# Definition of our partial function\n",
-    "lookup = find(inside=a_div, many=True, default=[])\n",
-    "\n",
-    "# Call the partial function with different selectors\n",
-    "li_elements = lookup(\"li\")\n",
-    "print(f\"{len(li_elements)} <li> elements found\")\n",
-    "\n",
-    "span_elements = lookup(\"span\")\n",
-    "print(f\"{len(span_elements)} <span> elements found\")\n",
-    "\n",
-    "no_element = lookup(\"i-dont-exist\")\n",
-    "assert len(no_element) == 0"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "dc359cd0",
-   "metadata": {},
-   "source": [
-    "---\n",
-    "\n",
-    "That's it for the `find` function! Next we will check Manen's browser, an enhanced version of Selenium's WebDriver, with additional features."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 14,
-   "id": "2ac65964",
-   "metadata": {
-    "vscode": {
-     "languageId": "plaintext"
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3 (ipykernel)",
+      "language": "python",
+      "name": "python3"
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.10.14"
     }
-   },
-   "outputs": [],
-   "source": [
-    "driver.quit()"
-   ]
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3 (ipykernel)",
-   "language": "python",
-   "name": "python3"
   },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.10.14"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
+  "nbformat": 4,
+  "nbformat_minor": 5
 }

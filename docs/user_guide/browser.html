@@ -6,7 +6,7 @@
 <link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Page Object Model for operability" href="page_object_model.html" /><link rel="prev" title="Easily explore the DOM with find" href="dom_exploration.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.07.18 -->
-        <title>Supercharge Selenium’s WebDriver with Manen’s Browser - manen</title>
+        <title>Supercharge Selenium WebDriver with Manen Browser - Manen</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=613ab9ff" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -169,7 +169,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">manen</div></a>
+      <a href="../index.html"><div class="brand">Manen</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -196,7 +196,7 @@
     <img class="sidebar-logo" src="../_static/manen_logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">manen</span>
+  <span class="sidebar-brand-text">Manen</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -209,7 +209,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../user_guide.html">User Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dom_exploration.html">Easily explore the DOM with <code class="docutils literal notranslate"><span class="pre">find</span></code></a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Supercharge Selenium’s <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Supercharge Selenium <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="page_object_model.html">Page Object Model for operability</a></li>
 </ul>
 </li>
@@ -222,6 +222,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.dom.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dom</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.element.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">element</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.exceptions.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">exceptions</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.webarea.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">webarea</span></code></a></li>
 </ul>
 </li>
@@ -269,9 +270,9 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="Supercharge-Selenium's-WebDriver-with-Manen's-Browser">
-<h1>Supercharge Selenium’s <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code><a class="headerlink" href="#Supercharge-Selenium's-WebDriver-with-Manen's-Browser" title="Link to this heading">¶</a></h1>
-<p>To counter the lack of operability and interactivity in Selenium’s WebDriver, Manen implements a supercharged version of it, called <code class="docutils literal notranslate"><span class="pre">Browser</span></code>. This browser inherits from the WebDriver, meaning that everything you can do with a browser, you can do it with an instance of <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code>.</p>
+          <section id="Supercharge-Selenium-WebDriver-with-Manen-Browser">
+<h1>Supercharge Selenium <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen <code class="docutils literal notranslate"><span class="pre">Browser</span></code><a class="headerlink" href="#Supercharge-Selenium-WebDriver-with-Manen-Browser" title="Link to this heading">¶</a></h1>
+<p>To counter the lack of operability and interactivity in Selenium WebDriver, Manen implements a supercharged version of it, called <code class="docutils literal notranslate"><span class="pre">Browser</span></code>. This browser inherits from the WebDriver, meaning that everything you can do with a browser, you can do it with an instance of <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code>.</p>
 <p>This guide will show you how to use the <code class="docutils literal notranslate"><span class="pre">Browser</span></code> class and its methods.</p>
 <p>Note that, for now, only Chrome browser is supported. Other browsers will be supported in the future.</p>
 <section id="Browser-initialization">
@@ -403,7 +404,7 @@ gocept.selenium
 </pre></div>
 </div>
 </div>
-<p>During the development of your project or in production for debug purposes, it can be great to know what match with your selectors. Manen’s browser provide a method <code class="docutils literal notranslate"><span class="pre">highlight</span></code> for this purpose. This method will locate elements using the <code class="docutils literal notranslate"><span class="pre">find</span></code> method, and then draw a frame around each found element.</p>
+<p>During the development of your project or in production for debug purposes, it can be great to know what match with your selectors. Manen browser provide a method <code class="docutils literal notranslate"><span class="pre">highlight</span></code> for this purpose. This method will locate elements using the <code class="docutils literal notranslate"><span class="pre">find</span></code> method, and then draw a frame around each found element.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -577,7 +578,7 @@ gocept.selenium
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Supercharge Selenium’s <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a><ul>
+<li><a class="reference internal" href="#">Supercharge Selenium <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a><ul>
 <li><a class="reference internal" href="#Browser-initialization">Browser initialization</a></li>
 <li><a class="reference internal" href="#Interacting-with-the-DOM">Interacting with the DOM</a></li>
 <li><a class="reference internal" href="#Cookies-management">Cookies management</a></li>

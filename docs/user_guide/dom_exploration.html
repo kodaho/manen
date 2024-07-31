@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Supercharge Selenium’s WebDriver with Manen’s Browser" href="browser.html" /><link rel="prev" title="User Guide" href="../user_guide.html" />
+<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Supercharge Selenium WebDriver with Manen Browser" href="browser.html" /><link rel="prev" title="User Guide" href="../user_guide.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.07.18 -->
-        <title>Easily explore the DOM with find - manen</title>
+        <title>Easily explore the DOM with find - Manen</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=613ab9ff" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -169,7 +169,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">manen</div></a>
+      <a href="../index.html"><div class="brand">Manen</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -196,7 +196,7 @@
     <img class="sidebar-logo" src="../_static/manen_logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">manen</span>
+  <span class="sidebar-brand-text">Manen</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -209,7 +209,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../user_guide.html">User Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Easily explore the DOM with <code class="docutils literal notranslate"><span class="pre">find</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="browser.html">Supercharge Selenium’s <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="browser.html">Supercharge Selenium <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="page_object_model.html">Page Object Model for operability</a></li>
 </ul>
 </li>
@@ -222,6 +222,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.dom.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dom</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.element.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">element</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.exceptions.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">exceptions</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manen/manen.page_object_model.webarea.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">webarea</span></code></a></li>
 </ul>
 </li>
@@ -275,7 +276,7 @@
 <p>The function <code class="docutils literal notranslate"><span class="pre">find</span></code> in <code class="docutils literal notranslate"><span class="pre">manen.finder</span></code> aims to help you handle these use cases. With a set of arguments, you can easily adapt the function to what you need: wait for an element, retrieve one or several elements, trying different selectors for the same element, etc.</p>
 <p>This guide will show you all you can do with <code class="docutils literal notranslate"><span class="pre">find</span></code> function.</p>
 <hr class="docutils" />
-<p>First, we need to an instance of Selenium’s WebDriver used for Chrome automation (but it could be any other browser).</p>
+<p>First, we need to an instance of Selenium WebDriver used for Chrome automation (but it could be any other browser).</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -544,7 +545,7 @@ Wall time: 3.1 s
 </pre></div></div>
 </div>
 <hr class="docutils" />
-<p>That’s it for the <code class="docutils literal notranslate"><span class="pre">find</span></code> function! Next we will check Manen’s browser, an enhanced version of Selenium’s WebDriver, with additional features.</p>
+<p>That’s it for the <code class="docutils literal notranslate"><span class="pre">find</span></code> function! Next we will check Manen browser, an enhanced version of Selenium WebDriver, with additional features.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -566,7 +567,7 @@ Wall time: 3.1 s
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Supercharge Selenium’s <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen’s <code class="docutils literal notranslate"><span class="pre">Browser</span></code></div>
+                <div class="title">Supercharge Selenium <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen <code class="docutils literal notranslate"><span class="pre">Browser</span></code></div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

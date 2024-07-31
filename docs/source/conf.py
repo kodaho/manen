@@ -68,7 +68,7 @@ html_theme = "furo"
 html_static_path = ["_static"]
 html_logo = "_static/manen_logo.png"
 html_favicon = "_static/favicon.png"
-html_title = "manen"
+html_title = "Manen"
 html_theme_options = {
     "navigation_with_keys": True,
     "footer_icons": [

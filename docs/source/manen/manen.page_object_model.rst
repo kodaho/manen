@@ -17,4 +17,5 @@
    manen.page_object_model.config
    manen.page_object_model.dom
    manen.page_object_model.element
+   manen.page_object_model.exceptions
    manen.page_object_model.webarea

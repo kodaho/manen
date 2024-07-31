@@ -34,14 +34,14 @@ features, you can find:
 
 - an implementation of the [Page Object Model](https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/)
   design pattern
-- a class which improves the operability of a Selenium's WebDriver
+- a class which improves the operability of a Selenium WebDriver
 - a function to easily find and isolate DOM elements inside a Selenium page
 
 This package aims to provide you the tools to write more concise, flexible and powerful code
 compared to what you would do by using only Selenium.
 
 > [!NOTE]
-> For now, only Selenium's Chrome WebDriver is supported. Other browsers will be supported in the
+> For now, only Selenium Chrome WebDriver is supported. Other browsers will be supported in the
 > future, as well as other automation tools such as Playwright or Scrapy.
 
 ## 📥 Installation
@@ -58,14 +58,14 @@ pip install manen
   several very different use cases, to help reduce your code complexity when fetching for
   elements (example: using default values, trying different selectors, iterating over several
   elements).
-- `manen.browser` defines an enhanced Selenium's `WebDriver` called `Browser`
+- `manen.browser` defines an enhanced Selenium `WebDriver` called `Browser`
 - `manen.page_object_model` is an implementation of the Page Object Model design pattern. It
   will wrap a HTML page, region and elements inside Python classes and objects, providing a
   better way to interact with a web page.
 
 ## 🚀 Getting started
 
-Manen's features will be explored by a simple example: going to the PyPI page, searching for a
+Manen features will be explored by a simple example: going to the PyPI page, searching for a
 specific package and extracting some information from the search results.
 
 First thing to do is to initialize a WebDriver instance. It can be done using the usual way

@@ -28,17 +28,18 @@ with and without Manen:
       from selenium.webdriver.chrome.webdriver import WebDriver
 
       from manen.page_object_model import dom
+      from manen.page_object_model.config import CSS, Default, Wait, XPath
       from manen.page_object_model.webarea import Page, WebArea
 
 
       class BlogPage(Page):
          class Article(WebArea):
-            title: Annotated[str, dom.XPath("//h1")]
-            n_likes: Annotated[int, dom.CSS("span.n_likes")]
-            tags: Annotated[list[str], dom.CSS("span.tag"), dom.Default([])]
-            updated_at: Annotated[datetime, dom.CSS("span.updated_at")]
+            title: Annotated[str, XPath("//h1")]
+            n_likes: Annotated[int, CSS("span.n_likes")]
+            tags: Annotated[list[str], CSS("span.tag"), Default([])]
+            updated_at: Annotated[datetime, CSS("span.updated_at")]
 
-         articles: Annotated[list[Article], dom.CSS('div.article'), dom.Wait(3)]
+         articles: Annotated[list[Article], CSS('div.article'), Wait(3)]
 
 
       driver = WebDriver()

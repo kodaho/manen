@@ -24,10 +24,10 @@ Changelog
 .. warning::
 
   Even if it's a minor release, this version represents a major change for the project; the
-  package has been mostly rewritten in order to implement page object model design pattern in a
-  more efficient way (using type annotation).
+  package has been mostly rewritten in order to implement the page object model design pattern in
+  a more efficient way (using type annotation).
 
-  Besides, some functionalities have been removed with a view to limit the number of features
+  Besides, some functionalities have been removed with the aim of limiting the number of features
   during the beta phase.
 
   All previous versions should be considered as deprecated.

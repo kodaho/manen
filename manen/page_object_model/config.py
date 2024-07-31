@@ -92,4 +92,12 @@ class Config:
             kwargs.update({"element_type": get_args(type_)[0], "many": False})
         else:
             kwargs.update({"element_type": type_, "many": False})
-        return cls.merge(annotation.__metadata__, **kwargs)
+
+        config = cls.merge(annotation.__metadata__, **kwargs)
+
+        if len(config.selectors) == 0:
+            raise ValueError(
+                f"At least one selector should be specified in the annotation of '{field}'"
+            )
+
+        return config

@@ -185,9 +185,8 @@ class BrowserMixin(WebDriverProtocol):
 class ChromeBrowser(BrowserMixin, Chrome):
     """Wrapper around Selenium ChromeWebDriver providing methods to improve its operability."""
 
-    @classmethod
+    @staticmethod
     def initialize(
-        cls,
         options: ChromeOptions | None = None,
         service: ChromeService | None = None,
         driver_path: str | None = None,
@@ -226,4 +225,4 @@ class ChromeBrowser(BrowserMixin, Chrome):
         if window_size:
             options.add_argument(f"--window-size={window_size[0]},{window_size[1]}")
 
-        return cls(options=options, service=service)
+        return Chrome(options=options, service=service)

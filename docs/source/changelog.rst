@@ -35,21 +35,23 @@ Changelog
 
 Changed
 ^^^^^^^
-- :py:mod:`~manen.page_object_model` has been entirely rewritten to use type annotation instead
+- The module :py:mod:`~manen.page_object_model` has been rewritten to use type annotation instead
   of ``Element``. Note that some elements like select or radio button haven't been implemented in
   this new version yet (but will be in the future).
 - Most of the documentation pages have been rewritten and improved.
 - Most modules have better typing annotations and documentation. Besides, the code has been
-  improved to be more syntactically correct.
-- Manen no longer has optional dependencies (they were in fact development dependencies).
+  improved to be more "Pythonic".
+- Manen no longer has optional dependencies (which were in fact development dependencies).
 - The minimal version of Python required is now 3.10.
-- Internally, rye is now used a project manager, and the linting and formatting relies on ruff.
+- Internally, Manen is now using `rye <https://rye.astral.sh/guide/>`_ as project manager, and
+  `ruff <https://docs.astral.sh/ruff/>`_ for the linting and formatting.
 
 Removed
 ^^^^^^^
 - The module ``manen.resource`` and everything related (like the CLI) have been removed. Indeed,
-  the official Selenium manager provides the same functionalities, and is available in recent
-  versions of Selenium.
+  the `official Selenium manager <https://www.selenium.dev/documentation/selenium_manager/>`_
+  (available as a CLI tool and in recent versions of Python bindings for Selenium) provides the
+  same functionalities.
 - ``manen.browser.BraveBrowser`` has been removed because it had a dependency on the module
   ``manen.resource``. Besides, it was considered as not enough tested internally to make it
   available publicly.

@@ -17,17 +17,17 @@ Changelog
 0.3.0
 -----
 
-|topic| Refacto & major changes |end|
+|topic| Page object model implementation revamp & other major changes |end|
 
-|released_on| 2022-03-06 |end|
+|released_on| (unreleased) |end|
 
 .. warning::
 
   Even if it's a minor release, this version represents a major change for the project; the
-  package has been mostly rewritten in order to implement page object model design pattern in a
-  more efficient way (using type annotation).
+  package has been mostly rewritten in order to implement the page object model design pattern in
+  a more efficient way (using type annotation).
 
-  Besides, some functionalities have been removed with a view to limit the number of features
+  Besides, some functionalities have been removed with the aim of limiting the number of features
   during the beta phase.
 
   All previous versions should be considered as deprecated.
@@ -35,21 +35,23 @@ Changelog
 
 Changed
 ^^^^^^^
-- :py:mod:`~manen.page_object_model` has been entirely rewritten to use type annotation instead
+- The module :py:mod:`~manen.page_object_model` has been rewritten to use type annotation instead
   of ``Element``. Note that some elements like select or radio button haven't been implemented in
   this new version yet (but will be in the future).
 - Most of the documentation pages have been rewritten and improved.
 - Most modules have better typing annotations and documentation. Besides, the code has been
-  improved to be more syntactically correct.
-- Manen no longer has optional dependencies (they were in fact development dependencies).
+  improved to be more "Pythonic".
+- Manen no longer has optional dependencies (which were in fact development dependencies).
 - The minimal version of Python required is now 3.10.
-- Internally, rye is now used a project manager, and the linting and formatting relies on ruff.
+- Internally, Manen is now using `rye <https://rye.astral.sh/guide/>`_ as project manager, and
+  `ruff <https://docs.astral.sh/ruff/>`_ for the linting and formatting.
 
 Removed
 ^^^^^^^
 - The module ``manen.resource`` and everything related (like the CLI) have been removed. Indeed,
-  the official Selenium manager provides the same functionalities, and is available in recent
-  versions of Selenium.
+  the `official Selenium manager <https://www.selenium.dev/documentation/selenium_manager/>`_
+  (available as a CLI tool and in recent versions of Python bindings for Selenium) provides the
+  same functionalities.
 - ``manen.browser.BraveBrowser`` has been removed because it had a dependency on the module
   ``manen.resource``. Besides, it was considered as not enough tested internally to make it
   available publicly.

@@ -478,8 +478,9 @@
 
 <div class="viewcode-block" id="ChromeBrowser.initialize">
 <a class="viewcode-back" href="../../manen/manen.browser.html#manen.browser.ChromeBrowser.initialize">[docs]</a>
-    <span class="nd">@staticmethod</span>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
         <span class="n">options</span><span class="p">:</span> <span class="n">ChromeOptions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">service</span><span class="p">:</span> <span class="n">ChromeService</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">driver_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -518,7 +519,7 @@
         <span class="k">if</span> <span class="n">window_size</span><span class="p">:</span>
             <span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--window-size=</span><span class="si">{</span><span class="n">window_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">window_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">Chrome</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">service</span><span class="o">=</span><span class="n">service</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">service</span><span class="o">=</span><span class="n">service</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

@@ -59,9 +59,9 @@ pip install manen
   elements (example: using default values, trying different selectors, iterating over several
   elements).
 - `manen.browser` defines an enhanced Selenium `WebDriver` called `Browser`
-- `manen.page_object_model` is an implementation of the Page Object Model design pattern. It
-  will wrap a HTML page, region and elements inside Python classes and objects, providing a
-  better way to interact with a web page.
+- `manen.page_object_model` is an implementation of the Page Object Model design pattern. It will
+  wrap a HTML page, component and DOM values inside Python classes and objects, providing a better
+  way to interact with a web page.
 
 ## 🚀 Getting started
 
@@ -83,26 +83,26 @@ browser.get("https://pypi.org")
 ![PyPI home page](https://raw.githubusercontent.com/kodaho/manen/main/docs/assets/screenshot_pypi_home.png)
 
 We are now on the home page of PyPI. What we are going to do now is building a class that will
-inherit from `Page` from the `manen.page_object_model.webarea` module. This Python class will be
+inherit from `Page` from the `manen.page_object_model.component` module. This Python class will be
 a reflect of the HTML page, allowing us to access DOM elements in the same way we access
 attributes. Note the whole page object model design pattern is implemented with type hints (a bit
 like in `Pydantic` model).
 
 ```python
-from manen.page_object_model import dom
+from manen.page_object_model.types import href, input_value
 from manen.page_object_model.config import CSS, XPath
-from manen.page_object_model.webarea import Page, WebArea
+from manen.page_object_model.component import Page, Component
 
 
 class HomePage(Page):
-    query: Annotated[dom.Input, CSS("input[name='q']")]
+    query: Annotated[input_value, CSS("input[name='q']")]
 
 
 class SearchResultPage(Page):
-    class Result(WebArea):
+    class Result(Component):
         name: Annotated[str, CSS("h3 span.package-snippet__name")]
         version: Annotated[str, CSS("h3 span.package-snippet__version")]
-        link: Annotated[dom.HRef, CSS("a.package-snippet")]
+        link: Annotated[href, CSS("a.package-snippet")]
         description: Annotated[str, CSS("p.package-snippet__description")]
         release_date: Annotated[datetime, CSS("span.package-snippet__created")]
 
@@ -116,15 +116,15 @@ class SearchResultPage(Page):
     ]
 ```
 
-The `Page` class encapsulates the whole current HTML page available through the driver. Each
-element is then represented by a class attribute, with a type and a selector (how to find the
-element in the HTML DOM). Depending on the type of the element, Manen will automatically execute
-the appropriate DOM content extraction on the element (for example, for a `str` type, the text
-content of the element will be extracted, for a `HRef` it will extract the HTML `href` a `a`
-tag).
+The `Page` class encapsulates the whole current HTML page available through the driver. Each DOM
+value we want to extract is then represented by a class attribute, with a type (what to extract)
+and a selector (where to extract it). Depending on the type of the value, Manen will automatically
+execute the appropriate DOM content extraction on the HTML element (for example, it will extract
+the inner text for a `str` type, the HTML attribute `href` for a `HRef` , or the property
+`innerHTML` for `InnerHTML`).
 
-A `WebArea` captures a sub-part of an HTML page. All the elements defined under this will be
-fetched inside the HTML element represented by the `WebArea` class.
+A `Component` captures a sub-part of an HTML page. All the elements defined under this will be
+fetched inside the HTML element represented by the `Component` class.
 
 Here the class `HomePage` defines an `Input` element, that will be linked to the search bar.
 Filling the search bar is done by assigning a value to the attribute `query`.
@@ -155,7 +155,7 @@ print(page.results[0])
 ```
 
 Manen provides a `model_dump` method, quite similar to the one in Pydantic to easily get all the
-attributes of a webarea or a page.
+attributes of a component or a page.
 
 ```python
 print(page.results[0].model_dump())
@@ -168,7 +168,7 @@ print(page.results[0].model_dump())
 
 > [!TIP]
 > Other DOM elements are also implemented, such as `ImageSrc`, `Input`, `Checkbox`... Each one of
-> them is used to target a specific attribute from a DOM element and enable interaction with it,
+> them is used to target a specific attribute from a DOM value and can enable interaction with it,
 > in a flawless Pythonic way. Check the [documentation](https://kodaho.github.io/manen/user_guide/page_object_model.html#List-of-available-elements)
 > for the list of available elements.
 

@@ -27,13 +27,12 @@ with and without Manen:
 
       from selenium.webdriver.chrome.webdriver import WebDriver
 
-      from manen.page_object_model import dom
       from manen.page_object_model.config import CSS, Default, Wait, XPath
-      from manen.page_object_model.webarea import Page, WebArea
+      from manen.page_object_model.component import Page, Component
 
 
       class BlogPage(Page):
-         class Article(WebArea):
+         class Article(Component):
             title: Annotated[str, XPath("//h1")]
             n_likes: Annotated[int, CSS("span.n_likes")]
             tags: Annotated[list[str], CSS("span.tag"), Default([])]

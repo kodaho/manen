@@ -2,7 +2,7 @@
 This module provides an implementation of the `Page Object design pattern
 <https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/>`_
 described in Selenium documentation. By combining the classes
-:py:class:`~manen.page_object_model.webarea.Page` and :py:class:`~manen.page_object_model.webarea.WebArea`,
+:py:class:`~manen.page_object_model.component.Page` and :py:class:`~manen.page_object_model.component.Component`,
 you can easily describe any web pages and access all the DOM elements in a simple
 way through a Python class.
 
@@ -20,22 +20,22 @@ classes in an external file called ``pypi_pom.py``.
     from selenium.webdriver.chrome.options import Options
     from selenium.webdriver.chrome.webdriver import WebDriver
 
-    from manen.page_object_model import dom
-    from manen.page_object_model.webarea import Page, WebArea
+    from manen.page_object_model.types import input_value
+    from manen.page_object_model.component import Page, Component
 
 
     class HomePage(Page):
         class SearchForm(Form):
-            query: Annotated[dom.Input, CSS("input[name='q']")]
+            query: Annotated[input_value, CSS("input[name='q']")]
 
         search: Annotated[SearchForm, CSS("form.search-form")]
 
 
     class SearchResultPage(Page):
-        class Result(WebArea):
+        class Result(Component):
             name: Annotated[str, CSS("h3 span.package-snippet__name")]
             version: Annotated[str, CSS("h3 span.package-snippet__version")]
-            link: Annotated[dom.HRef, CSS("a.package-snippet")]
+            link: Annotated[href, CSS("a.package-snippet")]
             description: Annotated[str, CSS("p.package-snippet__description")]
             release_date: Annotated[datetime, CSS("span.package-snippet__created")]
 

@@ -47,6 +47,7 @@ class Config:
     default: Any = NotImplemented
     many: bool = False
     is_input: bool = False
+    is_checkbox: bool = False
 
     @classmethod
     def merge(cls, configs, **kwargs):
@@ -54,6 +55,8 @@ class Config:
         wait = None
         default = NotImplemented
         is_input = False
+        is_checkbox = False
+
         for config in configs:
             if isinstance(config, cls):
                 selectors.extend(config.selectors)
@@ -73,13 +76,17 @@ class Config:
                 default = config.value
             elif config == Flag.INPUT:
                 is_input = True
+            elif config == Flag.CHECKBOX:
+                is_checkbox = True
             else:
                 raise ValueError(f"Unknown config type: {config}")
+
         return cls(
             selectors=selectors,
             wait=wait or 0,
             default=default,
             is_input=is_input,
+            is_checkbox=is_checkbox,
             **kwargs,
         )
 

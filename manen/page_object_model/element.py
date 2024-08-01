@@ -17,7 +17,6 @@ TTransformers = dict[type[T], Callable[[WebElement], T]]
 
 
 GET_TRANSFORMERS: TTransformers = {
-    dom.Checkbox: lambda element: element.get_attribute("checked") == "true",
     datetime: lambda element: dateparser.parse(element.text),
     dom.HRef: lambda element: element.get_attribute("href"),
     dom.ImageSrc: lambda element: element.get_attribute("src"),
@@ -96,6 +95,32 @@ class InputElement:
         )
         element.clear()
         element.send_keys(value)
+
+
+class CheckboxElement:
+    def __init__(self, config: Config):
+        self.config = config
+
+    def __get__(self, webarea: "WebArea", unused_cls_webarea: type["WebArea"]):
+        element = find(
+            selector=self.config.selectors,
+            inside=webarea._scope,
+            many=False,
+            default=self.config.default,
+            wait=self.config.wait,
+        )
+        return element.get_attribute("checked") == "true"
+
+    def __set__(self, webarea: "WebArea", value: bool):
+        element = find(
+            selector=self.config.selectors,
+            inside=webarea._scope,
+            many=False,
+            default=NotImplemented,
+            wait=self.config.wait,
+        )
+        if value != (element.get_attribute("checked") == "true"):
+            element.click()
 
 
 class Region(ImmutableDomComponent):

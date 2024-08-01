@@ -21,6 +21,8 @@ class WebArea:
                 fn = element.Regions if config.many else element.Region
             elif config.is_input:
                 fn = element.InputElement
+            elif config.is_checkbox:
+                fn = element.CheckboxElement
             else:
                 fn = element.Elements if config.many else element.Element
             setattr(

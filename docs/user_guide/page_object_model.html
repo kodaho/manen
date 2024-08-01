@@ -272,7 +272,7 @@
         <article role="main" id="furo-main-content">
           <section id="Page-Object-Model-for-operability">
 <h1>Page Object Model for operability<a class="headerlink" href="#Page-Object-Model-for-operability" title="Link to this heading">¶</a></h1>
-<p>One of the core feature of Manen is its implementation of the Page Object Model design pattern, which provides an interface between the core methods of Selenium WebDriver, and the workflows of your application. By using this design pattern, you shouldn’t have to re-implement fucntions to access DOM elements; you just have to desccribe your page structure by breaking it into multiple components. This will help to increase the readability and operability of your code.</p>
+<p>One of the core feature of Manen is its implementation of the Page Object Model design pattern, which provides an interface between the core methods of Selenium WebDriver, and the workflows of your application. By using this design pattern, you shouldn’t have to re-implement functions to access DOM elements; you just have to describe your page structure by breaking it into multiple components. This will help to increase the readability and operability of your code.</p>
 <p>This step-by-step guide shows how to use Manen for such purposes. We will use PyPI web page as playground for the exploration.</p>
 <hr class="docutils" />
 <p>First, we need a WebDriver instance that will be the entrypoint for all our code. We will also define an helper function in charge of taking a screenshot of the current page, and display it inline.</p>
@@ -338,8 +338,8 @@
 </div>
 <section id="DOM-interactions">
 <h2>DOM interactions<a class="headerlink" href="#DOM-interactions" title="Link to this heading">¶</a></h2>
-<p>The main idea behind the page object model is to use simple Pythonic code to interact with your page. Python classes, as long as types annotations, will be use to describe our page. Each class will inherit from a Manen component, in order to symbolize the fact that they should be related to the DOM of the current page.</p>
-<p>Each class attributes must be annotated with the type of DOM value you want to retrieve, as long as the selectors to use to locate the elements. Manen provides some types to represent basic DOM elements; you can also use the type <code class="docutils literal notranslate"><span class="pre">str</span></code> (to extract the inner text of an element), <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">datetime</span></code> to attempt to convert the text to the given types. Note that you can use <code class="docutils literal notranslate"><span class="pre">element</span></code> or Selenium WebElement to return the raw Selenium web element.</p>
+<p>The main idea behind the page object model is to use simple Pythonic code to interact with your page. Python classes, with their attributes, will be used to describe an HTML page. Each class will inherit from a Manen <code class="docutils literal notranslate"><span class="pre">Component</span></code>, in order to symbolize the fact that they should be related to the DOM of the current page.</p>
+<p>Each class attributes must be annotated with the type of DOM value you want to retrieve, as long as the selectors used to locate the elements. Manen provides some types to represent basic DOM elements; you can also use the type <code class="docutils literal notranslate"><span class="pre">str</span></code> (to extract the inner text of an element), <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">datetime</span></code> to attempt to convert the text to the given types. Note that you can use <code class="docutils literal notranslate"><span class="pre">element</span></code> or Selenium WebElement to return the raw Selenium web element.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -369,7 +369,7 @@
 </pre></div>
 </div>
 </div>
-<p>A page should be initialized using the driver instance.</p>
+<p>A page is initialized using the driver instance.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -395,7 +395,7 @@
 https://pypi.org/static/images/logo-small.8998e9d1.svg
 </pre></div></div>
 </div>
-<p>Each Component provides a method <code class="docutils literal notranslate"><span class="pre">model_dump</span></code> to serialize all the attributes into a dictionary.</p>
+<p>Each component provides a method <code class="docutils literal notranslate"><span class="pre">model_dump</span></code> to serialize all the attributes into a dictionary.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -417,7 +417,7 @@ https://pypi.org/static/images/logo-small.8998e9d1.svg
   {&#39;label&#39;: &#39;Register&#39;, &#39;link&#39;: &#39;https://pypi.org/account/register/&#39;}]}
 </pre></div></div>
 </div>
-<p>Filling the value of the input with the search query is as simple as doing a variable attribution.</p>
+<p>Filling the value of the input with the search query is done with an assignment.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -441,7 +441,7 @@ https://pypi.org/static/images/logo-small.8998e9d1.svg
 <img alt="../_images/user_guide_page_object_model_16_0.png" src="../_images/user_guide_page_object_model_16_0.png" />
 </div>
 </div>
-<p>Given that <code class="docutils literal notranslate"><span class="pre">page.search</span></code> inherit from the <code class="docutils literal notranslate"><span class="pre">Form</span></code> class, it has a method <code class="docutils literal notranslate"><span class="pre">submit</span></code> you can call to submit the query. Note that it can also be done with the following script:</p>
+<p>Given that <code class="docutils literal notranslate"><span class="pre">page.search</span></code> inherit from the <code class="docutils literal notranslate"><span class="pre">Form</span></code> class, it has an additional method <code class="docutils literal notranslate"><span class="pre">submit</span></code> compared to other component, you can call to submit the query. Note that it can also be done with the following instructions:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">selenium.webdriver.common.keys</span> <span class="kn">import</span> <span class="n">Keys</span>
 
 <span class="n">page</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">query</span> <span class="o">+=</span> <span class="n">Keys</span><span class="o">.</span><span class="n">ENTER</span>
@@ -480,7 +480,7 @@ Current URL: https://pypi.org/search/?q=selenium
 <img alt="../_images/user_guide_page_object_model_20_1.png" src="../_images/user_guide_page_object_model_20_1.png" />
 </div>
 </div>
-<p>Let’s define another page to describe the current structure. Notice that we re-use the class <code class="docutils literal notranslate"><span class="pre">NavigationBar</span></code> given that this web component is also on the current page.</p>
+<p>Let’s define another page class to describe the new HTML structure. Notice that we re-use the class <code class="docutils literal notranslate"><span class="pre">NavigationBar</span></code> given that this web component is also on the current page.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -541,7 +541,7 @@ Current URL: https://pypi.org/search/?q=selenium
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Number of results for the query: 2574
+Number of results for the query: 2578
 Number of results on the page: 20
 </pre></div></div>
 </div>
@@ -609,9 +609,9 @@ Number of results on the page: 20
 <div class="highlight"><pre>
 selenium (v4.23.1) has been released on 2024-07-24, less than 180 days ago
 selenium2 (v0.1.1) has been released on 2024-06-02, less than 180 days ago
-ak_selenium (v0.1.8) has been released on 2023-12-05
-antiblock-selenium (v0.0.3) has been released on 2020-06-16
-auto-selenium (v1.0.1) has been released on 2021-11-07
+percy-selenium (v2.0.4) has been released on 2024-03-01, less than 180 days ago
+play-selenium (v0.0.3) has been released on 2019-06-26
+pytest-selenium (v4.1.0) has been released on 2024-02-01
 </pre></div></div>
 </div>
 </section>
@@ -626,31 +626,34 @@ auto-selenium (v1.0.1) has been released on 2021-11-07
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">datetime</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">checkbox</span></code></p></td>
+<td><p>Form element to interact with a checkbox through boolean assignment</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">datetime</span></code></p></td>
 <td><p>Extract the inner text of an element, and parse it to a datetime</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">element</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">element</span></code></p></td>
 <td><p>Return the raw Selenium element</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">href</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">href</span></code></p></td>
 <td><p>Extract the <code class="docutils literal notranslate"><span class="pre">href</span></code> attribute of an element</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">inner_html</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">inner_html</span></code></p></td>
 <td><p>Extract the inner HTML of an element</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">input_value</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">input_value</span></code></p></td>
 <td><p>Form element to interact with an input</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
 <td><p>Extract an integer from inner text of an element</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outer_html</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">outer_html</span></code></p></td>
 <td><p>Extract the outer HTML of an element</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">src</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">src</span></code></p></td>
 <td><p>Extract the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute of an element</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
 <td><p>Extract the inner text of an element</p></td>
 </tr>
 </tbody>
@@ -662,8 +665,8 @@ auto-selenium (v1.0.1) has been released on 2021-11-07
 </section>
 <section id="Advanced-usage">
 <h2>Advanced usage<a class="headerlink" href="#Advanced-usage" title="Link to this heading">¶</a></h2>
-<p>The page object implementation is using internally the <code class="docutils literal notranslate"><span class="pre">find</span></code> function, which has additional arguments to customize how to retrieve elements from the DOM (see associated user guide for more details about that). In the same way, you can add options to each attribute of your class to enable this level of customization in your model.</p>
-<p>For example, let’s say the element with the number of results dynamically arrives after the page is loaded. We can wait for this element to appear. For elements that can be absent from the DOM, we can add a default value.</p>
+<p>The page object implementation is using internally the <code class="docutils literal notranslate"><span class="pre">find</span></code> function, which has additional arguments to customize how to retrieve elements from the DOM (see <a class="reference external" href="https://kodaho.github.io/manen/user_guide/dom_exploration.html">associated user guide</a> for more details about that). In the same way, you can add options to each class attributes to enable this level of customization in your page model.</p>
+<p>Waiting a given duration for element to appear is done with the <code class="docutils literal notranslate"><span class="pre">Wait</span></code> config, whereas <code class="docutils literal notranslate"><span class="pre">Default</span></code> is used to set a default value when the element behind a DOM value is not found.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>

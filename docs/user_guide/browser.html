@@ -331,9 +331,9 @@
 About the project         -&gt; https://kodaho.github.io/manen/about.html
 Installation              -&gt; https://kodaho.github.io/manen/installation.html
 User Guide                -&gt; https://kodaho.github.io/manen/user_guide.html
-Going deeper into manen   -&gt; https://kodaho.github.io/manen/manen/manen.html
-Changelog                 -&gt; https://kodaho.github.io/manen/changelog.html
+Going deeper into Manen   -&gt; https://kodaho.github.io/manen/manen/manen.html
 Contributing              -&gt; https://kodaho.github.io/manen/contributing.html
+Changelog                 -&gt; https://kodaho.github.io/manen/changelog.html
 </pre></div></div>
 </div>
 </section>
@@ -388,11 +388,11 @@ Contributing              -&gt; https://kodaho.github.io/manen/contributing.html
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-selenium2
 selenium
-galaxy-selenium
-gerapy-selenium
-gocept.selenium
+selenium2
+percy-selenium
+play-selenium
+pytest-selenium
 </pre></div></div>
 </div>
 <p>Similarly, the <code class="docutils literal notranslate"><span class="pre">lookup</span></code> method provides a way to get an element, but will never raises an error if this element is not found (the default value returned if not found is <code class="docutils literal notranslate"><span class="pre">None</span></code>, but it can be changed). Note that this is the same as calling <code class="docutils literal notranslate"><span class="pre">browser.find(...,</span> <span class="pre">default=None)</span></code>.</p>
@@ -472,7 +472,7 @@ gocept.selenium
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">cookies</span> <span class="o">+=</span> <span class="p">[{</span><span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="s1">&#39;httpbin.org&#39;</span><span class="p">,</span> <span class="s1">&#39;httpOnly&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;sameSite&#39;</span><span class="p">:</span> <span class="s1">&#39;Lax&#39;</span><span class="p">,</span> <span class="s1">&#39;secure&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">}]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">cookies</span> <span class="o">+=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">}]</span>
 </pre></div>
 </div>
 </div>

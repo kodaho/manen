@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from types import NoneType, UnionType
 from typing import Any, get_args, get_origin
 
-from manen.page_object_model.dom import Flag
 from manen.page_object_model.exceptions import SelectorConfigError, TypeConfigError
+from manen.page_object_model.types import Attribute, Flag
 
 __all__ = ("CSS", "Default", "LinkText", "PartialLinkText", "Wait", "XPath")
 
@@ -46,6 +46,7 @@ class Config:
     wait: int
     default: Any = NotImplemented
     many: bool = False
+    attribute: str | None = None
     is_input: bool = False
     is_checkbox: bool = False
 
@@ -56,6 +57,7 @@ class Config:
         default = NotImplemented
         is_input = False
         is_checkbox = False
+        attribute = None
 
         for config in configs:
             if isinstance(config, cls):
@@ -74,6 +76,8 @@ class Config:
                 wait = config.seconds
             elif isinstance(config, Default):
                 default = config.value
+            elif isinstance(config, Attribute):
+                attribute = config.name
             elif config == Flag.INPUT:
                 is_input = True
             elif config == Flag.CHECKBOX:
@@ -85,6 +89,7 @@ class Config:
             selectors=selectors,
             wait=wait or 0,
             default=default,
+            attribute=attribute,
             is_input=is_input,
             is_checkbox=is_checkbox,
             **kwargs,

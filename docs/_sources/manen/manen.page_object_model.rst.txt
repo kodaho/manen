@@ -1,5 +1,5 @@
 :py:mod:`manen.page_object_model`
-==================================
+=================================
 
 .. automodule:: manen.page_object_model
    :members:
@@ -14,8 +14,8 @@
    :maxdepth: 1
    :titlesonly:
 
+   manen.page_object_model.component
    manen.page_object_model.config
-   manen.page_object_model.dom
-   manen.page_object_model.element
+   manen.page_object_model.dom_value
    manen.page_object_model.exceptions
-   manen.page_object_model.webarea
+   manen.page_object_model.types

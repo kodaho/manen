@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.07.18 -->
-        <title>manen.page_object_model.exceptions - Manen</title>
+        <title>manen.page_object_model.component - Manen</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=613ab9ff" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -262,33 +262,96 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <h1>Source code for manen.page_object_model.exceptions</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">manen.exceptions</span> <span class="kn">import</span> <span class="n">ManenException</span>
+          <h1>Source code for manen.page_object_model.component</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">cast</span>
+
+<span class="kn">from</span> <span class="nn">selenium.webdriver.chrome.webdriver</span> <span class="kn">import</span> <span class="n">WebDriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.remote.webelement</span> <span class="kn">import</span> <span class="n">WebElement</span>
+
+<span class="kn">from</span> <span class="nn">manen.page_object_model</span> <span class="kn">import</span> <span class="n">dom_value</span> <span class="k">as</span> <span class="n">dom</span>
+<span class="kn">from</span> <span class="nn">manen.page_object_model.config</span> <span class="kn">import</span> <span class="n">Config</span>
 
 
-<div class="viewcode-block" id="TypeConfigError">
-<a class="viewcode-back" href="../../../manen/manen.page_object_model.exceptions.html#manen.page_object_model.exceptions.TypeConfigError">[docs]</a>
-<span class="k">class</span> <span class="nc">TypeConfigError</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="n">ManenException</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">types</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="n">field</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">types</span> <span class="o">=</span> <span class="n">types</span>
+<div class="viewcode-block" id="Component">
+<a class="viewcode-back" href="../../../manen/manen.page_object_model.component.html#manen.page_object_model.component.Component">[docs]</a>
+<span class="k">class</span> <span class="nc">Component</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">WebDriver</span> <span class="o">|</span> <span class="n">WebElement</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scope</span> <span class="o">=</span> <span class="n">scope</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span> <span class="o">=</span> <span class="n">scope</span><span class="o">.</span><span class="n">parent</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">WebElement</span><span class="p">)</span> <span class="k">else</span> <span class="n">scope</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Config</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="si">}</span><span class="s2">&#39; should have exactly one non-None type in its annotation, but &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;get </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="p">)</span></div>
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__annotations__</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="o">.</span><span class="n">from_annotation_item</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__annotations__</span><span class="p">[</span><span class="n">field</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_component</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span><span class="p">):</span>
+                <span class="n">fn</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">DOMSections</span> <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">many</span> <span class="k">else</span> <span class="n">dom</span><span class="o">.</span><span class="n">DOMSection</span>
+            <span class="k">elif</span> <span class="n">config</span><span class="o">.</span><span class="n">is_input</span><span class="p">:</span>
+                <span class="n">fn</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">InputDOMValue</span>
+            <span class="k">elif</span> <span class="n">config</span><span class="o">.</span><span class="n">is_checkbox</span><span class="p">:</span>
+                <span class="n">fn</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">CheckboxDOMValue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fn</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">DOMValues</span> <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">many</span> <span class="k">else</span> <span class="n">dom</span><span class="o">.</span><span class="n">DOMValue</span>
+
+            <span class="nb">setattr</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span>
+                <span class="n">field</span><span class="p">,</span>
+                <span class="n">fn</span><span class="p">(</span><span class="n">config</span><span class="p">),</span>
+            <span class="p">)</span>
+
+<div class="viewcode-block" id="Component.is_component">
+<a class="viewcode-back" href="../../../manen/manen.page_object_model.component.html#manen.page_object_model.component.Component.is_component">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_component</span><span class="p">(</span><span class="n">element_type</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">element_type</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="n">Component</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Component.model_dump">
+<a class="viewcode-back" href="../../../manen/manen.page_object_model.component.html#manen.page_object_model.component.Component.model_dump">[docs]</a>
+    <span class="k">def</span> <span class="nf">model_dump</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dump</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_component</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span><span class="p">)</span> <span class="ow">and</span> <span class="n">config</span><span class="o">.</span><span class="n">many</span><span class="p">:</span>
+                <span class="n">dump</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">cast</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="n">Component</span><span class="p">],</span> <span class="n">item</span><span class="p">)]</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_component</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">config</span><span class="o">.</span><span class="n">many</span><span class="p">:</span>
+                <span class="n">dump</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Component</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dump</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
+        <span class="k">return</span> <span class="n">dump</span></div>
+</div>
 
 
 
-<div class="viewcode-block" id="SelectorConfigError">
-<a class="viewcode-back" href="../../../manen/manen.page_object_model.exceptions.html#manen.page_object_model.exceptions.SelectorConfigError">[docs]</a>
-<span class="k">class</span> <span class="nc">SelectorConfigError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">ManenException</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="n">field</span>
+<div class="viewcode-block" id="Form">
+<a class="viewcode-back" href="../../../manen/manen.page_object_model.component.html#manen.page_object_model.component.Form">[docs]</a>
+<span class="k">class</span> <span class="nc">Form</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+<div class="viewcode-block" id="Form.submit">
+<a class="viewcode-back" href="../../../manen/manen.page_object_model.component.html#manen.page_object_model.component.Form.submit">[docs]</a>
+    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scope</span><span class="p">,</span> <span class="n">WebElement</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scope</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span></div>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;At least one selector should be specified in the annotation of &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="si">}</span><span class="s2">&#39;&quot;</span></div>
+
+<div class="viewcode-block" id="Form.is_form">
+<a class="viewcode-back" href="../../../manen/manen.page_object_model.component.html#manen.page_object_model.component.Form.is_form">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_form</span><span class="p">(</span><span class="n">element_type</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">element_type</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="n">Form</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Page">
+<a class="viewcode-back" href="../../../manen/manen.page_object_model.component.html#manen.page_object_model.component.Page">[docs]</a>
+<span class="k">class</span> <span class="nc">Page</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">title</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span><span class="o">.</span><span class="n">title</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">source_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_driver</span><span class="o">.</span><span class="n">page_source</span></div>
 
 </pre></div>
         </article>

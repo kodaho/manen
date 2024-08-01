@@ -218,11 +218,11 @@
 <li class="toctree-l2"><a class="reference internal" href="manen/manen.finder.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.finder</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="manen/manen.helpers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.helpers</span></code></a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="manen/manen.page_object_model.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.page_object_model</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of manen.page_object_model</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="manen/manen.page_object_model.component.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">component</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="manen/manen.page_object_model.config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="manen/manen.page_object_model.dom.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dom</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="manen/manen.page_object_model.element.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">element</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manen/manen.page_object_model.dom_value.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dom_value</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="manen/manen.page_object_model.exceptions.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">exceptions</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="manen/manen.page_object_model.webarea.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">webarea</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manen/manen.page_object_model.types.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">types</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -288,13 +288,12 @@ with and without Manen:</p>
 
 <span class="kn">from</span> <span class="nn">selenium.webdriver.chrome.webdriver</span> <span class="kn">import</span> <span class="n">WebDriver</span>
 
-<span class="kn">from</span> <span class="nn">manen.page_object_model</span> <span class="kn">import</span> <span class="n">dom</span>
 <span class="kn">from</span> <span class="nn">manen.page_object_model.config</span> <span class="kn">import</span> <span class="n">CSS</span><span class="p">,</span> <span class="n">Default</span><span class="p">,</span> <span class="n">Wait</span><span class="p">,</span> <span class="n">XPath</span>
-<span class="kn">from</span> <span class="nn">manen.page_object_model.webarea</span> <span class="kn">import</span> <span class="n">Page</span><span class="p">,</span> <span class="n">WebArea</span>
+<span class="kn">from</span> <span class="nn">manen.page_object_model.component</span> <span class="kn">import</span> <span class="n">Page</span><span class="p">,</span> <span class="n">Component</span>
 
 
 <span class="k">class</span> <span class="nc">BlogPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
-   <span class="k">class</span> <span class="nc">Article</span><span class="p">(</span><span class="n">WebArea</span><span class="p">):</span>
+   <span class="k">class</span> <span class="nc">Article</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
       <span class="n">title</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">XPath</span><span class="p">(</span><span class="s2">&quot;//h1&quot;</span><span class="p">)]</span>
       <span class="n">n_likes</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;span.n_likes&quot;</span><span class="p">)]</span>
       <span class="n">tags</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;span.tag&quot;</span><span class="p">),</span> <span class="n">Default</span><span class="p">([])]</span>

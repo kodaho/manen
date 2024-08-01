@@ -270,11 +270,12 @@
 <div class="viewcode-block" id="Flag">
 <a class="viewcode-back" href="../../../manen/manen.page_object_model.dom.html#manen.page_object_model.dom.Flag">[docs]</a>
 <span class="k">class</span> <span class="nc">Flag</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
-    <span class="n">INPUT</span> <span class="o">=</span> <span class="s2">&quot;INPUT&quot;</span></div>
+    <span class="n">INPUT</span> <span class="o">=</span> <span class="s2">&quot;INPUT&quot;</span>
+    <span class="n">CHECKBOX</span> <span class="o">=</span> <span class="s2">&quot;CHECKBOX&quot;</span></div>
 
 
 
-<span class="n">Checkbox</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">&quot;Checkbox&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+<span class="n">Checkbox</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Flag</span><span class="o">.</span><span class="n">CHECKBOX</span><span class="p">]</span>
 <span class="n">HRef</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">&quot;HRef&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 <span class="n">ImageSrc</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">&quot;ImageSrc&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 <span class="n">InnerHTML</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">&quot;InnerHTML&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>

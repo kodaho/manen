@@ -282,7 +282,6 @@
 
 
 <span class="n">GET_TRANSFORMERS</span><span class="p">:</span> <span class="n">TTransformers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">dom</span><span class="o">.</span><span class="n">Checkbox</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">&quot;checked&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
     <span class="n">datetime</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">dateparser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">text</span><span class="p">),</span>
     <span class="n">dom</span><span class="o">.</span><span class="n">HRef</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">),</span>
     <span class="n">dom</span><span class="o">.</span><span class="n">ImageSrc</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">&quot;src&quot;</span><span class="p">),</span>
@@ -372,6 +371,35 @@
         <span class="p">)</span>
         <span class="n">element</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="n">element</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="CheckboxElement">
+<a class="viewcode-back" href="../../../manen/manen.page_object_model.element.html#manen.page_object_model.element.CheckboxElement">[docs]</a>
+<span class="k">class</span> <span class="nc">CheckboxElement</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Config</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">webarea</span><span class="p">:</span> <span class="s2">&quot;WebArea&quot;</span><span class="p">,</span> <span class="n">unused_cls_webarea</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="s2">&quot;WebArea&quot;</span><span class="p">]):</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span>
+            <span class="n">selector</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">selectors</span><span class="p">,</span>
+            <span class="n">inside</span><span class="o">=</span><span class="n">webarea</span><span class="o">.</span><span class="n">_scope</span><span class="p">,</span>
+            <span class="n">many</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">default</span><span class="p">,</span>
+            <span class="n">wait</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">wait</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">&quot;checked&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">webarea</span><span class="p">:</span> <span class="s2">&quot;WebArea&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span>
+            <span class="n">selector</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">selectors</span><span class="p">,</span>
+            <span class="n">inside</span><span class="o">=</span><span class="n">webarea</span><span class="o">.</span><span class="n">_scope</span><span class="p">,</span>
+            <span class="n">many</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="bp">NotImplemented</span><span class="p">,</span>
+            <span class="n">wait</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">wait</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">&quot;checked&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span><span class="p">):</span>
+            <span class="n">element</span><span class="o">.</span><span class="n">click</span><span class="p">()</span></div>
 
 
 

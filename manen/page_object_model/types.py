@@ -29,9 +29,9 @@ class Attribute:
 
 
 checkbox = Annotated[bool, Flag.CHECKBOX]
-href = Annotated[str, Attribute("href")]
-src = Annotated[str, Attribute("src")]
-inner_html = Annotated[str, Attribute("innerHTML")]
-outer_html = Annotated[str, Attribute("outerHTML")]
-input_value = Annotated[str, Flag.INPUT]
 element = WebElement
+href = Annotated[str, Attribute("href")]
+inner_html = Annotated[str, Attribute("innerHTML")]
+input_value = Annotated[str, Flag.INPUT]
+outer_html = Annotated[str, Attribute("outerHTML")]
+src = Annotated[str, Attribute("src")]

@@ -34,7 +34,7 @@ class Component:
 
     @staticmethod
     def is_component(element_type):
-        return type(element_type) is type and issubclass(element_type, Component)
+        return issubclass(element_type, Component)
 
     def model_dump(self):
         dump = {}

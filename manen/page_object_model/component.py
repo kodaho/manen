@@ -54,10 +54,6 @@ class Form(Component):
         assert isinstance(self._scope, WebElement)
         self._scope.submit()
 
-    @staticmethod
-    def is_form(element_type):
-        return type(element_type) is type and issubclass(element_type, Form)
-
 
 class Page(Component):
     @property

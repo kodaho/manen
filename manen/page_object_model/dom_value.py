@@ -42,7 +42,7 @@ class ImmutableDOMValueMixin:
 
 
 class DOMValue(ImmutableDOMValueMixin, ConfigurableDOM):
-    def __get__(self, component: "Component", unused_cls_webarea: type["Component"]):
+    def __get__(self, component: "Component", component_class: type["Component"]):
         element = find(
             selector=self.config.selectors,
             inside=component._scope,
@@ -61,7 +61,7 @@ class DOMValue(ImmutableDOMValueMixin, ConfigurableDOM):
 
 
 class DOMValues(ImmutableDOMValueMixin, ConfigurableDOM):
-    def __get__(self, component: "Component", unused_cls_webarea: type["Component"]):
+    def __get__(self, component: "Component", component_class: type["Component"]):
         elements = find(
             selector=self.config.selectors,
             inside=component._scope,
@@ -85,7 +85,7 @@ class InputDOMValue:
             raise ValueError("Cannot use InputElement with many=True")
         self.config = config
 
-    def __get__(self, component: "Component", unused_cls_webarea: type["Component"]):
+    def __get__(self, component: "Component", component_class: type["Component"]):
         element = find(
             selector=self.config.selectors,
             inside=component._scope,
@@ -111,7 +111,7 @@ class CheckboxDOMValue:
     def __init__(self, config: Config):
         self.config = config
 
-    def __get__(self, component: "Component", unused_cls_webarea: type["Component"]):
+    def __get__(self, component: "Component", component_class: type["Component"]):
         element = find(
             selector=self.config.selectors,
             inside=component._scope,
@@ -137,7 +137,7 @@ class DOMSection(ImmutableDOMValueMixin, ConfigurableDOM):
     def __get__(
         self,
         component: "Component",
-        cls_webarea: type["Component"],
+        component_class: type["Component"],
     ) -> "Component":
         element = find(
             selector=self.config.selectors,
@@ -155,9 +155,7 @@ class DOMSection(ImmutableDOMValueMixin, ConfigurableDOM):
 
 
 class DOMSections(ImmutableDOMValueMixin, ConfigurableDOM):
-    def __get__(self, component: "Component", cls_webarea: type["Component"]):
-        from manen.page_object_model.component import Component
-
+    def __get__(self, component: "Component", component_class: type["Component"]):
         elements = find(
             selector=self.config.selectors,
             inside=component._scope,

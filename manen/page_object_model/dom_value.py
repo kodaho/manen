@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import TYPE_CHECKING, Annotated, Callable, TypeVar
+from typing import TYPE_CHECKING, Annotated, Callable, TypeVar, cast
 
 import dateparser
 from selenium.webdriver.remote.webelement import WebElement
@@ -42,7 +42,7 @@ class ImmutableDOMValueMixin:
 
 
 class DOMValue(ImmutableDOMValueMixin, ConfigurableDOM):
-    def __get__(self, component: "Component", unused_cls_webarea: type["Component"]):
+    def __get__(self, component: "Component", component_class: type["Component"]):
         element = find(
             selector=self.config.selectors,
             inside=component._scope,
@@ -61,7 +61,7 @@ class DOMValue(ImmutableDOMValueMixin, ConfigurableDOM):
 
 
 class DOMValues(ImmutableDOMValueMixin, ConfigurableDOM):
-    def __get__(self, component: "Component", unused_cls_webarea: type["Component"]):
+    def __get__(self, component: "Component", component_class: type["Component"]):
         elements = find(
             selector=self.config.selectors,
             inside=component._scope,
@@ -85,7 +85,7 @@ class InputDOMValue:
             raise ValueError("Cannot use InputElement with many=True")
         self.config = config
 
-    def __get__(self, component: "Component", unused_cls_webarea: type["Component"]):
+    def __get__(self, component: "Component", component_class: type["Component"]):
         element = find(
             selector=self.config.selectors,
             inside=component._scope,
@@ -111,7 +111,7 @@ class CheckboxDOMValue:
     def __init__(self, config: Config):
         self.config = config
 
-    def __get__(self, component: "Component", unused_cls_webarea: type["Component"]):
+    def __get__(self, component: "Component", component_class: type["Component"]):
         element = find(
             selector=self.config.selectors,
             inside=component._scope,
@@ -137,10 +137,8 @@ class DOMSection(ImmutableDOMValueMixin, ConfigurableDOM):
     def __get__(
         self,
         component: "Component",
-        cls_webarea: type["Component"],
+        component_class: type["Component"],
     ) -> "Component":
-        from manen.page_object_model.component import Component, Form
-
         element = find(
             selector=self.config.selectors,
             inside=component._scope,
@@ -148,16 +146,16 @@ class DOMSection(ImmutableDOMValueMixin, ConfigurableDOM):
             default=NotImplemented,
             wait=self.config.wait,
         )
-        name = self.config.element_type.__qualname__
-        base = (Form,) if Form.is_form(self.config.element_type) else (Component,)
-        cls = type(name, base, {**self.config.element_type.__dict__})
-        return cls(element)
+        cls = type(
+            self.config.element_type.__qualname__,
+            self.config.element_type.__bases__,
+            {**self.config.element_type.__dict__},
+        )
+        return cast("Component", cls(element))
 
 
 class DOMSections(ImmutableDOMValueMixin, ConfigurableDOM):
-    def __get__(self, component: "Component", cls_webarea: type["Component"]):
-        from manen.page_object_model.component import Component
-
+    def __get__(self, component: "Component", component_class: type["Component"]):
         elements = find(
             selector=self.config.selectors,
             inside=component._scope,
@@ -165,6 +163,9 @@ class DOMSections(ImmutableDOMValueMixin, ConfigurableDOM):
             default=NotImplemented,
             wait=self.config.wait,
         )
-        name = self.config.element_type.__qualname__
-        cls = type(name, (Component,), {**self.config.element_type.__dict__})
+        cls = type(
+            self.config.element_type.__qualname__,
+            self.config.element_type.__bases__,
+            {**self.config.element_type.__dict__},
+        )
         return [cls(element) for element in elements]

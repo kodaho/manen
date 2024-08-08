@@ -34,7 +34,7 @@ class Component:
 
     @staticmethod
     def is_component(element_type):
-        return type(element_type) is type and issubclass(element_type, Component)
+        return issubclass(element_type, Component)
 
     def model_dump(self):
         dump = {}
@@ -53,10 +53,6 @@ class Form(Component):
     def submit(self):
         assert isinstance(self._scope, WebElement)
         self._scope.submit()
-
-    @staticmethod
-    def is_form(element_type):
-        return type(element_type) is type and issubclass(element_type, Form)
 
 
 class Page(Component):

@@ -303,7 +303,7 @@
 <a class="viewcode-back" href="../../../manen/manen.page_object_model.component.html#manen.page_object_model.component.Component.is_component">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">is_component</span><span class="p">(</span><span class="n">element_type</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">element_type</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="n">Component</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="n">Component</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Component.model_dump">
@@ -331,13 +331,6 @@
     <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scope</span><span class="p">,</span> <span class="n">WebElement</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_scope</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="Form.is_form">
-<a class="viewcode-back" href="../../../manen/manen.page_object_model.component.html#manen.page_object_model.component.Form.is_form">[docs]</a>
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">is_form</span><span class="p">(</span><span class="n">element_type</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">element_type</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="n">Form</span><span class="p">)</span></div>
 </div>
 
 
@@ -392,7 +385,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=e9a9c1eb"></script>
+</div><script src="../../../_static/documentation_options.js?v=c9185b00"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

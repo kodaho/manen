@@ -39,13 +39,13 @@ classes in an external file called ``pypi_pom.py``.
             description: Annotated[str, CSS("p.package-snippet__description")]
             release_date: Annotated[datetime, CSS("span.package-snippet__created")]
 
-        nb_results: Annotated[
-            int,
+        nb_results_label: Annotated[
+            str,
             XPath("//*[@id='content']//form/div[1]/div[1]/p/strong"),
         ]
         results: Annotated[
             list[Result],
-            CSS("ul[aria-label='Résultats de recherche'] li"),
+            CSS("ul[aria-label='Search results'] li"),
         ]
 
 
@@ -64,8 +64,8 @@ we will suppose that you have an instance of
     >>> home_page.search.submit()
     # This will direct you to a search result page of PyPI.
     >>> page = SearchResultPage(driver)
-    >>> page.nb_results
-    2571
+    >>> page.nb_results_label
+    '2,571 projects for "selenium"'
     >>> len(page.results)
     20
     >>> result = page.results[0]

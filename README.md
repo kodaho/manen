@@ -106,8 +106,8 @@ class SearchResultPage(Page):
         description: Annotated[str, CSS("p.package-snippet__description")]
         release_date: Annotated[datetime, CSS("span.package-snippet__created")]
 
-    nb_results: Annotated[
-        int,
+    nb_results_label: Annotated[
+        str,
         XPath("//*[@id='content']//form/div[1]/div[1]/p/strong"),
     ]
     results: Annotated[
@@ -147,8 +147,8 @@ The `SearchResultPage` will then be used to extract the results.
 ```python
 page = SearchResultPage(browser)
 
-print(page.nb_results)
-# 3
+print(page.nb_results_label)
+# 3 projects for "manen"
 
 print(page.results[0])
 # <__main__.SearchResultPage.Result at 0x1058e97c0>

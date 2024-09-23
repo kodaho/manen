@@ -9,24 +9,6 @@ if TYPE_CHECKING:
 PLATFORM = platform.uname()
 
 
-def extract_integer(string: str) -> int:
-    """
-    Extract an integer from a string.
-
-    Args:
-        string (str): text to process
-    Raises:
-        ValueError: Raised if no integer is found in the string.
-    Returns:
-        int: Integer extracted from the string
-    """
-    string = re.sub(r"[\s,]", "", string)
-    match = re.compile(r"(?P<integer>[\d]+)").search(string)
-    if match:
-        return int(match.group("integer"))
-    raise ValueError(f"No integer detected in {string}")
-
-
 def version(version_str: str) -> "Version":
     """
     Helper function to convert a version string into a tuple. The versioning

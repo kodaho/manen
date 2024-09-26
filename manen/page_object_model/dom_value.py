@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from typing import TYPE_CHECKING, Annotated, Callable, TypeVar, cast
 
 import dateparser
@@ -16,6 +16,7 @@ TTransformers = dict[type[T], Callable[[WebElement, Config], T]]
 
 
 GET_TRANSFORMERS: TTransformers = {
+    date: lambda elt, cfg: dt.date() if (dt := dateparser.parse(elt.text)) else None,
     datetime: lambda elt, cfg: dateparser.parse(elt.text),
     int: lambda elt, cfg: int(elt.text),
     float: lambda elt, cfg: float(elt.text),

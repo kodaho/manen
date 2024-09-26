@@ -18,8 +18,8 @@ TTransformers = dict[type[T], Callable[[WebElement, Config], T]]
 GET_TRANSFORMERS: TTransformers = {
     date: lambda elt, cfg: dt.date() if (dt := dateparser.parse(elt.text)) else None,
     datetime: lambda elt, cfg: dateparser.parse(elt.text),
-    int: lambda elt, cfg: int(elt.text),
     float: lambda elt, cfg: float(elt.text),
+    int: lambda elt, cfg: int(elt.text),
     str: lambda elt, cfg: elt.text,
     types.href: lambda elt, cfg: elt.get_attribute(cfg.attribute),
     types.inner_html: lambda elt, cfg: elt.get_attribute(cfg.attribute),

@@ -306,13 +306,13 @@ classes in an external file called <code class="docutils literal notranslate"><s
         <span class="n">description</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;p.package-snippet__description&quot;</span><span class="p">)]</span>
         <span class="n">release_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;span.package-snippet__created&quot;</span><span class="p">)]</span>
 
-    <span class="n">nb_results</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="nb">int</span><span class="p">,</span>
+    <span class="n">nb_results_label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+        <span class="nb">str</span><span class="p">,</span>
         <span class="n">XPath</span><span class="p">(</span><span class="s2">&quot;//*[@id=&#39;content&#39;]//form/div[1]/div[1]/p/strong&quot;</span><span class="p">),</span>
     <span class="p">]</span>
     <span class="n">results</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">list</span><span class="p">[</span><span class="n">Result</span><span class="p">],</span>
-        <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;ul[aria-label=&#39;Résultats de recherche&#39;] li&quot;</span><span class="p">),</span>
+        <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;ul[aria-label=&#39;Search results&#39;] li&quot;</span><span class="p">),</span>
     <span class="p">]</span>
 </pre></div>
 </div>
@@ -328,8 +328,8 @@ we will suppose that you have an instance of
 <span class="gp">&gt;&gt;&gt; </span><span class="n">home_page</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
 <span class="go"># This will direct you to a search result page of PyPI.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">page</span> <span class="o">=</span> <span class="n">SearchResultPage</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">page</span><span class="o">.</span><span class="n">nb_results</span>
-<span class="go">2571</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">page</span><span class="o">.</span><span class="n">nb_results_label</span>
+<span class="go">&#39;2,571 projects for &quot;selenium&quot;&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">results</span><span class="p">)</span>
 <span class="go">20</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>

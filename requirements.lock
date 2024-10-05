@@ -10,31 +10,31 @@
 #   universal: true
 
 -e file:.
-attrs==23.2.0
+attrs==24.2.0
     # via outcome
     # via trio
-certifi==2024.7.4
+certifi==2024.8.30
     # via requests
     # via selenium
-cffi==1.16.0 ; implementation_name != 'pypy' and os_name == 'nt'
+cffi==1.17.1 ; implementation_name != 'pypy' and os_name == 'nt'
     # via trio
 charset-normalizer==3.3.2
     # via requests
 dateparser==1.2.0
     # via manen
-exceptiongroup==1.2.2 ; python_version < '3.11'
+exceptiongroup==1.2.2 ; python_full_version < '3.11'
     # via trio
     # via trio-websocket
 h11==0.14.0
     # via wsproto
-idna==3.7
+idna==3.10
     # via requests
     # via trio
 outcome==1.3.0.post0
     # via trio
 polling2==0.4.7
     # via manen
-prompt-toolkit==3.0.47
+prompt-toolkit==3.0.48
     # via questionary
 pycparser==2.22 ; implementation_name != 'pypy' and os_name == 'nt'
     # via cffi
@@ -42,17 +42,17 @@ pysocks==1.7.1
     # via urllib3
 python-dateutil==2.9.0.post0
     # via dateparser
-pytz==2024.1
+pytz==2024.2
     # via dateparser
-pyyaml==6.0.1
+pyyaml==6.0.2
     # via manen
 questionary==1.10.0
     # via manen
-regex==2024.5.15
+regex==2024.9.11
     # via dateparser
 requests==2.32.3
     # via manen
-selenium==4.22.0
+selenium==4.25.0
     # via manen
 six==1.16.0
     # via python-dateutil
@@ -60,18 +60,18 @@ sniffio==1.3.1
     # via trio
 sortedcontainers==2.4.0
     # via trio
-trio==0.26.0
+trio==0.26.2
     # via selenium
     # via trio-websocket
 trio-websocket==0.11.1
     # via selenium
 typing-extensions==4.12.2
     # via selenium
-tzdata==2024.1 ; platform_system == 'Windows'
+tzdata==2024.2 ; platform_system == 'Windows'
     # via tzlocal
 tzlocal==5.2
     # via dateparser
-urllib3==2.2.2
+urllib3==2.2.3
     # via requests
     # via selenium
 wcwidth==0.2.13

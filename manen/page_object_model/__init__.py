@@ -41,7 +41,7 @@ classes in an external file called ``pypi_pom.py``.
 
         nb_results_label: Annotated[
             str,
-            XPath("//*[@id='content']//form/div[1]/div[1]/p/strong"),
+            XPath("//*[@id='content']//form/div[1]/div[1]/p"),
         ]
         results: Annotated[
             list[Result],

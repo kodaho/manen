@@ -508,8 +508,8 @@ Current URL: https://pypi.org/search/?q=selenium
 
     <span class="n">navbar</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">NavigationBar</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;header.site-header&quot;</span><span class="p">)]</span>
 
-    <span class="n">nb_results_label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="nb">str</span><span class="p">,</span>
+    <span class="n">nb_results</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+        <span class="nb">int</span><span class="p">,</span>
         <span class="n">XPath</span><span class="p">(</span><span class="s2">&quot;//*[@id=&#39;content&#39;]//form/div[1]/div[1]/p/strong&quot;</span><span class="p">),</span>
     <span class="p">]</span>
     <span class="n">results</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
@@ -531,7 +531,7 @@ Current URL: https://pypi.org/search/?q=selenium
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of results for the query:&quot;</span><span class="p">,</span> <span class="n">page</span><span class="o">.</span><span class="n">nb_results_label</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of results for the query:&quot;</span><span class="p">,</span> <span class="n">page</span><span class="o">.</span><span class="n">nb_results</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of results on the page:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">results</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -680,8 +680,8 @@ pytest-selenium (v4.1.0) has been released on 2024-02-01
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manen.page_object_model.config</span> <span class="kn">import</span> <span class="n">Default</span><span class="p">,</span> <span class="n">Wait</span>
 
 <span class="k">class</span> <span class="nc">SearchResultPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
-    <span class="n">nb_results_label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="nb">str</span><span class="p">,</span>
+    <span class="n">nb_results</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+        <span class="nb">int</span><span class="p">,</span>
         <span class="n">XPath</span><span class="p">(</span><span class="s2">&quot;//*[@id=&#39;content&#39;]//form/div[1]/div[1]/p/strong&quot;</span><span class="p">),</span>
         <span class="n">Wait</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
     <span class="p">]</span>

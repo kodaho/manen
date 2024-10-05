@@ -140,7 +140,6 @@ polling2==0.5.0
     # via manen
 prompt-toolkit==3.0.48
     # via ipython
-    # via questionary
 ptyprocess==0.7.0 ; sys_platform != 'emscripten' and sys_platform != 'win32'
     # via pexpect
 pure-eval==0.2.3
@@ -167,19 +166,14 @@ pytz==2024.2
     # via dateparser
 pywin32==307 ; platform_python_implementation != 'PyPy' and sys_platform == 'win32'
     # via jupyter-core
-pyyaml==6.0.2
-    # via manen
 pyzmq==26.2.0
     # via jupyter-client
-questionary==1.10.0
-    # via manen
 referencing==0.35.1
     # via jsonschema
     # via jsonschema-specifications
 regex==2024.9.11
     # via dateparser
 requests==2.32.3
-    # via manen
     # via sphinx
 rich==13.9.2
     # via typer

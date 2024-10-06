@@ -1,5 +1,4 @@
-from datetime import date
-from typing import TYPE_CHECKING, Any, TypedDict, Union
+from typing import TYPE_CHECKING, Any, Union
 
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
@@ -29,13 +28,6 @@ class ElementFinderProtocol(Protocol):
 class CapabilitiesProtocol(Protocol):
     @property
     def capabilities(self) -> dict[str, Any]: ...
-
-
-class InstalledVersionInfo(TypedDict):
-    channel: str
-    os: str
-    release_date: date
-    version: Version
 
 
 if TYPE_CHECKING:

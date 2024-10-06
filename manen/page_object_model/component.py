@@ -44,7 +44,7 @@ class Component:
                 dump[field] = [el.model_dump() for el in cast(list[Component], item)]
             elif self.is_component(config.element_type) and not config.many:
                 dump[field] = cast(Component, item).model_dump()
-            else:
+            elif config.element_type != WebElement:
                 dump[field] = item
         return dump
 

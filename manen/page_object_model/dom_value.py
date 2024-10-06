@@ -1,7 +1,6 @@
 from datetime import date, datetime
 from typing import TYPE_CHECKING, Callable, TypeVar, cast
 
-import dateparser
 from selenium.webdriver.remote.webelement import WebElement
 
 from manen.finder import find
@@ -11,16 +10,21 @@ if TYPE_CHECKING:
     from manen.page_object_model.component import Component
 
 T = TypeVar("T")
-TTransformers = dict[type[T], Callable[[WebElement, Config], T]]
+TTransformers = dict[type[T], Callable[[str, Config], T]]
+
+
+def parse_datetime(value: str, cfg: Config) -> datetime:
+    if not cfg.format:
+        raise ValueError(f"A {cfg.element_type.__name__} format is required")
+    return datetime.strptime(value, cfg.format)
 
 
 GET_TRANSFORMERS: TTransformers = {
-    date: lambda elt, cfg: dt.date() if (dt := dateparser.parse(elt.text)) else None,
-    datetime: lambda elt, cfg: dateparser.parse(elt.text),
-    float: lambda elt, cfg: float(elt.text),
-    int: lambda elt, cfg: int(elt.text),
-    str: lambda elt, cfg: elt.text,
-    WebElement: lambda elt, cfg: elt,
+    date: lambda value, cfg: parse_datetime(value, cfg).date(),
+    datetime: parse_datetime,
+    float: lambda value, cfg: float(value),
+    int: lambda value, cfg: int(value),
+    str: lambda value, cfg: value,
 }
 
 
@@ -48,9 +52,14 @@ class DOMValue(ImmutableDOMValueMixin, ConfigurableDOM):
         )
         if element == self.config.default:
             return element
-        if self.config.attribute:
-            return element.get_attribute(self.config.attribute)
-        return GET_TRANSFORMERS[self.config.element_type](element, self.config)
+        if self.config.element_type == WebElement:
+            return element
+        value = (
+            element.get_attribute(self.config.attribute)
+            if self.config.attribute
+            else element.text
+        )
+        return GET_TRANSFORMERS[self.config.element_type](value or "", self.config)
 
 
 class DOMValues(ImmutableDOMValueMixin, ConfigurableDOM):
@@ -64,13 +73,19 @@ class DOMValues(ImmutableDOMValueMixin, ConfigurableDOM):
         )
         if elements == self.config.default:
             return elements
-        if self.config.attribute:
-            return [
-                element.get_attribute(self.config.attribute) for element in elements
-            ]
-        return [
-            GET_TRANSFORMERS[self.config.element_type](element, self.config)
+        if self.config.element_type == WebElement:
+            return elements
+        values = [
+            (
+                element.get_attribute(self.config.attribute)
+                if self.config.attribute
+                else element.text
+            )
             for element in elements
+        ]
+        return [
+            GET_TRANSFORMERS[self.config.element_type](value or "", self.config)
+            for value in values
         ]
 
 

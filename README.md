@@ -90,7 +90,7 @@ like in `Pydantic` model).
 
 ```python
 from manen.page_object_model.types import href, input_value
-from manen.page_object_model.config import CSS, XPath
+from manen.page_object_model.config import CSS, Attribute, DatetimeFormat, XPath
 from manen.page_object_model.component import Page, Component
 
 
@@ -104,7 +104,12 @@ class SearchResultPage(Page):
         version: Annotated[str, CSS("h3 span.package-snippet__version")]
         link: Annotated[href, CSS("a.package-snippet")]
         description: Annotated[str, CSS("p.package-snippet__description")]
-        release_date: Annotated[datetime, CSS("span.package-snippet__created")]
+        release_datetime: A[
+            datetime,
+            DatetimeFormat("%Y-%m-%dT%H:%M:%S%z"),
+            Attribute("datetime"),
+            CSS("span.package-snippet__created time"),
+        ]
 
     nb_results: Annotated[
         int,
@@ -163,7 +168,7 @@ print(page.results[0].model_dump())
 #  'version': '0.2.0',
 #  'link': 'https://pypi.org/project/manen/',
 #  'description': 'A package around Selenium with an implementation of the page object model, an enhanced WebDriver and a CLI.',
-#  'release_date': datetime.datetime(2022, 2, 19, 0, 0)}
+#  'release_datetime': datetime.datetime(2022, 2, 19, 12, 10, 31, tzinfo=datetime.timezone.utc)}
 ```
 
 > [!TIP]

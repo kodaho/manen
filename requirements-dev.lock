@@ -48,8 +48,6 @@ colorama==0.4.6
     # via pytest
     # via sphinx
     # via sphinx-autobuild
-dateparser==1.2.0
-    # via manen
 decorator==5.1.1
     # via ipython
 defusedxml==0.7.1
@@ -160,10 +158,7 @@ pysocks==1.7.1
     # via urllib3
 pytest==7.4.4
 python-dateutil==2.9.0.post0
-    # via dateparser
     # via jupyter-client
-pytz==2024.2
-    # via dateparser
 pywin32==307 ; platform_python_implementation != 'PyPy' and sys_platform == 'win32'
     # via jupyter-core
 pyzmq==26.2.0
@@ -171,8 +166,6 @@ pyzmq==26.2.0
 referencing==0.35.1
     # via jsonschema
     # via jsonschema-specifications
-regex==2024.9.11
-    # via dateparser
 requests==2.32.3
     # via sphinx
 rich==13.9.2
@@ -261,10 +254,6 @@ typing-extensions==4.12.2
     # via selenium
     # via typer
     # via uvicorn
-tzdata==2024.2 ; platform_system == 'Windows'
-    # via tzlocal
-tzlocal==5.2
-    # via dateparser
 urllib3==2.2.3
     # via requests
     # via selenium

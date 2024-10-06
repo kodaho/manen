@@ -1,11 +1,10 @@
 from datetime import date, datetime
-from typing import TYPE_CHECKING, Annotated, Callable, TypeVar, cast
+from typing import TYPE_CHECKING, Callable, TypeVar, cast
 
 import dateparser
 from selenium.webdriver.remote.webelement import WebElement
 
 from manen.finder import find
-from manen.page_object_model import types
 from manen.page_object_model.config import Config
 
 if TYPE_CHECKING:
@@ -21,10 +20,6 @@ GET_TRANSFORMERS: TTransformers = {
     float: lambda elt, cfg: float(elt.text),
     int: lambda elt, cfg: int(elt.text),
     str: lambda elt, cfg: elt.text,
-    types.href: lambda elt, cfg: elt.get_attribute(cfg.attribute),
-    types.inner_html: lambda elt, cfg: elt.get_attribute(cfg.attribute),
-    types.outer_html: lambda elt, cfg: elt.get_attribute(cfg.attribute),
-    types.src: lambda elt, cfg: elt.get_attribute(cfg.attribute),
     WebElement: lambda elt, cfg: elt,
 }
 
@@ -53,12 +48,9 @@ class DOMValue(ImmutableDOMValueMixin, ConfigurableDOM):
         )
         if element == self.config.default:
             return element
-        key = (
-            Annotated[str, types.Attribute(self.config.attribute)]
-            if self.config.attribute
-            else self.config.element_type
-        )
-        return GET_TRANSFORMERS[key](element, self.config)
+        if self.config.attribute:
+            return element.get_attribute(self.config.attribute)
+        return GET_TRANSFORMERS[self.config.element_type](element, self.config)
 
 
 class DOMValues(ImmutableDOMValueMixin, ConfigurableDOM):
@@ -72,12 +64,14 @@ class DOMValues(ImmutableDOMValueMixin, ConfigurableDOM):
         )
         if elements == self.config.default:
             return elements
-        key = (
-            Annotated[str, types.Attribute(self.config.attribute)]
-            if self.config.attribute
-            else self.config.element_type
-        )
-        return [GET_TRANSFORMERS[key](element, self.config) for element in elements]
+        if self.config.attribute:
+            return [
+                element.get_attribute(self.config.attribute) for element in elements
+            ]
+        return [
+            GET_TRANSFORMERS[self.config.element_type](element, self.config)
+            for element in elements
+        ]
 
 
 class InputDOMValue:

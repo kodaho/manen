@@ -185,6 +185,9 @@ browser.quit()
 possibilities offered by the package. It also contains several user guides to help you get
 started with the package.
 
+A [set of examples](./examples/) is also available in the `examples/` directory of the repository.
+They are designed to show you how to use the package in a real-world context.
+
 Don't hesitate to open an issue if you have any question or concern about this project!
 
 Looking to contribute to fix or add new features? Just read

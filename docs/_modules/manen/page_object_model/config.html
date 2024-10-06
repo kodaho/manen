@@ -265,10 +265,11 @@
           <h1>Source code for manen.page_object_model.config</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">NoneType</span><span class="p">,</span> <span class="n">UnionType</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">get_args</span><span class="p">,</span> <span class="n">get_origin</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">get_origin</span>
 
-<span class="kn">from</span> <span class="nn">manen.page_object_model.exceptions</span> <span class="kn">import</span> <span class="n">SelectorConfigError</span><span class="p">,</span> <span class="n">TypeConfigError</span>
+<span class="kn">from</span> <span class="nn">manen.page_object_model.exceptions</span> <span class="kn">import</span> <span class="n">SelectorConfigError</span>
 <span class="kn">from</span> <span class="nn">manen.page_object_model.types</span> <span class="kn">import</span> <span class="n">Attribute</span><span class="p">,</span> <span class="n">Flag</span>
+<span class="kn">from</span> <span class="nn">manen.page_object_model.utils</span> <span class="kn">import</span> <span class="n">resolve_args</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;CSS&quot;</span><span class="p">,</span> <span class="s2">&quot;Default&quot;</span><span class="p">,</span> <span class="s2">&quot;LinkText&quot;</span><span class="p">,</span> <span class="s2">&quot;PartialLinkText&quot;</span><span class="p">,</span> <span class="s2">&quot;Wait&quot;</span><span class="p">,</span> <span class="s2">&quot;XPath&quot;</span><span class="p">)</span>
 
@@ -387,22 +388,19 @@
 <a class="viewcode-back" href="../../../manen/manen.page_object_model.config.html#manen.page_object_model.config.Config.from_annotation_item">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_annotation_item</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">annotation</span><span class="p">):</span>
-        <span class="n">origin</span> <span class="o">=</span> <span class="n">get_origin</span><span class="p">(</span><span class="n">type_</span> <span class="o">:=</span> <span class="n">annotation</span><span class="o">.</span><span class="n">__origin__</span><span class="p">)</span>
+        <span class="n">origin</span> <span class="o">=</span> <span class="n">get_origin</span><span class="p">(</span><span class="n">annotation</span><span class="o">.</span><span class="n">__origin__</span><span class="p">)</span>
+        <span class="n">element_type</span><span class="p">,</span> <span class="o">*</span><span class="n">meta</span> <span class="o">=</span> <span class="n">resolve_args</span><span class="p">(</span><span class="n">annotation</span><span class="p">)</span>
+
         <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">field</span><span class="p">}</span>
-
         <span class="k">if</span> <span class="n">origin</span> <span class="ow">is</span> <span class="nb">list</span><span class="p">:</span>
-            <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;element_type&quot;</span><span class="p">:</span> <span class="n">get_args</span><span class="p">(</span><span class="n">type_</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;many&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
-
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;element_type&quot;</span><span class="p">:</span> <span class="n">element_type</span><span class="p">,</span> <span class="s2">&quot;many&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
         <span class="k">elif</span> <span class="n">origin</span> <span class="ow">is</span> <span class="n">UnionType</span><span class="p">:</span>
-            <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">arg</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">get_args</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span> <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">NoneType</span><span class="p">]</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">TypeConfigError</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
-            <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;element_type&quot;</span><span class="p">:</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;many&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
-
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;element_type&quot;</span><span class="p">:</span> <span class="n">element_type</span><span class="p">,</span> <span class="s2">&quot;many&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;element_type&quot;</span><span class="p">:</span> <span class="n">type_</span><span class="p">,</span> <span class="s2">&quot;many&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;element_type&quot;</span><span class="p">:</span> <span class="n">element_type</span><span class="p">,</span> <span class="s2">&quot;many&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
 
-        <span class="n">config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">annotation</span><span class="o">.</span><span class="n">__metadata__</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">meta</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">arg</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">meta</span> <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">NoneType</span><span class="p">])</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">selectors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">SelectorConfigError</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
@@ -449,7 +447,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=887b6ed6"></script>
+</div><script src="../../../_static/documentation_options.js?v=213b1ab0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

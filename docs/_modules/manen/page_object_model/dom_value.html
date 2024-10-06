@@ -264,13 +264,12 @@
         <article role="main" id="furo-main-content">
           <h1>Source code for manen.page_object_model.dom_value</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
 
 <span class="kn">import</span> <span class="nn">dateparser</span>
 <span class="kn">from</span> <span class="nn">selenium.webdriver.remote.webelement</span> <span class="kn">import</span> <span class="n">WebElement</span>
 
 <span class="kn">from</span> <span class="nn">manen.finder</span> <span class="kn">import</span> <span class="n">find</span>
-<span class="kn">from</span> <span class="nn">manen.page_object_model</span> <span class="kn">import</span> <span class="n">types</span>
 <span class="kn">from</span> <span class="nn">manen.page_object_model.config</span> <span class="kn">import</span> <span class="n">Config</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
@@ -286,10 +285,6 @@
     <span class="nb">float</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">elt</span><span class="p">,</span> <span class="n">cfg</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">elt</span><span class="o">.</span><span class="n">text</span><span class="p">),</span>
     <span class="nb">int</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">elt</span><span class="p">,</span> <span class="n">cfg</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">elt</span><span class="o">.</span><span class="n">text</span><span class="p">),</span>
     <span class="nb">str</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">elt</span><span class="p">,</span> <span class="n">cfg</span><span class="p">:</span> <span class="n">elt</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
-    <span class="n">types</span><span class="o">.</span><span class="n">href</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">elt</span><span class="p">,</span> <span class="n">cfg</span><span class="p">:</span> <span class="n">elt</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">attribute</span><span class="p">),</span>
-    <span class="n">types</span><span class="o">.</span><span class="n">inner_html</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">elt</span><span class="p">,</span> <span class="n">cfg</span><span class="p">:</span> <span class="n">elt</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">attribute</span><span class="p">),</span>
-    <span class="n">types</span><span class="o">.</span><span class="n">outer_html</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">elt</span><span class="p">,</span> <span class="n">cfg</span><span class="p">:</span> <span class="n">elt</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">attribute</span><span class="p">),</span>
-    <span class="n">types</span><span class="o">.</span><span class="n">src</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">elt</span><span class="p">,</span> <span class="n">cfg</span><span class="p">:</span> <span class="n">elt</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">attribute</span><span class="p">),</span>
     <span class="n">WebElement</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">elt</span><span class="p">,</span> <span class="n">cfg</span><span class="p">:</span> <span class="n">elt</span><span class="p">,</span>
 <span class="p">}</span>
 
@@ -326,12 +321,9 @@
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">default</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">element</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">Attribute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">attribute</span><span class="p">)]</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">attribute</span>
-            <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="n">GET_TRANSFORMERS</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">element</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">attribute</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">attribute</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">GET_TRANSFORMERS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span><span class="p">](</span><span class="n">element</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span></div>
 
 
 
@@ -348,12 +340,14 @@
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">elements</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">default</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">elements</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">Attribute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">attribute</span><span class="p">)]</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">attribute</span>
-            <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">GET_TRANSFORMERS</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">element</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span></div>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">attribute</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span>
+                <span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">attribute</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span>
+            <span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">GET_TRANSFORMERS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span><span class="p">](</span><span class="n">element</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span>
+        <span class="p">]</span></div>
 
 
 
@@ -498,7 +492,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=887b6ed6"></script>
+</div><script src="../../../_static/documentation_options.js?v=213b1ab0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

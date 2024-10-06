@@ -20,8 +20,9 @@ classes in an external file called ``pypi_pom.py``.
     from selenium.webdriver.chrome.options import Options
     from selenium.webdriver.chrome.webdriver import WebDriver
 
-    from manen.page_object_model.types import input_value
     from manen.page_object_model.component import Page, Component
+    from manen.page_object_model.config import CSS, Attribute, DatetimeFormat, XPath
+    from manen.page_object_model.types import input_value
 
 
     class HomePage(Page):
@@ -37,7 +38,12 @@ classes in an external file called ``pypi_pom.py``.
             version: Annotated[str, CSS("h3 span.package-snippet__version")]
             link: Annotated[href, CSS("a.package-snippet")]
             description: Annotated[str, CSS("p.package-snippet__description")]
-            release_date: Annotated[datetime, CSS("span.package-snippet__created")]
+            release_datetime: A[
+                datetime,
+                DatetimeFormat("%Y-%m-%dT%H:%M:%S%z"),
+                Attribute("datetime"),
+                CSS("span.package-snippet__created time"),
+            ]
 
         nb_results_label: Annotated[
             str,
@@ -72,14 +78,14 @@ we will suppose that you have an instance of
     <pypi_pom.SearchResultPage.Result>
     >>> result.name
     'selenium'
-    >>> result.release_date
-    datetime.datetime(2024, 7, 24, 0, 0)}
+    >>> result.release_datetime
+    datetime.datetime(2024, 9, 20, 15, 4, 46, tzinfo=datetime.timezone.utc)
     >>> result.model_dump()
     {'name': 'selenium',
-     'version': '4.23.1',
+     'version': '4.25.0',
      'link': 'https://pypi.org/project/selenium/',
      'description': 'Official Python bindings for Selenium WebDriver',
-     'release_date': datetime.datetime(2024, 7, 24, 0, 0)}
+     'release_datetime': datetime.datetime(2024, 9, 20, 15, 4, 46, tzinfo=datetime.timezone.utc)}
 
 This is a preview of what you can do with :py:mod:`~manen.page_object_model`. See the
 documentation of each objects to check all the features provided by the module.

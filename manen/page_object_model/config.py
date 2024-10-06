@@ -8,6 +8,9 @@ from manen.page_object_model.utils import resolve_args
 
 __all__ = ("CSS", "Default", "LinkText", "PartialLinkText", "Wait", "XPath")
 
+DEFAULT_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
+DEFAULT_DATE_FORMAT = "%Y-%m-%d"
+
 
 @dataclass
 class XPath:
@@ -40,6 +43,16 @@ class Default:
 
 
 @dataclass
+class DatetimeFormat:
+    format: str = DEFAULT_DATETIME_FORMAT
+
+
+@dataclass
+class DateFormat:
+    format: str = DEFAULT_DATE_FORMAT
+
+
+@dataclass
 class Config:
     name: str
     element_type: type
@@ -50,6 +63,7 @@ class Config:
     attribute: str | None = None
     is_input: bool = False
     is_checkbox: bool = False
+    format: str | None = None
 
     @classmethod
     def merge(cls, configs, **kwargs):
@@ -59,6 +73,7 @@ class Config:
         is_input = False
         is_checkbox = False
         attribute = None
+        format_ = None
 
         for config in configs:
             if isinstance(config, cls):
@@ -79,6 +94,8 @@ class Config:
                 default = config.value
             elif isinstance(config, Attribute):
                 attribute = config.name
+            elif isinstance(config, (DatetimeFormat, DateFormat)):
+                format_ = config.format
             elif config == Flag.INPUT:
                 is_input = True
             elif config == Flag.CHECKBOX:
@@ -93,6 +110,7 @@ class Config:
             attribute=attribute,
             is_input=is_input,
             is_checkbox=is_checkbox,
+            format=format_,
             **kwargs,
         )
 

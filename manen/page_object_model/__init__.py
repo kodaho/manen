@@ -78,7 +78,7 @@ we will suppose that you have an instance of
     <pypi_pom.SearchResultPage.Result>
     >>> result.name
     'selenium'
-    >>> result.release_date
+    >>> result.release_datetime
     datetime.datetime(2024, 9, 20, 15, 4, 46, tzinfo=datetime.timezone.utc)
     >>> result.model_dump()
     {'name': 'selenium',

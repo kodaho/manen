@@ -27,8 +27,9 @@ class ScrapeThisSiteHockeyTeamsPage(Page):
         diff: Annotated[int, CSS("td.diff")]
 
     class Pagination(Component):
-        previous: Annotated[href, CSS("a[aria-label='Previous']"), Default(None)]
-        next: Annotated[href, CSS("a[aria-label='Next']"), Default(None)]
+        previous: Annotated[href | None, CSS("a[aria-label='Previous']"), Default(None)]
+        available: Annotated[list[href], CSS("a:not([aria-label])")]
+        next: Annotated[href | None, CSS("a[aria-label='Next']"), Default(None)]
 
     source: Annotated[href, CSS("a.data-attribution")]
     nb_results_label: Annotated[str, CSS("h1 small")]

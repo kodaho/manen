@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from types import NoneType, UnionType
-from typing import Any, get_args, get_origin
+from typing import Any, get_origin
 
-from manen.page_object_model.exceptions import SelectorConfigError, TypeConfigError
+from manen.page_object_model.exceptions import SelectorConfigError
 from manen.page_object_model.types import Attribute, Flag
+from manen.page_object_model.utils import resolve_args
 
 __all__ = ("CSS", "Default", "LinkText", "PartialLinkText", "Wait", "XPath")
 
@@ -97,22 +98,19 @@ class Config:
 
     @classmethod
     def from_annotation_item(cls, field, annotation):
-        origin = get_origin(type_ := annotation.__origin__)
+        origin = get_origin(annotation.__origin__)
+        element_type, *meta = resolve_args(annotation)
+
         kwargs = {"name": field}
-
         if origin is list:
-            kwargs.update({"element_type": get_args(type_)[0], "many": True})
-
+            kwargs.update({"element_type": element_type, "many": True})
         elif origin is UnionType:
-            args = [arg for arg in get_args(type_) if arg is not NoneType]
-            if len(args) != 1:
-                raise TypeConfigError(field, args)
-            kwargs.update({"element_type": args[0], "many": False})
-
+            kwargs.update({"element_type": element_type, "many": False})
         else:
-            kwargs.update({"element_type": type_, "many": False})
+            kwargs.update({"element_type": element_type, "many": False})
 
-        config = cls.merge(annotation.__metadata__, **kwargs)
+        meta = tuple([arg for arg in meta if arg is not NoneType])
+        config = cls.merge(meta, **kwargs)
 
         if len(config.selectors) == 0:
             raise SelectorConfigError(field)

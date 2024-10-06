@@ -26,6 +26,9 @@ familiar with the library.
    docs/source/user_guide>`_. You can download them and run them locally to get a good start for
    playground environment.
 
+These user guides can be completed with real-world examples available in the
+`examples folder <https://github.com/kodaho/manen/tree/main/examples/>`_ of the source code
+repository.
 
 Getting familiar with Manen
 ---------------------------

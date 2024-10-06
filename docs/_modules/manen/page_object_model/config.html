@@ -273,6 +273,9 @@
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;CSS&quot;</span><span class="p">,</span> <span class="s2">&quot;Default&quot;</span><span class="p">,</span> <span class="s2">&quot;LinkText&quot;</span><span class="p">,</span> <span class="s2">&quot;PartialLinkText&quot;</span><span class="p">,</span> <span class="s2">&quot;Wait&quot;</span><span class="p">,</span> <span class="s2">&quot;XPath&quot;</span><span class="p">)</span>
 
+<span class="n">DEFAULT_DATETIME_FORMAT</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span>
+<span class="n">DEFAULT_DATE_FORMAT</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span>
+
 
 <div class="viewcode-block" id="XPath">
 <a class="viewcode-back" href="../../../manen/manen.page_object_model.config.html#manen.page_object_model.config.XPath">[docs]</a>
@@ -322,6 +325,22 @@
 
 
 
+<div class="viewcode-block" id="DatetimeFormat">
+<a class="viewcode-back" href="../../../manen/manen.page_object_model.config.html#manen.page_object_model.config.DatetimeFormat">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">DatetimeFormat</span><span class="p">:</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_DATETIME_FORMAT</span></div>
+
+
+
+<div class="viewcode-block" id="DateFormat">
+<a class="viewcode-back" href="../../../manen/manen.page_object_model.config.html#manen.page_object_model.config.DateFormat">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">DateFormat</span><span class="p">:</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_DATE_FORMAT</span></div>
+
+
+
 <div class="viewcode-block" id="Config">
 <a class="viewcode-back" href="../../../manen/manen.page_object_model.config.html#manen.page_object_model.config.Config">[docs]</a>
 <span class="nd">@dataclass</span>
@@ -335,6 +354,7 @@
     <span class="n">attribute</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">is_input</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">is_checkbox</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="Config.merge">
 <a class="viewcode-back" href="../../../manen/manen.page_object_model.config.html#manen.page_object_model.config.Config.merge">[docs]</a>
@@ -346,6 +366,7 @@
         <span class="n">is_input</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">is_checkbox</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">attribute</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">format_</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">configs</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
@@ -366,6 +387,8 @@
                 <span class="n">default</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">value</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">Attribute</span><span class="p">):</span>
                 <span class="n">attribute</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="p">(</span><span class="n">DatetimeFormat</span><span class="p">,</span> <span class="n">DateFormat</span><span class="p">)):</span>
+                <span class="n">format_</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">format</span>
             <span class="k">elif</span> <span class="n">config</span> <span class="o">==</span> <span class="n">Flag</span><span class="o">.</span><span class="n">INPUT</span><span class="p">:</span>
                 <span class="n">is_input</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">elif</span> <span class="n">config</span> <span class="o">==</span> <span class="n">Flag</span><span class="o">.</span><span class="n">CHECKBOX</span><span class="p">:</span>
@@ -380,6 +403,7 @@
             <span class="n">attribute</span><span class="o">=</span><span class="n">attribute</span><span class="p">,</span>
             <span class="n">is_input</span><span class="o">=</span><span class="n">is_input</span><span class="p">,</span>
             <span class="n">is_checkbox</span><span class="o">=</span><span class="n">is_checkbox</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="n">format_</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span></div>
 

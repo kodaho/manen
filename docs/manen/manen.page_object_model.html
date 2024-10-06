@@ -287,8 +287,9 @@ classes in an external file called <code class="docutils literal notranslate"><s
 <span class="kn">from</span> <span class="nn">selenium.webdriver.chrome.options</span> <span class="kn">import</span> <span class="n">Options</span>
 <span class="kn">from</span> <span class="nn">selenium.webdriver.chrome.webdriver</span> <span class="kn">import</span> <span class="n">WebDriver</span>
 
-<span class="kn">from</span> <span class="nn">manen.page_object_model.types</span> <span class="kn">import</span> <span class="n">input_value</span>
 <span class="kn">from</span> <span class="nn">manen.page_object_model.component</span> <span class="kn">import</span> <span class="n">Page</span><span class="p">,</span> <span class="n">Component</span>
+<span class="kn">from</span> <span class="nn">manen.page_object_model.config</span> <span class="kn">import</span> <span class="n">CSS</span><span class="p">,</span> <span class="n">Attribute</span><span class="p">,</span> <span class="n">DatetimeFormat</span><span class="p">,</span> <span class="n">XPath</span>
+<span class="kn">from</span> <span class="nn">manen.page_object_model.types</span> <span class="kn">import</span> <span class="n">input_value</span>
 
 
 <span class="k">class</span> <span class="nc">HomePage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
@@ -304,7 +305,12 @@ classes in an external file called <code class="docutils literal notranslate"><s
         <span class="n">version</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;h3 span.package-snippet__version&quot;</span><span class="p">)]</span>
         <span class="n">link</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">href</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;a.package-snippet&quot;</span><span class="p">)]</span>
         <span class="n">description</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;p.package-snippet__description&quot;</span><span class="p">)]</span>
-        <span class="n">release_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;span.package-snippet__created&quot;</span><span class="p">)]</span>
+        <span class="n">release_datetime</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span>
+            <span class="n">datetime</span><span class="p">,</span>
+            <span class="n">DatetimeFormat</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S%z&quot;</span><span class="p">),</span>
+            <span class="n">Attribute</span><span class="p">(</span><span class="s2">&quot;datetime&quot;</span><span class="p">),</span>
+            <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;span.package-snippet__created time&quot;</span><span class="p">),</span>
+        <span class="p">]</span>
 
     <span class="n">nb_results_label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span><span class="p">,</span>
@@ -336,14 +342,14 @@ we will suppose that you have an instance of
 <span class="go">&lt;pypi_pom.SearchResultPage.Result&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">name</span>
 <span class="go">&#39;selenium&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">release_date</span>
-<span class="go">datetime.datetime(2024, 7, 24, 0, 0)}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">release_datetime</span>
+<span class="go">datetime.datetime(2024, 9, 20, 15, 4, 46, tzinfo=datetime.timezone.utc)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
 <span class="go">{&#39;name&#39;: &#39;selenium&#39;,</span>
-<span class="go"> &#39;version&#39;: &#39;4.23.1&#39;,</span>
+<span class="go"> &#39;version&#39;: &#39;4.25.0&#39;,</span>
 <span class="go"> &#39;link&#39;: &#39;https://pypi.org/project/selenium/&#39;,</span>
 <span class="go"> &#39;description&#39;: &#39;Official Python bindings for Selenium WebDriver&#39;,</span>
-<span class="go"> &#39;release_date&#39;: datetime.datetime(2024, 7, 24, 0, 0)}</span>
+<span class="go"> &#39;release_datetime&#39;: datetime.datetime(2024, 9, 20, 15, 4, 46, tzinfo=datetime.timezone.utc)}</span>
 </pre></div>
 </div>
 <p>This is a preview of what you can do with <a class="reference internal" href="#module-manen.page_object_model" title="manen.page_object_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">page_object_model</span></code></a>. See the

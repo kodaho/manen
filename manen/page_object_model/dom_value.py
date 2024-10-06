@@ -101,7 +101,7 @@ class InputDOMValue:
             selector=self.config.selectors,
             inside=component._scope,
             many=False,
-            default=NotImplemented,
+            default=self.config.default,
             wait=self.config.wait,
         )
         element.clear()
@@ -127,7 +127,7 @@ class CheckboxDOMValue:
             selector=self.config.selectors,
             inside=component._scope,
             many=False,
-            default=NotImplemented,
+            default=self.config.default,
             wait=self.config.wait,
         )
         if value != (element.get_attribute("checked") == "true"):
@@ -144,7 +144,7 @@ class DOMSection(ImmutableDOMValueMixin, ConfigurableDOM):
             selector=self.config.selectors,
             inside=component._scope,
             many=False,
-            default=NotImplemented,
+            default=self.config.default,
             wait=self.config.wait,
         )
         cls = type(
@@ -161,7 +161,7 @@ class DOMSections(ImmutableDOMValueMixin, ConfigurableDOM):
             selector=self.config.selectors,
             inside=component._scope,
             many=True,
-            default=NotImplemented,
+            default=self.config.default,
             wait=self.config.wait,
         )
         cls = type(

@@ -100,6 +100,8 @@ class Config:
                 is_input = True
             elif config == Flag.CHECKBOX:
                 is_checkbox = True
+            elif config is NoneType:
+                default = None
             else:
                 raise ValueError(f"Unknown config type: {config}")
 
@@ -127,7 +129,6 @@ class Config:
         else:
             kwargs.update({"element_type": element_type, "many": False})
 
-        meta = tuple([arg for arg in meta if arg is not NoneType])
         config = cls.merge(meta, **kwargs)
 
         if len(config.selectors) == 0:

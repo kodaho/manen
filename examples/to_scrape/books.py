@@ -7,7 +7,7 @@ from selenium.webdriver.common.selenium_manager import SeleniumManager
 from selenium.webdriver.remote.webelement import WebElement
 
 from manen.page_object_model.component import Component, Page
-from manen.page_object_model.config import CSS, Attribute, Default
+from manen.page_object_model.config import CSS, Attribute
 from manen.page_object_model.types import href, src
 
 
@@ -29,8 +29,8 @@ class BooksToScrapePage(Page):
         in_stock: Annotated[str, CSS("p.instock.availability")]
 
     class Pagination(Component):
-        previous_url: Annotated[href | None, CSS("li.previous a"), Default(None)]
-        next_url: Annotated[href | None, CSS("li.next a"), Default(None)]
+        previous_url: Annotated[href | None, CSS("li.previous a")]
+        next_url: Annotated[href | None, CSS("li.next a")]
 
     categories: Annotated[list[Category], CSS("ul.nav-list li ul li")]
     current_category: Annotated[str, CSS("h1")]

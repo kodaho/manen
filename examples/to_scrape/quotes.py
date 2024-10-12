@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.selenium_manager import SeleniumManager
 
 from manen.page_object_model.component import Component, Page
-from manen.page_object_model.config import CSS, Default
+from manen.page_object_model.config import CSS
 from manen.page_object_model.types import href
 
 
@@ -17,8 +17,8 @@ class QuotesToScrapePage(Page):
         tags: Annotated[list[str], CSS("div.tags a.tag")]
 
     class Pagination(Component):
-        previous_url: Annotated[href | None, CSS("li.previous a"), Default(None)]
-        next_url: Annotated[href | None, CSS("li.next a"), Default(None)]
+        previous_url: Annotated[href, CSS("li.previous a")]
+        next_url: Annotated[href | None, CSS("li.next a")]
 
     quotes: Annotated[list[Quote], CSS("div.quote")]
     pagination: Annotated[Pagination, CSS("ul.pager")]

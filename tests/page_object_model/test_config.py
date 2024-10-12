@@ -46,14 +46,21 @@ def test_config_custom_attribute(attribute):
 
 
 @pytest.mark.parametrize("type_", [str, int, float, datetime, date, WebElement])
-def test_config_single_or_many(type_):
+def test_config_type(type_):
     config = Config.from_annotation_item("field", Annotated[type_, CSS("a")])
     assert config.element_type == type_
     assert not config.many
+    assert config.default is NotImplemented
 
     config = Config.from_annotation_item("field", Annotated[list[type_], CSS("a")])
     assert config.element_type == type_
     assert config.many
+    assert config.default is NotImplemented
+
+    config = Config.from_annotation_item("field", Annotated[type_ | None, CSS("a")])
+    assert config.element_type == type_
+    assert not config.many
+    assert config.default is None
 
 
 @pytest.mark.parametrize(

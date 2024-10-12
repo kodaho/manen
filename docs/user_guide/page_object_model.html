@@ -685,7 +685,7 @@ axe-selenium (v2.1.6) has been released on 2024-09-26, less than 180 days ago
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manen.page_object_model.config</span> <span class="kn">import</span> <span class="n">Default</span><span class="p">,</span> <span class="n">Wait</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manen.page_object_model.config</span> <span class="kn">import</span> <span class="n">Wait</span>
 
 <span class="k">class</span> <span class="nc">SearchResultPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
     <span class="n">nb_results</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
@@ -694,7 +694,7 @@ axe-selenium (v2.1.6) has been released on 2024-09-26, less than 180 days ago
         <span class="n">Wait</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
     <span class="p">]</span>
 
-    <span class="n">dont_exist</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s1">&#39;i-dont-exist&#39;</span><span class="p">),</span> <span class="n">Default</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+    <span class="n">dont_exist</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s1">&#39;i-dont-exist&#39;</span><span class="p">)]</span>
 
 <span class="n">page</span> <span class="o">=</span> <span class="n">SearchResultPage</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
 </pre></div>

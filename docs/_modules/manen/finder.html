@@ -271,12 +271,12 @@
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">overload</span>
 
-<span class="kn">import</span> <span class="nn">polling2</span>
 <span class="kn">from</span> <span class="nn">selenium.common.exceptions</span> <span class="kn">import</span> <span class="n">NoSuchElementException</span>
 <span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
 <span class="kn">from</span> <span class="nn">selenium.webdriver.remote.webdriver</span> <span class="kn">import</span> <span class="n">WebDriver</span>
 
-<span class="kn">from</span> <span class="nn">manen.exceptions</span> <span class="kn">import</span> <span class="n">ElementNotFound</span>
+<span class="kn">from</span> <span class="nn">manen.exceptions</span> <span class="kn">import</span> <span class="n">ElementNotFound</span><span class="p">,</span> <span class="n">PollTimeoutException</span>
+<span class="kn">from</span> <span class="nn">manen.helpers</span> <span class="kn">import</span> <span class="n">poll</span>
 <span class="kn">from</span> <span class="nn">manen.typing</span> <span class="kn">import</span> <span class="n">DriverOrElement</span><span class="p">,</span> <span class="n">WebElement</span>
 
 <span class="n">METHODS_MAPPER</span> <span class="o">=</span> <span class="p">{</span>
@@ -525,11 +525,11 @@
     <span class="n">selectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">selector</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">selector</span>
     <span class="n">finder</span> <span class="o">=</span> <span class="n">inside</span><span class="o">.</span><span class="n">find_elements</span> <span class="k">if</span> <span class="n">many</span> <span class="k">else</span> <span class="n">inside</span><span class="o">.</span><span class="n">find_element</span>
 
-    <span class="k">def</span> <span class="nf">try_several_selectors</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">try_several_selectors</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="n">fn_find</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">selector</span> <span class="ow">in</span> <span class="n">selectors</span><span class="p">:</span>
             <span class="n">selenium_selector</span> <span class="o">=</span> <span class="n">parse_selector</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">elements</span> <span class="o">=</span> <span class="n">finder</span><span class="p">(</span><span class="o">*</span><span class="n">selenium_selector</span><span class="p">)</span>
+                <span class="n">elements</span> <span class="o">=</span> <span class="n">fn_find</span><span class="p">(</span><span class="o">*</span><span class="n">selenium_selector</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">NoSuchElementException</span><span class="p">:</span>
                 <span class="n">elements</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">if</span> <span class="n">elements</span><span class="p">:</span>
@@ -538,15 +538,16 @@
 
     <span class="k">if</span> <span class="n">wait</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">found_elements</span> <span class="o">=</span> <span class="n">polling2</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span>
+            <span class="n">found_elements</span> <span class="o">=</span> <span class="n">poll</span><span class="p">(</span>
                 <span class="n">try_several_selectors</span><span class="p">,</span>
+                <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="n">finder</span><span class="p">),</span>
                 <span class="n">step</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
                 <span class="n">timeout</span><span class="o">=</span><span class="n">wait</span><span class="p">,</span>
             <span class="p">)</span>
-        <span class="k">except</span> <span class="n">polling2</span><span class="o">.</span><span class="n">TimeoutException</span><span class="p">:</span>
+        <span class="k">except</span> <span class="n">PollTimeoutException</span><span class="p">:</span>
             <span class="n">found_elements</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">found_elements</span> <span class="o">=</span> <span class="n">try_several_selectors</span><span class="p">()</span>
+        <span class="n">found_elements</span> <span class="o">=</span> <span class="n">try_several_selectors</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="n">finder</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">found_elements</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">found_elements</span>
@@ -596,7 +597,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=a8caf43d"></script>
+</div><script src="../../_static/documentation_options.js?v=0abd057a"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>

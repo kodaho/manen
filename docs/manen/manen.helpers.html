@@ -273,21 +273,21 @@
 <span id="manen-helpers"></span><h1><a class="reference internal" href="#module-manen.helpers" title="manen.helpers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.helpers</span></code></a><a class="headerlink" href="#module-manen.helpers" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="manen.helpers.version">
-<span class="sig-prename descclassname"><span class="pre">manen.helpers.</span></span><span class="sig-name descname"><span class="pre">version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Version</span></span></span><a class="reference internal" href="../_modules/manen/helpers.html#version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.helpers.version" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">manen.helpers.</span></span><span class="sig-name descname"><span class="pre">version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Version</span></span></span><a class="reference internal" href="../_modules/manen/helpers.html#version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.helpers.version" title="Link to this definition">¶</a></dt>
 <dd><p>Helper function to convert a version string into a tuple. The versioning
 scheme is described <a class="reference external" href="https://www.chromium.org/developers/version-numbers">here</a>.
 The input will be validated with the regular expression
-<code class="docutils literal notranslate"><span class="pre">^[\d]+.[\d]+.[\d]+.[\d]+$</span></code> and raised a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a> if it doesn’t match.</p>
+<code class="docutils literal notranslate"><span class="pre">^[\d]+.[\d]+.[\d]+.[\d]+$</span></code> and raised a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a> if it doesn’t match.</p>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>This versioning system is not compliant with semantic versioning rules.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>version_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – string to be converted to a tuple</p>
+<dd class="field-odd"><p><strong>version_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – string to be converted to a tuple</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – raised if the input doesn’t match the pattern</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – raised if the input doesn’t match the pattern</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>parsed version</p>
@@ -300,20 +300,20 @@ The input will be validated with the regular expression
 
 <dl class="py function">
 <dt class="sig sig-object py" id="manen.helpers.version_as_str">
-<span class="sig-prename descclassname"><span class="pre">manen.helpers.</span></span><span class="sig-name descname"><span class="pre">version_as_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version_tuple</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/manen/helpers.html#version_as_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.helpers.version_as_str" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">manen.helpers.</span></span><span class="sig-name descname"><span class="pre">version_as_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version_tuple</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/manen/helpers.html#version_as_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.helpers.version_as_str" title="Link to this definition">¶</a></dt>
 <dd><p>Format a version tuple as a string in the format: {major}.{minor}.{build}.{patch}</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>version_tuple</strong> (<em>Version</em>) – version info as a tuple</p></li>
-<li><p><strong>limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Limit on the length of the tuple to format. Defaults to 4.</p></li>
+<li><p><strong>limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Limit on the length of the tuple to format. Defaults to 4.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>formatted version</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>

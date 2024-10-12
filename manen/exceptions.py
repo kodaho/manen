@@ -25,3 +25,7 @@ class ElementNotFound(ManenException):
             "\n"
             f"{context_string}"
         )
+
+
+class PollTimeoutException(TimeoutError, ManenException):
+    pass

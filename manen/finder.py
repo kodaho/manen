@@ -6,12 +6,12 @@ Selenium elements.
 from functools import partial
 from typing import Any, Literal, overload
 
-import polling2
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
-from manen.exceptions import ElementNotFound
+from manen.exceptions import ElementNotFound, PollTimeoutException
+from manen.helpers import poll
 from manen.typing import DriverOrElement, WebElement
 
 METHODS_MAPPER = {
@@ -255,11 +255,11 @@ def find(
     selectors = [selector] if not isinstance(selector, list) else selector
     finder = inside.find_elements if many else inside.find_element
 
-    def try_several_selectors():
+    def try_several_selectors(selectors, fn_find):
         for selector in selectors:
             selenium_selector = parse_selector(selector)
             try:
-                elements = finder(*selenium_selector)
+                elements = fn_find(*selenium_selector)
             except NoSuchElementException:
                 elements = None
             if elements:
@@ -268,15 +268,16 @@ def find(
 
     if wait:
         try:
-            found_elements = polling2.poll(
+            found_elements = poll(
                 try_several_selectors,
+                args=(selectors, finder),
                 step=0.5,
                 timeout=wait,
             )
-        except polling2.TimeoutException:
+        except PollTimeoutException:
             found_elements = None
     else:
-        found_elements = try_several_selectors()
+        found_elements = try_several_selectors(selectors, finder)
 
     if found_elements:
         return found_elements

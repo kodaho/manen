@@ -1,6 +1,9 @@
 import platform
 import re
-from typing import TYPE_CHECKING
+from time import sleep, time
+from typing import TYPE_CHECKING, Any, Callable
+
+from manen.exceptions import PollTimeoutException
 
 if TYPE_CHECKING:
     from .typing import Version
@@ -55,3 +58,22 @@ def version_as_str(version_tuple: "Version", limit: int = 4) -> str:
         str: formatted version
     """
     return ".".join(map(str, version_tuple[:limit]))
+
+
+def poll(
+    fn,
+    args: tuple[Any, ...] | None = None,
+    kwargs: dict[str, Any] | None = None,
+    timeout: float = 10,
+    step: float = 0.5,
+    evaluate_success: Callable = lambda x: x is not None,
+):
+    args = args or tuple()
+    kwargs = kwargs or dict()
+    end_time = time() + timeout
+    while time() < end_time:
+        ans = fn(*args, **kwargs)
+        if evaluate_success(ans):
+            return ans
+        sleep(step)
+    raise PollTimeoutException(f"Timeout after {timeout} seconds")

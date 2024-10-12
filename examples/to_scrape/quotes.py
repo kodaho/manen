@@ -17,7 +17,7 @@ class QuotesToScrapePage(Page):
         tags: Annotated[list[str], CSS("div.tags a.tag")]
 
     class Pagination(Component):
-        previous_url: Annotated[href, CSS("li.previous a")]
+        previous_url: Annotated[href | None, CSS("li.previous a")]
         next_url: Annotated[href | None, CSS("li.next a")]
 
     quotes: Annotated[list[Quote], CSS("div.quote")]

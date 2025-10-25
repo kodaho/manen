@@ -43,7 +43,7 @@ Changed
   improved to be more "Pythonic".
 - Manen no longer has optional dependencies (which were in fact development dependencies).
 - The minimal version of Python required is now 3.10.
-- Internally, Manen is now using `rye <https://rye.astral.sh/guide/>`_ as project manager, and
+- Internally, Manen is now using `uv <https://docs.astral.sh/uv>`_ as project manager, and
   `ruff <https://docs.astral.sh/ruff/>`_ for the linting and formatting.
 
 Removed

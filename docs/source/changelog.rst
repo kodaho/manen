@@ -40,7 +40,7 @@ Changed
   this new version yet (but will be in the future).
 - Most of the documentation pages have been rewritten and improved.
 - Most modules have better typing annotations and documentation. Besides, the code has been
-  improved to be more "Pythonic".
+  improved to be more "pythonic".
 - Manen no longer has optional dependencies (which were in fact development dependencies).
 - The minimal version of Python required is now 3.10.
 - Internally, Manen is now using `uv <https://docs.astral.sh/uv>`_ as project manager, and

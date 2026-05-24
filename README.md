@@ -193,9 +193,3 @@ started with the package.
 A [set of examples](https://github.com/kodaho/manen/tree/main/examples) is also available in the
 `examples/` directory of the source code repository. They are designed to show you how to use the
 package in a real-world context.
-
-Don't hesitate to open an issue if you have any question or concern about this project!
-
-Looking to contribute to fix or add new features? Just read
-[this page](https://kodaho.github.io/manen/contributing.html),
-fork the repository and start doing the modifications you want.

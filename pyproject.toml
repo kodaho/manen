@@ -1,10 +1,11 @@
 [project]
 name = "manen"
 dynamic = ["version"]
-description = "An implementation of the Page Object Model design pattern, and other utilities for web scraping and automation."
 authors = [
     { name = "kodaho", email = "23268819+kodaho@users.noreply.github.com" },
 ]
+description = "An implementation of the Page Object Model design pattern, and other utilities for web scraping and automation."
+readme = "README.md"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Programming Language :: Python",
@@ -12,10 +13,9 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 keywords = ["automation", "DOM", "page object model", "scraping", "selenium"]
-dependencies = ["selenium>=3.141.0, <5"]
-readme = "README.md"
-requires-python = ">=3.10"
 license = { text = "GPLv3" }
+requires-python = ">=3.10"
+dependencies = ["selenium>=3.141.0,<5"]
 
 [project.urls]
 "Changes" = "https://kodaho.github.io/manen/changelog.html"

@@ -50,4 +50,4 @@ jobs:
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: |
           echo "Uploading to Pypi..."
-          uv publish --username __token__ --token $PYPI_TOKEN --verbose
+          uv publish --token $PYPI_TOKEN --verbose

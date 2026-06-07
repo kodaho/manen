@@ -30,31 +30,47 @@ Changelog
   Besides, some functionalities have been removed with the aim of limiting the number of features
   during the beta phase.
 
-  All previous versions should be considered as deprecated.
-
 
 Changed
 ^^^^^^^
-- The module :py:mod:`~manen.page_object_model` has been rewritten to use type annotation instead
-  of ``Element``. Note that some elements like select or radio button haven't been implemented in
-  this new version yet (but will be in the future).
-- Most of the documentation pages have been rewritten and improved.
-- Most modules have better typing annotations and documentation. Besides, the code has been
-  improved to be more "pythonic".
-- Manen no longer has optional dependencies (which were in fact development dependencies).
-- The minimal version of Python required is now 3.10.
-- Internally, Manen is now using `uv <https://docs.astral.sh/uv>`_ as project manager, and
-  `ruff <https://docs.astral.sh/ruff/>`_ for the linting and formatting.
+- :py:mod:`~manen.page_object_model` has been completely rewritten around type annotations. Pages
+  are described by annotating attributes with native Python types (``str``, ``int``, ``float``,
+  ``date``, ``datetime``, ``bool``, ``list``, ...) instead of the former ``Element`` subclasses.
+  The public API is now split into three submodules:
+
+  - ``manen.page_object_model.component``: :py:class:`~manen.page_object_model.component.Page`,
+    :py:class:`~manen.page_object_model.component.Component` (replacing ``WebArea``) and
+    :py:class:`~manen.page_object_model.component.Form` (replacing ``Action``).
+  - ``manen.page_object_model.config``: selectors and modifiers ``CSS``, ``XPath``, ``LinkText``,
+    ``PartialLinkText``, ``Attribute``, ``Wait``, ``Default``, ``DateFormat`` and
+    ``DatetimeFormat``.
+  - ``manen.page_object_model.types``: type aliases such as ``href``, ``src``, ``inner_html``,
+    ``outer_html``, ``input_value`` and ``checkbox``.
+
+- :py:class:`~manen.browser.BrowserMixin.is_browser_compatible_with_driver` replaces the former
+  ``are_versions_compatible``.
+- :py:func:`~manen.finder.find` is now fully typed through overloads.
+- Manen no longer has optional dependencies, and ``selenium`` is now its only runtime dependency.
+- The minimal supported version of Python is now 3.10.
+- Most of the documentation has been rewritten and improved.
+
+Added
+^^^^^
+- :py:class:`~manen.browser.ScrollDirection` and :py:class:`~manen.browser.HeadlessMode` enums to
+  configure the browser.
+- :py:class:`~manen.exceptions.PollTimeoutException`, raised when an element is not found within
+  the configured waiting time.
 
 Removed
 ^^^^^^^
-- The module ``manen.resource`` and everything related (like the CLI) have been removed. Indeed,
-  the `official Selenium manager <https://www.selenium.dev/documentation/selenium_manager/>`_
-  (available as a CLI tool and in recent versions of Python bindings for Selenium) provides the
-  same functionalities.
-- ``manen.browser.BraveBrowser`` has been removed because it had a dependency on the module
-  ``manen.resource``. Besides, it was considered as not enough tested internally to make it
-  available publicly.
+- The module ``manen.resource`` and everything related (including the ``manen`` CLI) have been
+  removed. The `official Selenium manager <https://www.selenium.dev/documentation/selenium_manager/>`_
+  now provides the same functionalities.
+- ``manen.browser.BraveBrowser`` has been removed; it depended on ``manen.resource`` and was not
+  tested enough to be exposed publicly.
+- The selector-as-string elements (``Element``, ``TextElement``, ``LinkElement``,
+  ``IntegerElement``, ``DateTimeElement``, ...) as well as ``Region``/``Regions`` and the
+  YAML page loaders have been dropped in favour of the new type-annotation based API.
 
 |
 

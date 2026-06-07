@@ -19,7 +19,7 @@ Changelog
 
 |topic| Page object model implementation revamp & other major changes |end|
 
-|released_on| 2026-05-07 |end|
+|released_on| 2026-06-07 |end|
 
 .. warning::
 

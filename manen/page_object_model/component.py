@@ -1,3 +1,4 @@
+from inspect import get_annotations
 from typing import cast
 
 from selenium.webdriver.chrome.webdriver import WebDriver
@@ -8,16 +9,22 @@ from manen.page_object_model.config import Config
 
 
 class Component:
-    def __init__(self, /, scope: WebDriver | WebElement):
-        self._scope = scope
-        self._driver = scope.parent if isinstance(scope, WebElement) else scope
-        self._config: dict[str, Config] = {}
+    _config: dict[str, Config] = {}
 
-        for field in self.__annotations__:
-            config = Config.from_annotation_item(field, self.__annotations__[field])
-            self._config[field] = config
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
 
-            if self.is_component(config.element_type):
+        # Inherit configs from parent classes (walk MRO in reverse so the
+        # most-specific base wins on conflicts).
+        merged: dict[str, Config] = {}
+        for base in reversed(cls.__mro__[1:]):
+            merged.update(getattr(base, "_config", {}))
+
+        for field, annotation in get_annotations(cls).items():
+            config = Config.from_annotation_item(field, annotation)
+            merged[field] = config
+
+            if cls.is_component(config.element_type):
                 fn = dom.DOMSections if config.many else dom.DOMSection
             elif config.is_input:
                 fn = dom.InputDOMValue
@@ -26,15 +33,17 @@ class Component:
             else:
                 fn = dom.DOMValues if config.many else dom.DOMValue
 
-            setattr(
-                self.__class__,
-                field,
-                fn(config),
-            )
+            setattr(cls, field, fn(config))
+
+        cls._config = merged
+
+    def __init__(self, /, scope: WebDriver | WebElement):
+        self._scope = scope
+        self._driver = scope.parent if isinstance(scope, WebElement) else scope
 
     @staticmethod
     def is_component(element_type):
-        return issubclass(element_type, Component)
+        return isinstance(element_type, type) and issubclass(element_type, Component)
 
     def model_dump(self):
         dump = {}

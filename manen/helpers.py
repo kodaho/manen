@@ -17,7 +17,7 @@ def version(version_str: str) -> "Version":
     Helper function to convert a version string into a tuple. The versioning
     scheme is described `here <https://www.chromium.org/developers/version-numbers>`_.
     The input will be validated with the regular expression
-    ``^[\\d]+.[\\d]+.[\\d]+.[\\d]+$`` and raised a :py:class:`ValueError` if it doesn't match.
+    ``^\\d+\\.\\d+(?:\\.\\d+)?(?:\\.\\d+)?$`` and raised a :py:class:`ValueError` if it doesn't match.
 
     ..  caution::
 
@@ -32,7 +32,7 @@ def version(version_str: str) -> "Version":
     Returns:
         Version: parsed version
     """
-    if not re.match(r"^[\d]+.[\d]+(.[\d]+)?(.[\d]+)?$", version_str):
+    if not re.match(r"^\d+\.\d+(?:\.\d+)?(?:\.\d+)?$", version_str):
         raise ValueError(
             f"The version `{version_str}` is not compatible with the pattern"
             " MAJOR.MINOR(.BRANCH)?.PATH."

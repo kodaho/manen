@@ -59,7 +59,7 @@ with and without Manen:
 
    .. code-block:: ipython
 
-      from dateparser import dateparser
+      import dateparser
       from selenium.common.exceptions import NoSuchElementException
       from selenium.webdriver.common.by import By
       from selenium.webdriver.support import expected_conditions as EC
@@ -68,7 +68,7 @@ with and without Manen:
       driver = WebDriver()
 
       articles = WebDriverWait(driver, 3).until(
-          EC.presence_of_elements_located((By.CSS, "article"))
+          EC.presence_of_elements_located((By.CSS_SELECTOR, "article"))
       )
       title = articles[0].find_element(By.CSS_SELECTOR, "h1").text
       n_likes = int(articles[0].find_element(By.CSS_SELECTOR, "span.n_likes").text)
@@ -76,9 +76,9 @@ with and without Manen:
           tags = articles[0].find_element(By.CSS_SELECTOR, "span.tags")
       except NoSuchElementException:
           tags = []
-      updated_at = dateparser(articles[0].find_element(By.CSS_SELECTOR, "p.date").text)
+      updated_at = dateparser.parse(articles[0].find_element(By.CSS_SELECTOR, "p.date").text)
 
-      print({'title': title, 'n_likes': n_likes, 'tags': tags, 'updated': updated_at})
+      print({'title': title, 'n_likes': n_likes, 'tags': tags, 'updated_at': updated_at})
       # {
       #   'title': 'Hello, Manen!',
       #   'n_likes': 42,
@@ -87,7 +87,7 @@ with and without Manen:
       # }
 
 
-Besides being more concise, the version using Manen is also more verbose, meaning
+Besides being more concise, the version using Manen is also more expressive, meaning
 that it can ease the comprehension of your source code.
 
 You can find a deeper explanation that motivated the development of Manen in the

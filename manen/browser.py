@@ -176,7 +176,10 @@ class BrowserMixin(WebDriverProtocol):
         Returns:
             Any: Outputs of :py:func:`~manen.finder.find`
         """
-        return find(inside=cast("DriverOrElement", self), default=None)(*args, **kwargs)
+        kwargs.setdefault("inside", cast("DriverOrElement", self))
+        kwargs.setdefault("many", True)
+        kwargs.setdefault("default", None)
+        return find(*args, **kwargs)
 
 
 class ChromeBrowser(BrowserMixin, Chrome):
@@ -215,7 +218,7 @@ class ChromeBrowser(BrowserMixin, Chrome):
             service = ChromeService(executable_path=driver_path)
 
         if headless_mode:
-            options.add_argument(f"--headless={headless_mode}")
+            options.add_argument(f"--headless={headless_mode.value}")
 
         if proxy:
             options.add_argument(f"--proxy-server={proxy}")

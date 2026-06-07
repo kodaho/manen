@@ -156,12 +156,7 @@ class DOMSection(ImmutableDOMValueMixin, ConfigurableDOM):
             default=self.config.default,
             wait=self.config.wait,
         )
-        cls = type(
-            self.config.element_type.__qualname__,
-            self.config.element_type.__bases__,
-            {**self.config.element_type.__dict__},
-        )
-        return cast("Component", cls(element))
+        return cast("Component", self.config.element_type(element))
 
 
 class DOMSections(ImmutableDOMValueMixin, ConfigurableDOM):
@@ -173,9 +168,4 @@ class DOMSections(ImmutableDOMValueMixin, ConfigurableDOM):
             default=self.config.default,
             wait=self.config.wait,
         )
-        cls = type(
-            self.config.element_type.__qualname__,
-            self.config.element_type.__bases__,
-            {**self.config.element_type.__dict__},
-        )
-        return [cls(element) for element in elements]
+        return [self.config.element_type(element) for element in elements]

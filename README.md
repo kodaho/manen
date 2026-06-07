@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center"> 🌔  Manen</h1>
+  <h1 align="center"> ☾  Manen</h1>
 </p>
 
 ---
@@ -54,13 +54,13 @@ pip install manen
 
 ## ✨ Features
 
-- `manen.finder.find` allows to easily get element(s) in a HTML page. This function support
+- `manen.finder.find` allows to easily get element(s) in an HTML page. This function supports
   several very different use cases, to help reduce your code complexity when fetching for
   elements (example: using default values, trying different selectors, iterating over several
   elements).
 - `manen.browser` defines an enhanced Selenium `WebDriver` called `Browser`
 - `manen.page_object_model` is an implementation of the Page Object Model design pattern. It will
-  wrap a HTML page, component and DOM values inside Python classes and objects, providing a better
+  wrap an HTML page, component and DOM values inside Python classes and objects, providing a better
   way to interact with a web page.
 
 ## 🚀 Getting started
@@ -84,11 +84,14 @@ browser.get("https://pypi.org")
 
 We are now on the home page of PyPI. What we are going to do now is building a class that will
 inherit from `Page` from the `manen.page_object_model.component` module. This Python class will be
-a reflect of the HTML page, allowing us to access DOM elements in the same way we access
+a reflection of the HTML page, allowing us to access DOM elements in the same way we access
 attributes. Note the whole page object model design pattern is implemented with type hints (a bit
 like in `Pydantic` model).
 
 ```python
+from datetime import datetime
+from typing import Annotated, Annotated as A
+
 from manen.page_object_model.types import href, input_value
 from manen.page_object_model.config import CSS, Attribute, DatetimeFormat, XPath
 from manen.page_object_model.component import Page, Component
@@ -125,13 +128,13 @@ The `Page` class encapsulates the whole current HTML page available through the 
 value we want to extract is then represented by a class attribute, with a type (what to extract)
 and a selector (where to extract it). Depending on the type of the value, Manen will automatically
 execute the appropriate DOM content extraction on the HTML element (for example, it will extract
-the inner text for a `str` type, the HTML attribute `href` for a `HRef` , or the property
-`innerHTML` for `InnerHTML`).
+the inner text for a `str` type, the HTML attribute `href` for an `href`, or the property
+`innerHTML` for `inner_html`).
 
 A `Component` captures a sub-part of an HTML page. All the elements defined under this will be
 fetched inside the HTML element represented by the `Component` class.
 
-Here the class `HomePage` defines an `Input` element, that will be linked to the search bar.
+Here the class `HomePage` defines an `input_value` element, that will be linked to the search bar.
 Filling the search bar is done by assigning a value to the attribute `query`.
 
 ```python
@@ -172,7 +175,7 @@ print(page.results[0].model_dump())
 ```
 
 > [!TIP]
-> Other DOM elements are also implemented, such as `ImageSrc`, `Input`, `Checkbox`... Each one of
+> Other DOM elements are also implemented, such as `src`, `input_value`, `checkbox`... Each one of
 > them is used to target a specific attribute from a DOM value and can enable interaction with it,
 > in a flawless Pythonic way. Check the [documentation](https://kodaho.github.io/manen/user_guide/page_object_model.html#List-of-available-elements)
 > for the list of available elements.

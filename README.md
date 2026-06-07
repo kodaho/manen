@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center"> 🌔  Manen</h1>
+  <h1 align="center"> ☾  Manen</h1>
 </p>
 
 ---
@@ -89,6 +89,9 @@ attributes. Note the whole page object model design pattern is implemented with 
 like in `Pydantic` model).
 
 ```python
+from datetime import datetime
+from typing import Annotated, Annotated as A
+
 from manen.page_object_model.types import href, input_value
 from manen.page_object_model.config import CSS, Attribute, DatetimeFormat, XPath
 from manen.page_object_model.component import Page, Component

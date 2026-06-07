@@ -13,6 +13,18 @@ class TypeConfigError(TypeError, ManenException):
         )
 
 
+class MissingAnnotationError(TypeError, ManenException):
+    def __init__(self, field, annotation):
+        self.field = field
+        self.annotation = annotation
+
+    def __str__(self):
+        return (
+            f"Field '{self.field}' must be declared with `Annotated[...]` and at least one "
+            f"selector (e.g. `Annotated[str, CSS(...)]`), but got `{self.annotation!r}`."
+        )
+
+
 class SelectorConfigError(ValueError, ManenException):
     def __init__(self, field):
         self.field = field

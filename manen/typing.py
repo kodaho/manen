@@ -1,8 +1,7 @@
-from typing import TYPE_CHECKING, Any, Union
+from typing import TYPE_CHECKING, Any, Protocol, Union
 
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
-from typing_extensions import Protocol
 
 DriverOrElement = Union[WebDriver, WebElement]
 Version = tuple[int, int, int | None, int | None]

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from types import NoneType, UnionType
 from typing import Any, get_origin
 
-from manen.page_object_model.exceptions import SelectorConfigError
+from manen.page_object_model.exceptions import MissingAnnotationError, SelectorConfigError
 from manen.page_object_model.types import Attribute, Flag
 from manen.page_object_model.utils import resolve_args
 
@@ -118,6 +118,9 @@ class Config:
 
     @classmethod
     def from_annotation_item(cls, field, annotation):
+        if not hasattr(annotation, "__metadata__"):
+            raise MissingAnnotationError(field, annotation)
+
         origin = get_origin(annotation.__origin__)
         element_type, *meta = resolve_args(annotation)
 

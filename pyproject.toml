@@ -7,7 +7,7 @@ authors = [
 description = "An implementation of the Page Object Model design pattern, and other utilities for web scraping and automation."
 readme = "README.md"
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Topic :: Software Development :: Libraries :: Python Modules",

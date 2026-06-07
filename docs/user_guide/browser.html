@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="author" title="About these documents" href="../about.html"><link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Page Object Model for operability" href="page_object_model.html"><link rel="prev" title="Easily explore the DOM with find" href="dom_exploration.html">
-        <link rel="prefetch" href="../_static/manen_logo.png" as="image">
+        <link rel="prefetch" href="../_static/manen-logo-light.svg" as="image">
+        <link rel="prefetch" href="../_static/manen-logo-dark.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Supercharge Selenium WebDriver with Manen Browser - Manen</title>
@@ -186,10 +187,10 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/manen_logo.png" alt="Logo"/>
+    <img class="sidebar-logo only-light" src="../_static/manen-logo-light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/manen-logo-dark.svg" alt="Dark Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Manen</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -262,12 +263,12 @@
         <article role="main" id="furo-main-content">
           <section id="Supercharge-Selenium-WebDriver-with-Manen-Browser">
 <h1>Supercharge Selenium <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen <code class="docutils literal notranslate"><span class="pre">Browser</span></code><a class="headerlink" href="#Supercharge-Selenium-WebDriver-with-Manen-Browser" title="Link to this heading">¶</a></h1>
-<p>To counter the lack of operability and interactivity in Selenium WebDriver, Manen implements a supercharged version of it, called <code class="docutils literal notranslate"><span class="pre">Browser</span></code>. This browser inherits from the WebDriver, meaning that everything you can do with a browser, you can do it with an instance of <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code>.</p>
+<p>To counter the lack of operability and interactivity in Selenium WebDriver, Manen implements a supercharged version of it, called <code class="docutils literal notranslate"><span class="pre">Browser</span></code>. This browser inherits from the WebDriver, meaning that everything you can do with a <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code>, you can do with an instance of <code class="docutils literal notranslate"><span class="pre">Browser</span></code>.</p>
 <p>This guide will show you how to use the <code class="docutils literal notranslate"><span class="pre">Browser</span></code> class and its methods.</p>
 <p>Note that, for now, only Chrome browser is supported. Other browsers will be supported in the future.</p>
 <section id="Browser-initialization">
 <h2>Browser initialization<a class="headerlink" href="#Browser-initialization" title="Link to this heading">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">Browser</span></code> class provide a method to easily initialize it, with some shortcuts for popular options (such as driver path, headless mode, proxy, window size). If you don’t have any webdriver installed, you can use the Selenium manager (only available in Selenium 4) to automatically download it.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Browser</span></code> class provides a method to easily initialize it, with some shortcuts for popular options (such as driver path, headless mode, proxy, window size). If you don’t have any webdriver installed, you can use the Selenium manager (only available in Selenium 4) to automatically download it.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -385,7 +386,7 @@ play-selenium
 pytest-selenium
 </pre></div></div>
 </div>
-<p>Similarly, the <code class="docutils literal notranslate"><span class="pre">lookup</span></code> method provides a way to get an element, but will never raises an error if this element is not found (the default value returned if not found is <code class="docutils literal notranslate"><span class="pre">None</span></code>, but it can be changed). Note that this is the same as calling <code class="docutils literal notranslate"><span class="pre">browser.find(...,</span> <span class="pre">default=None)</span></code>.</p>
+<p>Similarly, the <code class="docutils literal notranslate"><span class="pre">lookup</span></code> method provides a way to get an element, but will never raise an error if this element is not found (the default value returned if not found is <code class="docutils literal notranslate"><span class="pre">None</span></code>, but it can be changed). Note that this is the same as calling <code class="docutils literal notranslate"><span class="pre">browser.find(...,</span> <span class="pre">default=None)</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -394,7 +395,7 @@ pytest-selenium
 </pre></div>
 </div>
 </div>
-<p>During the development of your project or in production for debug purposes, it can be great to know what match with your selectors. Manen browser provide a method <code class="docutils literal notranslate"><span class="pre">highlight</span></code> for this purpose. This method will locate elements using the <code class="docutils literal notranslate"><span class="pre">find</span></code> method, and then draw a frame around each found element.</p>
+<p>During the development of your project or in production for debug purposes, it can be great to know what matches your selectors. Manen browser provides a method <code class="docutils literal notranslate"><span class="pre">highlight</span></code> for this purpose. This method will locate elements using the <code class="docutils literal notranslate"><span class="pre">find</span></code> method, and then draw a frame around each found element.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>

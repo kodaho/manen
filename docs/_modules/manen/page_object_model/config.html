@@ -3,7 +3,8 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><link rel="author" title="About these documents" href="../../../about.html"><link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html">
-        <link rel="prefetch" href="../../../_static/manen_logo.png" as="image">
+        <link rel="prefetch" href="../../../_static/manen-logo-light.svg" as="image">
+        <link rel="prefetch" href="../../../_static/manen-logo-dark.svg" as="image">
 
     <link rel="shortcut icon" href="../../../_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>manen.page_object_model.config - Manen</title>
@@ -184,10 +185,10 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../../../_static/manen_logo.png" alt="Logo"/>
+    <img class="sidebar-logo only-light" src="../../../_static/manen-logo-light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/manen-logo-dark.svg" alt="Dark Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Manen</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -257,7 +258,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoneType</span><span class="p">,</span> <span class="n">UnionType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">get_origin</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">manen.page_object_model.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">SelectorConfigError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">manen.page_object_model.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">MissingAnnotationError</span><span class="p">,</span> <span class="n">SelectorConfigError</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">manen.page_object_model.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Attribute</span><span class="p">,</span> <span class="n">Flag</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">manen.page_object_model.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">resolve_args</span>
 
@@ -404,6 +405,9 @@
 <a class="viewcode-back" href="../../../manen/manen.page_object_model.config.html#manen.page_object_model.config.Config.from_annotation_item">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_annotation_item</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">annotation</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">annotation</span><span class="p">,</span> <span class="s2">&quot;__metadata__&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">MissingAnnotationError</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">annotation</span><span class="p">)</span>
+
         <span class="n">origin</span> <span class="o">=</span> <span class="n">get_origin</span><span class="p">(</span><span class="n">annotation</span><span class="o">.</span><span class="n">__origin__</span><span class="p">)</span>
         <span class="n">element_type</span><span class="p">,</span> <span class="o">*</span><span class="n">meta</span> <span class="o">=</span> <span class="n">resolve_args</span><span class="p">(</span><span class="n">annotation</span><span class="p">)</span>
 

@@ -3,7 +3,8 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><link rel="author" title="About these documents" href="../../about.html"><link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html">
-        <link rel="prefetch" href="../../_static/manen_logo.png" as="image">
+        <link rel="prefetch" href="../../_static/manen-logo-light.svg" as="image">
+        <link rel="prefetch" href="../../_static/manen-logo-dark.svg" as="image">
 
     <link rel="shortcut icon" href="../../_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>manen.helpers - Manen</title>
@@ -184,10 +185,10 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../../_static/manen_logo.png" alt="Logo"/>
+    <img class="sidebar-logo only-light" src="../../_static/manen-logo-light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../_static/manen-logo-dark.svg" alt="Dark Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Manen</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -274,7 +275,7 @@
 <span class="sd">    Helper function to convert a version string into a tuple. The versioning</span>
 <span class="sd">    scheme is described `here &lt;https://www.chromium.org/developers/version-numbers&gt;`_.</span>
 <span class="sd">    The input will be validated with the regular expression</span>
-<span class="sd">    ``^[\\d]+.[\\d]+.[\\d]+.[\\d]+$`` and raised a :py:class:`ValueError` if it doesn&#39;t match.</span>
+<span class="sd">    ``^\\d+\\.\\d+(?:\\.\\d+)?(?:\\.\\d+)?$`` and raised a :py:class:`ValueError` if it doesn&#39;t match.</span>
 
 <span class="sd">    ..  caution::</span>
 
@@ -289,7 +290,7 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        Version: parsed version</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[\d]+.[\d]+(.[\d]+)?(.[\d]+)?$&quot;</span><span class="p">,</span> <span class="n">version_str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\d+\.\d+(?:\.\d+)?(?:\.\d+)?$&quot;</span><span class="p">,</span> <span class="n">version_str</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;The version `</span><span class="si">{</span><span class="n">version_str</span><span class="si">}</span><span class="s2">` is not compatible with the pattern&quot;</span>
             <span class="s2">&quot; MAJOR.MINOR(.BRANCH)?.PATH.&quot;</span>

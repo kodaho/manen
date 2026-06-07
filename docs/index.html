@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="author" title="About these documents" href="about.html"><link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="About the project" href="about.html">
-        <link rel="prefetch" href="_static/manen_logo.png" as="image">
+        <link rel="prefetch" href="_static/manen-logo-light.svg" as="image">
+        <link rel="prefetch" href="_static/manen-logo-dark.svg" as="image">
 
     <link rel="shortcut icon" href="_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Manen</title>
@@ -185,10 +186,10 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="_static/manen_logo.png" alt="Logo"/>
+    <img class="sidebar-logo only-light" src="_static/manen-logo-light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/manen-logo-dark.svg" alt="Dark Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Manen</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -308,7 +309,7 @@ with and without Manen:</p>
 </div>
 </div>
 <input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio" /><label class="tab-label" for="tab-set--0-input--2">Without Manen</label><div class="tab-content docutils container">
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dateparser</span><span class="w"> </span><span class="kn">import</span> <span class="n">dateparser</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">dateparser</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">selenium.common.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoSuchElementException</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">selenium.webdriver.common.by</span><span class="w"> </span><span class="kn">import</span> <span class="n">By</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">selenium.webdriver.support</span><span class="w"> </span><span class="kn">import</span> <span class="n">expected_conditions</span> <span class="k">as</span> <span class="n">EC</span>
@@ -317,7 +318,7 @@ with and without Manen:</p>
 <span class="n">driver</span> <span class="o">=</span> <span class="n">WebDriver</span><span class="p">()</span>
 
 <span class="n">articles</span> <span class="o">=</span> <span class="n">WebDriverWait</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">until</span><span class="p">(</span>
-    <span class="n">EC</span><span class="o">.</span><span class="n">presence_of_elements_located</span><span class="p">((</span><span class="n">By</span><span class="o">.</span><span class="n">CSS</span><span class="p">,</span> <span class="s2">&quot;article&quot;</span><span class="p">))</span>
+    <span class="n">EC</span><span class="o">.</span><span class="n">presence_of_elements_located</span><span class="p">((</span><span class="n">By</span><span class="o">.</span><span class="n">CSS_SELECTOR</span><span class="p">,</span> <span class="s2">&quot;article&quot;</span><span class="p">))</span>
 <span class="p">)</span>
 <span class="n">title</span> <span class="o">=</span> <span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">CSS_SELECTOR</span><span class="p">,</span> <span class="s2">&quot;h1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
 <span class="n">n_likes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">CSS_SELECTOR</span><span class="p">,</span> <span class="s2">&quot;span.n_likes&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
@@ -325,9 +326,9 @@ with and without Manen:</p>
     <span class="n">tags</span> <span class="o">=</span> <span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">CSS_SELECTOR</span><span class="p">,</span> <span class="s2">&quot;span.tags&quot;</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">NoSuchElementException</span><span class="p">:</span>
     <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">updated_at</span> <span class="o">=</span> <span class="n">dateparser</span><span class="p">(</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">CSS_SELECTOR</span><span class="p">,</span> <span class="s2">&quot;p.date&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">updated_at</span> <span class="o">=</span> <span class="n">dateparser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">CSS_SELECTOR</span><span class="p">,</span> <span class="s2">&quot;p.date&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">({</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span> <span class="s1">&#39;n_likes&#39;</span><span class="p">:</span> <span class="n">n_likes</span><span class="p">,</span> <span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="n">tags</span><span class="p">,</span> <span class="s1">&#39;updated&#39;</span><span class="p">:</span> <span class="n">updated_at</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">({</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span> <span class="s1">&#39;n_likes&#39;</span><span class="p">:</span> <span class="n">n_likes</span><span class="p">,</span> <span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="n">tags</span><span class="p">,</span> <span class="s1">&#39;updated_at&#39;</span><span class="p">:</span> <span class="n">updated_at</span><span class="p">})</span>
 <span class="c1"># {</span>
 <span class="c1">#   &#39;title&#39;: &#39;Hello, Manen!&#39;,</span>
 <span class="c1">#   &#39;n_likes&#39;: 42,</span>
@@ -338,7 +339,7 @@ with and without Manen:</p>
 </div>
 </div>
 </div>
-<p>Besides being more concise, the version using Manen is also more verbose, meaning
+<p>Besides being more concise, the version using Manen is also more expressive, meaning
 that it can ease the comprehension of your source code.</p>
 <p>You can find a deeper explanation that motivated the development of Manen in the
 section <a class="reference internal" href="about.html#why-such-package"><span class="std std-ref">Why such package?</span></a>.</p>

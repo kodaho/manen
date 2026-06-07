@@ -4,47 +4,35 @@ About the project
 Why such package?
 -----------------
 
-The main motivation behind Manen is to provide a better developer experience when working on
-browser automation and web scraping project. Most automation and scraping tools provide basic
-methods to interact with the browser and with the DOM, but don't provide the structure to keep
-the code clean and maintainable. Manen aims to be the interface between the core of the
-automation tool (only Selenium is supported for now) and your tests and workflows logic; just
-focus on your use case and let Manen handle the browser interactions.
+Manen exists to make browser automation and web scraping a better experience. Most tools offer
+only basic methods to interact with the browser and the DOM, leaving you without the structure
+needed to keep your code clean and maintainable. Manen sits between the automation core (only
+Selenium for now) and your tests and workflows, so you can focus on your use case and let it
+handle the browser interactions.
 
-The main answer to this objective is with the implementation of the Page Object Model design
-pattern. This pattern is a way to organize your code by creating a class for each component of
-your application, and to put all the interactions with the page in this class. Such classes
-should be focus on the interactions with the page and not on the interactions with the DOM. The
-latter is handled by Manen; you specify the selector and what you want to extract from each
-element (the text, an integer, a date, the inner HTML), and Manen will do it for you. Special
-objects like inputs also have their own Manen representation, so you can easily fill the value
-in a Pythonic way. Besides, Manen provides what is called ``Browser``, which are basically a new
-class based on Selenium WebDriver, but with some ameliorations and shortcuts.
+At its heart is the Page Object Model design pattern: you create one class per component of your
+application and gather all of its page interactions there. Those classes stay focused on the
+page, while Manen takes care of the DOM. You simply declare a selector and what to extract from
+each element (its text, an integer, a date, the inner HTML), and Manen does the rest. Special
+elements such as inputs also have their own representation, so you can fill in values the
+Pythonic way. Manen further ships a ``Browser`` class, built on the Selenium WebDriver but with
+added improvements and shortcuts.
 
-Note that the design of the page object model implementation in Manen is fully based on type
-annotations, largely inspired by Pydantic. This way, the developer experience is improved not
-only during the runtime but also during the development, in your IDE.
+This Page Object Model implementation is driven entirely by type annotations, largely inspired by
+Pydantic, which improves the developer experience both at runtime and while coding in your IDE.
 
-Putting the page object model into practice isn't a new topic (quite old actually, Simon Stewart,
-a lead in the Selenium project, wrote about it in 2009), but Manen aims to provide a modern and
-Pythonic way to do it. Here are some articles and resources which inspired and drive the
-development of the project:
+The Page Object Model is hardly new; Simon Stewart, a lead on the Selenium project, wrote about
+it back in 2009, but Manen brings a modern, Pythonic take. The following articles and resources
+inspired and guide the project:
 
 * `Page object models, by Selenium <https://www.selenium.dev/documentation/en/guidelines_and_recommendations/page_object_models/>`_
 * `Page Object, by Martin Fowler <https://martinfowler.com/bliki/PageObject.html>`_
 * [in french] `Page Object Model : l'heure de la retraite ?, by Younup <https://www.younup.fr/blog/page-object-model-lheure-de-la-retraite>`_
 
 
-Current status and roadmap
---------------------------
+Current status
+--------------
 
-Manen is still in beta version, but it is already usable for some use cases. The solution Manen
-aims to provide are implemented, but some elements can be missing before being fully usable. Some
-improvements and features are already on the way (implement more DOM elements, compatibility with
-other browser automation tools, etc.), all of them targeting the same objective: provide simple
-yet powerful tools for browser automation.
-
-.. attention::
-
-  Because Manen is still in beta, the API can change between minor versions. Keep an eye on the
-  :ref:`Changelog` to see the changes between each release.
+Manen is still in beta, yet already usable for many cases. Its core solutions are in place, and
+more features can still be added: support for backends other than Selenium, interactivity with
+more DOM elements...

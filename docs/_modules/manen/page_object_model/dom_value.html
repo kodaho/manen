@@ -3,7 +3,8 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><link rel="author" title="About these documents" href="../../../about.html"><link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html">
-        <link rel="prefetch" href="../../../_static/manen_logo.png" as="image">
+        <link rel="prefetch" href="../../../_static/manen-logo-light.svg" as="image">
+        <link rel="prefetch" href="../../../_static/manen-logo-dark.svg" as="image">
 
     <link rel="shortcut icon" href="../../../_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>manen.page_object_model.dom_value - Manen</title>
@@ -184,10 +185,10 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../../../_static/manen_logo.png" alt="Logo"/>
+    <img class="sidebar-logo only-light" src="../../../_static/manen-logo-light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/manen-logo-dark.svg" alt="Dark Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Manen</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -434,12 +435,7 @@
             <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">default</span><span class="p">,</span>
             <span class="n">wait</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">wait</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="vm">__qualname__</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="vm">__bases__</span><span class="p">,</span>
-            <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">},</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;Component&quot;</span><span class="p">,</span> <span class="bp">cls</span><span class="p">(</span><span class="n">element</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;Component&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span><span class="p">(</span><span class="n">element</span><span class="p">))</span></div>
 
 
 
@@ -454,12 +450,7 @@
             <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">default</span><span class="p">,</span>
             <span class="n">wait</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">wait</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="vm">__qualname__</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="vm">__bases__</span><span class="p">,</span>
-            <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">},</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="bp">cls</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">element_type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span></div>
 
 </pre></div>
         </article>

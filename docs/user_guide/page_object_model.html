@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="author" title="About these documents" href="../about.html"><link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Going deeper into Manen" href="../manen/manen.html"><link rel="prev" title="Supercharge Selenium WebDriver with Manen Browser" href="browser.html">
-        <link rel="prefetch" href="../_static/manen_logo.png" as="image">
+        <link rel="prefetch" href="../_static/manen-logo-light.svg" as="image">
+        <link rel="prefetch" href="../_static/manen-logo-dark.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Page Object Model for operability - Manen</title>
@@ -186,10 +187,10 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/manen_logo.png" alt="Logo"/>
+    <img class="sidebar-logo only-light" src="../_static/manen-logo-light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/manen-logo-dark.svg" alt="Dark Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Manen</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -262,10 +263,10 @@
         <article role="main" id="furo-main-content">
           <section id="Page-Object-Model-for-operability">
 <h1>Page Object Model for operability<a class="headerlink" href="#Page-Object-Model-for-operability" title="Link to this heading">¶</a></h1>
-<p>One of the core feature of Manen is its implementation of the Page Object Model design pattern, which provides an interface between the core methods of Selenium WebDriver, and the workflows of your application. By using this design pattern, you shouldn’t have to re-implement functions to access DOM elements; you just have to describe your page structure by breaking it into multiple components. This will help to increase the readability and operability of your code.</p>
+<p>One of the core features of Manen is its implementation of the Page Object Model design pattern, which provides an interface between the core methods of Selenium WebDriver, and the workflows of your application. By using this design pattern, you shouldn’t have to re-implement functions to access DOM elements; you just have to describe your page structure by breaking it into multiple components. This will help to increase the readability and operability of your code.</p>
 <p>This step-by-step guide shows how to use Manen for such purposes. We will use PyPI web page as playground for the exploration.</p>
 <hr class="docutils" />
-<p>First, we need a WebDriver instance that will be the entrypoint for all our code. We will also define an helper function in charge of taking a screenshot of the current page, and display it inline.</p>
+<p>First, we need a WebDriver instance that will be the entrypoint for all our code. We will also define a helper function in charge of taking a screenshot of the current page, and display it inline.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -329,7 +330,7 @@
 <section id="DOM-interactions">
 <h2>DOM interactions<a class="headerlink" href="#DOM-interactions" title="Link to this heading">¶</a></h2>
 <p>The main idea behind the page object model is to use simple Pythonic code to interact with your page. Python classes, with their attributes, will be used to describe an HTML page. Each class will inherit from a Manen <code class="docutils literal notranslate"><span class="pre">Component</span></code>, in order to symbolize the fact that they should be related to the DOM of the current page.</p>
-<p>Each class attributes must be annotated with the type of DOM value you want to retrieve, as long as the selectors used to locate the elements. Manen provides some types to represent basic DOM elements; you can also use the type <code class="docutils literal notranslate"><span class="pre">str</span></code> (to extract the inner text of an element), <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">datetime</span></code> to attempt to convert the text to the given types. Note that you can use <code class="docutils literal notranslate"><span class="pre">element</span></code> or Selenium WebElement to return the raw Selenium web element.</p>
+<p>Each class attributes must be annotated with the type of DOM value you want to retrieve, as well as the selectors used to locate the elements. Manen provides some types to represent basic DOM elements; you can also use the type <code class="docutils literal notranslate"><span class="pre">str</span></code> (to extract the inner text of an element), <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">datetime</span></code> to attempt to convert the text to the given types. Note that you can use <code class="docutils literal notranslate"><span class="pre">element</span></code> or Selenium WebElement to return the raw Selenium web element.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -402,8 +403,10 @@ https://pypi.org/static/images/logo-small.8998e9d1.svg
 <div class="highlight"><pre>
 {&#39;logo&#39;: &#39;https://pypi.org/static/images/logo-small.8998e9d1.svg&#39;,
  &#39;items&#39;: [{&#39;label&#39;: &#39;Help&#39;, &#39;link&#39;: &#39;https://pypi.org/help/&#39;},
+  {&#39;label&#39;: &#39;Docs&#39;, &#39;link&#39;: &#39;https://docs.pypi.org/&#39;},
   {&#39;label&#39;: &#39;Sponsors&#39;, &#39;link&#39;: &#39;https://pypi.org/sponsors/&#39;},
-  {&#39;label&#39;: &#39;Log in&#39;, &#39;link&#39;: &#39;https://pypi.org/account/login/&#39;},
+  {&#39;label&#39;: &#39;Log in&#39;,
+   &#39;link&#39;: &#39;https://pypi.org/account/login/?next=https%3A%2F%2Fpypi.org%2F&#39;},
   {&#39;label&#39;: &#39;Register&#39;, &#39;link&#39;: &#39;https://pypi.org/account/register/&#39;}]}
 </pre></div></div>
 </div>
@@ -431,7 +434,7 @@ https://pypi.org/static/images/logo-small.8998e9d1.svg
 <img alt="../_images/user_guide_page_object_model_16_0.png" src="../_images/user_guide_page_object_model_16_0.png" />
 </div>
 </div>
-<p>Given that <code class="docutils literal notranslate"><span class="pre">page.search</span></code> inherit from the <code class="docutils literal notranslate"><span class="pre">Form</span></code> class, it has an additional method <code class="docutils literal notranslate"><span class="pre">submit</span></code> compared to other component, you can call to submit the query. Note that it can also be done with the following instructions:</p>
+<p>Given that <code class="docutils literal notranslate"><span class="pre">page.search</span></code> inherits from the <code class="docutils literal notranslate"><span class="pre">Form</span></code> class, it has an additional method <code class="docutils literal notranslate"><span class="pre">submit</span></code>, compared to other components, that you can call to submit the query. Note that it can also be done with the following instructions:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">selenium.webdriver.common.keys</span><span class="w"> </span><span class="kn">import</span> <span class="n">Keys</span>
 
 <span class="n">page</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">query</span> <span class="o">+=</span> <span class="n">Keys</span><span class="o">.</span><span class="n">ENTER</span>
@@ -447,7 +450,7 @@ https://pypi.org/static/images/logo-small.8998e9d1.svg
 </div>
 <p>By doing so, we navigated to another page, with the results of the search.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Current URL:&#39;</span><span class="p">,</span> <span class="n">driver</span><span class="o">.</span><span class="n">current_url</span><span class="p">)</span>
@@ -472,7 +475,7 @@ Current URL: https://pypi.org/search/?q=selenium
 </div>
 <p>Let’s define another page class to describe the new HTML structure. Notice that we re-use the class <code class="docutils literal notranslate"><span class="pre">NavigationBar</span></code> given that this web component is also on the current page.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
@@ -484,7 +487,6 @@ Current URL: https://pypi.org/search/?q=selenium
 <span class="k">class</span><span class="w"> </span><span class="nc">SearchResultPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
     <span class="k">class</span><span class="w"> </span><span class="nc">Result</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
         <span class="n">name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;h3 span.package-snippet__name&quot;</span><span class="p">)]</span>
-        <span class="n">version</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;h3 span.package-snippet__version&quot;</span><span class="p">)]</span>
         <span class="n">link</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">href</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;a.package-snippet&quot;</span><span class="p">)]</span>
         <span class="n">description</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CSS</span><span class="p">(</span><span class="s2">&quot;p.package-snippet__description&quot;</span><span class="p">)]</span>
         <span class="n">release_datetime</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
@@ -499,7 +501,7 @@ Current URL: https://pypi.org/search/?q=selenium
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">release_datetime</span> <span class="o">&gt;=</span> <span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="o">.</span><span class="n">localize</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">print_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-            <span class="n">summary</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (v</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">) has been released on </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">release_datetime</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">summary</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> has been released on </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">release_datetime</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_recent</span><span class="p">:</span>
                 <span class="n">summary</span> <span class="o">+=</span> <span class="s2">&quot;, less than 180 days ago&quot;</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
@@ -518,7 +520,7 @@ Current URL: https://pypi.org/search/?q=selenium
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">page</span> <span class="o">=</span> <span class="n">SearchResultPage</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
@@ -526,7 +528,7 @@ Current URL: https://pypi.org/search/?q=selenium
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of results for the query:&quot;</span><span class="p">,</span> <span class="n">page</span><span class="o">.</span><span class="n">nb_results</span><span class="p">)</span>
@@ -539,13 +541,13 @@ Current URL: https://pypi.org/search/?q=selenium
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Number of results for the query: 2,687
+Number of results for the query: 3,701
 Number of results on the page: 20
 </pre></div></div>
 </div>
-<p>Same as before, we can access the elemens of the navigation bar.</p>
+<p>Same as before, we can access the elements of the navigation bar.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">page</span><span class="o">.</span><span class="n">navbar</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
@@ -553,21 +555,23 @@ Number of results on the page: 20
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 {&#39;logo&#39;: &#39;https://pypi.org/static/images/logo-small.8998e9d1.svg&#39;,
  &#39;items&#39;: [{&#39;label&#39;: &#39;Help&#39;, &#39;link&#39;: &#39;https://pypi.org/help/&#39;},
+  {&#39;label&#39;: &#39;Docs&#39;, &#39;link&#39;: &#39;https://docs.pypi.org/&#39;},
   {&#39;label&#39;: &#39;Sponsors&#39;, &#39;link&#39;: &#39;https://pypi.org/sponsors/&#39;},
-  {&#39;label&#39;: &#39;Log in&#39;, &#39;link&#39;: &#39;https://pypi.org/account/login/&#39;},
+  {&#39;label&#39;: &#39;Log in&#39;,
+   &#39;link&#39;: &#39;https://pypi.org/account/login/?next=https%3A%2F%2Fpypi.org%2Fsearch%2F%3Fq%3Dselenium&#39;},
   {&#39;label&#39;: &#39;Register&#39;, &#39;link&#39;: &#39;https://pypi.org/account/register/&#39;}]}
 </pre></div></div>
 </div>
 <p>Besides, all the search results of the page will be on each item of <code class="docutils literal notranslate"><span class="pre">page.results</span></code>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">page</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
@@ -575,16 +579,15 @@ Number of results on the page: 20
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 {&#39;name&#39;: &#39;selenium&#39;,
- &#39;version&#39;: &#39;4.25.0&#39;,
  &#39;link&#39;: &#39;https://pypi.org/project/selenium/&#39;,
  &#39;description&#39;: &#39;Official Python bindings for Selenium WebDriver&#39;,
- &#39;release_datetime&#39;: datetime.datetime(2024, 9, 20, 15, 4, 46, tzinfo=datetime.timezone.utc)}
+ &#39;release_datetime&#39;: datetime.datetime(2026, 5, 12, 22, 48, 16, tzinfo=datetime.timezone.utc)}
 </pre></div></div>
 </div>
 <blockquote>
@@ -592,7 +595,7 @@ Number of results on the page: 20
 </div></blockquote>
 <p>We can then call the custom method <code class="docutils literal notranslate"><span class="pre">print_summary</span></code> we implemented for <code class="docutils literal notranslate"><span class="pre">Result</span></code> item.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">page</span><span class="o">.</span><span class="n">results</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
@@ -605,17 +608,17 @@ Number of results on the page: 20
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-selenium (v4.25.0) has been released on 2024-09-20, less than 180 days ago
-selenium2 (v0.1.1) has been released on 2024-06-02, less than 180 days ago
-ak_selenium (v0.1.9) has been released on 2024-09-08, less than 180 days ago
-automated-selenium (v1.1.1) has been released on 2023-05-29
-axe-selenium (v2.1.6) has been released on 2024-09-26, less than 180 days ago
+selenium has been released on 2026-05-12, less than 180 days ago
+automated-selenium has been released on 2023-05-29
+auto-selenium has been released on 2021-11-07
+axe-selenium has been released on 2024-09-26
+balderhub-selenium has been released on 2025-10-17
 </pre></div></div>
 </div>
 </section>
 <section id="List-of-available-Manen-types">
 <h2>List of available Manen types<a class="headerlink" href="#List-of-available-Manen-types" title="Link to this heading">¶</a></h2>
-<p>Manen implements out of the box the current elements:</p>
+<p>Manen implements out of the box the following elements:</p>
 <div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
@@ -670,9 +673,9 @@ axe-selenium (v2.1.6) has been released on 2024-09-26, less than 180 days ago
 <section id="Advanced-usage">
 <h2>Advanced usage<a class="headerlink" href="#Advanced-usage" title="Link to this heading">¶</a></h2>
 <p>The page object implementation is using internally the <code class="docutils literal notranslate"><span class="pre">find</span></code> function, which has additional arguments to customize how to retrieve elements from the DOM (see <a class="reference external" href="https://kodaho.github.io/manen/user_guide/dom_exploration.html">associated user guide</a> for more details about that). In the same way, you can add options to each class attributes to enable this level of customization in your page model.</p>
-<p>Waiting a given duration for element to appear is done with the <code class="docutils literal notranslate"><span class="pre">Wait</span></code> config, whereas <code class="docutils literal notranslate"><span class="pre">Default</span></code> is used to set a default value when the element behind a DOM value is not found.</p>
+<p>Waiting a given duration for an element to appear is done with the <code class="docutils literal notranslate"><span class="pre">Wait</span></code> config, whereas <code class="docutils literal notranslate"><span class="pre">Default</span></code> is used to set a default value when the element behind a DOM value is not found.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">manen.page_object_model.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Wait</span>
@@ -691,7 +694,7 @@ axe-selenium (v2.1.6) has been released on 2024-09-26, less than 180 days ago
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">page</span><span class="o">.</span><span class="n">dont_exist</span> <span class="ow">is</span> <span class="kc">None</span>
@@ -702,7 +705,7 @@ axe-selenium (v2.1.6) has been released on 2024-09-26, less than 180 days ago
 <hr class="docutils" />
 <p>You are now familiar with the page object model implementation of Manen! Don’t hesitate to <a class="reference external" href="https://github.com/kodaho/manen/issues">open an issue</a> if you have any remarks, concerns, or feature request!</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>

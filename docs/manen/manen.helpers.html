@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="author" title="About these documents" href="../about.html"><link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="manen.page_object_model" href="manen.page_object_model.html"><link rel="prev" title="manen.finder" href="manen.finder.html">
-        <link rel="prefetch" href="../_static/manen_logo.png" as="image">
+        <link rel="prefetch" href="../_static/manen-logo-light.svg" as="image">
+        <link rel="prefetch" href="../_static/manen-logo-dark.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>manen.helpers - Manen</title>
@@ -185,10 +186,10 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/manen_logo.png" alt="Logo"/>
+    <img class="sidebar-logo only-light" src="../_static/manen-logo-light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/manen-logo-dark.svg" alt="Dark Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Manen</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -272,7 +273,7 @@
 <dd><p>Helper function to convert a version string into a tuple. The versioning
 scheme is described <a class="reference external" href="https://www.chromium.org/developers/version-numbers">here</a>.
 The input will be validated with the regular expression
-<code class="docutils literal notranslate"><span class="pre">^[\d]+.[\d]+.[\d]+.[\d]+$</span></code> and raised a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a> if it doesn’t match.</p>
+<code class="docutils literal notranslate"><span class="pre">^\d+\.\d+(?:\.\d+)?(?:\.\d+)?$</span></code> and raised a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a> if it doesn’t match.</p>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>This versioning system is not compliant with semantic versioning rules.</p>

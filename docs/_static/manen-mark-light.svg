@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" role="img" aria-label="manen mark">
+  <title>manen — mark</title>
+  <defs>
+    <mask id="manen-mark-mask" maskUnits="userSpaceOnUse">
+      <rect width="160" height="160" fill="white"></rect>
+      <circle cx="119.47" cy="65.64" r="70" fill="black"></circle>
+    </mask>
+  </defs>
+  <circle cx="80" cy="80" r="70" fill="#16140f" mask="url(#manen-mark-mask)"></circle>
+</svg>

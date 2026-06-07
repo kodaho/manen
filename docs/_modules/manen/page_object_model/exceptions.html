@@ -3,7 +3,8 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><link rel="author" title="About these documents" href="../../../about.html"><link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html">
-        <link rel="prefetch" href="../../../_static/manen_logo.png" as="image">
+        <link rel="prefetch" href="../../../_static/manen-logo-light.svg" as="image">
+        <link rel="prefetch" href="../../../_static/manen-logo-dark.svg" as="image">
 
     <link rel="shortcut icon" href="../../../_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>manen.page_object_model.exceptions - Manen</title>
@@ -184,10 +185,10 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../../../_static/manen_logo.png" alt="Logo"/>
+    <img class="sidebar-logo only-light" src="../../../_static/manen-logo-light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/manen-logo-dark.svg" alt="Dark Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Manen</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -267,6 +268,21 @@
         <span class="k">return</span> <span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="si">}</span><span class="s2">&#39; should have exactly one non-None type in its annotation, but &quot;</span>
             <span class="sa">f</span><span class="s2">&quot;get </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="MissingAnnotationError">
+<a class="viewcode-back" href="../../../manen/manen.page_object_model.exceptions.html#manen.page_object_model.exceptions.MissingAnnotationError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MissingAnnotationError</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="n">ManenException</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">annotation</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="n">field</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">annotation</span> <span class="o">=</span> <span class="n">annotation</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="si">}</span><span class="s2">&#39; must be declared with `Annotated[...]` and at least one &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;selector (e.g. `Annotated[str, CSS(...)]`), but got `</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">annotation</span><span class="si">!r}</span><span class="s2">`.&quot;</span>
         <span class="p">)</span></div>
 
 

@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="author" title="About these documents" href="about.html"><link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="prev" title="types" href="manen/manen.page_object_model.types.html">
-        <link rel="prefetch" href="_static/manen_logo.png" as="image">
+        <link rel="prefetch" href="_static/manen-logo-light.svg" as="image">
+        <link rel="prefetch" href="_static/manen-logo-dark.svg" as="image">
 
     <link rel="shortcut icon" href="_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Changelog - Manen</title>
@@ -185,10 +186,10 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="_static/manen_logo.png" alt="Logo"/>
+    <img class="sidebar-logo only-light" src="_static/manen-logo-light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/manen-logo-dark.svg" alt="Dark Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Manen</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -264,7 +265,7 @@
 <section id="id1">
 <h2>0.3.0<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p><span style="display: inline-block; width: 110px; font-size:85%; font-weight: 600;">Topic</span> <span style="font-size:85%"> Page object model implementation revamp &amp; other major changes </span></p>
-<p><span style="display: inline-block; width: 110px; font-size:85%; font-weight: 600;">Release date</span> <span style="font-size:85%"> (unreleased) </span></p>
+<p><span style="display: inline-block; width: 110px; font-size:85%; font-weight: 600;">Release date</span> <span style="font-size:85%"> 2026-05-07 </span></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Even if it’s a minor release, this version represents a major change for the project; the
@@ -272,33 +273,53 @@ package has been mostly rewritten in order to implement the page object model de
 a more efficient way (using type annotation).</p>
 <p>Besides, some functionalities have been removed with the aim of limiting the number of features
 during the beta phase.</p>
-<p>All previous versions should be considered as deprecated.</p>
 </div>
 <section id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>The module <a class="reference internal" href="manen/manen.page_object_model.html#module-manen.page_object_model" title="manen.page_object_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">page_object_model</span></code></a> has been rewritten to use type annotation instead
-of <code class="docutils literal notranslate"><span class="pre">Element</span></code>. Note that some elements like select or radio button haven’t been implemented in
-this new version yet (but will be in the future).</p></li>
-<li><p>Most of the documentation pages have been rewritten and improved.</p></li>
-<li><p>Most modules have better typing annotations and documentation. Besides, the code has been
-improved to be more “pythonic”.</p></li>
-<li><p>Manen no longer has optional dependencies (which were in fact development dependencies).</p></li>
-<li><p>The minimal version of Python required is now 3.10.</p></li>
-<li><p>Internally, Manen is now using <a class="reference external" href="https://docs.astral.sh/uv">uv</a> as project manager, and
-<a class="reference external" href="https://docs.astral.sh/ruff/">ruff</a> for the linting and formatting.</p></li>
+<li><p><a class="reference internal" href="manen/manen.page_object_model.html#module-manen.page_object_model" title="manen.page_object_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">page_object_model</span></code></a> has been completely rewritten around type annotations. Pages
+are described by annotating attributes with native Python types (<code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>,
+<code class="docutils literal notranslate"><span class="pre">date</span></code>, <code class="docutils literal notranslate"><span class="pre">datetime</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code>, …) instead of the former <code class="docutils literal notranslate"><span class="pre">Element</span></code> subclasses.
+The public API is now split into three submodules:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">manen.page_object_model.component</span></code>: <a class="reference internal" href="manen/manen.page_object_model.component.html#manen.page_object_model.component.Page" title="manen.page_object_model.component.Page"><code class="xref py py-class docutils literal notranslate"><span class="pre">Page</span></code></a>,
+<a class="reference internal" href="manen/manen.page_object_model.component.html#manen.page_object_model.component.Component" title="manen.page_object_model.component.Component"><code class="xref py py-class docutils literal notranslate"><span class="pre">Component</span></code></a> (replacing <code class="docutils literal notranslate"><span class="pre">WebArea</span></code>) and
+<a class="reference internal" href="manen/manen.page_object_model.component.html#manen.page_object_model.component.Form" title="manen.page_object_model.component.Form"><code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></a> (replacing <code class="docutils literal notranslate"><span class="pre">Action</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">manen.page_object_model.config</span></code>: selectors and modifiers <code class="docutils literal notranslate"><span class="pre">CSS</span></code>, <code class="docutils literal notranslate"><span class="pre">XPath</span></code>, <code class="docutils literal notranslate"><span class="pre">LinkText</span></code>,
+<code class="docutils literal notranslate"><span class="pre">PartialLinkText</span></code>, <code class="docutils literal notranslate"><span class="pre">Attribute</span></code>, <code class="docutils literal notranslate"><span class="pre">Wait</span></code>, <code class="docutils literal notranslate"><span class="pre">Default</span></code>, <code class="docutils literal notranslate"><span class="pre">DateFormat</span></code> and
+<code class="docutils literal notranslate"><span class="pre">DatetimeFormat</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">manen.page_object_model.types</span></code>: type aliases such as <code class="docutils literal notranslate"><span class="pre">href</span></code>, <code class="docutils literal notranslate"><span class="pre">src</span></code>, <code class="docutils literal notranslate"><span class="pre">inner_html</span></code>,
+<code class="docutils literal notranslate"><span class="pre">outer_html</span></code>, <code class="docutils literal notranslate"><span class="pre">input_value</span></code> and <code class="docutils literal notranslate"><span class="pre">checkbox</span></code>.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="manen/manen.browser.html#manen.browser.BrowserMixin.is_browser_compatible_with_driver" title="manen.browser.BrowserMixin.is_browser_compatible_with_driver"><code class="xref py py-class docutils literal notranslate"><span class="pre">is_browser_compatible_with_driver</span></code></a> replaces the former
+<code class="docutils literal notranslate"><span class="pre">are_versions_compatible</span></code>.</p></li>
+<li><p><a class="reference internal" href="manen/manen.finder.html#manen.finder.find" title="manen.finder.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">find()</span></code></a> is now fully typed through overloads.</p></li>
+<li><p>Manen no longer has optional dependencies, and <code class="docutils literal notranslate"><span class="pre">selenium</span></code> is now its only runtime dependency.</p></li>
+<li><p>The minimal supported version of Python is now 3.10.</p></li>
+<li><p>Most of the documentation has been rewritten and improved.</p></li>
+</ul>
+</section>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="manen/manen.browser.html#manen.browser.ScrollDirection" title="manen.browser.ScrollDirection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScrollDirection</span></code></a> and <a class="reference internal" href="manen/manen.browser.html#manen.browser.HeadlessMode" title="manen.browser.HeadlessMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">HeadlessMode</span></code></a> enums to
+configure the browser.</p></li>
+<li><p><a class="reference internal" href="manen/manen.exceptions.html#manen.exceptions.PollTimeoutException" title="manen.exceptions.PollTimeoutException"><code class="xref py py-class docutils literal notranslate"><span class="pre">PollTimeoutException</span></code></a>, raised when an element is not found within
+the configured waiting time.</p></li>
 </ul>
 </section>
 <section id="removed">
 <h3>Removed<a class="headerlink" href="#removed" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>The module <code class="docutils literal notranslate"><span class="pre">manen.resource</span></code> and everything related (like the CLI) have been removed. Indeed,
-the <a class="reference external" href="https://www.selenium.dev/documentation/selenium_manager/">official Selenium manager</a>
-(available as a CLI tool and in recent versions of Python bindings for Selenium) provides the
-same functionalities.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">manen.browser.BraveBrowser</span></code> has been removed because it had a dependency on the module
-<code class="docutils literal notranslate"><span class="pre">manen.resource</span></code>. Besides, it was considered as not enough tested internally to make it
-available publicly.</p></li>
+<li><p>The module <code class="docutils literal notranslate"><span class="pre">manen.resource</span></code> and everything related (including the <code class="docutils literal notranslate"><span class="pre">manen</span></code> CLI) have been
+removed. The <a class="reference external" href="https://www.selenium.dev/documentation/selenium_manager/">official Selenium manager</a>
+now provides the same functionalities.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">manen.browser.BraveBrowser</span></code> has been removed; it depended on <code class="docutils literal notranslate"><span class="pre">manen.resource</span></code> and was not
+tested enough to be exposed publicly.</p></li>
+<li><p>The selector-as-string elements (<code class="docutils literal notranslate"><span class="pre">Element</span></code>, <code class="docutils literal notranslate"><span class="pre">TextElement</span></code>, <code class="docutils literal notranslate"><span class="pre">LinkElement</span></code>,
+<code class="docutils literal notranslate"><span class="pre">IntegerElement</span></code>, <code class="docutils literal notranslate"><span class="pre">DateTimeElement</span></code>, …) as well as <code class="docutils literal notranslate"><span class="pre">Region</span></code>/<code class="docutils literal notranslate"><span class="pre">Regions</span></code> and the
+YAML page loaders have been dropped in favour of the new type-annotation based API.</p></li>
 </ul>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -309,8 +330,8 @@ available publicly.</p></li>
 <h2>0.2.0<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p><span style="display: inline-block; width: 110px; font-size:85%; font-weight: 600;">Topic</span> <span style="font-size:85%"> Rename some classes in <a class="reference internal" href="manen/manen.page_object_model.html#module-manen.page_object_model" title="manen.page_object_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">page_object_model</span></code></a> and improve CLI </span></p>
 <p><span style="display: inline-block; width: 110px; font-size:85%; font-weight: 600;">Release date</span> <span style="font-size:85%"> 2022-02-19 </span></p>
-<section id="added">
-<h3>Added<a class="headerlink" href="#added" title="Link to this heading">¶</a></h3>
+<section id="id3">
+<h3>Added<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Specify link to changelog in documentation in package metadata.</p></li>
 <li><p>Introduce new options in <code class="docutils literal notranslate"><span class="pre">manen</span> <span class="pre">driver</span> <span class="pre">download</span></code> to set the specifications of the drivers
@@ -319,8 +340,8 @@ to be downloaded directly from the command line.</p></li>
 private/special methods and classes other than the ones in <code class="docutils literal notranslate"><span class="pre">__all__</span></code>.</p></li>
 </ul>
 </section>
-<section id="id3">
-<h3>Changed<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<section id="id4">
+<h3>Changed<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Improve CLI command to download drivers executable (now launched with <code class="docutils literal notranslate"><span class="pre">manen</span> <span class="pre">driver</span> <span class="pre">download</span></code>).</p></li>
 <li><p>Rename <code class="xref py py-class docutils literal notranslate"><span class="pre">DateTimeElement</span></code> (previously <code class="docutils literal notranslate"><span class="pre">DatetimeElement</span></code>).</p></li>
@@ -337,12 +358,12 @@ private/special methods and classes other than the ones in <code class="docutils
 </div>
 </section>
 </section>
-<section id="id4">
-<h2>0.1.2<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<section id="id5">
+<h2>0.1.2<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <p><span style="display: inline-block; width: 110px; font-size:85%; font-weight: 600;">Topic</span> <span style="font-size:85%">  Fix bug in the download workflow of the CLI </span></p>
 <p><span style="display: inline-block; width: 110px; font-size:85%; font-weight: 600;">Release date</span> <span style="font-size:85%"> 2022-02-19 </span></p>
-<section id="id5">
-<h3>Fixed<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<section id="id6">
+<h3>Fixed<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Fix a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> in the download workflow (variable wrongly named).</p></li>
 </ul>
@@ -351,12 +372,12 @@ private/special methods and classes other than the ones in <code class="docutils
 </div>
 </section>
 </section>
-<section id="id6">
-<h2>0.1.1<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<section id="id7">
+<h2>0.1.1<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
 <p><span style="display: inline-block; width: 110px; font-size:85%; font-weight: 600;">Topic</span> <span style="font-size:85%"> Mainly documentation improvements </span></p>
 <p><span style="display: inline-block; width: 110px; font-size:85%; font-weight: 600;">Release date</span> <span style="font-size:85%"> 2022-02-12 </span></p>
-<section id="id7">
-<h3>Changed<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<section id="id8">
+<h3>Changed<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Make documentation publicly available under
 <a class="reference external" href="https://kodaho.github.io/manen/">kodaho.github.io/manen</a>.</p></li>
@@ -370,12 +391,12 @@ private/special methods and classes other than the ones in <code class="docutils
 </div>
 </section>
 </section>
-<section id="id8">
-<h2>0.1.0<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<section id="id9">
+<h2>0.1.0<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
 <p><span style="display: inline-block; width: 110px; font-size:85%; font-weight: 600;">Topic</span> <span style="font-size:85%"> First release of the package </span></p>
 <p><span style="display: inline-block; width: 110px; font-size:85%; font-weight: 600;">Release date</span> <span style="font-size:85%"> 2022-01-31 </span></p>
-<section id="id9">
-<h3>Added<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<section id="id10">
+<h3>Added<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="manen/manen.finder.html#manen.finder.find" title="manen.finder.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">find()</span></code></a> allows to easily get element(s) in a WebDriver
 page. This function support several very different use cases, thanks to several
@@ -453,25 +474,26 @@ drivers files.</p></li>
 <li><a class="reference internal" href="#">Changelog</a><ul>
 <li><a class="reference internal" href="#id1">0.3.0</a><ul>
 <li><a class="reference internal" href="#changed">Changed</a></li>
+<li><a class="reference internal" href="#added">Added</a></li>
 <li><a class="reference internal" href="#removed">Removed</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#id2">0.2.0</a><ul>
-<li><a class="reference internal" href="#added">Added</a></li>
-<li><a class="reference internal" href="#id3">Changed</a></li>
+<li><a class="reference internal" href="#id3">Added</a></li>
+<li><a class="reference internal" href="#id4">Changed</a></li>
 <li><a class="reference internal" href="#fixed">Fixed</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id4">0.1.2</a><ul>
-<li><a class="reference internal" href="#id5">Fixed</a></li>
+<li><a class="reference internal" href="#id5">0.1.2</a><ul>
+<li><a class="reference internal" href="#id6">Fixed</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id6">0.1.1</a><ul>
-<li><a class="reference internal" href="#id7">Changed</a></li>
+<li><a class="reference internal" href="#id7">0.1.1</a><ul>
+<li><a class="reference internal" href="#id8">Changed</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id8">0.1.0</a><ul>
-<li><a class="reference internal" href="#id9">Added</a></li>
+<li><a class="reference internal" href="#id9">0.1.0</a><ul>
+<li><a class="reference internal" href="#id10">Added</a></li>
 </ul>
 </li>
 </ul>

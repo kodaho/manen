@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="author" title="About these documents" href="../about.html"><link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="types" href="manen.page_object_model.types.html"><link rel="prev" title="dom_value" href="manen.page_object_model.dom_value.html">
-        <link rel="prefetch" href="../_static/manen_logo.png" as="image">
+        <link rel="prefetch" href="../_static/manen-logo-light.svg" as="image">
+        <link rel="prefetch" href="../_static/manen-logo-dark.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>exceptions - Manen</title>
@@ -185,10 +186,10 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/manen_logo.png" alt="Logo"/>
+    <img class="sidebar-logo only-light" src="../_static/manen-logo-light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/manen-logo-dark.svg" alt="Dark Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Manen</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -261,6 +262,12 @@
         <article role="main" id="furo-main-content">
           <section id="module-manen.page_object_model.exceptions">
 <span id="exceptions"></span><h1><a class="reference internal" href="#module-manen.page_object_model.exceptions" title="manen.page_object_model.exceptions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">exceptions</span></code></a><a class="headerlink" href="#module-manen.page_object_model.exceptions" title="Link to this heading">¶</a></h1>
+<dl class="py exception">
+<dt class="sig sig-object py" id="manen.page_object_model.exceptions.MissingAnnotationError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.exceptions.</span></span><span class="sig-name descname"><span class="pre">MissingAnnotationError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/exceptions.html#MissingAnnotationError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.exceptions.MissingAnnotationError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError</span></code></a>, <a class="reference internal" href="manen.exceptions.html#manen.exceptions.ManenException" title="manen.exceptions.ManenException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ManenException</span></code></a></p>
+</dd></dl>
+
 <dl class="py exception">
 <dt class="sig sig-object py" id="manen.page_object_model.exceptions.SelectorConfigError">
 <span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.exceptions.</span></span><span class="sig-name descname"><span class="pre">SelectorConfigError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/exceptions.html#SelectorConfigError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.exceptions.SelectorConfigError" title="Link to this definition">¶</a></dt>
@@ -338,6 +345,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">exceptions</span></code></a><ul>
+<li><a class="reference internal" href="#manen.page_object_model.exceptions.MissingAnnotationError"><code class="docutils literal notranslate"><span class="pre">MissingAnnotationError</span></code></a></li>
 <li><a class="reference internal" href="#manen.page_object_model.exceptions.SelectorConfigError"><code class="docutils literal notranslate"><span class="pre">SelectorConfigError</span></code></a></li>
 <li><a class="reference internal" href="#manen.page_object_model.exceptions.TypeConfigError"><code class="docutils literal notranslate"><span class="pre">TypeConfigError</span></code></a></li>
 </ul>

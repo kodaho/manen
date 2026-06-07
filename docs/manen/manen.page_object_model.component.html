@@ -1,25 +1,26 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="../">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="config" href="manen.page_object_model.config.html" /><link rel="prev" title="manen.page_object_model" href="manen.page_object_model.html" />
+<link rel="author" title="About these documents" href="../about.html"><link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="config" href="manen.page_object_model.config.html"><link rel="prev" title="manen.page_object_model" href="manen.page_object_model.html">
+        <link rel="prefetch" href="../_static/manen_logo.png" as="image">
 
-    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
+    <link rel="shortcut icon" href="../_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>component - Manen</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
 
 
 <style>
   body {
-    --color-code-background: #f8f8f8;
-  --color-code-foreground: black;
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
   
   }
   @media not print {
@@ -146,14 +147,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -163,8 +160,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -172,8 +168,7 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -181,8 +176,7 @@
         </button>
       </div>
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -190,7 +184,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
-  
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="../_static/manen_logo.png" alt="Logo"/>
   </div>
@@ -206,18 +199,18 @@
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About the project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../user_guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../user_guide.html">User Guide</a><input aria-label="Toggle navigation of User Guide" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../user_guide/dom_exploration.html">Easily explore the DOM with <code class="docutils literal notranslate"><span class="pre">find</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../user_guide/browser.html">Supercharge Selenium <code class="docutils literal notranslate"><span class="pre">WebDriver</span></code> with Manen <code class="docutils literal notranslate"><span class="pre">Browser</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../user_guide/page_object_model.html">Page Object Model for operability</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="manen.html">Going deeper into Manen</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Going deeper into Manen</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="manen.html">Going deeper into Manen</a><input aria-label="Toggle navigation of Going deeper into Manen" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="manen.browser.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.browser</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="manen.exceptions.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.exceptions</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="manen.finder.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.finder</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="manen.helpers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.helpers</span></code></a></li>
-<li class="toctree-l2 current has-children"><a class="reference internal" href="manen.page_object_model.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.page_object_model</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of manen.page_object_model</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="manen.page_object_model.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">manen.page_object_model</span></code></a><input aria-label="Toggle navigation of manen.page_object_model" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">component</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="manen.page_object_model.dom_value.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dom_value</span></code></a></li>
@@ -227,7 +220,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
 
@@ -255,8 +247,7 @@
   </a>
 </div>
 <div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -264,8 +255,7 @@
             </button>
           </div>
           <label class="toc-overlay-icon toc-content-icon" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
@@ -273,11 +263,11 @@
 <span id="component"></span><h1><a class="reference internal" href="#module-manen.page_object_model.component" title="manen.page_object_model.component"><code class="xref py py-mod docutils literal notranslate"><span class="pre">component</span></code></a><a class="headerlink" href="#module-manen.page_object_model.component" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="manen.page_object_model.component.Component">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.component.</span></span><span class="sig-name descname"><span class="pre">Component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.chrome.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><span class="pre">WebDriver</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webelement.WebElement" title="(in Selenium Python Bindings v2)"><span class="pre">WebElement</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/component.html#Component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.component.Component" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.component.</span></span><span class="sig-name descname"><span class="pre">Component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.chrome.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><span class="pre">WebDriver</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webelement.WebElement" title="(in Selenium Python Bindings v2)"><span class="pre">WebElement</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/component.html#Component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.component.Component" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="manen.page_object_model.component.Component.is_component">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/component.html#Component.is_component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.component.Component.is_component" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/component.html#Component.is_component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.component.Component.is_component" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -289,7 +279,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="manen.page_object_model.component.Form">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.component.</span></span><span class="sig-name descname"><span class="pre">Form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.chrome.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><span class="pre">WebDriver</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webelement.WebElement" title="(in Selenium Python Bindings v2)"><span class="pre">WebElement</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/component.html#Form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.component.Form" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.component.</span></span><span class="sig-name descname"><span class="pre">Form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.chrome.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><span class="pre">WebDriver</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webelement.WebElement" title="(in Selenium Python Bindings v2)"><span class="pre">WebElement</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/component.html#Form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.component.Form" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#manen.page_object_model.component.Component" title="manen.page_object_model.component.Component"><code class="xref py py-class docutils literal notranslate"><span class="pre">Component</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="manen.page_object_model.component.Form.submit">
@@ -300,16 +290,16 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="manen.page_object_model.component.Page">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.component.</span></span><span class="sig-name descname"><span class="pre">Page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.chrome.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><span class="pre">WebDriver</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webelement.WebElement" title="(in Selenium Python Bindings v2)"><span class="pre">WebElement</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/component.html#Page"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.component.Page" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">manen.page_object_model.component.</span></span><span class="sig-name descname"><span class="pre">Page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.chrome.webdriver.WebDriver" title="(in Selenium Python Bindings v2)"><span class="pre">WebDriver</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webelement.WebElement" title="(in Selenium Python Bindings v2)"><span class="pre">WebElement</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manen/page_object_model/component.html#Page"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#manen.page_object_model.component.Page" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#manen.page_object_model.component.Component" title="manen.page_object_model.component.Component"><code class="xref py py-class docutils literal notranslate"><span class="pre">Component</span></code></a></p>
 <dl class="py property">
 <dt class="sig sig-object py" id="manen.page_object_model.component.Page.source_code">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">source_code</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#manen.page_object_model.component.Page.source_code" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">source_code</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#manen.page_object_model.component.Page.source_code" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="manen.page_object_model.component.Page.title">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#manen.page_object_model.component.Page.title" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">title</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#manen.page_object_model.component.Page.title" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -405,9 +395,9 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=0abd057a"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=30646c52"></script>
     <script src="../_static/tabs.js?v=3ee01567"></script>

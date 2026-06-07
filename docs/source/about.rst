@@ -5,7 +5,7 @@ Why such package?
 -----------------
 
 The main motivation behind Manen is to provide a better developer experience when working on
-browser automation and web scraping project. Most automation and scraping tools provide basic
+browser automation and web scraping projects. Most automation and scraping tools provide basic
 methods to interact with the browser and with the DOM, but don't provide the structure to keep
 the code clean and maintainable. Manen aims to be the interface between the core of the
 automation tool (only Selenium is supported for now) and your tests and workflows logic; just
@@ -14,12 +14,12 @@ focus on your use case and let Manen handle the browser interactions.
 The main answer to this objective is with the implementation of the Page Object Model design
 pattern. This pattern is a way to organize your code by creating a class for each component of
 your application, and to put all the interactions with the page in this class. Such classes
-should be focus on the interactions with the page and not on the interactions with the DOM. The
+should be focused on the interactions with the page and not on the interactions with the DOM. The
 latter is handled by Manen; you specify the selector and what you want to extract from each
 element (the text, an integer, a date, the inner HTML), and Manen will do it for you. Special
 objects like inputs also have their own Manen representation, so you can easily fill the value
-in a Pythonic way. Besides, Manen provides what is called ``Browser``, which are basically a new
-class based on Selenium WebDriver, but with some ameliorations and shortcuts.
+in a Pythonic way. Besides, Manen provides what is called ``Browser``, which is basically a new
+class based on Selenium WebDriver, but with some improvements and shortcuts.
 
 Note that the design of the page object model implementation in Manen is fully based on type
 annotations, largely inspired by Pydantic. This way, the developer experience is improved not
@@ -38,7 +38,7 @@ development of the project:
 Current status and roadmap
 --------------------------
 
-Manen is still in beta version, but it is already usable for some use cases. The solution Manen
+Manen is still in beta version, but it is already usable for some use cases. The solutions Manen
 aims to provide are implemented, but some elements can be missing before being fully usable. Some
 improvements and features are already on the way (implement more DOM elements, compatibility with
 other browser automation tools, etc.), all of them targeting the same objective: provide simple

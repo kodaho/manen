@@ -5,7 +5,7 @@ This user guide section is designed to help you get the most out of Manen. It in
 accessible to beginners or advanced users, and to be as practical as possible, with concrete
 examples and explanations.
 
-Each one of the main feature of Manen is detailed in a separate guide:
+Each one of the main features of Manen is detailed in a separate guide:
 
 #. a guide to get acquainted with the DOM exploration feature provided by
    :py:mod:`manen.finder.find`
@@ -24,7 +24,7 @@ familiar with the library.
 
    All the user guides are available as notebooks on `GitHub <https://github.com/kodaho/manen/tree/main/
    docs/source/user_guide>`_. You can download them and run them locally to get a good start for
-   playground environment.
+   a playground environment.
 
 These user guides can be completed with real-world examples available in the
 `examples folder <https://github.com/kodaho/manen/tree/main/examples/>`_ of the source code

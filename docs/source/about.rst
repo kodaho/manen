@@ -44,11 +44,6 @@ improvements and features are already on the way (implement more DOM elements, c
 other browser automation tools, etc.), all of them targeting the same objective: provide simple
 yet powerful tools for browser automation.
 
-If you are interested in the project, you can already use it and are more than welcome to provide
-any feedbacks! You can use `GitHub issues <https://github.com/kodaho/manen/issues/>`_ to describe
-your use case, your needs, or any bug you encountered. If you want to contribue to the project,
-you can check the :ref:`Contributing` page of this documentation.
-
 .. attention::
 
   Because Manen is still in beta, the API can change between minor versions. Keep an eye on the

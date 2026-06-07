@@ -30,8 +30,3 @@ published on PyPI), you can use:
 .. code-block:: bash
 
     $ pip install git+https://github.com/kodaho/manen.git@latest
-
-.. warning::
-
-    The ``main`` branch is a development branch and may contain unstable code. If you want to
-    install the package for development purposes, you can check the :ref:`Contributing` page.

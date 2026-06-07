@@ -119,10 +119,7 @@ class BrowserMixin(WebDriverProtocol):
         if not isinstance(elements, list):
             elements = [elements]
         script = "\n".join(
-            [
-                f"arguments[{i}].style.border = '3px solid black';"
-                for i in range(len(elements))
-            ]
+            [f"arguments[{i}].style.border = '3px solid black';" for i in range(len(elements))]
         )
         self.execute_script(script, *elements)
 

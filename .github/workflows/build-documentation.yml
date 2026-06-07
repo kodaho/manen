@@ -9,29 +9,34 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Install rye
-        run: |
-          curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash
-          echo "$HOME/.rye/shims" >> $GITHUB_PATH
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+
       - name: Install dependencies for doc
         run: |
           sudo apt install pandoc
-          rye sync
+          uv python install
+
       - name: Build documentation
         run: |
           cd ./docs
-          rye run make-docs
+          uv run make html
+
       - name: Get version
         run: |
-          mkdir version/ && python -c "import manen;print(manen.__version__)" > version/manen_version.txt
+          mkdir version/
+          uv run python -c "import manen;print(manen.__version__)" > version/manen_version.txt
+
       - name: Upload package version info
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: version
           path: version
+
       - name: Upload distributions artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: documentation_html
           path: docs/build/html/
@@ -41,22 +46,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: gh-pages
+
       - name: Download built documentation
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: documentation_html
           path: docs/
+
       - name: Download package version
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: version
           path: version
+
       - name: Creating last build file
         run: |
           echo "v$(cat version/manen_version.txt) - $(echo "${{ github.sha }}" | cut -c1-7)" > .last_build
+
       - name: Deploying documentation
         run: |
           git config user.name ${{ github.repository_owner }}

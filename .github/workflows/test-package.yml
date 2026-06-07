@@ -10,21 +10,22 @@ on:
       - feat/**
       - feature/**
       - fix/**
-      - refacto/**
+      - refactor/**
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Install rye
-        run: |
-          curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash
-          echo "$HOME/.rye/shims" >> $GITHUB_PATH
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+
       - name: Install package and linter
-        run: rye sync
+        run: uv sync --all-extras
+
       - name: Run linter to detect errors
-        run: rye run ruff check --output-format=concise manen/
+        run: uv run ruff check --output-format=concise manen/
 
   test:
     needs: lint
@@ -34,16 +35,18 @@ jobs:
         os:
           - ubuntu-latest
         python-version:
-          - "3.10"
-          - "3.11"
-          - "3.12"
+          - '3.10'
+          - '3.11'
+          - '3.12'
+          - '3.13'
+          - '3.14'
     steps:
-      - uses: actions/checkout@v4
-      - name: Install rye
-        run: |
-          curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash
-          echo "$HOME/.rye/shims" >> $GITHUB_PATH
-      - name: Install dependencies
-        run: rye sync
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+        with:
+          python-version: ${{ matrix.python-version }}
+
       - name: Test with pytest
-        run: rye run pytest
+        run: uv run pytest
